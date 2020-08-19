@@ -1,26 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import * as fooddata from "./food_data/fooddata.json";
+import { CATEGORIES } from "./food_data/categories";
+
+interface foodItem {
+  ITEM: string;
+  CAL: string;
+  PRICE: string;
+  CATEGORY: string;
+  ID: string;
+}
+
+interface ButtonProps {
+  handleTypeClick?: () => void;
+}
+
+const foodList: string[] = CATEGORIES;
 
 function App() {
+  const handleTypeClick = (name: string) => {
+    console.log(name);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Categories handleTypeClick={handleTypeClick} />
+      <h1>heyya</h1>
     </div>
   );
 }
+
+const Categories: React.SFC<ButtonProps> = ({
+  handleTypeClick,
+}): JSX.Element => {
+  return (
+    <>
+      {CATEGORIES.map((x: any) => (
+        <h1 key={x} onClick={handleClick(x)}>
+          {x}
+        </h1>
+      ))}
+    </>
+  );
+};
 
 export default App;

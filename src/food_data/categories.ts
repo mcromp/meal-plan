@@ -1,0 +1,8 @@
+export const CATEGORIES = [
+  "BURGERSANDWICH",
+  "BEVERAGE",
+  "CHICKENFISH",
+  "DESSERTSHAKE",
+  "SNACKSIDE",
+  "BREAKFAST",
+];
