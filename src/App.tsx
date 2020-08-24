@@ -1,46 +1,94 @@
 import React, { useState } from "react";
-import * as fooddata from "./food_data/fooddata.json";
+import data from "./food_data/fooddata.json";
 import { CATEGORIES } from "./food_data/categories";
 
-interface foodItem {
-  ITEM: string;
-  CAL: string;
-  PRICE: string;
-  CATEGORY: string;
-  ID: string;
-}
+type Category =
+  | "BURGERSANDWICH"
+  | "BEVERAGE"
+  | "CHICKENFISH"
+  | "DESSERTSHAKE"
+  | "SNACKSIDE"
+  | "BREAKFAST";
 
-interface ButtonProps {
-  handleTypeClick?: () => void;
-}
+// type Price = "$" | "$$" | "$$$";
+// interface FoodItem {
+//   ITEM: string;
+//   CAL: string;
+//   PRICE: string;
+//   CATEGORY: Category;
+//   ID: string;
+// }
+
+const fooddata = data;
+
+type ButtonProps = {
+  callback: (name: string) => void;
+};
 
 const foodList: string[] = CATEGORIES;
 
 function App() {
-  const handleTypeClick = (name: string) => {
-    console.log(name);
-  };
-
+  // const handleTypeClick = (name: string) => {
+  //   console.log(name);
+  // };
+  const [itemListToday, setItemListToday] = useState([]);
   return (
     <div>
-      <Categories handleTypeClick={handleTypeClick} />
+      {/* <Categories callback={handleTypeClick} /> */}
+      {fooddata.map((x) => {
+        return (
+          <FoodCard
+            key={x.ID}
+            item={x.ITEM}
+            id={x.ID}
+            cal={x.CAL}
+            cat={x.CATEGORY}
+            price={x.PRICE}
+          />
+        );
+      })}
       <h1>heyya</h1>
     </div>
   );
 }
 
-const Categories: React.SFC<ButtonProps> = ({
-  handleTypeClick,
-}): JSX.Element => {
+type Props = {
+  item: string;
+  cal: string;
+  cat: string;
+  price: string;
+  id: string;
+};
+
+const FoodCard: React.FC<Props> = ({ item, cal, cat, price, id }) => {
   return (
-    <>
-      {CATEGORIES.map((x: any) => (
-        <h1 key={x} onClick={handleClick(x)}>
-          {x}
-        </h1>
-      ))}
-    </>
+    <div>
+      <hr />
+      <br />
+      <span>{cal}</span>
+      <br />
+      <span>{price}</span>
+      <h1>{item}</h1>
+      <span>{cat}</span>
+      {/* adds itemtodaylist */}
+      <button onClick={() => console.log(`item ${item}, +1`)}>plus 1</button>
+      {/* subtracts itemtodaylist */}
+      <button onClick={() => console.log(`item ${item}, -1`)}>minus 1</button>
+      <hr />
+    </div>
   );
 };
+
+// const Categories: React.FC<ButtonProps> = ({ callback }) => {
+//   return (
+//     <>
+//       {CATEGORIES.map((x: any) => (
+//         <h1 key={x} onClick={() => callback(x)}>
+//           {x}
+//         </h1>
+//       ))}
+//     </>
+//   );
+// };
 
 export default App;
