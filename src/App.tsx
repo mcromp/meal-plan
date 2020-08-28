@@ -118,11 +118,10 @@ function App() {
         {calendar.map((calendarItem) => (
           <DayItem
             key={calendarItem.id}
-            item={calendarItem}
+            calendarItem={calendarItem}
             fooddata={fooddata}
             removeItem={removeItem}
             addCalendar={handleClick}
-            addFav={addFav}
           />
         ))}
       </div>
@@ -143,23 +142,31 @@ function App() {
 //******************************************************************************
 //            DAY ITEM
 //******************************************************************************
-//    REMEMBER TO ADD INTERFACE
 
-const DayItem: React.FC<any> = ({
-  item,
+interface DayItemProps {
+  calendarItem: CalendarItem;
+  removeItem: (id: string) => void;
+  fooddata: FoodItem[];
+  addCalendar: (id: string, number: number) => void;
+}
+
+const DayItem: React.FC<DayItemProps> = ({
+  calendarItem: calendarItem,
   removeItem,
   fooddata,
   addCalendar,
 }) => {
-  const foodItemId = fooddata.findIndex((butty: any) => butty.ID === item.id);
+  const foodItemId = fooddata.findIndex(
+    (butty: any) => butty.ID === calendarItem.id
+  );
   const foodItem = fooddata[foodItemId];
   return (
     <div key={foodItem.ID}>
       <h1>{foodItem.ITEM}</h1>
-      <h3>{item.quantity}</h3>
-      <button onClick={() => removeItem(item.id)}>Remove Item</button>
-      <button onClick={() => addCalendar(item.id, 1)}>+1</button>
-      <button onClick={() => addCalendar(item.id, -1)}>-1</button>
+      <h3>{calendarItem.quantity}</h3>
+      <button onClick={() => removeItem(calendarItem.id)}>Remove Item</button>
+      <button onClick={() => addCalendar(calendarItem.id, 1)}>+1</button>
+      <button onClick={() => addCalendar(calendarItem.id, -1)}>-1</button>
     </div>
   );
 };
