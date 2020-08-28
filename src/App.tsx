@@ -106,16 +106,11 @@ function App() {
         ))}
       </div>
       <div style={{ backgroundColor: "lightgoldenrodyellow" }}>
-        {fooddata.map((item) => {
-          return (
-            <FoodCard
-              key={item.ID}
-              item={item}
-              addCalendar={handleClick}
-              disableCheck={disableCheck}
-            />
-          );
-        })}
+        <FoodCardList
+          fooddata={fooddata}
+          handleClick={handleClick}
+          disableCheck={disableCheck}
+        />
       </div>
     </div>
   );
@@ -149,7 +144,32 @@ const DayItem: React.FC<any> = ({
 //            FOOD CARD
 //******************************************************************************
 
-// const FoodCardList: React.FC<any> = ({}) => {};
+interface FoodCardListProps {
+  fooddata: FoodItem[];
+  handleClick: (id: string, number: number) => void;
+  disableCheck: (id: string) => boolean | undefined;
+}
+
+const FoodCardList: React.FC<FoodCardListProps> = ({
+  fooddata,
+  handleClick,
+  disableCheck,
+}) => {
+  return (
+    <div>
+      {fooddata.map((item) => {
+        return (
+          <FoodCard
+            key={item.ID}
+            item={item}
+            addCalendar={handleClick}
+            disableCheck={disableCheck}
+          />
+        );
+      })}
+    </div>
+  );
+};
 
 interface FoodCardProps {
   item: FoodItem;
