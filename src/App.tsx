@@ -40,10 +40,10 @@ const fooddata: FoodItem[] = data;
 function App() {
   const [calendar, setCalendar] = useState<CalendarItem[]>([]);
   // const [userList, setUserList] = useState<User[]>([]);
-  const [filter, setFilter] = useState<boolean>(false);
+  const [filterFav, setFilterFav] = useState<boolean>(false);
   const [user, setUser] = useState<User>({
     id: "99",
-    favList: ["1", "2"],
+    favList: [],
     name: "Ugly Child",
   });
 
@@ -90,11 +90,28 @@ function App() {
     }
   };
 
+  const addFav = (id: string) => {
+    let i = user.favList.indexOf(id);
+    if (i === -1) {
+      setUser((prevState) => {
+        let tempArr = { ...prevState };
+        tempArr.favList.push(id);
+        return tempArr;
+      });
+    } else {
+      setUser((prevState) => {
+        let tempArr = { ...prevState };
+        tempArr.favList.splice(i, 1);
+        return tempArr;
+      });
+    }
+  };
+
   return (
     <div>
       <span>currently logged in as: {user.name}</span>
-      <button onClick={() => setFilter((prevState) => !prevState)}>
-        FILTER?????
+      <button onClick={() => setFilterFav((prevState) => !prevState)}>
+        {filterFav ? "SEE ALLL" : "SEE FAVORITES"}
       </button>
       <h2>Food 2 today:</h2>
       <div style={{ backgroundColor: "pink" }}>
@@ -105,6 +122,7 @@ function App() {
             fooddata={fooddata}
             removeItem={removeItem}
             addCalendar={handleClick}
+            addFav={addFav}
           />
         ))}
       </div>
@@ -113,8 +131,9 @@ function App() {
           fooddata={fooddata}
           handleClick={handleClick}
           disableCheck={disableCheck}
-          filter={filter}
+          filter={filterFav}
           user={user}
+          addFav={addFav}
         />
       </div>
     </div>
@@ -155,6 +174,7 @@ interface FoodCardListProps {
   disableCheck: (id: string) => boolean | undefined;
   user: User;
   filter: boolean;
+  addFav: (id: string) => void;
 }
 
 const FoodCardList: React.FC<FoodCardListProps> = ({
@@ -163,6 +183,7 @@ const FoodCardList: React.FC<FoodCardListProps> = ({
   disableCheck,
   user,
   filter,
+  addFav,
 }) => {
   let itemlist = fooddata;
   if (filter) {
@@ -178,6 +199,8 @@ const FoodCardList: React.FC<FoodCardListProps> = ({
             item={item}
             addCalendar={handleClick}
             disableCheck={disableCheck}
+            user={user}
+            addFav={addFav}
           />
         );
       })}
@@ -189,12 +212,16 @@ interface FoodCardProps {
   item: FoodItem;
   addCalendar: (id: string, number: number) => void;
   disableCheck: (id: string) => boolean | undefined;
+  user: User;
+  addFav: (id: string) => void;
 }
 
 const FoodCard: React.FC<FoodCardProps> = ({
   item,
-  addCalendar: addCalendar,
-  disableCheck: disableCheck,
+  addCalendar,
+  disableCheck,
+  user,
+  addFav,
 }) => {
   return (
     <div>
@@ -208,8 +235,10 @@ const FoodCard: React.FC<FoodCardProps> = ({
       >
         minus 1
       </button>
-      {/* <button onClick={() => } */}
-
+      <br />
+      <button onClick={() => addFav(item.ID)}>
+        {user.favList.includes(item.ID) ? "💟" : "♡"}
+      </button>
       <hr />
     </div>
   );
