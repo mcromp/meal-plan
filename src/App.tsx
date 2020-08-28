@@ -93,6 +93,9 @@ function App() {
   return (
     <div>
       <span>currently logged in as: {user.name}</span>
+      <button onClick={() => setFilter((prevState) => !prevState)}>
+        FILTER?????
+      </button>
       <h2>Food 2 today:</h2>
       <div style={{ backgroundColor: "pink" }}>
         {calendar.map((calendarItem) => (
@@ -110,6 +113,8 @@ function App() {
           fooddata={fooddata}
           handleClick={handleClick}
           disableCheck={disableCheck}
+          filter={filter}
+          user={user}
         />
       </div>
     </div>
@@ -148,16 +153,25 @@ interface FoodCardListProps {
   fooddata: FoodItem[];
   handleClick: (id: string, number: number) => void;
   disableCheck: (id: string) => boolean | undefined;
+  user: User;
+  filter: boolean;
 }
 
 const FoodCardList: React.FC<FoodCardListProps> = ({
   fooddata,
   handleClick,
   disableCheck,
+  user,
+  filter,
 }) => {
+  let itemlist = fooddata;
+  if (filter) {
+    itemlist = itemlist.filter((item) => user.favList.includes(item.ID));
+  }
+
   return (
     <div>
-      {fooddata.map((item) => {
+      {itemlist.map((item) => {
         return (
           <FoodCard
             key={item.ID}
