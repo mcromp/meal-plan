@@ -1,14 +1,14 @@
 import data from "./food_data/fooddata.json";
 import React, { useState } from "react";
-import { CATEGORIES } from "./food_data/categories";
+// import { CATEGORIES } from "./food_data/categories";
 
-type Category =
-  | "BURGERSANDWICH"
-  | "BEVERAGE"
-  | "CHICKENFISH"
-  | "DESSERTSHAKE"
-  | "SNACKSIDE"
-  | "BREAKFAST";
+// type Category =
+//   | "BURGERSANDWICH"
+//   | "BEVERAGE"
+//   | "CHICKENFISH"
+//   | "DESSERTSHAKE"
+//   | "SNACKSIDE"
+//   | "BREAKFAST";
 
 interface FoodItem {
   ITEM: string;
@@ -35,23 +35,12 @@ type ButtonProps = {
   callback: (name: string) => void;
 };
 
-const foodList: string[] = CATEGORIES;
 const fooddata: FoodItem[] = data;
 
 function App() {
   const [calendar, setCalendar] = useState<CalendarItem[]>([]);
-  const [userList, setUserList] = useState<User[]>([
-    {
-      id: "99",
-      favList: ["1", "2"],
-      name: "Ugly Child",
-    },
-    {
-      id: "77",
-      favList: ["3", "21"],
-      name: "Stinko",
-    },
-  ]);
+  // const [userList, setUserList] = useState<User[]>([]);
+  const [filter, setFilter] = useState<boolean>(false);
   const [user, setUser] = useState<User>({
     id: "99",
     favList: ["1", "2"],
@@ -77,7 +66,7 @@ function App() {
   };
 
   const removeItem = (id: string) => {
-    const filteredCalendar = calendar.filter((item) => item.id != id);
+    const filteredCalendar = calendar.filter((item) => item.id !== id);
     setCalendar([...filteredCalendar]);
   };
 
@@ -103,37 +92,64 @@ function App() {
 
   return (
     <div>
-      <span>currently logged in as: {userList[0].name}</span>
+      <span>currently logged in as: {user.name}</span>
       <h2>Food 2 today:</h2>
-      {calendar.map((calendarItem) => {
-        const foodItemId = fooddata.findIndex(
-          (item) => item.ID === calendarItem.id
-        );
-        const foodItem = fooddata[foodItemId];
-        return (
-          <div key={foodItem.ID}>
-            <h1>{foodItem.ITEM}</h1>
-            <span>{calendarItem.quantity}</span>
-          </div>
-        );
-      })}
-      <br />
-      <br />
-      <br />
-      {fooddata.map((item) => {
-        return (
-          <FoodCard
-            key={item.ID}
-            item={item}
+      <div style={{ backgroundColor: "pink" }}>
+        {calendar.map((calendarItem) => (
+          <DayItem
+            key={calendarItem.id}
+            item={calendarItem}
+            fooddata={fooddata}
+            removeItem={removeItem}
             addCalendar={handleClick}
-            disableCheck={disableCheck}
           />
-        );
-      })}
-      <h1>heyya</h1>
+        ))}
+      </div>
+      <div style={{ backgroundColor: "lightgoldenrodyellow" }}>
+        {fooddata.map((item) => {
+          return (
+            <FoodCard
+              key={item.ID}
+              item={item}
+              addCalendar={handleClick}
+              disableCheck={disableCheck}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }
+
+//******************************************************************************
+//            DAY ITEM
+//******************************************************************************
+//    REMEMBER TO ADD INTERFACE
+
+const DayItem: React.FC<any> = ({
+  item,
+  removeItem,
+  fooddata,
+  addCalendar,
+}) => {
+  const foodItemId = fooddata.findIndex((butty: any) => butty.ID === item.id);
+  const foodItem = fooddata[foodItemId];
+  return (
+    <div key={foodItem.ID}>
+      <h1>{foodItem.ITEM}</h1>
+      <h3>{item.quantity}</h3>
+      <button onClick={() => removeItem(item.id)}>Remove Item</button>
+      <button onClick={() => addCalendar(item.id, 1)}>+1</button>
+      <button onClick={() => addCalendar(item.id, -1)}>-1</button>
+    </div>
+  );
+};
+
+//******************************************************************************
+//            FOOD CARD
+//******************************************************************************
+
+// const FoodCardList: React.FC<any> = ({}) => {};
 
 interface FoodCardProps {
   item: FoodItem;
@@ -151,7 +167,6 @@ const FoodCard: React.FC<FoodCardProps> = ({
       <hr />
       <br />
       <span>{item.ITEM}</span>
-      <br />
       <button onClick={() => addCalendar(item.ID, 1)}>plus 1</button>
       <button
         onClick={() => addCalendar(item.ID, -1)}
