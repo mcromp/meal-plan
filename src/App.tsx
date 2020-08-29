@@ -1,14 +1,5 @@
 import data from "./food_data/fooddata.json";
 import React, { useState } from "react";
-// import { CATEGORIES } from "./food_data/categories";
-
-// type Category =
-//   | "BURGERSANDWICH"
-//   | "BEVERAGE"
-//   | "CHICKENFISH"
-//   | "DESSERTSHAKE"
-//   | "SNACKSIDE"
-//   | "BREAKFAST";
 
 interface FoodItem {
   ITEM: string;
@@ -37,10 +28,23 @@ type ButtonProps = {
 
 const fooddata: FoodItem[] = data;
 
+enum FiltersTypes {
+  ShowAll = "SHOWALL",
+  Favorites = "FAVORITES",
+  BurgerSandwich = "BURGERSANDWICH",
+  Beverage = "BEVERAGE",
+  ChickenFish = "CHICKENFISH",
+  DessertShake = "DESSERTSHAKE",
+  SnackSide = "SNACKSIDE",
+  Breakfast = "BREAKFAST",
+}
+
 function App() {
   const [calendar, setCalendar] = useState<CalendarItem[]>([]);
   // const [userList, setUserList] = useState<User[]>([]);
-  const [filterFav, setFilterFav] = useState<boolean>(false);
+  const [currentFilter, setCurrentFilter] = useState<FiltersTypes>(
+    FiltersTypes.ShowAll
+  );
   const [user, setUser] = useState<User>({
     id: "99",
     favList: [],
@@ -107,13 +111,18 @@ function App() {
     }
   };
 
+  const setFilter = (filter: FiltersTypes) => {
+    console.log(filter);
+    setCurrentFilter(filter);
+  };
+
   return (
     <div>
       <span>currently logged in as: {user.name}</span>
-      <button onClick={() => setFilterFav((prevState) => !prevState)}>
-        {filterFav ? "SEE ALLL" : "SEE FAVORITES"}
-      </button>
       <h2>Food 2 today:</h2>
+
+      <FilterButtonList currentFilter={currentFilter} handleClick={setFilter} />
+
       <div style={{ backgroundColor: "pink" }}>
         {calendar.map((calendarItem) => (
           <DayItem
@@ -130,7 +139,7 @@ function App() {
           fooddata={fooddata}
           handleClick={handleClick}
           disableCheck={disableCheck}
-          filter={filterFav}
+          currentFilter={currentFilter}
           user={user}
           addFav={addFav}
         />
@@ -138,6 +147,35 @@ function App() {
     </div>
   );
 }
+
+//******************************************************************************
+//            Filter Buttons
+//******************************************************************************
+
+interface FilterButtonListProps {
+  currentFilter: FiltersTypes;
+  handleClick: (filter: FiltersTypes) => void;
+}
+
+const FilterButtonList: React.FC<FilterButtonListProps> = ({
+  currentFilter,
+  handleClick,
+}) => {
+  return (
+    <div>
+      <button onClick={() => handleClick(FiltersTypes.ShowAll)}>SHOWALL</button>
+      <button onClick={() => handleClick(FiltersTypes.Favorites)}>
+        FAVORITES
+      </button>
+      <button>BURGERSANDWICH</button>
+      <button>BEVERAGE</button>
+      <button>CHICKENFISH</button>
+      <button>DESSERTSHAKE</button>
+      <button>SNACKSIDE</button>
+      <button>BREAKFAST</button>
+    </div>
+  );
+};
 
 //******************************************************************************
 //            DAY ITEM
@@ -177,25 +215,25 @@ const DayItem: React.FC<DayItemProps> = ({
 
 interface FoodCardListProps {
   fooddata: FoodItem[];
+  user: User;
   handleClick: (id: string, number: number) => void;
   disableCheck: (id: string) => boolean | undefined;
-  user: User;
-  filter: boolean;
   addFav: (id: string) => void;
+  currentFilter: FiltersTypes;
 }
 
 const FoodCardList: React.FC<FoodCardListProps> = ({
   fooddata,
+  user,
   handleClick,
   disableCheck,
-  user,
-  filter,
   addFav,
+  currentFilter,
 }) => {
   let itemlist = fooddata;
-  if (filter) {
-    itemlist = itemlist.filter((item) => user.favList.includes(item.ID));
-  }
+  // if (currentFilter) {
+  //   itemlist = itemlist.filter((item) => user.favList.includes(item.ID));
+  // }
 
   return (
     <div>
