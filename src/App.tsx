@@ -1,6 +1,5 @@
 import data from "./food_data/fooddata.json";
 import React, { useState, useEffect } from "react";
-import { CATEGORIES } from "./food_data/categories";
 
 interface FoodItem {
   ITEM: string;
@@ -45,14 +44,14 @@ interface Filter {
   selected: boolean;
 }
 
-const defaultFilterList: Filter[] = [
+let defaultFilterList: Filter[] = [
   { id: "FAVORITES", name: "User Favorites", selected: false },
   { id: "BURGERSANDWICH", name: "Burger and Sandwhich", selected: false },
   { id: "BEVERAGE", name: "Beverage", selected: false },
   { id: "CHICKENFISH", name: "Chicken and Fish", selected: false },
   { id: "DESSERTSHAKE", name: "Dessert and MilkShake", selected: false },
   { id: "SNACKSIDE", name: "Snack and Side", selected: false },
-  { id: "BREAKFAST", name: "Breakfast", selected: false },
+  { id: "BREAKFAST", name: "Breakfast", selected: true },
 ];
 
 function App() {
@@ -61,7 +60,7 @@ function App() {
   const [filterList, setFilterList] = useState<Filter[]>(defaultFilterList);
   const [user, setUser] = useState<User>({
     id: "99",
-    favList: [],
+    favList: ["0", "1", "2"],
     name: "Ugly Child",
   });
 
@@ -110,25 +109,41 @@ function App() {
 
   const addFav = (id: string) => {
     let i = user.favList.indexOf(id);
+    let tempArr = { ...user };
     if (i === -1) {
-      setUser((prevState) => {
-        let tempArr = { ...prevState };
-        tempArr.favList.push(id);
-        return tempArr;
-      });
+      tempArr.favList.push(id);
     } else {
-      setUser((prevState) => {
-        let tempArr = { ...prevState };
-        tempArr.favList.splice(i, 1);
-        return tempArr;
-      });
+      tempArr.favList.splice(i, 1);
     }
+    setUser(tempArr);
+  };
+
+  const changeFilter1 = () => {
+    let pp = [...filterList];
+    setFilterList((prevState) => {
+      pp[3].selected = true;
+      prevState = [...pp];
+      return prevState;
+    });
+    // console.log(filterList, "filter list");
+  };
+  const changeFilter2 = () => {
+    let pp = [...filterList];
+    setFilterList((prevState) => {
+      pp[4].selected = true;
+      prevState = [...pp];
+      return prevState;
+    });
+    // console.log(filterList, "filter list");
   };
 
   return (
     <div>
       <span>currently logged in as: {user.name}</span>
       <h2>Food 2 today:</h2>
+      <button onClick={() => console.log(user)}>click for user</button>
+      <button onClick={changeFilter1}>click for user</button>
+      <button onClick={changeFilter2}>click for user</button>
 
       <div style={{ backgroundColor: "pink" }}>
         {calendar.map((calendarItem) => (
@@ -148,6 +163,7 @@ function App() {
           disableCheck={disableCheck}
           user={user}
           addFav={addFav}
+          filterList={filterList}
         />
       </div>
     </div>
@@ -196,6 +212,7 @@ const DayItem: React.FC<DayItemProps> = ({
 
 interface FoodCardListProps {
   fooddata: FoodItem[];
+  filterList: Filter[];
   user: User;
   handleClick: (id: string, number: number) => void;
   disableCheck: (id: string) => boolean | undefined;
@@ -204,19 +221,55 @@ interface FoodCardListProps {
 
 const FoodCardList: React.FC<FoodCardListProps> = ({
   fooddata,
+  filterList,
   user,
   handleClick,
   disableCheck,
   addFav,
 }) => {
-  let itemlist = fooddata;
-  // if (currentFilter) {
-  //   itemlist = itemlist.filter((item) => user.favList.includes(item.ID));
-  // }
+  const [cardList, setCardList] = useState(fooddata);
+
+  useEffect(() => {
+    let pp: Filter[] = filterList;
+    filterCardList(pp);
+  }, [filterList]);
+
+  useEffect(() => {}, [cardList]);
+
+  const filterCardList = (pp: Filter[]) => {
+    const selectedFilterList = pp.filter((item) => item.selected);
+    const favoritesSelected = pp.some(
+      (item) => item.id === "FAVORITES" && item.selected
+    );
+
+    const filterFoodList: FoodItem[] = [];
+
+    if (selectedFilterList.length === 0) {
+      return;
+    } else if (selectedFilterList.length !== 0) {
+      fooddata.forEach((foodItem) => {
+        for (let i in selectedFilterList) {
+          console.log(foodItem.CATEGORY);
+          if (selectedFilterList[i].id === foodItem.CATEGORY) {
+            filterFoodList.push(foodItem);
+            return;
+          }
+          if (favoritesSelected) {
+            user.favList.forEach((favItem) => {
+              if (foodItem.ID === favItem) {
+                filterFoodList.push(foodItem);
+              }
+            });
+          }
+        }
+      });
+      setCardList(filterFoodList);
+    }
+  };
 
   return (
     <div>
-      {itemlist.map((item) => {
+      {cardList.map((item) => {
         return (
           <FoodCard
             key={item.ID}
@@ -263,7 +316,6 @@ const FoodCard: React.FC<FoodCardProps> = ({
       <button onClick={() => addFav(item.ID)}>
         {user.favList.includes(item.ID) ? "💟" : "♡"}
       </button>
-      <hr />
     </div>
   );
 };
