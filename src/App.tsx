@@ -235,54 +235,35 @@ const FoodCardList: React.FC<FoodCardListProps> = ({
 
   useEffect(() => {}, [cardList]);
 
+  const createCardList = (
+    selectedFilterList: Filter[],
+    favoritesSelected: boolean
+  ) =>
+    fooddata.reduce<FoodItem[]>((acc, foodItem) => {
+      selectedFilterList.forEach((selecedFilter) => {
+        if (selecedFilter.id === foodItem.CATEGORY) acc.push(foodItem);
+        if (favoritesSelected) {
+          user.favList.forEach((favItem) => {
+            if (foodItem.ID === favItem) acc.push(foodItem);
+          });
+        }
+      });
+      return acc;
+    }, []);
+
   const filterCardList = (pp: Filter[]) => {
     const selectedFilterList = pp.filter((item) => item.selected);
     const favoritesSelected = pp.some(
       (item) => item.id === "FAVORITES" && item.selected
     );
-
     const filterFoodList: FoodItem[] = [];
-
     if (selectedFilterList.length === 0) {
       return;
     } else if (selectedFilterList.length !== 0) {
-      //
-      //
-      //
-      let newlist = fooddata.reduce<FoodItem[]>((acc, foodItem) => {
-        selectedFilterList.forEach((selecedFilter) => {
-          if (selecedFilter.id === foodItem.CATEGORY) return acc.push(foodItem);
-          //
-          //
-          if (favoritesSelected) {
-            user.favList.forEach((favItem) => {
-              if (foodItem.ID === favItem) return acc.push(foodItem);
-            });
-          }
-
-          //
-        });
-        return acc;
-      }, []);
-
-      console.log(newlist);
-
-      // fooddata.forEach((foodItem) => {
-      //   for (let i in selectedFilterList) {
-      //     if (selectedFilterList[i].id === foodItem.CATEGORY) {
-      //       filterFoodList.push(foodItem);
-      //       return;
-      //     }
-      //     if (favoritesSelected) {
-      //       user.favList.forEach((favItem) => {
-      //         if (foodItem.ID === favItem) {
-      //           filterFoodList.push(foodItem);
-      //         }
-      //       });
-      //     }
-      //   }
-      // });
-
+      let newlist: FoodItem[] = createCardList(
+        selectedFilterList,
+        favoritesSelected
+      );
       setCardList(newlist);
     }
   };
