@@ -230,8 +230,7 @@ const FoodCardList: React.FC<FoodCardListProps> = ({
   const [cardList, setCardList] = useState(fooddata);
 
   useEffect(() => {
-    let pp: Filter[] = filterList;
-    filterCardList(pp);
+    filterCardList(filterList);
   }, [filterList]);
 
   useEffect(() => {}, [cardList]);
@@ -247,23 +246,44 @@ const FoodCardList: React.FC<FoodCardListProps> = ({
     if (selectedFilterList.length === 0) {
       return;
     } else if (selectedFilterList.length !== 0) {
-      fooddata.forEach((foodItem) => {
-        for (let i in selectedFilterList) {
-          console.log(foodItem.CATEGORY);
-          if (selectedFilterList[i].id === foodItem.CATEGORY) {
-            filterFoodList.push(foodItem);
-            return;
-          }
+      //
+      //
+      //
+      let newlist = fooddata.reduce<FoodItem[]>((acc, foodItem) => {
+        selectedFilterList.forEach((selecedFilter) => {
+          if (selecedFilter.id === foodItem.CATEGORY) return acc.push(foodItem);
+          //
+          //
           if (favoritesSelected) {
             user.favList.forEach((favItem) => {
-              if (foodItem.ID === favItem) {
-                filterFoodList.push(foodItem);
-              }
+              if (foodItem.ID === favItem) return acc.push(foodItem);
             });
           }
-        }
-      });
-      setCardList(filterFoodList);
+
+          //
+        });
+        return acc;
+      }, []);
+
+      console.log(newlist);
+
+      // fooddata.forEach((foodItem) => {
+      //   for (let i in selectedFilterList) {
+      //     if (selectedFilterList[i].id === foodItem.CATEGORY) {
+      //       filterFoodList.push(foodItem);
+      //       return;
+      //     }
+      //     if (favoritesSelected) {
+      //       user.favList.forEach((favItem) => {
+      //         if (foodItem.ID === favItem) {
+      //           filterFoodList.push(foodItem);
+      //         }
+      //       });
+      //     }
+      //   }
+      // });
+
+      setCardList(newlist);
     }
   };
 
