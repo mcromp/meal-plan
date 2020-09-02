@@ -1,11 +1,11 @@
-import data from "./food_data/fooddata.json";
 import React, { useState, useEffect } from "react";
+import data from "./food_data/fooddata.json";
 
 interface FoodItem {
   ITEM: string;
   CAL: string;
-  CATEGORY: string;
   PRICE: string;
+  CATEGORY: string;
   ID: string;
 }
 
@@ -22,12 +22,6 @@ interface CalendarItem {
   user: string;
 }
 
-type ButtonProps = {
-  callback: (name: string) => void;
-};
-
-const fooddata: FoodItem[] = data;
-
 type FilterId =
   | "BURGERSANDWICH"
   | "BEVERAGE"
@@ -35,7 +29,6 @@ type FilterId =
   | "DESSERTSHAKE"
   | "SNACKSIDE"
   | "BREAKFAST"
-  | "SHOWALL"
   | "FAVORITES";
 
 interface Filter {
@@ -44,6 +37,8 @@ interface Filter {
   selected: boolean;
 }
 
+let fooddata: any[] = data;
+
 let defaultFilterList: Filter[] = [
   { id: "FAVORITES", name: "User Favorites", selected: false },
   { id: "BURGERSANDWICH", name: "Burger and Sandwhich", selected: false },
@@ -51,16 +46,15 @@ let defaultFilterList: Filter[] = [
   { id: "CHICKENFISH", name: "Chicken and Fish", selected: false },
   { id: "DESSERTSHAKE", name: "Dessert and MilkShake", selected: false },
   { id: "SNACKSIDE", name: "Snack and Side", selected: false },
-  { id: "BREAKFAST", name: "Breakfast", selected: true },
+  { id: "BREAKFAST", name: "Breakfast", selected: false },
 ];
 
 function App() {
   const [calendar, setCalendar] = useState<CalendarItem[]>([]);
-  // const [userList, setUserList] = useState<User[]>([]);
-  const [filterList, setFilterList] = useState<Filter[]>(defaultFilterList);
+  const [filterList, setfilterList] = useState<Filter[]>(defaultFilterList);
   const [user, setUser] = useState<User>({
     id: "99",
-    favList: ["0", "1", "2"],
+    favList: ["0"],
     name: "Ugly Child",
   });
 
@@ -72,7 +66,7 @@ function App() {
     return !filtedItem[0];
   };
 
-  const addItem = (id: string, amount: number) => {
+  const addToCalendar = (id: string, amount: number) => {
     const newCalendarItem: CalendarItem = {
       id,
       date: "today",
@@ -92,7 +86,7 @@ function App() {
       findCalendarItem(item, id)
     );
     if (selectedItemId === -1) {
-      if (amount > 0) addItem(id, amount);
+      if (amount > 0) addToCalendar(id, amount);
     } else {
       let updatedQuantity = calendar[selectedItemId].quantity + amount;
       if (updatedQuantity <= 0) {
@@ -118,33 +112,12 @@ function App() {
     setUser(tempArr);
   };
 
-  const changeFilter1 = () => {
-    let pp = [...filterList];
-    setFilterList((prevState) => {
-      pp[3].selected = true;
-      prevState = [...pp];
-      return prevState;
-    });
-    // console.log(filterList, "filter list");
-  };
-  const changeFilter2 = () => {
-    let pp = [...filterList];
-    setFilterList((prevState) => {
-      pp[4].selected = true;
-      prevState = [...pp];
-      return prevState;
-    });
-    // console.log(filterList, "filter list");
-  };
-
   return (
     <div>
       <span>currently logged in as: {user.name}</span>
       <h2>Food 2 today:</h2>
       <button onClick={() => console.log(user)}>click for user</button>
-      <button onClick={changeFilter1}>click for user</button>
-      <button onClick={changeFilter2}>click for user</button>
-
+      <FilterButtonList filterList={filterList} setFilterList={setfilterList} />
       <div style={{ backgroundColor: "pink" }}>
         {calendar.map((calendarItem) => (
           <DayItem
@@ -156,16 +129,14 @@ function App() {
           />
         ))}
       </div>
-      <div style={{ backgroundColor: "lightgoldenrodyellow" }}>
-        <FoodCardList
-          fooddata={fooddata}
-          handleClick={handleClick}
-          disableCheck={disableCheck}
-          user={user}
-          addFav={addFav}
-          filterList={filterList}
-        />
-      </div>
+      <FoodCardList
+        fooddata={fooddata}
+        handleClick={handleClick}
+        disableCheck={disableCheck}
+        user={user}
+        addFav={addFav}
+        filterList={filterList}
+      />
     </div>
   );
 }
@@ -173,6 +144,44 @@ function App() {
 //******************************************************************************
 //            Filter Buttons
 //******************************************************************************
+
+const FilterButtonList: React.FC<any> = ({ filterList, setFilterList }) => {
+  const [showAll, setShowAll] = useState<boolean>(false);
+
+  const clearAll = () => {
+    let pp = filterList.map((x: Filter) => {
+      x.selected = false;
+      return x;
+    });
+    setFilterList(pp);
+    setShowAll(false);
+  };
+
+  const handleClick = (thang: Filter) => {
+    let xx = [...filterList];
+    let i = xx.indexOf(thang);
+    xx[i].selected = !xx[i].selected;
+    console.log(xx);
+    setFilterList(xx);
+    setShowAll(true);
+  };
+  return (
+    <div>
+      {filterList.map((x: Filter) => {
+        return (
+          <button
+            onClick={() => handleClick(x)}
+            key={x.name}
+            disabled={x.selected}
+          >
+            {x.name}
+          </button>
+        );
+      })}
+      {showAll ? <button onClick={clearAll}>clear all filters</button> : null}
+    </div>
+  );
+};
 
 //******************************************************************************
 //            DAY ITEM
@@ -192,7 +201,7 @@ const DayItem: React.FC<DayItemProps> = ({
   addCalendar,
 }) => {
   const foodItemId = fooddata.findIndex(
-    (butty: any) => butty.ID === calendarItem.id
+    (butt: any) => butt.ID === calendarItem.id
   );
   const foodItem = fooddata[foodItemId];
   return (
@@ -221,7 +230,7 @@ interface FoodCardListProps {
 
 const FoodCardList: React.FC<FoodCardListProps> = ({
   fooddata,
-  filterList,
+  filterList: filterList,
   user,
   handleClick,
   disableCheck,
@@ -230,46 +239,40 @@ const FoodCardList: React.FC<FoodCardListProps> = ({
   const [cardList, setCardList] = useState(fooddata);
 
   useEffect(() => {
-    filterCardList(filterList);
+    setCardList([]);
+    filterCardList();
   }, [filterList]);
 
-  useEffect(() => {}, [cardList]);
-
-  const createCardList = (
-    selectedFilterList: Filter[],
-    favoritesSelected: boolean
-  ) =>
-    fooddata.reduce<FoodItem[]>((acc, foodItem) => {
-      selectedFilterList.forEach((selecedFilter) => {
-        if (selecedFilter.id === foodItem.CATEGORY) acc.push(foodItem);
-        if (favoritesSelected) {
-          user.favList.forEach((favItem) => {
-            if (foodItem.ID === favItem) acc.push(foodItem);
-          });
-        }
-      });
+  const filterCardList = () => {
+    let tempArr: FoodItem[] = [];
+    let selectedFilterIdList = filterList.reduce<FilterId[]>((acc, item) => {
+      if (item.selected) acc.push(item.id);
       return acc;
     }, []);
 
-  const filterCardList = (pp: Filter[]) => {
-    const selectedFilterList = pp.filter((item) => item.selected);
-    const favoritesSelected = pp.some(
-      (item) => item.id === "FAVORITES" && item.selected
-    );
-    const filterFoodList: FoodItem[] = [];
-    if (selectedFilterList.length === 0) {
-      return;
-    } else if (selectedFilterList.length !== 0) {
-      let newlist: FoodItem[] = createCardList(
-        selectedFilterList,
-        favoritesSelected
-      );
-      setCardList(newlist);
+    if (selectedFilterIdList.length <= 0) {
+      tempArr = fooddata;
+    } else {
+      tempArr = createCardList(selectedFilterIdList);
     }
+
+    setCardList(tempArr);
   };
 
+  const createCardList = (selectedFilterIdList: FilterId[]) =>
+    fooddata.reduce<FoodItem[]>((acc, food) => {
+      let foodCategory = food.CATEGORY as FilterId;
+      if (
+        selectedFilterIdList.includes(foodCategory) ||
+        (user.favList.includes(food.ID) &&
+          selectedFilterIdList.includes("FAVORITES"))
+      )
+        acc.push(food);
+      return acc;
+    }, []);
+
   return (
-    <div>
+    <div style={{ backgroundColor: "darkcyan" }}>
       {cardList.map((item) => {
         return (
           <FoodCard
