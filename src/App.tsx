@@ -147,37 +147,67 @@ function App() {
 
 const FilterButtonList: React.FC<any> = ({ filterList, setFilterList }) => {
   const [showAll, setShowAll] = useState<boolean>(false);
+  const [enabledFilterList, setEnabledFilterList] = useState<Filter[]>([]);
 
   const clearAll = () => {
-    let pp = filterList.map((x: Filter) => {
-      x.selected = false;
-      return x;
+    let temp = filterList.map((filter: Filter) => {
+      filter.selected = false;
+      return filter;
     });
-    setFilterList(pp);
+    setFilterList(temp);
+    setEnabledFilterList([]);
     setShowAll(false);
   };
 
-  const handleClick = (thang: Filter) => {
-    let xx = [...filterList];
-    let i = xx.indexOf(thang);
-    xx[i].selected = !xx[i].selected;
-    console.log(xx);
-    setFilterList(xx);
+  const setFilter = (filter: Filter, boo: boolean) => {
+    let temp = [...filterList];
+    temp[temp.indexOf(filter)].selected = boo;
+    setFilterList(temp);
     setShowAll(true);
   };
+
+  const addFilter = (filter: Filter) => {
+    let temp = [...enabledFilterList, filter];
+    setEnabledFilterList(temp);
+  };
+
+  const removeFilter = (filter: Filter) => {
+    let temp = [...enabledFilterList];
+    temp.splice(temp.indexOf(filter), 1);
+    setEnabledFilterList(temp);
+  };
+
   return (
     <div>
-      {filterList.map((x: Filter) => {
+      {enabledFilterList.map((filter: Filter) => {
         return (
           <button
-            onClick={() => handleClick(x)}
-            key={x.name}
-            disabled={x.selected}
+            key={filter.name}
+            style={{ backgroundColor: "red" }}
+            onClick={() => {
+              setFilter(filter, false);
+              removeFilter(filter);
+            }}
           >
-            {x.name}
+            {filter.name} X
           </button>
         );
       })}
+      <br />
+      <hr />
+
+      {filterList.map((filter: Filter) => (
+        <button
+          onClick={() => {
+            setFilter(filter, true);
+            addFilter(filter);
+          }}
+          key={filter.name}
+          disabled={filter.selected}
+        >
+          {filter.name}
+        </button>
+      ))}
       {showAll ? <button onClick={clearAll}>clear all filters</button> : null}
     </div>
   );
