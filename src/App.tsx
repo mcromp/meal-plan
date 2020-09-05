@@ -118,11 +118,7 @@ function App() {
       <h2>Food 2 today:</h2>
       <button onClick={() => console.log(user)}>click for user</button>
       <FilterButtonList filterList={filterList} setFilterList={setfilterList} />
-      <div
-        style={{
-          backgroundColor: "pink",
-        }}
-      >
+      <div style={{ backgroundColor: "pink" }}>
         {calendar.map((calendarItem) => (
           <DayItem
             key={calendarItem.id}
@@ -133,7 +129,6 @@ function App() {
           />
         ))}
       </div>
-
       <FoodCardList
         fooddata={fooddata}
         handleClick={handleClick}
@@ -150,9 +145,19 @@ function App() {
 //            Search Bar
 //******************************************************************************
 
+const SearchBar: React.FC<any> = ({}) => {
+  return (
+    <>
+      <label></label>
+    </>
+  );
+};
+
 //******************************************************************************
 //            Filter Buttons
 //******************************************************************************
+
+//make instance
 
 const FilterButtonList: React.FC<any> = ({ filterList, setFilterList }) => {
   const [showAll, setShowAll] = useState<boolean>(false);
@@ -205,7 +210,6 @@ const FilterButtonList: React.FC<any> = ({ filterList, setFilterList }) => {
       })}
       <br />
       <hr />
-
       {filterList.map((filter: Filter) => (
         <button
           onClick={() => {
@@ -240,11 +244,8 @@ const DayItem: React.FC<DayItemProps> = ({
   fooddata,
   addCalendar,
 }) => {
-  const foodItemId = fooddata.findIndex(
-    (butt: any) => butt.ID === calendarItem.id
-  );
-  const foodItem = fooddata[foodItemId];
-  return (
+  const foodItem = fooddata.find((i: FoodItem) => i.ID === calendarItem.id);
+  return foodItem ? (
     <div key={foodItem.ID}>
       <h1>{foodItem.ITEM}</h1>
       <h3>{calendarItem.quantity}</h3>
@@ -252,7 +253,7 @@ const DayItem: React.FC<DayItemProps> = ({
       <button onClick={() => addCalendar(calendarItem.id, 1)}>+1</button>
       <button onClick={() => addCalendar(calendarItem.id, -1)}>-1</button>
     </div>
-  );
+  ) : null;
 };
 
 //******************************************************************************
