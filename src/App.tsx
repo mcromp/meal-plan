@@ -37,7 +37,7 @@ interface Filter {
   selected: boolean;
 }
 
-let fooddata: any[] = data;
+let fooddata: FoodItem[] = data;
 
 let defaultFilterList: Filter[] = [
   { id: "FAVORITES", name: "User Favorites", selected: false },
@@ -104,11 +104,8 @@ function App() {
   const addFav = (id: string) => {
     let i = user.favList.indexOf(id);
     let tempArr = { ...user };
-    if (i === -1) {
-      tempArr.favList.push(id);
-    } else {
-      tempArr.favList.splice(i, 1);
-    }
+    if (i === -1) tempArr.favList.push(id)
+    else tempArr.favList.splice(i, 1)
     setUser(tempArr);
   };
 
@@ -116,7 +113,8 @@ function App() {
     <div>
       <span>currently logged in as: {user.name}</span>
       <h2>Food 2 today:</h2>
-      <button onClick={() => console.log(user)}>click for user</button>
+      <SearchBar fooddata={fooddata} />
+      {/* <button onClick={() => console.log(user)}>click for user</button> */}
       <FilterButtonList filterList={filterList} setFilterList={setfilterList} />
       <div style={{ backgroundColor: "pink" }}>
         {calendar.map((calendarItem) => (
@@ -145,10 +143,25 @@ function App() {
 //            Search Bar
 //******************************************************************************
 
-const SearchBar: React.FC<any> = ({}) => {
+const SearchBar: React.FC<any> = ({ }) => {
+  const [textValue, setTextValue] = useState("")
+  const [searchListDisplay, setSearchListDisplay] = useState([])
+
+  useEffect(() => {
+    console.log(textValue)
+  }, [textValue])
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement>) => {
+    setTextValue(e.target.value)
+
+
+  }
+
   return (
     <>
-      <label></label>
+      Search: <input value={textValue} onChange={(e) => handleChange(e)} />
+
     </>
   );
 };
@@ -157,9 +170,12 @@ const SearchBar: React.FC<any> = ({}) => {
 //            Filter Buttons
 //******************************************************************************
 
-//make instance
+interface FilterButtonListProps {
+  filterList: Filter[],
+  setFilterList: (filterList: Filter[]) => void;
+}
 
-const FilterButtonList: React.FC<any> = ({ filterList, setFilterList }) => {
+const FilterButtonList: React.FC<FilterButtonListProps> = ({ filterList, setFilterList }) => {
   const [showAll, setShowAll] = useState<boolean>(false);
   const [enabledFilterList, setEnabledFilterList] = useState<Filter[]>([]);
 
@@ -312,11 +328,7 @@ const FoodCardList: React.FC<FoodCardListProps> = ({
   }, [filterList, fooddata, user.favList]);
 
   return (
-    <div
-      style={{
-        backgroundColor: "darkcyan",
-      }}
-    >
+    <div style={{ backgroundColor: "darkcyan" }}>
       {cardList.map((item) => {
         return (
           <FoodCard
