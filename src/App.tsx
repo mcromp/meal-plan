@@ -1,10 +1,11 @@
 import React, { useState, useLayoutEffect, useEffect, useRef } from "react";
 import data from "./food_data/fooddata.json";
-import './App.css'
 import SearchBar from "./components/SearchBar/SearchContainer";
 import { FoodItem, Filter, CalendarItem, User, FilterId } from "./types";
 import { defaultFilterList } from "./food_data/defaultFilterList";
-import FilterButtonList from "./components/Filter/FilterContainer";
+import FilterButtonList from "./components/FilterBar/FilterContainer";
+import './App.css'
+import FoodCardList from "./components/FoodCard/FoodCardContainer";
 
 let fooddata: FoodItem[] = data;
 
@@ -124,112 +125,5 @@ const DayItem: React.FC<DayItemProps> = ({
   ) : null;
 };
 
-//******************************************************************************
-//            FOOD CARD
-//******************************************************************************
-
-interface FoodCardListProps {
-  fooddata: FoodItem[];
-  filterList: Filter[];
-  user: User;
-  handleClick: (id: string, number: number) => void;
-  disableCheck: (id: string) => boolean | undefined;
-  addFav: (id: string) => void;
-}
-
-const FoodCardList: React.FC<FoodCardListProps> = ({
-  fooddata,
-  filterList,
-  user,
-  handleClick,
-  disableCheck,
-  addFav,
-}) => {
-  const [cardList, setCardList] = useState(fooddata);
-
-  useEffect(() => {
-    const filterCardList = () => {
-      let tempArr: FoodItem[] = [];
-
-      const selectedFilterIdList = filterList.reduce<FilterId[]>((acc, item) => {
-        if (item.selected) acc.push(item.id);
-        return acc;
-      }, []);
-
-      selectedFilterIdList.length <= 0
-        ? (tempArr = fooddata)
-        : (tempArr = createCardList(selectedFilterIdList));
-
-      setCardList(tempArr);
-    };
-
-    const createCardList = (selectedFilterIdList: FilterId[]) =>
-      fooddata.reduce<FoodItem[]>((acc, food) => {
-        const foodCategory = food.CATEGORY as FilterId;
-        if (
-          selectedFilterIdList.includes(foodCategory) ||
-          (user.favList.includes(food.ID) &&
-            selectedFilterIdList.includes("FAVORITES"))
-        )
-          acc.push(food);
-        return acc;
-      }, []);
-
-    setCardList([]);
-    filterCardList();
-  }, [filterList, fooddata, user.favList]);
-
-  return (
-    <div className="grid_i">
-      {cardList.map((item) => {
-        return (
-          <FoodCard
-            key={item.ID}
-            item={item}
-            addCalendar={handleClick}
-            disableCheck={disableCheck}
-            user={user}
-            addFav={addFav}
-          />
-        );
-      })}
-    </div>
-  );
-};
-
-interface FoodCardProps {
-  item: FoodItem;
-  addCalendar: (id: string, number: number) => void;
-  disableCheck: (id: string) => boolean | undefined;
-  user: User;
-  addFav: (id: string) => void;
-}
-
-const FoodCard: React.FC<FoodCardProps> = ({
-  item,
-  addCalendar,
-  disableCheck,
-  user,
-  addFav,
-}) => {
-  return (
-    <div style={{ backgroundColor: "mediumpurple" }}>
-      <hr />
-      <br />
-      <span>{item.ITEM}</span>
-      <button onClick={() => addCalendar(item.ID, 1)}>plus 1</button>
-      <button
-        onClick={() => addCalendar(item.ID, -1)}
-        disabled={disableCheck(item.ID)}
-      >
-        minus 1
-      </button>
-      <br />
-      <button onClick={() => addFav(item.ID)}>
-        {user.favList.includes(item.ID) ? "💟" : "♡"}
-      </button>
-    </div >
-  );
-};
 
 export default App;
