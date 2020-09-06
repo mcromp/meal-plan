@@ -10,17 +10,13 @@ const FoodCard: React.FC<FoodCardProps> = ({
 }) => {
     return (
         <div style={{ backgroundColor: "mediumpurple" }}>
-            <hr />
-            <br />
             <span>{item.ITEM}</span>
             <button onClick={() => addCalendar(item.ID, 1)}>plus 1</button>
             <button
                 onClick={() => addCalendar(item.ID, -1)}
-                disabled={disableCheck(item.ID)}
-            >
+                disabled={disableCheck(item.ID)}>
                 minus 1
-      </button>
-            <br />
+            </button>
             <button onClick={() => toggleFav(item.ID)}>
                 {user.favList.includes(item.ID) ? "💟" : "♡"}
             </button>

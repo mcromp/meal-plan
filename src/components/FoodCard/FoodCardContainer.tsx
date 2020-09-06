@@ -10,7 +10,7 @@ const FoodCardList: React.FC<FoodCardListProps> = ({
     user,
     handleClick,
     calendar,
-    toggleFav: toggleFav,
+    toggleFav,
 }) => {
     const [cardList, setCardList] = useState(fooddata);
 
@@ -29,7 +29,6 @@ const FoodCardList: React.FC<FoodCardListProps> = ({
 
             setCardList(tempArr);
         };
-
 
         const createCardList = (selectedFilterIdList: FilterId[]) =>
             fooddata.reduce<FoodItem[]>((acc, food) => {
