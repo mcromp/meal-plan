@@ -1,8 +1,8 @@
 import { CalendarItem, FoodItem } from "../../types";
 import React from 'react'
-import { DayItemProps } from "./types";
+import { DayBoardItemProps } from "./types";
 
-const DayItem: React.FC<DayItemProps> = ({
+const DayBoardItem: React.FC<DayBoardItemProps> = ({
     calendarItem,
     removeItem,
     fooddata,
@@ -20,4 +20,4 @@ const DayItem: React.FC<DayItemProps> = ({
     ) : null;
 };
 
-export default DayItem
+export default DayBoardItem

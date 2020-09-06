@@ -1,6 +1,6 @@
 import { CalendarItem, FoodItem } from "../../types";
 
-export interface DayItemProps {
+export interface DayBoardItemProps {
   calendarItem: CalendarItem;
   removeItem: (id: string) => void;
   fooddata: FoodItem[];

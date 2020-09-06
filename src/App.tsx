@@ -4,7 +4,7 @@ import { defaultFilterList } from "./food_data/defaultFilterList";
 import SearchBar from "./components/SearchBar/SearchContainer";
 import FilterButtonList from "./components/FilterBar/FilterContainer";
 import FoodCardList from "./components/FoodCard/FoodCardContainer";
-import DayItem from "./components/DayBoard/DayBoard";
+import DayBoardItem from "./components/DayBoard/DayBoard";
 import data from "./food_data/fooddata.json";
 import './App.css'
 
@@ -65,7 +65,7 @@ function App() {
   return (
     <div style={{ backgroundColor: "pink" }}>
       {calendar.map((calendarItem) => (
-        <DayItem
+        <DayBoardItem
           key={calendarItem.id}
           calendarItem={calendarItem}
           fooddata={fooddata}
