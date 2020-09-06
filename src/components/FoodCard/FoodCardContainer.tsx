@@ -9,7 +9,7 @@ const FoodCardList: React.FC<FoodCardListProps> = ({
     filterList,
     user,
     handleClick,
-    disableCheck,
+    calendar,
     addFav,
 }) => {
     const [cardList, setCardList] = useState(fooddata);
@@ -30,6 +30,7 @@ const FoodCardList: React.FC<FoodCardListProps> = ({
             setCardList(tempArr);
         };
 
+
         const createCardList = (selectedFilterIdList: FilterId[]) =>
             fooddata.reduce<FoodItem[]>((acc, food) => {
                 const foodCategory = food.CATEGORY as FilterId;
@@ -45,6 +46,12 @@ const FoodCardList: React.FC<FoodCardListProps> = ({
         setCardList([]);
         filterCardList();
     }, [filterList, fooddata, user.favList]);
+
+
+    const disableCheck = (id: string): boolean => {
+        const filtedItem = calendar.filter((item) => item.id === id);
+        return !filtedItem[0];
+    };
 
     return (
         <div className="grid_i">

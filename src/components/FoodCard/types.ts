@@ -1,4 +1,4 @@
-import { FoodItem, User, Filter } from "../../types";
+import { FoodItem, User, Filter, CalendarItem } from "../../types";
 
 export interface FoodCardProps {
   item: FoodItem;
@@ -13,6 +13,6 @@ export interface FoodCardListProps {
   filterList: Filter[];
   user: User;
   handleClick: (id: string, number: number) => void;
-  disableCheck: (id: string) => boolean | undefined;
+  calendar: CalendarItem[];
   addFav: (id: string) => void;
 }

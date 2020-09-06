@@ -6,10 +6,9 @@ import SearchBar from "./components/SearchBar/SearchContainer";
 import FilterButtonList from "./components/FilterBar/FilterContainer";
 import FoodCardList from "./components/FoodCard/FoodCardContainer";
 import DayItem from "./components/DayBoard/DayBoard";
-
 import './App.css'
 
-let fooddata: FoodItem[] = data;
+const fooddata: FoodItem[] = data;
 
 function App() {
   const [calendar, setCalendar] = useState<CalendarItem[]>([]);
@@ -23,10 +22,6 @@ function App() {
   const findCalendarItem = (item: CalendarItem, id: string) =>
     item.date === "today" && item.user === user.id && item.id === id;
 
-  const disableCheck = (id: string): boolean => {
-    const filtedItem = calendar.filter((item) => item.id === id);
-    return !filtedItem[0];
-  };
 
   const addToCalendar = (id: string, amount: number) => {
     const newCalendarItem: CalendarItem = {
@@ -89,7 +84,7 @@ function App() {
       <FoodCardList
         fooddata={fooddata}
         handleClick={handleClick}
-        disableCheck={disableCheck}
+        calendar={calendar}
         user={user}
         addFav={addFav}
         filterList={filterList}
