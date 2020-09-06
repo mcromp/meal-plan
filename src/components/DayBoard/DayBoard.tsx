@@ -1,4 +1,4 @@
-import { CalendarItem, FoodItem } from "../../types";
+import { FoodItem } from "../../types";
 import React from 'react'
 import { DayBoardItemProps } from "./types";
 
