@@ -1,0 +1,27 @@
+.grid_i {
+  background-color: cornflowerblue;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+.dropdown-content {
+  display: block;
+  position: absolute;
+  background-color: orange;
+  z-index: 1;
+}
+.dropdown > button {
+  margin: 10px;
+}
+/* 
+.dropdown:focus-within .dropdown-content {
+  display: block;
+}
+
+.dropdown-content:focus-within {
+  display: block;
+} */

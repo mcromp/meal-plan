@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useLayoutEffect, useEffect, useRef } from "react";
 import data from "./food_data/fooddata.json";
+import './App.css'
 
 interface FoodItem {
   ITEM: string;
@@ -82,27 +83,25 @@ function App() {
   };
 
   const handleClick = (id: string, amount: number) => {
-    let selectedItemId = calendar.findIndex((item) =>
+    const selectedItemId = calendar.findIndex((item) =>
       findCalendarItem(item, id)
     );
     if (selectedItemId === -1) {
       if (amount > 0) addToCalendar(id, amount);
     } else {
-      let updatedQuantity = calendar[selectedItemId].quantity + amount;
-      if (updatedQuantity <= 0) {
-        removeItem(id);
-      } else {
-        setCalendar((prevState) => {
-          const newState = [...prevState];
-          newState[selectedItemId].quantity = updatedQuantity;
-          return newState;
-        });
-      }
+      const updatedQuantity = calendar[selectedItemId].quantity + amount;
+      if (updatedQuantity <= 0) removeItem(id);
+      else setCalendar((prevState) => {
+        const newState = [...prevState];
+        newState[selectedItemId].quantity = updatedQuantity;
+        return newState;
+      });
+
     }
   };
 
   const addFav = (id: string) => {
-    let i = user.favList.indexOf(id);
+    const i = user.favList.indexOf(id);
     let tempArr = { ...user };
     if (i === -1) tempArr.favList.push(id)
     else tempArr.favList.splice(i, 1)
@@ -113,7 +112,7 @@ function App() {
     <div>
       <span>currently logged in as: {user.name}</span>
       <h2>Food 2 today:</h2>
-      <SearchBar fooddata={fooddata} />
+      <SearchBar fooddata={fooddata} calendar={calendar} addToCalendar={addToCalendar} />
       {/* <button onClick={() => console.log(user)}>click for user</button> */}
       <FilterButtonList filterList={filterList} setFilterList={setfilterList} />
       <div style={{ backgroundColor: "pink" }}>
@@ -143,26 +142,78 @@ function App() {
 //            Search Bar
 //******************************************************************************
 
-const SearchBar: React.FC<any> = ({ }) => {
-  const [textValue, setTextValue] = useState("")
-  const [searchListDisplay, setSearchListDisplay] = useState([])
-
-  useEffect(() => {
-    console.log(textValue)
-  }, [textValue])
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement>) => {
-    setTextValue(e.target.value)
+const SearchBar: React.FC<any> = ({ fooddata, calendar, addToCalendar }) => {
+  const [textValue, setTextValue] = useState<string>("")
+  const [searchListDisplay, setSearchListDisplay] = useState<FoodItem[]>([])
+  const [showList, setShowList] = useState(true)
+  const [errorText, setErrorText] = useState("")
+  const wrapperRef = useRef<HTMLDivElement>(null)
 
 
+  useLayoutEffect(() => {
+    window.addEventListener("mousedown", handleClickOutside)
+    return () => {
+      window.removeEventListener("mousedown", handleClickOutside);
+    };
+  });
+
+  const handleClickOutside = (event: MouseEvent): void => {
+    if (wrapperRef.current && !wrapperRef.current.contains(event.target as HTMLElement)) setShowList(false)
   }
 
-  return (
-    <>
-      Search: <input value={textValue} onChange={(e) => handleChange(e)} />
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setErrorText("")
+    let word = e.target.value;
+    setSearchListDisplay([])
+    setTextValue(word)
+    if (word.length > 0) {
+      let XX = fooddata.reduce((acc: any, item: FoodItem) => {
+        let i = item.ITEM.toLowerCase()
+        let x = word.toLowerCase();
+        if (i.includes(x)) acc.push(item)
+        return acc
+      }, [])
+      XX = XX.splice(0, 5)
+      setSearchListDisplay(XX)
+    }
+  }
 
-    </>
+  const handleClick = (item: FoodItem) => {
+    setSearchListDisplay([])
+    setTextValue("")
+    let calendarCheck = calendar.map((xx: any) => xx.id)
+    if (calendarCheck.includes(item.ID)) {
+
+      setErrorText(`${item.ITEM} has already been added`)
+      setTimeout(() => {
+        setErrorText("")
+      }, 1500);
+    } else {
+      addToCalendar(item.ID, 1)
+    }
+  }
+
+
+  return (
+    <div style={{ backgroundColor: "mediumpurple" }}>
+      <div ref={wrapperRef} className="flex-container flex-column pos-rel">
+        <input
+          onClick={() => setShowList(true)}
+          placeholder="Type to search"
+          value={textValue}
+          onChange={e => handleChange(e)}
+        />
+        {<sub>{errorText}</sub>}
+        {showList && searchListDisplay.map(i =>
+          <div
+            onClick={() => handleClick(i)}
+            key={i.ID}
+            tabIndex={0}
+          >
+            <span>{i.ITEM}</span>
+          </div>)}
+      </div>
+    </div>
   );
 };
 
@@ -299,7 +350,7 @@ const FoodCardList: React.FC<FoodCardListProps> = ({
     const filterCardList = () => {
       let tempArr: FoodItem[] = [];
 
-      let selectedFilterIdList = filterList.reduce<FilterId[]>((acc, item) => {
+      const selectedFilterIdList = filterList.reduce<FilterId[]>((acc, item) => {
         if (item.selected) acc.push(item.id);
         return acc;
       }, []);
@@ -313,7 +364,7 @@ const FoodCardList: React.FC<FoodCardListProps> = ({
 
     const createCardList = (selectedFilterIdList: FilterId[]) =>
       fooddata.reduce<FoodItem[]>((acc, food) => {
-        let foodCategory = food.CATEGORY as FilterId;
+        const foodCategory = food.CATEGORY as FilterId;
         if (
           selectedFilterIdList.includes(foodCategory) ||
           (user.favList.includes(food.ID) &&
@@ -328,7 +379,7 @@ const FoodCardList: React.FC<FoodCardListProps> = ({
   }, [filterList, fooddata, user.favList]);
 
   return (
-    <div style={{ backgroundColor: "darkcyan" }}>
+    <div className="grid_i">
       {cardList.map((item) => {
         return (
           <FoodCard
@@ -361,7 +412,7 @@ const FoodCard: React.FC<FoodCardProps> = ({
   addFav,
 }) => {
   return (
-    <div>
+    <div style={{ backgroundColor: "mediumpurple" }}>
       <hr />
       <br />
       <span>{item.ITEM}</span>
@@ -376,7 +427,7 @@ const FoodCard: React.FC<FoodCardProps> = ({
       <button onClick={() => addFav(item.ID)}>
         {user.favList.includes(item.ID) ? "💟" : "♡"}
       </button>
-    </div>
+    </div >
   );
 };
 
