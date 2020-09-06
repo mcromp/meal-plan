@@ -10,7 +10,7 @@ const FoodCardList: React.FC<FoodCardListProps> = ({
     user,
     handleClick,
     calendar,
-    addFav,
+    toggleFav: toggleFav,
 }) => {
     const [cardList, setCardList] = useState(fooddata);
 
@@ -63,7 +63,7 @@ const FoodCardList: React.FC<FoodCardListProps> = ({
                         addCalendar={handleClick}
                         disableCheck={disableCheck}
                         user={user}
-                        addFav={addFav}
+                        toggleFav={toggleFav}
                     />
                 );
             })}

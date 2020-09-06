@@ -5,7 +5,7 @@ export interface FoodCardProps {
   addCalendar: (id: string, number: number) => void;
   disableCheck: (id: string) => boolean | undefined;
   user: User;
-  addFav: (id: string) => void;
+  toggleFav: (id: string) => void;
 }
 
 export interface FoodCardListProps {
@@ -14,5 +14,5 @@ export interface FoodCardListProps {
   user: User;
   handleClick: (id: string, number: number) => void;
   calendar: CalendarItem[];
-  addFav: (id: string) => void;
+  toggleFav: (id: string) => void;
 }

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { FoodItem, Filter, CalendarItem, User, FilterId } from "./types";
+import { FoodItem, Filter, CalendarItem, User } from "./types";
 import { defaultFilterList } from "./food_data/defaultFilterList";
 import SearchBar from "./components/SearchBar/SearchContainer";
 import FilterButtonList from "./components/FilterBar/FilterContainer";
 import FoodCardList from "./components/FoodCard/FoodCardContainer";
 import DayItem from "./components/DayBoard/DayBoard";
-import './App.css'
 import data from "./food_data/fooddata.json";
+import './App.css'
 
 const fooddata: FoodItem[] = data;
 
@@ -54,7 +54,7 @@ function App() {
     } else modifyQuantityOfCalendarItem(selectedItemId, id, amount)
   };
 
-  const addFav = (id: string) => {
+  const toggleFav = (id: string) => {
     const i = user.favList.indexOf(id);
     const tempArr = { ...user };
     if (i === -1) tempArr.favList.push(id)
@@ -85,7 +85,7 @@ function App() {
         handleClick={handleItemCardClick}
         calendar={calendar}
         user={user}
-        addFav={addFav}
+        toggleFav={toggleFav}
         filterList={filterList}
       />
     </div>
