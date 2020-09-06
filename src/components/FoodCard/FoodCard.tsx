@@ -1,13 +1,5 @@
 import React from 'react'
-import { FoodItem, User } from "../../types";
-
-interface FoodCardProps {
-    item: FoodItem;
-    addCalendar: (id: string, number: number) => void;
-    disableCheck: (id: string) => boolean | undefined;
-    user: User;
-    addFav: (id: string) => void;
-}
+import { FoodCardProps } from './types';
 
 const FoodCard: React.FC<FoodCardProps> = ({
     item,

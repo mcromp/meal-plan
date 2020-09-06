@@ -1,11 +1,13 @@
-import React, { useState, useLayoutEffect, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import data from "./food_data/fooddata.json";
-import SearchBar from "./components/SearchBar/SearchContainer";
 import { FoodItem, Filter, CalendarItem, User, FilterId } from "./types";
 import { defaultFilterList } from "./food_data/defaultFilterList";
+import SearchBar from "./components/SearchBar/SearchContainer";
 import FilterButtonList from "./components/FilterBar/FilterContainer";
-import './App.css'
 import FoodCardList from "./components/FoodCard/FoodCardContainer";
+import DayItem from "./components/DayBoard/DayBoard";
+
+import './App.css'
 
 let fooddata: FoodItem[] = data;
 
@@ -83,7 +85,6 @@ function App() {
         ))}
       </div>
       <SearchBar fooddata={fooddata} calendar={calendar} addToCalendar={addToCalendar} />
-      {/* <button onClick={() => console.log(user)}>click for user</button> */}
       <FilterButtonList filterList={filterList} setFilterList={setfilterList} />
       <FoodCardList
         fooddata={fooddata}
@@ -96,34 +97,5 @@ function App() {
     </div>
   );
 }
-//******************************************************************************
-//            DAY ITEM
-//******************************************************************************
-
-interface DayItemProps {
-  calendarItem: CalendarItem;
-  removeItem: (id: string) => void;
-  fooddata: FoodItem[];
-  addCalendar: (id: string, number: number) => void;
-}
-
-const DayItem: React.FC<DayItemProps> = ({
-  calendarItem,
-  removeItem,
-  fooddata,
-  addCalendar,
-}) => {
-  const foodItem = fooddata.find((i: FoodItem) => i.ID === calendarItem.id);
-  return foodItem ? (
-    <div key={foodItem.ID}>
-      <h1>{foodItem.ITEM}</h1>
-      <h3>{calendarItem.quantity}</h3>
-      <button onClick={() => removeItem(calendarItem.id)}>Remove Item</button>
-      <button onClick={() => addCalendar(calendarItem.id, 1)}>+1</button>
-      <button onClick={() => addCalendar(calendarItem.id, -1)}>-1</button>
-    </div>
-  ) : null;
-};
-
 
 export default App;

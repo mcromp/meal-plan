@@ -1,10 +1,8 @@
 import { Filter } from "../../types";
 import React, { useState } from "react";
+import { FilterButtonListProps } from "./types";
 
-interface FilterButtonListProps {
-    filterList: Filter[],
-    setFilterList: (filterList: Filter[]) => void;
-}
+
 
 const FilterButtonList: React.FC<FilterButtonListProps> = ({ filterList, setFilterList }) => {
     const [showAll, setShowAll] = useState<boolean>(false);

@@ -1,15 +1,8 @@
 import { FoodItem, Filter, User, FilterId } from "../../types";
 import React, { useState, useEffect } from "react";
 import FoodCard from "./FoodCard";
+import { FoodCardListProps } from "./types";
 
-interface FoodCardListProps {
-    fooddata: FoodItem[];
-    filterList: Filter[];
-    user: User;
-    handleClick: (id: string, number: number) => void;
-    disableCheck: (id: string) => boolean | undefined;
-    addFav: (id: string) => void;
-}
 
 const FoodCardList: React.FC<FoodCardListProps> = ({
     fooddata,
