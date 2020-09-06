@@ -65,22 +65,23 @@ function App() {
   };
 
   return (
-    <div>
-      <span>currently logged in as: {user.name}</span>
-      <h2>Food 2 today:</h2>
-      <div style={{ backgroundColor: "pink" }}>
-        {calendar.map((calendarItem) => (
-          <DayItem
-            key={calendarItem.id}
-            calendarItem={calendarItem}
-            fooddata={fooddata}
-            removeItem={removeItem}
-            addCalendar={handleClick}
-          />
-        ))}
-      </div>
-      <SearchBar fooddata={fooddata} calendar={calendar} addToCalendar={addToCalendar} />
-      <FilterButtonList filterList={filterList} setFilterList={setfilterList} />
+    <div style={{ backgroundColor: "pink" }}>
+      {calendar.map((calendarItem) => (
+        <DayItem
+          key={calendarItem.id}
+          calendarItem={calendarItem}
+          fooddata={fooddata}
+          removeItem={removeItem}
+          addCalendar={handleClick}
+        />
+      ))}
+      <SearchBar
+        fooddata={fooddata}
+        calendar={calendar}
+        addToCalendar={addToCalendar} />
+      <FilterButtonList
+        filterList={filterList}
+        setFilterList={setfilterList} />
       <FoodCardList
         fooddata={fooddata}
         handleClick={handleClick}
