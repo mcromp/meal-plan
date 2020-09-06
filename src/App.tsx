@@ -102,7 +102,7 @@ function App() {
 
   const addFav = (id: string) => {
     const i = user.favList.indexOf(id);
-    let tempArr = { ...user };
+    const tempArr = { ...user };
     if (i === -1) tempArr.favList.push(id)
     else tempArr.favList.splice(i, 1)
     setUser(tempArr);
@@ -112,9 +112,6 @@ function App() {
     <div>
       <span>currently logged in as: {user.name}</span>
       <h2>Food 2 today:</h2>
-      <SearchBar fooddata={fooddata} calendar={calendar} addToCalendar={addToCalendar} />
-      {/* <button onClick={() => console.log(user)}>click for user</button> */}
-      <FilterButtonList filterList={filterList} setFilterList={setfilterList} />
       <div style={{ backgroundColor: "pink" }}>
         {calendar.map((calendarItem) => (
           <DayItem
@@ -126,6 +123,9 @@ function App() {
           />
         ))}
       </div>
+      <SearchBar fooddata={fooddata} calendar={calendar} addToCalendar={addToCalendar} />
+      {/* <button onClick={() => console.log(user)}>click for user</button> */}
+      <FilterButtonList filterList={filterList} setFilterList={setfilterList} />
       <FoodCardList
         fooddata={fooddata}
         handleClick={handleClick}
@@ -181,7 +181,7 @@ const SearchBar: React.FC<any> = ({ fooddata, calendar, addToCalendar }) => {
   const handleClick = (item: FoodItem) => {
     setSearchListDisplay([])
     setTextValue("")
-    let calendarCheck = calendar.map((xx: any) => xx.id)
+    const calendarCheck = calendar.map((xx: any) => xx.id)
     if (calendarCheck.includes(item.ID)) {
 
       setErrorText(`${item.ITEM} has already been added`)
@@ -241,14 +241,14 @@ const FilterButtonList: React.FC<FilterButtonListProps> = ({ filterList, setFilt
   };
 
   const setFilter = (filter: Filter, boo: boolean) => {
-    let prevState = [...filterList];
+    const prevState = [...filterList];
     prevState[prevState.indexOf(filter)].selected = boo;
     setFilterList(prevState);
     setShowAll(true);
   };
 
   const addFilter = (filter: Filter) => {
-    let temp = [...enabledFilterList, filter];
+    const temp = [...enabledFilterList, filter];
     setEnabledFilterList(temp);
   };
 
