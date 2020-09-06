@@ -22,7 +22,6 @@ function App() {
   const findCalendarItem = (item: CalendarItem, id: string) =>
     item.date === "today" && item.user === user.id && item.id === id;
 
-
   const addToCalendar = (id: string, amount: number) => {
     const newCalendarItem: CalendarItem = {
       id,

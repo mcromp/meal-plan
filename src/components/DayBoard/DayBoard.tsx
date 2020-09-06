@@ -10,13 +10,13 @@ const DayItem: React.FC<DayItemProps> = ({
 }) => {
     const foodItem = fooddata.find((i: FoodItem) => i.ID === calendarItem.id);
     return foodItem ? (
-        <div key={foodItem.ID}>
+        <>
             <h1>{foodItem.ITEM}</h1>
             <h3>{calendarItem.quantity}</h3>
             <button onClick={() => removeItem(calendarItem.id)}>Remove Item</button>
             <button onClick={() => addCalendar(calendarItem.id, 1)}>+1</button>
             <button onClick={() => addCalendar(calendarItem.id, -1)}>-1</button>
-        </div>
+        </>
     ) : null;
 };
 
