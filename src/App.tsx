@@ -1,17 +1,24 @@
 import React, { useState } from "react";
 import { FoodItem, Filter, CalendarItem, User } from "./types";
 import { defaultFilterList } from "./food_data/defaultFilterList";
-import SearchBar from "./components/SearchBar/SearchContainer";
-import FilterButtonList from "./components/FilterBar/FilterContainer";
+import SearchBar from "./components/SearchBar/SearchBar";
+import FilterButtonList from "./components/FilterBar/FilterBar";
 import FoodCardList from "./components/FoodCard/FoodCardContainer";
 import DayBoardItem from "./components/DayBoard/DayBoard";
 import data from "./food_data/fooddata.json";
 import './App.css'
+import { useDispatch, useSelector } from "react-redux";
+import { addCalendarItem, removeCalendarItemById, modifyCalendarItemQuantity } from "./redux/calendar";
 
 const fooddata: FoodItem[] = data;
 
 function App() {
-  const [calendar, setCalendar] = useState<CalendarItem[]>([]);
+  const dispatch = useDispatch()
+  const calendar = useSelector<any, CalendarItem[]>(state => state)
+  // const user = useSelector(state => state.user)
+  // const filterList = useSelector(state => state.filterList)
+
+  // const [calendar, setCalendar] = useState<CalendarItem[]>([]);
   const [filterList, setfilterList] = useState<Filter[]>(defaultFilterList);
   const [user, setUser] = useState<User>({
     id: "99",
@@ -29,29 +36,21 @@ function App() {
       quantity: amount,
       user: user.id,
     };
-    setCalendar((prevState) => [...prevState, newCalendarItem]);
+    dispatch(addCalendarItem(newCalendarItem))
+    // setCalendar((prevState) => [...prevState, newCalendarItem]);
   };
 
-  const removeItem = (id: string) => {
-    const filteredCalendar = calendar.filter((item) => item.id !== id);
-    setCalendar([...filteredCalendar]);
-  };
-
-  const modifyQuantityOfCalendarItem = (selectedItemId: number, id: string, amount: number) => {
-    const updatedQuantity = calendar[selectedItemId].quantity + amount;
-    if (updatedQuantity <= 0) removeItem(id);
-    else setCalendar((prevState) => {
-      const newState = [...prevState];
-      newState[selectedItemId].quantity = updatedQuantity;
-      return newState;
-    });
+  const modifyQuantityOfCalendarItem = (selectedItemIndex: number, id: string, amount: number) => {
+    const updatedQuantity = calendar[selectedItemIndex].quantity + amount;
+    if (updatedQuantity <= 0) dispatch(removeCalendarItemById(id))
+    else dispatch(modifyCalendarItemQuantity(selectedItemIndex, updatedQuantity))
   }
 
   const handleItemCardClick = (id: string, amount: number) => {
-    const selectedItemId = calendar.findIndex((item) => findCalendarItem(item, id));
-    if (selectedItemId === -1) {
+    const selectedItemIndex = calendar.findIndex((item) => findCalendarItem(item, id));
+    if (selectedItemIndex === -1) {
       if (amount > 0) addItemToCalendar(id, amount);
-    } else modifyQuantityOfCalendarItem(selectedItemId, id, amount)
+    } else modifyQuantityOfCalendarItem(selectedItemIndex, id, amount)
   };
 
   const toggleFav = (id: string) => {
@@ -64,15 +63,14 @@ function App() {
 
   return (
     <div style={{ backgroundColor: "pink" }}>
-      {calendar.map((calendarItem) => (
+      {calendar ? calendar.map((calendarItem) => (
         <DayBoardItem
           key={calendarItem.id}
           calendarItem={calendarItem}
           fooddata={fooddata}
-          removeItem={removeItem}
-          addCalendar={handleItemCardClick}
+          handleItemCardClick={handleItemCardClick}
         />
-      ))}
+      )) : null}
       <SearchBar
         fooddata={fooddata}
         calendar={calendar}
