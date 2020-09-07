@@ -1,13 +1,20 @@
 import React from 'react'
 import { FoodCardProps } from './types';
+import { useSelector, useDispatch } from 'react-redux';
+import { removeFav, addFav } from '../../redux/favList';
 
 const FoodCard: React.FC<FoodCardProps> = ({
     item,
     addCalendar,
     disableCheck,
-    favList,
-    toggleFav,
 }) => {
+    const favList = useSelector<any, any>(state => state.favList)
+    const dispatch = useDispatch()
+
+    const toggleFav = (id: string) => {
+        if (favList.includes(id)) dispatch(removeFav(id))
+        else dispatch(addFav(id))
+    };
     return (
         <div style={{ backgroundColor: "mediumpurple" }}>
             <span>{item.ITEM}</span>

@@ -2,17 +2,17 @@ import { FoodItem, FilterId } from "../../types";
 import React, { useState, useEffect } from "react";
 import FoodCard from "./FoodCard";
 import { FoodCardListProps } from "./types";
+import { useSelector } from "react-redux";
 
 
 const FoodCardList: React.FC<FoodCardListProps> = ({
     fooddata,
-    filterList,
-    favList,
     handleClick,
     calendar,
-    toggleFav,
+    filterList
 }) => {
     const [cardList, setCardList] = useState(fooddata);
+    const favList = useSelector<any, any>(state => state.favList)
 
     useEffect(() => {
         const filterCardList = () => {
@@ -61,8 +61,6 @@ const FoodCardList: React.FC<FoodCardListProps> = ({
                         item={item}
                         addCalendar={handleClick}
                         disableCheck={disableCheck}
-                        favList={favList}
-                        toggleFav={toggleFav}
                     />
                 );
             })}

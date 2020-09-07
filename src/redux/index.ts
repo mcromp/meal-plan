@@ -1,11 +1,12 @@
 import { combineReducers, createStore } from "redux";
 import { defaultFilterList } from "../food_data/defaultFilterList";
 import calendarReducer from "./calendar";
+import favListReducer from "./favList";
 
 export const rootReducer = combineReducers({
   calendar: calendarReducer,
-  // calendarReducer
+  favList: favListReducer,
   //  filterList Reducer
   //  userReducer
 });
-export const store = createStore(calendarReducer);
+export const store = createStore(rootReducer);

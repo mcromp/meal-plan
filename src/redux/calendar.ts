@@ -4,12 +4,6 @@ const initalState = {
   calendar: [],
 };
 
-//type shit
-// export const ADD_CALENDAR_ITEM = "ADD_CALENDAR_ITEM";
-// export const REMOVE_CALENDAR_ITEM_BY_ID = "REMOVE_CALENDAR_ITEM_BY_ID";
-// type ModifyCalendarPayload = number;
-// type CalendarAction = { type: string; payload: string | ModifyCalendarPayload };
-
 export default function calendarReducer(
   calendar: CalendarItem[] = initalState.calendar,
   action: any

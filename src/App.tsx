@@ -14,7 +14,7 @@ const fooddata: FoodItem[] = data;
 
 function App() {
   const dispatch = useDispatch()
-  const calendar = useSelector<any, CalendarItem[]>(state => state)
+  const calendar = useSelector<any, any>(state => state.calendar)
   // const user = useSelector(state => state.user)
   // const filterList = useSelector(state => state.filterList)
 
@@ -22,8 +22,6 @@ function App() {
   const [filterList, setfilterList] = useState<Filter[]>(defaultFilterList);
   const [favList, setFavList] = useState<string[]>(["0"]);
 
-  const findCalendarItem = (item: CalendarItem, id: string) =>
-    item.id === id;
 
   const addItemToCalendar = (id: string, amount: number) => {
     const newCalendarItem: CalendarItem = {
@@ -31,7 +29,13 @@ function App() {
       quantity: amount,
     };
     dispatch(addCalendarItem(newCalendarItem))
-    // setCalendar((prevState) => [...prevState, newCalendarItem]);
+  };
+
+  const handleItemCardClick = (id: string, amount: number) => {
+    const selectedItemIndex = calendar.findIndex((item: any) => item.id === id);
+    if (selectedItemIndex === -1) {
+      if (amount > 0) addItemToCalendar(id, amount);
+    } else modifyQuantityOfCalendarItem(selectedItemIndex, id, amount)
   };
 
   const modifyQuantityOfCalendarItem = (selectedItemIndex: number, id: string, amount: number) => {
@@ -40,24 +44,9 @@ function App() {
     else dispatch(modifyCalendarItemQuantity(selectedItemIndex, updatedQuantity))
   }
 
-  const handleItemCardClick = (id: string, amount: number) => {
-    const selectedItemIndex = calendar.findIndex((item) => findCalendarItem(item, id));
-    if (selectedItemIndex === -1) {
-      if (amount > 0) addItemToCalendar(id, amount);
-    } else modifyQuantityOfCalendarItem(selectedItemIndex, id, amount)
-  };
-
-  const toggleFav = (id: string) => {
-    const i = favList.indexOf(id);
-    const tempArr = { ...favList };
-    if (i === -1) tempArr.push(id)
-    else tempArr.splice(i, 1)
-    setFavList(tempArr);
-  };
-
   return (
     <div style={{ backgroundColor: "pink" }}>
-      {calendar ? calendar.map((calendarItem) => (
+      {calendar ? calendar.map((calendarItem: any) => (
         <DayBoardItem
           key={calendarItem.id}
           calendarItem={calendarItem}
@@ -76,8 +65,6 @@ function App() {
         fooddata={fooddata}
         handleClick={handleItemCardClick}
         calendar={calendar}
-        favList={favList}
-        toggleFav={toggleFav}
         filterList={filterList}
       />
     </div>
