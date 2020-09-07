@@ -1,7 +1,5 @@
 import { CalendarItem } from "../types";
 
-const initalState: CalendarItem[] = [];
-
 export default function calendarReducer(
   calendar: CalendarItem[] = [],
   action: any
