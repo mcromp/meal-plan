@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FoodItem, Filter, CalendarItem, User } from "./types";
+import { FoodItem, Filter, CalendarItem } from "./types";
 import { defaultFilterList } from "./food_data/defaultFilterList";
 import SearchBar from "./components/SearchBar/SearchBar";
 import FilterButtonList from "./components/FilterBar/FilterBar";
@@ -20,21 +20,15 @@ function App() {
 
   // const [calendar, setCalendar] = useState<CalendarItem[]>([]);
   const [filterList, setfilterList] = useState<Filter[]>(defaultFilterList);
-  const [user, setUser] = useState<User>({
-    id: "99",
-    favList: ["0"],
-    name: "Ugly Child",
-  });
+  const [favList, setFavList] = useState<string[]>(["0"]);
 
   const findCalendarItem = (item: CalendarItem, id: string) =>
-    item.date === "today" && item.user === user.id && item.id === id;
+    item.id === id;
 
   const addItemToCalendar = (id: string, amount: number) => {
     const newCalendarItem: CalendarItem = {
       id,
-      date: "today",
       quantity: amount,
-      user: user.id,
     };
     dispatch(addCalendarItem(newCalendarItem))
     // setCalendar((prevState) => [...prevState, newCalendarItem]);
@@ -54,11 +48,11 @@ function App() {
   };
 
   const toggleFav = (id: string) => {
-    const i = user.favList.indexOf(id);
-    const tempArr = { ...user };
-    if (i === -1) tempArr.favList.push(id)
-    else tempArr.favList.splice(i, 1)
-    setUser(tempArr);
+    const i = favList.indexOf(id);
+    const tempArr = { ...favList };
+    if (i === -1) tempArr.push(id)
+    else tempArr.splice(i, 1)
+    setFavList(tempArr);
   };
 
   return (
@@ -82,7 +76,7 @@ function App() {
         fooddata={fooddata}
         handleClick={handleItemCardClick}
         calendar={calendar}
-        user={user}
+        favList={favList}
         toggleFav={toggleFav}
         filterList={filterList}
       />

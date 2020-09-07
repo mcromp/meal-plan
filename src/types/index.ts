@@ -6,17 +6,9 @@ export interface FoodItem {
   ID: string;
 }
 
-export interface User {
-  id: string;
-  favList: string[];
-  name: string;
-}
-
 export interface CalendarItem {
   id: string;
-  date: string;
   quantity: number;
-  user: string;
 }
 
 export type FilterId =

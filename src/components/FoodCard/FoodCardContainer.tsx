@@ -7,7 +7,7 @@ import { FoodCardListProps } from "./types";
 const FoodCardList: React.FC<FoodCardListProps> = ({
     fooddata,
     filterList,
-    user,
+    favList,
     handleClick,
     calendar,
     toggleFav,
@@ -35,7 +35,7 @@ const FoodCardList: React.FC<FoodCardListProps> = ({
                 const foodCategory = food.CATEGORY as FilterId;
                 if (
                     selectedFilterIdList.includes(foodCategory) ||
-                    (user.favList.includes(food.ID) &&
+                    (favList.includes(food.ID) &&
                         selectedFilterIdList.includes("FAVORITES"))
                 )
                     acc.push(food);
@@ -44,7 +44,7 @@ const FoodCardList: React.FC<FoodCardListProps> = ({
 
         setCardList([]);
         filterCardList();
-    }, [filterList, fooddata, user.favList]);
+    }, [filterList, fooddata, favList]);
 
 
     const disableCheck = (id: string): boolean => {
@@ -61,7 +61,7 @@ const FoodCardList: React.FC<FoodCardListProps> = ({
                         item={item}
                         addCalendar={handleClick}
                         disableCheck={disableCheck}
-                        user={user}
+                        favList={favList}
                         toggleFav={toggleFav}
                     />
                 );

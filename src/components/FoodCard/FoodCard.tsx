@@ -5,7 +5,7 @@ const FoodCard: React.FC<FoodCardProps> = ({
     item,
     addCalendar,
     disableCheck,
-    user,
+    favList,
     toggleFav,
 }) => {
     return (
@@ -18,7 +18,7 @@ const FoodCard: React.FC<FoodCardProps> = ({
                 minus 1
             </button>
             <button onClick={() => toggleFav(item.ID)}>
-                {user.favList.includes(item.ID) ? "💟" : "♡"}
+                {favList.includes(item.ID) ? "💟" : "♡"}
             </button>
         </div >
     );
