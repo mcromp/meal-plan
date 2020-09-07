@@ -1,11 +1,4 @@
-const initalState = {
-  favList: ["0"],
-};
-
-export default function favListReducer(
-  favList: string[] = initalState.favList,
-  action: any
-) {
+export default function favListReducer(favList: string[] = ["0"], action: any) {
   switch (action.type) {
     case "ADD_FAV":
       return [...favList, action.payload];

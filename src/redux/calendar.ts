@@ -1,11 +1,9 @@
 import { CalendarItem } from "../types";
 
-const initalState = {
-  calendar: [],
-};
+const initalState: CalendarItem[] = [];
 
 export default function calendarReducer(
-  calendar: CalendarItem[] = initalState.calendar,
+  calendar: CalendarItem[] = [],
   action: any
 ) {
   switch (action.type) {
