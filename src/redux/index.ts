@@ -7,6 +7,5 @@ export const rootReducer = combineReducers({
   calendar: calendarReducer,
   favList: favListReducer,
   //  filterList Reducer
-  //  userReducer
 });
 export const store = createStore(rootReducer);

@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { FoodItem, Filter, CalendarItem } from "./types";
-import { defaultFilterList } from "./food_data/defaultFilterList";
-import SearchBar from "./components/SearchBar/SearchBar";
-import FilterButtonList from "./components/FilterBar/FilterBar";
-import FoodCardList from "./components/FoodCard/FoodCardContainer";
-import DayBoardItem from "./components/DayBoard/DayBoard";
-import data from "./food_data/fooddata.json";
-import './App.css'
+import data from "../../food_data/fooddata.json";
 import { useDispatch, useSelector } from "react-redux";
-import { addCalendarItem, removeCalendarItemById, modifyCalendarItemQuantity } from "./redux/calendar";
+import { addCalendarItem, removeCalendarItemById, modifyCalendarItemQuantity } from "../../redux/calendar";
+import { FoodItem, Filter, CalendarItem } from "../../types";
+import { defaultFilterList } from "../../food_data/defaultFilterList";
+import DayBoardItem from "../DayBoard/DayBoard";
+import SearchBar from "../SearchBar/SearchBar";
+import FilterButtonList from "../FilterBar/FilterBar";
+import FoodCardList from "../FoodCard/FoodCardContainer";
+import './App.css'
 
 const fooddata: FoodItem[] = data;
 
