@@ -1,4 +1,4 @@
-import { FoodItem, FilterId } from "../../types";
+import { FoodItem, FilterId, Filter } from "../../types";
 import React, { useState, useEffect } from "react";
 import FoodCard from "./FoodCard";
 import { FoodCardListProps } from "./types";
@@ -9,11 +9,10 @@ const FoodCardList: React.FC<FoodCardListProps> = ({
     fooddata,
     handleClick,
     calendar,
-    filterList
 }) => {
     const [cardList, setCardList] = useState(fooddata);
     const favList = useSelector<any, any>(state => state.favList)
-
+    const filterList = useSelector<any, Filter[]>(state => state.filterList)
     useEffect(() => {
         const filterCardList = () => {
             let tempArr: FoodItem[] = [];

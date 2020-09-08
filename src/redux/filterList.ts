@@ -12,11 +12,31 @@ const initalState: Filter[] = [
 
 const filterReducer = (filterList: Filter[] = initalState, action: any) => {
   switch (action.type) {
-    case "ADD_FAV":
-      return filterList;
+    case "SET_FILTER":
+      const { filter, boo } = action.payload;
+      const prevState = [...filterList];
+      prevState[prevState.indexOf(filter)].selected = boo;
+      return prevState;
+    case "RESET_FILTER":
+      return filterList.map((filter: Filter) => {
+        filter.selected = false;
+        return filter;
+      });
     default:
       return filterList;
   }
 };
+
+export const setFilter = (filter: Filter, boo: boolean) => ({
+  type: "SET_FILTER",
+  payload: {
+    filter,
+    boo,
+  },
+});
+
+export const resetFilter = () => ({
+  type: "RESET_FILTER",
+});
 
 export default filterReducer;

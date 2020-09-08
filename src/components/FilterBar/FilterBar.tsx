@@ -1,27 +1,22 @@
 import { Filter } from "../../types";
 import React, { useState } from "react";
 import { FilterButtonListProps } from "./types";
+import { useSelector, useDispatch } from "react-redux";
+import { setFilter, resetFilter } from "../../redux/filterList";
 
-
-
-const FilterButtonList: React.FC<FilterButtonListProps> = ({ filterList, setFilterList }) => {
+const FilterButtonList: React.FC<FilterButtonListProps> = ({ }) => {
     const [showAll, setShowAll] = useState<boolean>(false);
     const [enabledFilterList, setEnabledFilterList] = useState<Filter[]>([]);
-
+    const filterList = useSelector<any, Filter[]>(state => state.filterList)
+    const dispatch = useDispatch()
     const clearAll = () => {
-        const resetFilterList = filterList.map((filter: Filter) => {
-            filter.selected = false;
-            return filter;
-        });
-        setFilterList(resetFilterList);
+        dispatch(resetFilter())
         setEnabledFilterList([]);
         setShowAll(false);
     };
 
-    const setFilter = (filter: Filter, boo: boolean) => {
-        const prevState = [...filterList];
-        prevState[prevState.indexOf(filter)].selected = boo;
-        setFilterList(prevState);
+    const handleFilterClick = (filter: Filter, boo: boolean) => {
+        dispatch(setFilter(filter, boo))
         setShowAll(true);
     };
 
@@ -37,6 +32,7 @@ const FilterButtonList: React.FC<FilterButtonListProps> = ({ filterList, setFilt
         setEnabledFilterList(prevEnabledFilterList);
     };
 
+
     return (
         <div>
             {enabledFilterList.map((filter: Filter) => {
@@ -45,7 +41,7 @@ const FilterButtonList: React.FC<FilterButtonListProps> = ({ filterList, setFilt
                         key={filter.name}
                         style={{ backgroundColor: "red" }}
                         onClick={() => {
-                            setFilter(filter, false);
+                            handleFilterClick(filter, false);
                             removeFilter(filter);
                         }}
                     >
@@ -55,10 +51,10 @@ const FilterButtonList: React.FC<FilterButtonListProps> = ({ filterList, setFilt
             })}
             <br />
             <hr />
-            {filterList.map((filter: Filter) => (
-                <button
+            {filterList.map((filter: Filter) => {
+                return <button
                     onClick={() => {
-                        setFilter(filter, true);
+                        handleFilterClick(filter, true);
                         addFilter(filter);
                     }}
                     key={filter.name}
@@ -66,7 +62,7 @@ const FilterButtonList: React.FC<FilterButtonListProps> = ({ filterList, setFilt
                 >
                     {filter.name}
                 </button>
-            ))}
+            })}
             {showAll ? <button onClick={clearAll}>clear all filters</button> : null}
         </div>
     );

@@ -8,7 +8,6 @@ export interface FoodCardProps {
 
 export interface FoodCardListProps {
   fooddata: FoodItem[];
-  filterList: Filter[];
   handleClick: (id: string, number: number) => void;
   calendar: CalendarItem[];
 }

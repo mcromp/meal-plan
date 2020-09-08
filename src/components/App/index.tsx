@@ -55,14 +55,11 @@ function App() {
         fooddata={fooddata}
         calendar={calendar}
         addToCalendar={addItemToCalendar} />
-      <FilterButtonList
-        filterList={filterList}
-        setFilterList={setfilterList} />
+      <FilterButtonList />
       <FoodCardList
         fooddata={fooddata}
         handleClick={handleItemCardClick}
         calendar={calendar}
-        filterList={filterList}
       />
     </div>
   );
