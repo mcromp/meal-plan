@@ -1,10 +1,9 @@
 import { Filter } from "../../types";
 import React, { useState } from "react";
-import { FilterButtonListProps } from "./types";
 import { useSelector, useDispatch } from "react-redux";
 import { setFilter, resetFilter } from "../../redux/filterList";
 
-const FilterButtonList: React.FC<FilterButtonListProps> = ({ }) => {
+const FilterButtonList: React.FC = () => {
     const [showAll, setShowAll] = useState<boolean>(false);
     const [enabledFilterList, setEnabledFilterList] = useState<Filter[]>([]);
     const filterList = useSelector<any, Filter[]>(state => state.filterList)
@@ -32,25 +31,26 @@ const FilterButtonList: React.FC<FilterButtonListProps> = ({ }) => {
         setEnabledFilterList(prevEnabledFilterList);
     };
 
+    const enabledFilters = enabledFilterList.map((filter: Filter) => {
+        return (
+            <button
+                key={filter.name}
+                style={{ backgroundColor: "red" }}
+                onClick={() => {
+                    handleFilterClick(filter, false);
+                    removeFilter(filter);
+                }}
+            >
+                {filter.name} X
+            </button>
+        );
+    })
+
+
 
     return (
         <div>
-            {enabledFilterList.map((filter: Filter) => {
-                return (
-                    <button
-                        key={filter.name}
-                        style={{ backgroundColor: "red" }}
-                        onClick={() => {
-                            handleFilterClick(filter, false);
-                            removeFilter(filter);
-                        }}
-                    >
-                        {filter.name} X
-                    </button>
-                );
-            })}
-            <br />
-            <hr />
+            {enabledFilters}
             {filterList.map((filter: Filter) => {
                 return <button
                     onClick={() => {
