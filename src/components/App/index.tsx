@@ -15,10 +15,6 @@ const fooddata: FoodItem[] = data;
 function App() {
   const dispatch = useDispatch()
   const calendar = useSelector<any, any>(state => state.calendar)
-  // const filterList = useSelector(state => state.filterList)
-  const [filterList, setfilterList] = useState<Filter[]>(defaultFilterList);
-
-
 
   const addItemToCalendar = (id: string, amount: number) => {
     const newCalendarItem: CalendarItem = {
