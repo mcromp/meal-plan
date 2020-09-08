@@ -41,16 +41,17 @@ const SearchBar: React.FC<any> = ({ fooddata, calendar, addToCalendar }) => {
     const handleClick = (item: FoodItem) => {
         setSearchListDisplay([])
         setTextValue("")
-        const calendarCheck = calendar.map((item: any) => item.id)
-        if (calendarCheck.includes(item.ID)) {
+        const itemAlreadyInCalendar = calendar.map((item: any) => item.id)
+        if (itemAlreadyInCalendar.includes(item.ID)) errorMessage(item.ITEM)
+        else addToCalendar(item.ID, 1)
 
-            setErrorText(`${item.ITEM} has already been added`)
-            setTimeout(() => {
-                setErrorText("")
-            }, 1500);
-        } else {
-            addToCalendar(item.ID, 1)
-        }
+    }
+
+    const errorMessage = (item: string) => {
+        setErrorText(`${item} has already been added`)
+        setTimeout(() => {
+            setErrorText("")
+        }, 1500);
     }
 
 
@@ -63,7 +64,7 @@ const SearchBar: React.FC<any> = ({ fooddata, calendar, addToCalendar }) => {
                     value={textValue}
                     onChange={e => handleChange(e)}
                 />
-                {<sub>{errorText}</sub>}
+                <sub>{errorText}</sub>
                 {showList && searchListDisplay.map(i =>
                     <div
                         onClick={() => handleClick(i)}
