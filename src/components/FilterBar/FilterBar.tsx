@@ -31,38 +31,27 @@ const FilterButtonList: React.FC = () => {
         setEnabledFilterList(prevEnabledFilterList);
     };
 
-    const enabledFilters = enabledFilterList.map((filter: Filter) => {
-        return (
-            <button
-                key={filter.name}
-                style={{ backgroundColor: "red" }}
-                onClick={() => {
-                    handleFilterClick(filter, false);
-                    removeFilter(filter);
-                }}
-            >
-                {filter.name} X
-            </button>
-        );
-    })
-
-
-
     return (
         <div>
-            {enabledFilters}
-            {filterList.map((filter: Filter) => {
-                return <button
+            {enabledFilterList.map((filter: Filter) =>
+                <button
+                    key={filter.name}
+                    style={{ backgroundColor: "red" }}
+                    onClick={() => {
+                        handleFilterClick(filter, false);
+                        removeFilter(filter);
+                    }}>{filter.name} X</button>)
+            }
+            {filterList.map((filter: Filter) => (
+                <button
                     onClick={() => {
                         handleFilterClick(filter, true);
                         addFilter(filter);
                     }}
                     key={filter.name}
                     disabled={filter.selected}
-                >
-                    {filter.name}
-                </button>
-            })}
+                >{filter.name}</button>
+            ))}
             {showAll ? <button onClick={clearAll}>clear all filters</button> : null}
         </div>
     );
