@@ -64,7 +64,7 @@ const SearchBar: React.FC<any> = ({ fooddata, calendar, addToCalendar }) => {
                     value={textValue}
                     onChange={e => handleChange(e)}
                 />
-                <sub>{errorText}</sub>
+                <span>{errorText}</span>
                 {showList && searchListDisplay.map(i =>
                     <div
                         onClick={() => handleClick(i)}
