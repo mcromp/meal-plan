@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import data from "../../food_data/fooddata.json";
 import { useDispatch, useSelector } from "react-redux";
 import { addCalendarItem, removeCalendarItemById, modifyCalendarItemQuantity } from "../../redux/calendar";
-import { FoodItem, Filter, CalendarItem } from "../../types";
-import { defaultFilterList } from "../../food_data/defaultFilterList";
+import { FoodItem, CalendarItem } from "../../types";
 import DayBoardItem from "../DayBoard/DayBoard";
 import SearchBar from "../SearchBar/SearchBar";
 import FilterButtonList from "../FilterBar/FilterBar";
@@ -17,10 +16,7 @@ function App() {
   const calendar = useSelector<any, any>(state => state.calendar)
 
   const addItemToCalendar = (id: string, amount: number) => {
-    const newCalendarItem: CalendarItem = {
-      id,
-      quantity: amount,
-    };
+    const newCalendarItem: CalendarItem = { id, quantity: amount };
     dispatch(addCalendarItem(newCalendarItem))
   };
 
