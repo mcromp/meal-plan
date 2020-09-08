@@ -1,5 +1,4 @@
 import { combineReducers, createStore } from "redux";
-import { defaultFilterList } from "../food_data/defaultFilterList";
 import calendarReducer from "./calendar";
 import favListReducer from "./favList";
 import filterReducer from "./filterList";
