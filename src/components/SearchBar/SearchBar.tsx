@@ -21,27 +21,27 @@ const SearchBar: React.FC<any> = ({ fooddata, calendar, addToCalendar }) => {
         if (wrapperRef.current && !wrapperRef.current.contains(event.target as HTMLElement)) setShowList(false)
     }
 
+    const checkSubStingIncludes = (a: string, b: string) => a.toLocaleLowerCase().includes(b.toLocaleLowerCase())
+
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setErrorText("")
-        let word = e.target.value;
+        const word = e.target.value;
         setSearchListDisplay([])
         setTextValue(word)
         if (word.length > 0) {
-            let XX = fooddata.reduce((acc: any, item: FoodItem) => {
-                let i = item.ITEM.toLowerCase()
-                let x = word.toLowerCase();
-                if (i.includes(x)) acc.push(item)
+            let searchList = fooddata.reduce((acc: any, item: FoodItem) => {
+                if (checkSubStingIncludes(item.ITEM, word)) acc.push(item)
                 return acc
-            }, [])
-            XX = XX.splice(0, 5)
-            setSearchListDisplay(XX)
+            }, []).splice(0, 5)
+            setSearchListDisplay(searchList)
         }
     }
 
     const handleClick = (item: FoodItem) => {
         setSearchListDisplay([])
         setTextValue("")
-        const calendarCheck = calendar.map((xx: any) => xx.id)
+        const calendarCheck = calendar.map((item: any) => item.id)
         if (calendarCheck.includes(item.ID)) {
 
             setErrorText(`${item.ITEM} has already been added`)

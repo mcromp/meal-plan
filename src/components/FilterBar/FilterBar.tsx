@@ -1,5 +1,5 @@
-import { Filter } from "../../types";
 import React, { useState } from "react";
+import { Filter } from "../../types";
 import { useSelector, useDispatch } from "react-redux";
 import { setFilter, resetFilter } from "../../redux/filterList";
 
@@ -40,18 +40,18 @@ const FilterButtonList: React.FC = () => {
                     onClick={() => {
                         handleFilterClick(filter, false);
                         removeFilter(filter);
-                    }}>{filter.name} X</button>)
-            }
-            {filterList.map((filter: Filter) => (
+                    }}>{filter.name} X</button>
+            )}
+            {filterList.map((filter: Filter) =>
                 <button
+                    key={filter.name}
+                    disabled={filter.selected}
                     onClick={() => {
                         handleFilterClick(filter, true);
                         addFilter(filter);
                     }}
-                    key={filter.name}
-                    disabled={filter.selected}
                 >{filter.name}</button>
-            ))}
+            )}
             {showAll ? <button onClick={clearAll}>clear all filters</button> : null}
         </div>
     );
