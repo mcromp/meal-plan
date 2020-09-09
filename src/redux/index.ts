@@ -1,11 +1,15 @@
-import { combineReducers, createStore } from "redux";
+import { combineReducers, createStore, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
 import calendarReducer from "./calendar";
 import favListReducer from "./favList";
 import filterReducer from "./filterList";
-
-export const rootReducer = combineReducers({
+import { dataReducer } from "./fooddata";
+import logger from "redux-logger";
+const rootReducer = combineReducers({
   calendar: calendarReducer,
   favList: favListReducer,
   filterList: filterReducer,
+  data: dataReducer,
 });
-export const store = createStore(rootReducer);
+
+export const store = createStore(rootReducer, applyMiddleware(thunk, logger));
