@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import data from "../../food_data/fooddata.json";
 import { useDispatch, useSelector } from "react-redux";
 import { addCalendarItem, removeCalendarItemById, modifyCalendarItemQuantity } from "../../redux/calendar";
@@ -8,12 +8,23 @@ import SearchBar from "../SearchBar/SearchBar";
 import FilterButtonList from "../FilterBar/FilterBar";
 import FoodCardList from "../FoodCard/FoodCardContainer";
 import './App.css'
+import { fetchData } from "../../redux/fooddata";
 
 const fooddata: FoodItem[] = data;
 
 function App() {
   const dispatch = useDispatch()
   const calendar = useSelector<any, any>(state => state.calendar)
+  const dummyData = useSelector<any, any>(state => state.data)
+
+  useEffect(() => {
+    dispatch(fetchData())
+    console.log('heyya')
+  }, [dispatch])
+
+  useEffect(() => {
+    console.log(dummyData)
+  }, [dummyData])
 
   const addItemToCalendar = (id: string, amount: number) => {
     const newCalendarItem: CalendarItem = { id, quantity: amount };
