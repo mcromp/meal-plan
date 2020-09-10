@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import FoodCard from "./FoodCard";
 import { FoodCardListProps } from "./types";
 import { useSelector } from "react-redux";
+import { RootState } from "../../redux";
 
 
 const FoodCardList: React.FC<FoodCardListProps> = ({
@@ -11,8 +12,8 @@ const FoodCardList: React.FC<FoodCardListProps> = ({
     calendar,
 }) => {
     const [cardList, setCardList] = useState(fooddata);
-    const favList = useSelector<any, any>(state => state.favList)
-    const filterList = useSelector<any, Filter[]>(state => state.filterList)
+    const favList = useSelector<RootState, string[]>(state => state.favList)
+    const filterList = useSelector<RootState, Filter[]>(state => state.filterList)
     useEffect(() => {
         const filterCardList = () => {
             let tempArr: FoodItem[] = [];

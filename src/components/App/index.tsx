@@ -9,13 +9,14 @@ import FilterButtonList from "../FilterBar/FilterBar";
 import FoodCardList from "../FoodCard/FoodCardContainer";
 import './App.css'
 import { fetchData } from "../../redux/fooddata";
+import { RootState } from "../../redux";
 
 const fooddata: FoodItem[] = data;
 
 function App() {
   const dispatch = useDispatch()
-  const calendar = useSelector<any, any>(state => state.calendar)
-  const dummyData = useSelector<any, any>(state => state.data)
+  const calendar = useSelector<RootState, CalendarItem[]>(state => state.calendar)
+  const dummyData = useSelector<RootState, any>(state => state.data)
 
   useEffect(() => {
     dispatch(fetchData())

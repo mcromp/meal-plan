@@ -2,13 +2,14 @@ import React from 'react'
 import { FoodCardProps } from './types';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeFav, addFav } from '../../redux/favList';
+import { RootState } from '../../redux';
 
 const FoodCard: React.FC<FoodCardProps> = ({
     item,
     addCalendar,
     disableCheck,
 }) => {
-    const favList = useSelector<any, any>(state => state.favList)
+    const favList = useSelector<RootState, string[]>(state => state.favList)
     const dispatch = useDispatch()
 
     const toggleFav = (id: string) => {

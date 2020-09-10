@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import { Filter } from "../../types";
 import { useSelector, useDispatch } from "react-redux";
 import { setFilter, resetFilter } from "../../redux/filterList";
+import { RootState } from "../../redux";
 
 const FilterButtonList: React.FC = () => {
     const [showAll, setShowAll] = useState<boolean>(false);
     const [enabledFilterList, setEnabledFilterList] = useState<Filter[]>([]);
-    const filterList = useSelector<any, Filter[]>(state => state.filterList)
+    const filterList = useSelector<RootState, Filter[]>(state => state.filterList)
     const dispatch = useDispatch()
     const clearAll = () => {
         dispatch(resetFilter())
