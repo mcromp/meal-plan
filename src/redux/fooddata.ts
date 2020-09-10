@@ -1,54 +1,93 @@
+import { FoodItem } from "../types";
+import { Dispatch } from "redux";
+
 const dummyURL: string = "https://jsonplaceholder.typicode.com/users";
 
 //ACTION TYPES
 export const FETCH_DATA_REQUEST = "FETCH_DATA_REQUEST";
 export const FETCH_DATA_SUCCESS = "FETCH_DATA_SUCCESS";
 export const FETCH_DATA_FAILURE = "FETCH_DATA_FAILURE";
-//ACTION CREATOR
-const fetchDataRequest = () => {
-  return {
-    type: FETCH_DATA_REQUEST,
-  };
-};
 
-const fetchDataSuccess = (data: any) => {
-  return {
-    type: FETCH_DATA_SUCCESS,
-    payload: data,
-  };
-};
-const fetchDataFailure = (error: any) => {
-  return {
-    type: FETCH_DATA_FAILURE,
-    payload: error,
-  };
-};
+//ACTION CREATOR
+// const fetchDataRequest = () => {
+//   return {
+//     type: FETCH_DATA_REQUEST,
+//   };
+// };
+
+// const fetchDataSuccess = (data: FoodItem[]) => {
+//   return {
+//     type: FETCH_DATA_SUCCESS,
+//     payload: data,
+//   };
+// };
+// const fetchDataFailure = (error: string) => {
+//   return {
+//     type: FETCH_DATA_FAILURE,
+//     payload: error,
+//   };
+// };
 
 //ASYNC ACTION CREATOR
 export const fetchData = () => {
-  return (dispatch: any) => {
-    dispatch(fetchDataRequest);
+  return (dispatch: Dispatch<DataAction>) => {
+    dispatch({
+      type: FETCH_DATA_REQUEST,
+    });
     fetch(dummyURL)
       .then((res) => res.json())
-      .then((data) => {
+      .then((data: FoodItem[]) => {
         console.log(data);
-        dispatch(fetchDataSuccess(data));
+        dispatch({
+          type: FETCH_DATA_SUCCESS,
+          payload: data,
+        });
       })
       .catch((err) => {
         console.error(err);
-        dispatch(fetchDataFailure(err.message));
+        dispatch({
+          type: FETCH_DATA_FAILURE,
+          payload: err.message,
+        });
       });
   };
 };
 
+//TYPES
+
+export interface FetchDataRequest {
+  type: typeof FETCH_DATA_REQUEST;
+}
+
+export interface FetchDataSuccess {
+  type: typeof FETCH_DATA_SUCCESS;
+  payload: FoodItem[];
+}
+
+export interface FetchDataFailure {
+  type: typeof FETCH_DATA_FAILURE;
+  payload: string;
+}
+
+export type DataAction = FetchDataRequest | FetchDataSuccess | FetchDataFailure;
+
+export interface DataState {
+  loading: boolean;
+  data: FoodItem[];
+  error: string;
+}
+
 // REDUCER
-const initalState = {
+const initalState: DataState = {
   loading: false,
   data: [],
   error: "",
 };
 
-export const dataReducer = (state = initalState, action: any) => {
+export const dataReducer = (
+  state = initalState,
+  action: DataAction
+): DataState => {
   switch (action.type) {
     case FETCH_DATA_REQUEST:
       return {
