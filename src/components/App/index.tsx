@@ -20,12 +20,12 @@ function App() {
 
   useEffect(() => {
     dispatch(fetchData())
-    console.log('heyya')
+    console.log('Data Fetched')
   }, [dispatch])
 
-  useEffect(() => {
-    console.log(dummyData)
-  }, [dummyData])
+  // useEffect(() => {
+  //   console.log(dummyData)
+  // }, [dummyData])
 
   const addItemToCalendar = (id: string, amount: number) => {
     const newCalendarItem: CalendarItem = { id, quantity: amount };

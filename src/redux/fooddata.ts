@@ -1,5 +1,12 @@
-import { FoodItem } from "../types";
 import { Dispatch } from "redux";
+
+export interface FoodItem {
+  ITEM: string;
+  CAL: string;
+  PRICE: string;
+  CATEGORY: string;
+  ID: string;
+}
 
 const dummyURL: string = "https://jsonplaceholder.typicode.com/users";
 
@@ -37,7 +44,6 @@ export const fetchData = () => {
     fetch(dummyURL)
       .then((res) => res.json())
       .then((data: FoodItem[]) => {
-        console.log(data);
         dispatch({
           type: FETCH_DATA_SUCCESS,
           payload: data,
