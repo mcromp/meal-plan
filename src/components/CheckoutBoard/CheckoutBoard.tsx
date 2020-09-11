@@ -1,10 +1,10 @@
 import { FoodItem } from "../../types";
 import React from 'react'
-import { DayBoardItemProps } from "./types";
+import { CheckoutBoardItemProps } from "./types";
 import { useDispatch } from "react-redux";
 import { removeCalendarItemById } from "../../redux/calendar";
 
-const DayBoardItem: React.FC<DayBoardItemProps> = ({
+const CheckoutBoardItem: React.FC<CheckoutBoardItemProps> = ({
     calendarItem,
     fooddata,
     handleItemCardClick,
@@ -22,4 +22,4 @@ const DayBoardItem: React.FC<DayBoardItemProps> = ({
     ) : null;
 };
 
-export default DayBoardItem
+export default CheckoutBoardItem

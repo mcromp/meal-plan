@@ -1,10 +1,10 @@
 import React from 'react'
-import { FoodCardProps } from './types';
+import { MenuCardProps } from './types';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeFav, addFav } from '../../redux/favList';
 import { RootState } from '../../redux';
 
-const FoodCard: React.FC<FoodCardProps> = ({
+const MenuCard: React.FC<MenuCardProps> = ({
     item,
     addCalendar,
     disableCheck,
@@ -32,4 +32,4 @@ const FoodCard: React.FC<FoodCardProps> = ({
     );
 };
 
-export default FoodCard
+export default MenuCard

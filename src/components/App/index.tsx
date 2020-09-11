@@ -3,10 +3,10 @@ import data from "../../food_data/fooddata.json";
 import { useDispatch, useSelector } from "react-redux";
 import { addCalendarItem, removeCalendarItemById, modifyCalendarItemQuantity } from "../../redux/calendar";
 import { FoodItem, CalendarItem } from "../../types";
-import DayBoardItem from "../DayBoard/DayBoard";
+import CheckoutBoardItem from "../CheckoutBoard/CheckoutBoard";
 import SearchBar from "../SearchBar/SearchBar";
 import FilterButtonList from "../FilterBar/FilterBar";
-import FoodCardList from "../FoodCard/FoodCardContainer";
+import MenuBoard from "../Menu/MenuBoard";
 import './App.css'
 import { fetchData } from "../../redux/fooddata";
 import { RootState } from "../../redux";
@@ -48,7 +48,7 @@ function App() {
   return (
     <div style={{ backgroundColor: "pink" }}>
       {calendar ? calendar.map((calendarItem: any) => (
-        <DayBoardItem
+        <CheckoutBoardItem
           key={calendarItem.id}
           calendarItem={calendarItem}
           fooddata={fooddata}
@@ -60,7 +60,7 @@ function App() {
         calendar={calendar}
         addToCalendar={addItemToCalendar} />
       <FilterButtonList />
-      <FoodCardList
+      <MenuBoard
         fooddata={fooddata}
         handleClick={handleItemCardClick}
         calendar={calendar}

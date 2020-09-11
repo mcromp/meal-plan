@@ -1,12 +1,12 @@
 import { FoodItem, FilterId, Filter } from "../../types";
 import React, { useState, useEffect } from "react";
-import FoodCard from "./FoodCard";
-import { FoodCardListProps } from "./types";
+import MenuCard from "./MenuCard";
+import { MenuBoardProps } from "./types";
 import { useSelector } from "react-redux";
 import { RootState } from "../../redux";
 
 
-const FoodCardList: React.FC<FoodCardListProps> = ({
+const MenuBoard: React.FC<MenuBoardProps> = ({
     fooddata,
     handleClick,
     calendar,
@@ -56,7 +56,7 @@ const FoodCardList: React.FC<FoodCardListProps> = ({
         <div className="grid_i">
             {cardList.map((item) => {
                 return (
-                    <FoodCard
+                    <MenuCard
                         key={item.ID}
                         item={item}
                         addCalendar={handleClick}
@@ -68,4 +68,4 @@ const FoodCardList: React.FC<FoodCardListProps> = ({
     );
 };
 
-export default FoodCardList
+export default MenuBoard
