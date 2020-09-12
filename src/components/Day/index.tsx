@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import data from "../../food_data/fooddata.json";
 import { useDispatch, useSelector } from "react-redux";
 import { addCalendarItem, removeCalendarItemById, modifyCalendarItemQuantity } from "../../redux/calendar";
@@ -7,17 +7,17 @@ import CheckoutBoardItem from "../CheckoutBoard/CheckoutBoard";
 import SearchBar from "../SearchBar/SearchBar";
 import FilterButtonList from "../FilterBar/FilterBar";
 import MenuBoard from "../Menu/MenuBoard";
-import './App.css'
+import './Day.css'
 import { fetchData } from "../../redux/fooddata";
 import { RootState } from "../../redux";
 
 const fooddata: FoodItem[] = data;
 
-function App() {
+function Day() {
   const dispatch = useDispatch()
   const calendar = useSelector<RootState, CalendarItem[]>(state => state.calendar)
   const dummyData = useSelector<RootState, any>(state => state.data)
-
+  const [dayTime, setDayTime] = useState<any>([])
   useEffect(() => {
     dispatch(fetchData())
     console.log('Data Fetched')
@@ -55,6 +55,7 @@ function App() {
           handleItemCardClick={handleItemCardClick}
         />
       )) : null}
+      <button>SUBMIT</button>
       <SearchBar
         fooddata={fooddata}
         calendar={calendar}
@@ -69,4 +70,4 @@ function App() {
   );
 }
 
-export default App;
+export default Day;

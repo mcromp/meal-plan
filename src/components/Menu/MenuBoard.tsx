@@ -37,8 +37,7 @@ const MenuBoard: React.FC<MenuBoardProps> = ({
                     selectedFilterIdList.includes(foodCategory) ||
                     (favList.includes(food.ID) &&
                         selectedFilterIdList.includes("FAVORITES"))
-                )
-                    acc.push(food);
+                ) acc.push(food);
                 return acc;
             }, []);
 
