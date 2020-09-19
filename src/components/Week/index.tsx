@@ -25,7 +25,7 @@ let daysInMonth = new Date(currentYear, currentMonth, 32).getDate()
 
 let weekdayz: number[] = new Array(7).fill(null)
 
-function App() {
+function Week() {
     useEffect(() => {
         const tomorrow = new Date(today)
         tomorrow.setDate(tomorrow.getDate() + 1)
@@ -54,4 +54,4 @@ function App() {
     );
 }
 
-export default App;
+export default Week;

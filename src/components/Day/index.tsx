@@ -28,7 +28,8 @@ function Day() {
   // }, [dummyData])
 
   const addItemToCalendar = (id: string, amount: number) => {
-    const newCalendarItem: CalendarItem = { id, quantity: amount };
+    const day = "2020-05-13"
+    const newCalendarItem: CalendarItem = { id, quantity: amount, day };
     dispatch(addCalendarItem(newCalendarItem))
   };
 

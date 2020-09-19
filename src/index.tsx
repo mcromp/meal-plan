@@ -2,13 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import { store } from "./redux";
-import Week from "./components/Week/Week";
+import UserSelect from "./components/Login";
 import './index.css'
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Week />
+      <UserSelect />
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")
