@@ -1,21 +1,21 @@
 .grid_i {
-  background-color: cornflowerblue;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
+ background-color: cornflowerblue;
+ display: grid;
+ grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
 }
 
 .dropdown {
-  position: relative;
-  display: inline-block;
+ position: relative;
+ display: inline-block;
 }
 .dropdown-content {
-  display: block;
-  position: absolute;
-  background-color: orange;
-  z-index: 1;
+ display: block;
+ position: absolute;
+ background-color: orange;
+ z-index: 1;
 }
 .dropdown > button {
-  margin: 10px;
+ margin: 10px;
 }
 /* 
 .dropdown:focus-within .dropdown-content {

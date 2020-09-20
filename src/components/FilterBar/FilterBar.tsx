@@ -9,6 +9,7 @@ const FilterButtonList: React.FC = () => {
   const [enabledFilterList, setEnabledFilterList] = useState<Filter[]>([]);
   const filterList = useSelector<RootState, Filter[]>(state => state.filterList)
   const dispatch = useDispatch()
+
   const clearAll = () => {
     dispatch(resetFilter())
     setEnabledFilterList([]);
