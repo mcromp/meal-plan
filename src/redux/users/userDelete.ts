@@ -30,24 +30,30 @@ export type UserDeleteAction =
 
 export interface UserDeleteState {
  loading: boolean;
- message: string;
+ message: string | null;
  error: string;
 }
+
 const initalState: UserDeleteState = {
  loading: false,
- message: "",
+ message: null,
  error: "",
 };
 
-export const deleteUser = (id: string) => {
+export const resetDeleteMessage = () => ({
+ type: RESET_USER_DELETE_MESSAGE,
+});
+
+export const deleteUserFetch = (id: string) => {
  return (dispatch: Dispatch<UserDeleteAction>) => {
   dispatch({
    type: FETCH_USER_DELETE_REQUEST,
   });
-  fetch(URL + id)
+  fetch(URL + id, {
+   method: "DELETE",
+  })
    .then((res) => res.json())
    .then((data: any) => {
-    console.log(data);
     const resUsername = data.deletedUser.username;
     dispatch({
      type: FETCH_USER_DELETE_SUCCESS,
@@ -89,7 +95,7 @@ export const userDeleteReducer = (
   case RESET_USER_DELETE_MESSAGE:
    return {
     ...state,
-    message: "",
+    message: null,
    };
   default:
    return state;

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux';
+import { deleteUserFetch, resetDeleteMessage } from '../../redux/users/userDelete';
 import { User, usersGet, UsersState } from '../../redux/users/users';
 
 
@@ -12,11 +13,17 @@ const Login = () => {
   const [message, setMessage] = useState<string | null>(null)
   const [value, setValue] = useState<string>("")
   const usersState = useSelector<RootState, UsersState>(state => state.usersState)
+  const deleteStateMessage = useSelector<RootState, string | null>(state => state.userDelete.message)
   const dispatch = useDispatch()
 
   useEffect(() => {
     dispatch(usersGet())
   }, [dispatch])
+
+  useEffect(() => {
+    if (deleteStateMessage) handleMessage(deleteStateMessage)
+    dispatch(resetDeleteMessage())
+  }, [dispatch, deleteStateMessage])
 
   const fetchUsers = () => {
     dispatch(usersGet())
@@ -39,21 +46,9 @@ const Login = () => {
 
 
   const deleteUser = (id: string) => {
-
+    dispatch(deleteUserFetch(id))
     fetchUsers();
-
   }
-  //   fetch(URL + id, {
-  //     method: 'DELETE',
-  //   })
-  //     .then(res => res.json())
-  //     .then(res => {
-  //       const resUsername = res.deletedUser.username
-  //       handleMessage(`${resUsername} deleted successfully`)
-  //       fetchUsers()
-  //     })
-  //     .catch(err => console.error(err))
-  // }
 
   const signupUser = (username: any) => {
     let ppp = {
