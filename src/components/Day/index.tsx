@@ -18,14 +18,12 @@ function Day() {
   const calendar = useSelector<RootState, CalendarItem[]>(state => state.calendar)
   const dummyData = useSelector<RootState, any>(state => state.data)
   const [dayTime, setDayTime] = useState<any>([])
+
   useEffect(() => {
     dispatch(fetchData())
     console.log('Data Fetched')
   }, [dispatch])
 
-  // useEffect(() => {
-  //   console.log(dummyData)
-  // }, [dummyData])
 
   const addItemToCalendar = (id: string, amount: number) => {
     const day = "2020-05-13"
