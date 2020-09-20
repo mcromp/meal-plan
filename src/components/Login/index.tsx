@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux';
 import { deleteUserFetch, resetDeleteMessage } from '../../redux/users/userDelete';
 import { User, usersGet, UsersState } from '../../redux/users/users';
+import { URL } from "../../redux/users/users";
 
 
 const Login = () => {
-  // const [users, setUsers] = useState<any[]>([])
   const [selectedUser, setSelectedUser] = useState<User | null>(null)
   const [confirmDelete, setConfirmDelete] = useState<boolean>(false)
   const [showAddUser, setShowAddUser] = useState<boolean>(false)
@@ -43,20 +43,15 @@ const Login = () => {
     setValue("")
   }
 
-
-
   const deleteUser = (id: string) => {
     dispatch(deleteUserFetch(id))
     fetchUsers();
   }
 
-  const signupUser = (username: any) => {
-    let ppp = {
-      username
-    }
+  const signupUser = (username: string) => {
     fetch(URL + "signup", {
       method: 'POST',
-      body: JSON.stringify(ppp),
+      body: JSON.stringify({ username }),
       headers: {
         'Content-Type': 'application/json'
       },
@@ -83,7 +78,7 @@ const Login = () => {
     setMessage(text)
     setTimeout(() => {
       setMessage(null)
-    }, 2000);
+    }, 1500);
   }
 
   const checkValue = value.length === 0;
@@ -109,7 +104,6 @@ const Login = () => {
             <SelectForm
               value={value}
               handleSelect={handleSelect}
-              // users={users}
               handleUserSelect={handleUserSelect} />
 
             {message ? <div><span>{message}</span> </div> : null}
@@ -126,7 +120,6 @@ const Login = () => {
 
 const CreateUser: React.FC<any> = ({
   setShowAddUser,
-  // users,
   signupUser
 }) => {
   const [value, setValue] = useState("")
