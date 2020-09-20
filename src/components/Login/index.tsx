@@ -70,9 +70,7 @@ const Login = () => {
       {showAddUser ?
         <CreateUser
           setShowAddUser={setShowAddUser}
-          signupUser={signupUser}
-          handleMessage={handleMessage}
-        />
+          signupUser={signupUser} />
         :
         confirmDelete ?
 
