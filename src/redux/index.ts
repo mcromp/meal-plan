@@ -4,6 +4,7 @@ import calendarReducer from "./calendar";
 import favListReducer from "./favList";
 import filterReducer from "./filterList";
 import { dataReducer } from "./fooddata";
+import { userDeleteReducer } from "./users/userDelete";
 import { userReducer } from "./users/users";
 // import logger from "redux-logger";
 
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
  filterList: filterReducer,
  data: dataReducer,
  usersState: userReducer,
+ userDelete: userDeleteReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

@@ -37,18 +37,23 @@ const Login = () => {
   }
 
 
-  const deleteUser = (id: any) => {
-    fetch(URL + id, {
-      method: 'DELETE',
-    })
-      .then(res => res.json())
-      .then(res => {
-        const resUsername = res.deletedUser.username
-        handleMessage(`${resUsername} deleted successfully`)
-        fetchUsers()
-      })
-      .catch(err => console.error(err))
+
+  const deleteUser = (id: string) => {
+
+    fetchUsers();
+
   }
+  //   fetch(URL + id, {
+  //     method: 'DELETE',
+  //   })
+  //     .then(res => res.json())
+  //     .then(res => {
+  //       const resUsername = res.deletedUser.username
+  //       handleMessage(`${resUsername} deleted successfully`)
+  //       fetchUsers()
+  //     })
+  //     .catch(err => console.error(err))
+  // }
 
   const signupUser = (username: any) => {
     let ppp = {
