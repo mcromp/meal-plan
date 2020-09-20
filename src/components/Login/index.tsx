@@ -1,37 +1,38 @@
 import React, { useEffect, useState } from 'react';
-const URL = "http://localhost:5000/users/"
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../redux';
+import { User, usersGet, UsersState } from '../../redux/users/users';
+
 
 const Login = () => {
-  const [users, setUsers] = useState<any[]>([])
-  const [selectedUser, setSelectedUser] = useState<any>({})
-  const [value, setValue] = useState("")
+  // const [users, setUsers] = useState<any[]>([])
+  const [selectedUser, setSelectedUser] = useState<User | null>(null)
   const [confirmDelete, setConfirmDelete] = useState<boolean>(false)
   const [showAddUser, setShowAddUser] = useState<boolean>(false)
   const [message, setMessage] = useState<string | null>(null)
+  const [value, setValue] = useState<string>("")
+  const usersState = useSelector<RootState, UsersState>(state => state.usersState)
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    fetchUsers()
-  }, [])
+    dispatch(usersGet())
+  }, [dispatch])
 
   const fetchUsers = () => {
-    fetch(URL)
-      .then(res => res.json())
-      .then(data => {
-        setUsers(data)
-      })
+    dispatch(usersGet())
   }
 
 
   const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setValue(e.target.value)
-    setSelectedUser(users[+e.target.value])
+    setSelectedUser(usersState.users[+e.target.value])
   }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setConfirmDelete(false)
-    deleteUser(selectedUser._id)
-    setSelectedUser({})
+    if (selectedUser) deleteUser(selectedUser.id)
+    setSelectedUser(null)
     setValue("")
   }
 
@@ -85,12 +86,13 @@ const Login = () => {
     }, 2000);
   }
 
+  const checkValue = value.length === 0;
+
   return (
     <>
       {showAddUser ?
         <CreateUser
           setShowAddUser={setShowAddUser}
-          users={users}
           signupUser={signupUser}
           handleMessage={handleMessage}
         />
@@ -107,13 +109,13 @@ const Login = () => {
             <SelectForm
               value={value}
               handleSelect={handleSelect}
-              users={users}
+              // users={users}
               handleUserSelect={handleUserSelect} />
 
             {message ? <div><span>{message}</span> </div> : null}
 
-            <button disabled={value.length === 0} onClick={() => console.log("testy")}>Sign in!</button>
-            <button disabled={value.length === 0} onClick={handleUserSelect}>Delete user</button>
+            <button disabled={checkValue} onClick={() => console.log("testy")}>Sign in!</button>
+            <button disabled={checkValue} onClick={handleUserSelect}>Delete user</button>
             <br />
             <button onClick={() => setShowAddUser(true)}>Sign up!</button>
           </>
@@ -124,18 +126,20 @@ const Login = () => {
 
 const CreateUser: React.FC<any> = ({
   setShowAddUser,
-  users,
+  // users,
   signupUser
 }) => {
   const [value, setValue] = useState("")
   const [usernameList, setUsernameList] = useState<any[]>([])
+  const usersState = useSelector<RootState, UsersState>(state => state.usersState)
+
   useEffect(() => {
-    const newlist = users.reduce((acc: any, user: any) => {
+    const newlist = usersState.users.reduce((acc: any, user: User) => {
       acc.push(user.username)
       return acc
     }, [])
     setUsernameList(newlist)
-  }, [users])
+  }, [usersState.users])
   const usernameIncluded = usernameList.includes(value);
   const submitDisabled = value.length <= 3 || usernameIncluded;
 
@@ -158,9 +162,10 @@ const CreateUser: React.FC<any> = ({
 }
 
 
-const SelectForm: React.FC<any> = ({ value, handleSelect, users, handleUserSelect }) => {
-  const optionMap = (users.map((user: any, i: any) =>
-    <option key={user._id} value={i}>{user.username}</option>
+const SelectForm: React.FC<any> = ({ value, handleSelect, handleUserSelect }) => {
+  const usersState = useSelector<RootState, UsersState>(state => state.usersState)
+  const optionMap = (usersState.users.map((user: any, i: any) =>
+    <option key={user.id} value={i}>{user.username}</option>
   ))
   return (
     <form>
@@ -183,7 +188,7 @@ const ConfirmDelete: React.FC<any> = ({
 
   return (
     <div style={{ backgroundColor: "plum" }}>
-      <span>Are you sure you want to delete {selectedUser.username}?</span>
+      <span>Delete {selectedUser.username}?</span>
       <button onClick={handleSubmit}>YES</button>
       <button onClick={() => setConfirmDelete(false)}>NO</button>
     </div>
