@@ -2,18 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux';
 import { deleteUserFetch, resetDeleteMessage } from '../../redux/users/userDelete';
+import { signupUserFetch } from '../../redux/users/userSignup';
 import { User, usersGet, UsersState } from '../../redux/users/users';
-import { URL } from "../../redux/users/users";
 
 
 const Login = () => {
   const [selectedUser, setSelectedUser] = useState<User | null>(null)
   const [confirmDelete, setConfirmDelete] = useState<boolean>(false)
   const [showAddUser, setShowAddUser] = useState<boolean>(false)
-  const [message, setMessage] = useState<string | null>(null)
   const [value, setValue] = useState<string>("")
+  const [message, setMessage] = useState<string | null>(null)
   const usersState = useSelector<RootState, UsersState>(state => state.usersState)
   const deleteStateMessage = useSelector<RootState, string | null>(state => state.userDelete.message)
+  const signupStateMessage = useSelector<RootState, string | null>(state => state.userSignup.message)
+
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -25,10 +27,10 @@ const Login = () => {
     dispatch(resetDeleteMessage())
   }, [dispatch, deleteStateMessage])
 
-  const fetchUsers = () => {
-    dispatch(usersGet())
-  }
-
+  useEffect(() => {
+    if (signupStateMessage) handleMessage(signupStateMessage)
+    dispatch(resetDeleteMessage())
+  }, [dispatch, signupStateMessage])
 
   const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setValue(e.target.value)
@@ -45,33 +47,13 @@ const Login = () => {
 
   const deleteUser = (id: string) => {
     dispatch(deleteUserFetch(id))
-    fetchUsers();
+    dispatch(usersGet())
   }
 
   const signupUser = (username: string) => {
-    fetch(URL + "signup", {
-      method: 'POST',
-      body: JSON.stringify({ username }),
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    })
-      .then(res => res.json())
-      .then(res => {
-        const newUser = res.newUser.username;
-        handleMessage(`${newUser} added successfully`)
-        fetchUsers();
-        setShowAddUser(false)
-      })
-      .catch(err => {
-        console.error(err)
-        handleMessage("Error, user could not be added")
-      })
-  }
-
-
-  const handleUserSelect = () => {
-    setConfirmDelete(true)
+    dispatch(signupUserFetch(username))
+    dispatch(usersGet())
+    setShowAddUser(false)
   }
 
   const handleMessage = (text: string) => {
@@ -103,39 +85,44 @@ const Login = () => {
 
             <SelectForm
               value={value}
-              handleSelect={handleSelect}
-              handleUserSelect={handleUserSelect} />
+              handleSelect={handleSelect} />
 
-            {message ? <div><span>{message}</span> </div> : null}
 
             <button disabled={checkValue} onClick={() => console.log("testy")}>Sign in!</button>
-            <button disabled={checkValue} onClick={handleUserSelect}>Delete user</button>
+            <button disabled={checkValue} onClick={() => setConfirmDelete(true)}>Delete user</button>
             <br />
             <button onClick={() => setShowAddUser(true)}>Sign up!</button>
+            {message ? <span>{message}</span> : null}
           </>
       }
-    </>)
+    </>
+  )
+}
+
+export interface CreateUserProps {
+  setShowAddUser: (boolean: boolean) => void;
+  signupUser: (username: string) => void;
 }
 
 
-const CreateUser: React.FC<any> = ({
+const CreateUser: React.FC<CreateUserProps> = ({
   setShowAddUser,
   signupUser
 }) => {
   const [value, setValue] = useState("")
-  const [usernameList, setUsernameList] = useState<any[]>([])
+  const [usernameList, setUsernameList] = useState<string[]>([])
   const usersState = useSelector<RootState, UsersState>(state => state.usersState)
 
   useEffect(() => {
-    const newlist = usersState.users.reduce((acc: any, user: User) => {
+    const newlist = usersState.users.reduce((acc: string[], user: User) => {
       acc.push(user.username)
       return acc
     }, [])
     setUsernameList(newlist)
   }, [usersState.users])
-  const usernameIncluded = usernameList.includes(value);
-  const submitDisabled = value.length <= 3 || usernameIncluded;
 
+  const usernameIncluded = usernameList.includes(value);
+  const submitDisabled = value.length <= 3 || usernameIncluded || value.length >= 15;
   return (
     <div>
       <span>Input Username for new user</span>
@@ -148,16 +135,24 @@ const CreateUser: React.FC<any> = ({
         <span>name already included</span> : null
       }
       {value.length <= 3 ?
-        <span>Username must be at least 3 characters</span> : null
+        <span>Username is too short</span> : null
+      }
+      {value.length >= 15 ?
+        <span>Username is too long</span> : null
       }
     </div>
   )
 }
 
 
-const SelectForm: React.FC<any> = ({ value, handleSelect, handleUserSelect }) => {
+export interface SelectFormProps {
+  value: string;
+  handleSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+}
+
+const SelectForm: React.FC<SelectFormProps> = ({ value, handleSelect }) => {
   const usersState = useSelector<RootState, UsersState>(state => state.usersState)
-  const optionMap = (usersState.users.map((user: any, i: any) =>
+  const optionMap = (usersState.users.map((user: User, i: number) =>
     <option key={user.id} value={i}>{user.username}</option>
   ))
   return (
@@ -172,8 +167,12 @@ const SelectForm: React.FC<any> = ({ value, handleSelect, handleUserSelect }) =>
   )
 }
 
-
-const ConfirmDelete: React.FC<any> = ({
+export interface ConfirmDeleteProps {
+  handleSubmit: () => void;
+  selectedUser: User;
+  setConfirmDelete: (boolean: boolean) => void;
+}
+const ConfirmDelete: React.FC<ConfirmDeleteProps> = ({
   handleSubmit,
   selectedUser,
   setConfirmDelete

@@ -6,6 +6,7 @@ import filterReducer from "./filterList";
 import { dataReducer } from "./fooddata";
 import { userDeleteReducer } from "./users/userDelete";
 import { userReducer } from "./users/users";
+import { userSignupReducer } from "./users/userSignup";
 // import logger from "redux-logger";
 
 const rootReducer = combineReducers({
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
  data: dataReducer,
  usersState: userReducer,
  userDelete: userDeleteReducer,
+ userSignup: userSignupReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
