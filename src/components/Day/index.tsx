@@ -21,7 +21,6 @@ function Day() {
 
   useEffect(() => {
     dispatch(fetchData())
-    console.log('Data Fetched')
   }, [dispatch])
 
 
@@ -46,6 +45,7 @@ function Day() {
 
   return (
     <div style={{ backgroundColor: "pink" }}>
+
       {calendar ? calendar.map((calendarItem: any) => (
         <CheckoutBoardItem
           key={calendarItem.id}
@@ -55,16 +55,19 @@ function Day() {
         />
       )) : null}
       <button>SUBMIT</button>
+
       <SearchBar
         fooddata={fooddata}
         calendar={calendar}
         addToCalendar={addItemToCalendar} />
+
       <FilterButtonList />
+
       <MenuBoard
         fooddata={fooddata}
         handleClick={handleItemCardClick}
-        calendar={calendar}
-      />
+        calendar={calendar} />
+
     </div>
   );
 }
