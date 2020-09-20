@@ -4,6 +4,7 @@ import { URL } from "./users";
 export const FETCH_USER_DELETE_REQUEST = "FETCH_USER_DELETE_REQUEST";
 export const FETCH_USER_DELETE_SUCCESS = "FETCH_USER_DELETE_SUCCESS";
 export const FETCH_USER_DELETE_FAILURE = "FETCH_USER_DELETE_FAILURE";
+export const RESET_USER_DELETE_MESSAGE = "RESET_USER_DELETE_MESSAGE";
 
 export interface FetchUserDeleteRequest {
  type: typeof FETCH_USER_DELETE_REQUEST;
@@ -16,11 +17,16 @@ export interface FetchUserDeleteFailure {
  type: typeof FETCH_USER_DELETE_FAILURE;
  payload: string;
 }
+export interface ResetUserDeleteMessage {
+ type: typeof RESET_USER_DELETE_MESSAGE;
+ payload: string;
+}
 
 export type UserDeleteAction =
  | FetchUserDeleteRequest
  | FetchUserDeleteSuccess
- | FetchUserDeleteFailure;
+ | FetchUserDeleteFailure
+ | ResetUserDeleteMessage;
 
 export interface UserDeleteState {
  loading: boolean;
@@ -79,6 +85,11 @@ export const userDeleteReducer = (
     loading: false,
     message: "Delete unsucessful",
     error: action.payload,
+   };
+  case RESET_USER_DELETE_MESSAGE:
+   return {
+    ...state,
+    message: "",
    };
   default:
    return state;
