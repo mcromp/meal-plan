@@ -37,7 +37,7 @@ const Login = () => {
     setSelectedUser(usersState.users[+e.target.value])
   }
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     setConfirmDelete(false)
     if (selectedUser) deleteUser(selectedUser.id)
@@ -166,8 +166,8 @@ const SelectForm: React.FC<SelectFormProps> = ({ value, handleSelect }) => {
 }
 
 export interface ConfirmDeleteProps {
-  handleSubmit: () => void;
-  selectedUser: User;
+  handleSubmit: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  selectedUser: User | null;
   setConfirmDelete: (boolean: boolean) => void;
 }
 const ConfirmDelete: React.FC<ConfirmDeleteProps> = ({
@@ -178,8 +178,8 @@ const ConfirmDelete: React.FC<ConfirmDeleteProps> = ({
 
   return (
     <div style={{ backgroundColor: "plum" }}>
-      <span>Delete {selectedUser.username}?</span>
-      <button onClick={handleSubmit}>YES</button>
+      <span>Delete {selectedUser ? selectedUser.username : null}?</span>
+      <button onClick={(e) => handleSubmit(e)}>YES</button>
       <button onClick={() => setConfirmDelete(false)}>NO</button>
     </div>
   )
