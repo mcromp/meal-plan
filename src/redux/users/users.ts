@@ -1,6 +1,7 @@
 import { Dispatch } from "redux";
+import { APIURL } from "../apiUrl";
 
-export const URL = "http://localhost:5000/users/";
+export const USERURL = APIURL + "users/";
 
 export interface UserJSON {
  _id: string;
@@ -54,7 +55,7 @@ export const usersGet = () => {
   dispatch({
    type: FETCH_USERS_REQUEST,
   });
-  fetch(URL)
+  fetch(USERURL)
    .then((res) => res.json())
    .then((data: UserJSON[]) => {
     const users: User[] = data.map((user) => {

@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { URL } from "./users";
+import { USERURL } from "./users";
 
 export const FETCH_USER_SIGNUP_REQUEST = "FETCH_USER_SIGNUP_REQUEST";
 export const FETCH_USER_SIGNUP_SUCCESS = "FETCH_USER_SIGNUP_SUCCESS";
@@ -49,7 +49,7 @@ export const signupUserFetch = (username: string) => {
   dispatch({
    type: FETCH_USER_SIGNUP_REQUEST,
   });
-  fetch(URL + "signup", {
+  fetch(USERURL + "signup", {
    method: "POST",
    body: JSON.stringify({ username }),
    headers: {

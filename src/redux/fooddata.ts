@@ -1,14 +1,13 @@
 import { Dispatch } from "redux";
+import { APIURL } from "./apiUrl";
 
-export interface FoodItem {
+export interface MenuItem {
  ITEM: string;
  CAL: string;
  PRICE: string;
  CATEGORY: string;
  ID: string;
 }
-
-const dummyURL: string = "https://jsonplaceholder.typicode.com/users";
 
 //ACTION TYPES
 export const FETCH_DATA_REQUEST = "FETCH_DATA_REQUEST";
@@ -22,7 +21,7 @@ export const fetchDataRequest = () => {
  };
 };
 
-export const fetchDataSuccess = (data: FoodItem[]) => {
+export const fetchDataSuccess = (data: MenuItem[]) => {
  return {
   type: FETCH_DATA_SUCCESS,
   payload: data,
@@ -36,14 +35,14 @@ export const fetchDataFailure = (error: string) => {
 };
 
 //ASYNC ACTION CREATOR
-export const fetchData = () => {
+export const fetchMenuList = () => {
  return (dispatch: Dispatch<DataAction>) => {
   dispatch({
    type: FETCH_DATA_REQUEST,
   });
-  fetch(dummyURL)
+  fetch(APIURL + "menu")
    .then((res) => res.json())
-   .then((data: FoodItem[]) => {
+   .then((data: MenuItem[]) => {
     dispatch({
      type: FETCH_DATA_SUCCESS,
      payload: data,
@@ -67,7 +66,7 @@ export interface FetchDataRequest {
 
 export interface FetchDataSuccess {
  type: typeof FETCH_DATA_SUCCESS;
- payload: FoodItem[];
+ payload: MenuItem[];
 }
 
 export interface FetchDataFailure {
@@ -77,23 +76,23 @@ export interface FetchDataFailure {
 
 export type DataAction = FetchDataRequest | FetchDataSuccess | FetchDataFailure;
 
-export interface DataState {
+export interface InitalMenuState {
  loading: boolean;
- data: FoodItem[];
+ data: MenuItem[];
  error: string;
 }
 
 // REDUCER
-const initalState: DataState = {
+const initalState: InitalMenuState = {
  loading: false,
  data: [],
  error: "",
 };
 
-export const dataReducer = (
+export const menuReducer = (
  state = initalState,
  action: DataAction
-): DataState => {
+): InitalMenuState => {
  switch (action.type) {
   case FETCH_DATA_REQUEST:
    return {

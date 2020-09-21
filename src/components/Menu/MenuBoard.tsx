@@ -1,23 +1,31 @@
-import { FoodItem, FilterId, Filter } from "../../types";
+import { MenuItem, FilterId, Filter } from "../../types";
 import React, { useState, useEffect } from "react";
 import MenuCard from "./MenuCard";
 import { MenuBoardProps } from "./types";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux";
+import { fetchMenuList } from "../../redux/fooddata";
 
 
 const MenuBoard: React.FC<MenuBoardProps> = ({
-  fooddata,
   handleClick,
   calendar,
 }) => {
-  const [cardList, setCardList] = useState(fooddata);
+  const [cardList, setCardList] = useState<MenuItem[] | null>(null);
   const favList = useSelector<RootState, string[]>(state => state.favList)
   const filterList = useSelector<RootState, Filter[]>(state => state.filterList)
+  const menuList = useSelector<RootState, MenuItem[]>(state => state.menuList.data)
+  const dispatch = useDispatch()
+
+
+  useEffect(() => {
+    if (menuList.length === 0) dispatch(fetchMenuList())
+    setCardList(menuList)
+  }, [menuList, dispatch])
 
   useEffect(() => {
     const filterCardList = () => {
-      let tempArr: FoodItem[] = [];
+      let tempArr: MenuItem[] = [];
 
       const selectedFilterIdList = filterList.reduce<FilterId[]>((acc, item) => {
         if (item.selected) acc.push(item.id);
@@ -25,14 +33,14 @@ const MenuBoard: React.FC<MenuBoardProps> = ({
       }, []);
 
       selectedFilterIdList.length <= 0
-        ? (tempArr = fooddata)
+        ? (tempArr = menuList)
         : (tempArr = createCardList(selectedFilterIdList));
 
       setCardList(tempArr);
     };
 
     const createCardList = (selectedFilterIdList: FilterId[]) =>
-      fooddata.reduce<FoodItem[]>((acc, food) => {
+      menuList.reduce<MenuItem[]>((acc, food) => {
         const foodCategory = food.CATEGORY as FilterId;
         if (
           selectedFilterIdList.includes(foodCategory) ||
@@ -44,7 +52,7 @@ const MenuBoard: React.FC<MenuBoardProps> = ({
 
     setCardList([]);
     filterCardList();
-  }, [filterList, fooddata, favList]);
+  }, [filterList, menuList, favList]);
 
 
   const disableCheck = (id: string): boolean => {
@@ -54,16 +62,14 @@ const MenuBoard: React.FC<MenuBoardProps> = ({
 
   return (
     <div className="grid_i">
-      {cardList.map((item) => {
-        return (
-          <MenuCard
-            key={item.ID}
-            item={item}
-            addCalendar={handleClick}
-            disableCheck={disableCheck}
-          />
-        );
-      })}
+      {cardList ? cardList.map((item: MenuItem) => (
+        <MenuCard
+          key={item.ID}
+          item={item}
+          addCalendar={handleClick}
+          disableCheck={disableCheck}
+        />
+      )) : null}
     </div>
   );
 };

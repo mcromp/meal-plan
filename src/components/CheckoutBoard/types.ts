@@ -1,7 +1,6 @@
-import { CalendarItem, FoodItem } from "../../types";
+import { CalendarItem, MenuItem } from "../../types";
 
 export interface CheckoutBoardItemProps {
  calendarItem: CalendarItem;
- fooddata: FoodItem[];
  handleItemCardClick: (id: string, number: number) => void;
 }

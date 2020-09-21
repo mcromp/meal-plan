@@ -3,7 +3,7 @@ import thunk from "redux-thunk";
 import calendarReducer from "./calendar";
 import favListReducer from "./favList";
 import filterReducer from "./filterList";
-import { dataReducer } from "./fooddata";
+import { menuReducer } from "./fooddata";
 import currentUserReducer from "./users/userCurrent";
 import { userDeleteReducer } from "./users/userDelete";
 import { userReducer } from "./users/users";
@@ -14,7 +14,7 @@ const rootReducer = combineReducers({
  calendar: calendarReducer,
  favList: favListReducer,
  filterList: filterReducer,
- data: dataReducer,
+ menuList: menuReducer,
  usersState: userReducer,
  userDelete: userDeleteReducer,
  userSignup: userSignupReducer,

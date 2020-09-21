@@ -1,10 +1,10 @@
 import React, { useState, useRef, useLayoutEffect } from "react";
-import { FoodItem } from "../../types";
+import { MenuItem } from "../../types";
 
 
 const SearchBar: React.FC<any> = ({ fooddata, calendar, addToCalendar }) => {
   const [textValue, setTextValue] = useState<string>("")
-  const [searchListDisplay, setSearchListDisplay] = useState<FoodItem[]>([])
+  const [searchListDisplay, setSearchListDisplay] = useState<MenuItem[]>([])
   const [showList, setShowList] = useState(true)
   const [errorText, setErrorText] = useState("")
   const wrapperRef = useRef<HTMLDivElement>(null)
@@ -30,7 +30,7 @@ const SearchBar: React.FC<any> = ({ fooddata, calendar, addToCalendar }) => {
     setSearchListDisplay([])
     setTextValue(word)
     if (word.length > 0) {
-      const searchList = fooddata.reduce((acc: any, item: FoodItem) => {
+      const searchList = fooddata.reduce((acc: any, item: MenuItem) => {
         if (checkSubStingIncludes(item.ITEM, word)) acc.push(item)
         return acc
       }, []).splice(0, 5)
@@ -38,7 +38,7 @@ const SearchBar: React.FC<any> = ({ fooddata, calendar, addToCalendar }) => {
     }
   }
 
-  const handleClick = (item: FoodItem) => {
+  const handleClick = (item: MenuItem) => {
     setSearchListDisplay([])
     setTextValue("")
     const itemAlreadyInCalendar = calendar.map((item: any) => item.id)

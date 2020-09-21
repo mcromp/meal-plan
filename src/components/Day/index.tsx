@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from "react";
-import data from "../../food_data/fooddata.json";
 import { useDispatch, useSelector } from "react-redux";
 import { addCalendarItem, removeCalendarItemById, modifyCalendarItemQuantity } from "../../redux/calendar";
-import { FoodItem, CalendarItem } from "../../types";
+import { MenuItem, CalendarItem } from "../../types";
 import CheckoutBoardItem from "../CheckoutBoard/CheckoutBoard";
 import SearchBar from "../SearchBar/SearchBar";
 import FilterButtonList from "../FilterBar/FilterBar";
 import MenuBoard from "../Menu/MenuBoard";
 import './Day.css'
-import { fetchData } from "../../redux/fooddata";
+import { fetchMenuList } from "../../redux/fooddata";
 import { RootState } from "../../redux";
 
-const fooddata: FoodItem[] = data;
 
 const Day = () => {
   const dispatch = useDispatch()
@@ -20,7 +18,7 @@ const Day = () => {
   // const [dayTime, setDayTime] = useState<any>([])
 
   useEffect(() => {
-    dispatch(fetchData())
+    dispatch(fetchMenuList())
   }, [dispatch])
 
 
@@ -50,21 +48,18 @@ const Day = () => {
         <CheckoutBoardItem
           key={calendarItem.id}
           calendarItem={calendarItem}
-          fooddata={fooddata}
           handleItemCardClick={handleItemCardClick}
         />
       )) : null}
       <button>SUBMIT</button>
 
       <SearchBar
-        fooddata={fooddata}
         calendar={calendar}
         addToCalendar={addItemToCalendar} />
 
       <FilterButtonList />
 
       <MenuBoard
-        fooddata={fooddata}
         handleClick={handleItemCardClick}
         calendar={calendar} />
 
