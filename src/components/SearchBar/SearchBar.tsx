@@ -1,8 +1,14 @@
 import React, { useState, useRef, useLayoutEffect } from "react";
-import { MenuItem } from "../../types";
+import { CalendarItem, MenuItem } from "../../types";
 
 
-const SearchBar: React.FC<any> = ({ fooddata, calendar, addToCalendar }) => {
+interface SearchBarProps {
+  menuList: MenuItem[];
+  calendar: CalendarItem[];
+  addToCalendar: (id: string, amount: number) => void
+}
+
+const SearchBar: React.FC<SearchBarProps> = ({ menuList, calendar, addToCalendar }) => {
   const [textValue, setTextValue] = useState<string>("")
   const [searchListDisplay, setSearchListDisplay] = useState<MenuItem[]>([])
   const [showList, setShowList] = useState(true)
@@ -30,7 +36,7 @@ const SearchBar: React.FC<any> = ({ fooddata, calendar, addToCalendar }) => {
     setSearchListDisplay([])
     setTextValue(word)
     if (word.length > 0) {
-      const searchList = fooddata.reduce((acc: any, item: MenuItem) => {
+      const searchList = menuList.reduce((acc: any, item: MenuItem) => {
         if (checkSubStingIncludes(item.ITEM, word)) acc.push(item)
         return acc
       }, []).splice(0, 5)
