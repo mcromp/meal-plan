@@ -76,14 +76,14 @@ export interface FetchDataFailure {
 
 export type DataAction = FetchDataRequest | FetchDataSuccess | FetchDataFailure;
 
-export interface InitalMenuState {
+export interface MenuState {
  loading: boolean;
  data: MenuItem[];
  error: string;
 }
 
 // REDUCER
-const initalState: InitalMenuState = {
+const initalState: MenuState = {
  loading: false,
  data: [],
  error: "",
@@ -92,7 +92,7 @@ const initalState: InitalMenuState = {
 export const menuReducer = (
  state = initalState,
  action: DataAction
-): InitalMenuState => {
+): MenuState => {
  switch (action.type) {
   case FETCH_DATA_REQUEST:
    return {

@@ -6,16 +6,15 @@ import CheckoutBoardItem from "../CheckoutBoard/CheckoutBoard";
 import SearchBar from "../SearchBar/SearchBar";
 import FilterButtonList from "../FilterBar/FilterBar";
 import MenuBoard from "../Menu/MenuBoard";
-import './Day.css'
-import { fetchMenuList } from "../../redux/fooddata";
+import { fetchMenuList, MenuState } from "../../redux/fooddata";
 import { RootState } from "../../redux";
+import './Day.css'
 
 
 const Day = () => {
   const dispatch = useDispatch()
   const calendar = useSelector<RootState, CalendarItem[]>(state => state.calendar)
-  // const dummyData = useSelector<RootState, any>(state => state.data)
-  // const [dayTime, setDayTime] = useState<any>([])
+  const { data: menuList, loading, error } = useSelector<RootState, MenuState>(state => state.menuList)
 
   useEffect(() => {
     dispatch(fetchMenuList())
@@ -43,27 +42,33 @@ const Day = () => {
 
   return (
     <div style={{ backgroundColor: "pink" }}>
+      {loading ? <span>loading...</span> :
+        <>
+          {
+            calendar ? calendar.map((calendarItem: any) => (
+              <CheckoutBoardItem
+                key={calendarItem.id}
+                calendarItem={calendarItem}
+                handleItemCardClick={handleItemCardClick}
+              />
+            )) : null}
 
-      {calendar ? calendar.map((calendarItem: any) => (
-        <CheckoutBoardItem
-          key={calendarItem.id}
-          calendarItem={calendarItem}
-          handleItemCardClick={handleItemCardClick}
-        />
-      )) : null}
-      <button>SUBMIT</button>
+          <button>SUBMIT</button>
 
-      <SearchBar
-        calendar={calendar}
-        addToCalendar={addItemToCalendar} />
+          <SearchBar
+            menuList={menuList}
+            calendar={calendar}
+            addToCalendar={addItemToCalendar} />
 
-      <FilterButtonList />
+          <FilterButtonList />
 
-      <MenuBoard
-        handleClick={handleItemCardClick}
-        calendar={calendar} />
-
+          <MenuBoard
+            handleClick={handleItemCardClick}
+            calendar={calendar} />
+        </>
+      }
     </div>
+
   );
 }
 
