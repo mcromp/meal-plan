@@ -4,6 +4,7 @@ import calendarReducer from "./calendar";
 import favListReducer from "./favList";
 import filterReducer from "./filterList";
 import { dataReducer } from "./fooddata";
+import currentUserReducer from "./users/userCurrent";
 import { userDeleteReducer } from "./users/userDelete";
 import { userReducer } from "./users/users";
 import { userSignupReducer } from "./users/userSignup";
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
  usersState: userReducer,
  userDelete: userDeleteReducer,
  userSignup: userSignupReducer,
+ currentUser: currentUserReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

@@ -1,22 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux';
 import { deleteUserFetch, resetDeleteMessage } from '../../redux/users/userDelete';
-import { signupUserFetch } from '../../redux/users/userSignup';
 import { User, usersGet, UsersState } from '../../redux/users/users';
+import { useDispatch, useSelector } from 'react-redux';
+import { signupUserFetch } from '../../redux/users/userSignup';
+import { setCurrentUser } from '../../redux/users/userCurrent';
 
 
 const Login = () => {
-  const [selectedUser, setSelectedUser] = useState<User | null>(null)
   const [confirmDelete, setConfirmDelete] = useState<boolean>(false)
   const [showAddUser, setShowAddUser] = useState<boolean>(false)
   const [value, setValue] = useState<string>("")
+  const [selectedUser, setSelectedUser] = useState<User | null>(null)
   const [message, setMessage] = useState<string | null>(null)
   const usersState = useSelector<RootState, UsersState>(state => state.usersState)
   const deleteStateMessage = useSelector<RootState, string | null>(state => state.userDelete.message)
   const signupStateMessage = useSelector<RootState, string | null>(state => state.userSignup.message)
+  const currentUser = useSelector<RootState, User | {}>(state => state.currentUser)
 
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    console.log(currentUser)
+  }, [currentUser])
 
   useEffect(() => {
     dispatch(usersGet())
@@ -63,6 +69,13 @@ const Login = () => {
     }, 1500);
   }
 
+  const handleSignin = () => {
+    if (selectedUser) dispatch(setCurrentUser(selectedUser))
+    console.log(`BEEP BOOP ${value} SIGNED IN`)
+    setSelectedUser(null)
+    setValue("")
+  }
+
   const checkValue = value.length === 0;
 
   return (
@@ -86,7 +99,7 @@ const Login = () => {
               handleSelect={handleSelect} />
 
 
-            <button disabled={checkValue} onClick={() => console.log("testy")}>Sign in!</button>
+            <button disabled={checkValue} onClick={() => handleSignin()}>Sign in!</button>
             <button disabled={checkValue} onClick={() => setConfirmDelete(true)}>Delete user</button>
             <br />
             <button onClick={() => setShowAddUser(true)}>Sign up!</button>

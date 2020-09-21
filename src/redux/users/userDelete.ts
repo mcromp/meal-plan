@@ -34,6 +34,10 @@ export interface UserDeleteState {
  error: string;
 }
 
+interface DeleteRes {
+ deletedUser: User;
+}
+
 const initalState: UserDeleteState = {
  loading: false,
  message: null,
@@ -43,10 +47,6 @@ const initalState: UserDeleteState = {
 export const resetDeleteMessage = () => ({
  type: RESET_USER_DELETE_MESSAGE,
 });
-
-interface DeleteRes {
- deletedUser: User;
-}
 
 export const deleteUserFetch = (id: string) => {
  return (dispatch: Dispatch<UserDeleteAction>) => {
