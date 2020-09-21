@@ -56,24 +56,22 @@ const SearchBar: React.FC<any> = ({ fooddata, calendar, addToCalendar }) => {
 
 
   return (
-    <div style={{ backgroundColor: "mediumpurple" }}>
-      <div ref={wrapperRef} className="flex-container flex-column pos-rel">
-        <input
-          onClick={() => setShowList(true)}
-          placeholder="Type to search"
-          value={textValue}
-          onChange={e => handleChange(e)}
-        />
-        <span>{errorText}</span>
-        {showList && searchListDisplay.map(i =>
-          <div
-            onClick={() => handleClick(i)}
-            key={i.ID}
-            tabIndex={0}
-          >
-            <span>{i.ITEM}</span>
-          </div>)}
-      </div>
+    <div ref={wrapperRef} className="flex-container flex-column pos-rel">
+      <input
+        onClick={() => setShowList(true)}
+        placeholder="Type to search"
+        value={textValue}
+        onChange={e => handleChange(e)}
+      />
+      <span>{errorText}</span>
+      {showList && searchListDisplay.map(item =>
+        <div
+          onClick={() => handleClick(item)}
+          key={item.ID}
+          tabIndex={0}
+        >
+          <span>{item.ITEM}</span>
+        </div>)}
     </div>
   );
 };

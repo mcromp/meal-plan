@@ -13,8 +13,8 @@ import { RootState } from "../../redux";
 
 const fooddata: FoodItem[] = data;
 
-function Day() {
-  const dispatch = useDispatch()
+const Day = () => {
+  const dispatch = Dispatch()
   const calendar = useSelector<RootState, CalendarItem[]>(state => state.calendar)
   // const dummyData = useSelector<RootState, any>(state => state.data)
   // const [dayTime, setDayTime] = useState<any>([])
