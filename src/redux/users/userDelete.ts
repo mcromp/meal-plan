@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { URL } from "./users";
+import { URL, User } from "./users";
 
 export const FETCH_USER_DELETE_REQUEST = "FETCH_USER_DELETE_REQUEST";
 export const FETCH_USER_DELETE_SUCCESS = "FETCH_USER_DELETE_SUCCESS";
@@ -44,6 +44,10 @@ export const resetDeleteMessage = () => ({
  type: RESET_USER_DELETE_MESSAGE,
 });
 
+interface DeleteRes {
+ deletedUser: User;
+}
+
 export const deleteUserFetch = (id: string) => {
  return (dispatch: Dispatch<UserDeleteAction>) => {
   dispatch({
@@ -53,7 +57,7 @@ export const deleteUserFetch = (id: string) => {
    method: "DELETE",
   })
    .then((res) => res.json())
-   .then((data: any) => {
+   .then((data: DeleteRes) => {
     const resUsername = data.deletedUser.username;
     dispatch({
      type: FETCH_USER_DELETE_SUCCESS,

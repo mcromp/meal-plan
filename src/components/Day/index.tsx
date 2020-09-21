@@ -16,8 +16,8 @@ const fooddata: FoodItem[] = data;
 function Day() {
   const dispatch = useDispatch()
   const calendar = useSelector<RootState, CalendarItem[]>(state => state.calendar)
-  const dummyData = useSelector<RootState, any>(state => state.data)
-  const [dayTime, setDayTime] = useState<any>([])
+  // const dummyData = useSelector<RootState, any>(state => state.data)
+  // const [dayTime, setDayTime] = useState<any>([])
 
   useEffect(() => {
     dispatch(fetchData())
