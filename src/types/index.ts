@@ -9,8 +9,8 @@ export interface MenuItem {
 export interface CalendarItem {
  id: string;
  quantity: number;
- day?: string;
- user?: string;
+ day: string;
+ user: string;
 }
 
 export type FilterId =

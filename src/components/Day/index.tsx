@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addCalendarItem, removeCalendarItemById, modifyCalendarItemQuantity } from "../../redux/calendar";
+import { addCalendarItem, removeCalendarItemById, modifyCalendarItemQuantity } from "../../redux/calendar/calendar";
 import { MenuItem, CalendarItem } from "../../types";
 import CheckoutBoardItem from "../CheckoutBoard/CheckoutBoard";
 import SearchBar from "../SearchBar/SearchBar";
@@ -12,30 +12,38 @@ import { Redirect, useParams } from 'react-router-dom'
 import { User } from "../../redux/users/users";
 import './Day.css'
 
+type DayParam = {
+  day: string
+}
+
 const Day = () => {
   const dispatch = useDispatch()
   const currentUser = useSelector<RootState, User | null>(state => state.currentUser)
   const calendar = useSelector<RootState, CalendarItem[]>(state => state.calendar)
   const [calendarDay, setCalendarDay] = useState<CalendarItem[]>()
   const { data: menuList, loading, error } = useSelector<RootState, MenuState>(state => state.menuList)
-  const day: string = useParams()
+  const params: DayParam = useParams()
 
   useEffect(() => {
     dispatch(fetchMenuList())
   }, [dispatch])
 
   useEffect(() => {
+    // console.log(calendarDay)
     console.log(calendar)
-  }, [calendar])
+  }, [])
 
   useEffect(() => {
-    const calendarFiltered = calendar.filter(item => item.user === currentUser?.id && item.day === day)
+    console.log(calendar)
+    const calendarFiltered = calendar.filter(item => item.user === currentUser?.id && item.day === params.day)
     setCalendarDay(calendarFiltered)
-  }, [])
+  }, [calendar])
 
 
   const addItemToCalendar = (id: string, amount: number) => {
-    const newCalendarItem: CalendarItem = { id, quantity: amount, day };
+    let user: string = "";
+    if (currentUser) user = currentUser.id
+    const newCalendarItem: CalendarItem = { id, quantity: amount, day: params.day, user };
     dispatch(addCalendarItem(newCalendarItem))
   };
 
@@ -58,6 +66,7 @@ const Day = () => {
 
   if (!currentUser) { return <Redirect to='/' /> }
   if (loading) { return <span>Loading...</span> }
+  if (error) { return <span>{error}</span> }
 
   return (
     <div style={{ backgroundColor: "pink" }}>

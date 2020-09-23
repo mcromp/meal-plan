@@ -2,7 +2,7 @@ import { MenuItem } from "../../types";
 import React from 'react'
 import { CheckoutBoardItemProps } from "./types";
 import { useDispatch, useSelector } from "react-redux";
-import { removeCalendarItemById } from "../../redux/calendar";
+import { removeCalendarItemById } from "../../redux/calendar/calendar";
 import { RootState } from "../../redux";
 
 const CheckoutBoardItem: React.FC<CheckoutBoardItemProps> = ({
@@ -11,10 +11,7 @@ const CheckoutBoardItem: React.FC<CheckoutBoardItemProps> = ({
 }) => {
   const dispatch = useDispatch()
   const menuList = useSelector<RootState, MenuItem[]>(state => state.menuList.data)
-
-
   const MenuItem = menuList.find((i: MenuItem) => i.ID === calendarItem.id);
-
 
   return MenuItem ? (
     <>

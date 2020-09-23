@@ -37,7 +37,7 @@ function Week() {
 
   if (!currentUser) { return <Redirect to='/' /> }
   if (daySelected) {
-    let string = "2020-05-13"
+    let string: string = "2020-05-13"
     return <Redirect to={`/${string}`} />
   }
 

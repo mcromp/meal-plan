@@ -15,7 +15,7 @@ const App: React.FC = () => {
         <Route path="/week">
           <Week />
         </Route>
-        <Route path="/:date">
+        <Route path="/:day">
           <Day />
         </Route>
       </Switch>

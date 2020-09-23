@@ -17,11 +17,3 @@
 .dropdown > button {
  margin: 10px;
 }
-/* 
-.dropdown:focus-within .dropdown-content {
-  display: block;
-}
-
-.dropdown-content:focus-within {
-  display: block;
-} */
