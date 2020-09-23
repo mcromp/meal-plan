@@ -32,7 +32,7 @@ const initalState: CalendarPostState = {
  error: "",
 };
 
-export const signupUserFetch = (calendar: CalendarItem[]) => {
+export const calendarPostFetch = (calendar: CalendarItem[]) => {
  return (dispatch: Dispatch<CalendarPostAction>) => {
   dispatch({
    type: FETCH_CALENDAR_POST_REQUEST,
@@ -45,7 +45,7 @@ export const signupUserFetch = (calendar: CalendarItem[]) => {
    },
   })
    .then((res) => res.json())
-   .then((res) => {
+   .then(() => {
     dispatch({
      type: FETCH_CALENDAR_POST_SUCCESS,
     });
