@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addCalendarItem, removeCalendarItemById, modifyCalendarItemQuantity } from "../../redux/calendar/calendar";
-import { MenuItem, CalendarItem } from "../../types";
+import { CalendarItem } from "../../types";
 import CheckoutBoardItem from "../CheckoutBoard/CheckoutBoard";
 import SearchBar from "../SearchBar/SearchBar";
 import FilterButtonList from "../FilterBar/FilterBar";
@@ -12,6 +12,8 @@ import { Redirect, useParams } from 'react-router-dom'
 import { User } from "../../redux/users/users";
 import './Day.css'
 
+
+// REFACTOR THISSSSSSS
 type DayParam = {
   day: string
 }
