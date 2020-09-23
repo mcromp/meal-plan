@@ -16,12 +16,18 @@ const Day = () => {
   const dispatch = useDispatch()
   const currentUser = useSelector<RootState, User | null>(state => state.currentUser)
   const calendar = useSelector<RootState, CalendarItem[]>(state => state.calendar)
+  const [calendarDay, setCalendarDay] = useState<CalendarItem[]>()
   const { data: menuList, loading, error } = useSelector<RootState, MenuState>(state => state.menuList)
   const day: string = useParams()
 
   useEffect(() => {
     dispatch(fetchMenuList())
   }, [dispatch])
+
+  useEffect(() => {
+    const calendarFiltered = calendar.filter(item => item.user === currentUser?.id && item.day === day)
+    setCalendarDay(calendarFiltered)
+  }, [])
 
 
   const addItemToCalendar = (id: string, amount: number) => {
@@ -30,7 +36,7 @@ const Day = () => {
   };
 
   const handleItemCardClick = (id: string, amount: number) => {
-    const selectedItemIndex = calendar.findIndex((item: any) => item.id === id);
+    const selectedItemIndex = calendar.findIndex((item: CalendarItem) => item.id === id);
     if (selectedItemIndex === -1) {
       if (amount > 0) addItemToCalendar(id, amount);
     } else modifyQuantityOfCalendarItem(selectedItemIndex, id, amount)
@@ -42,14 +48,18 @@ const Day = () => {
     else dispatch(modifyCalendarItemQuantity(selectedItemIndex, updatedQuantity))
   }
 
+  const handleSubmit = () => {
+
+  }
+
   if (!currentUser) { return <Redirect to='/' /> }
-  if (loading) { return <span>loading...</span> }
+  if (loading) { return <span>Loading...</span> }
 
   return (
     <div style={{ backgroundColor: "pink" }}>
       <>
         {
-          calendar ? calendar.map((calendarItem: any) => (
+          calendarDay ? calendarDay.map((calendarItem: CalendarItem) => (
             <CheckoutBoardItem
               key={calendarItem.id}
               calendarItem={calendarItem}
@@ -57,7 +67,7 @@ const Day = () => {
             />
           )) : null}
 
-        <button>SUBMIT</button>
+        <button onClick={handleSubmit}>SUBMIT</button>
 
         <SearchBar
           menuList={menuList}
