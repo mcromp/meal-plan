@@ -4,7 +4,7 @@ import MenuCard from "./MenuCard";
 import { MenuBoardProps } from "./types";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux";
-import { fetchMenuList } from "../../redux/fooddata";
+import { fetchMenuList } from "../../redux/menuList";
 
 
 const MenuBoard: React.FC<MenuBoardProps> = ({

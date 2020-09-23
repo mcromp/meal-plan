@@ -6,7 +6,7 @@ import CheckoutBoardItem from "../CheckoutBoard/CheckoutBoard";
 import SearchBar from "../SearchBar/SearchBar";
 import FilterButtonList from "../FilterBar/FilterBar";
 import MenuBoard from "../Menu/MenuBoard";
-import { fetchMenuList, MenuState } from "../../redux/fooddata";
+import { fetchMenuList, MenuState } from "../../redux/menuList";
 import { RootState } from "../../redux";
 import { Redirect, useParams } from 'react-router-dom'
 import { User } from "../../redux/users/users";
@@ -23,6 +23,10 @@ const Day = () => {
   useEffect(() => {
     dispatch(fetchMenuList())
   }, [dispatch])
+
+  useEffect(() => {
+    console.log(calendar)
+  }, [calendar])
 
   useEffect(() => {
     const calendarFiltered = calendar.filter(item => item.user === currentUser?.id && item.day === day)

@@ -3,7 +3,7 @@ import thunk from "redux-thunk";
 import calendarReducer from "./calendar";
 import favListReducer from "./favList";
 import filterReducer from "./filterList";
-import { menuReducer } from "./fooddata";
+import { menuReducer } from "./menuList";
 import currentUserReducer from "./users/userCurrent";
 import { userDeleteReducer } from "./users/userDelete";
 import { userReducer } from "./users/users";
