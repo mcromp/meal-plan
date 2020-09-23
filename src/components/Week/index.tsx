@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { RootState } from '../../redux';
@@ -10,8 +10,8 @@ enum Weekdays {
   "Sun", "Mon", "Tues", "Wed", "Thur", "Fri", "Sat",
 }
 enum MonthNames {
-  "January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"
+  "Jan", "Feb", "Mar", "Apr", "May", "June",
+  "July", "Aug", "Sept", "Oct", "Nov", "Dec"
 }
 
 let today: Date = new Date();
@@ -33,24 +33,28 @@ function Week() {
 
   }, [])
   const currentUser = useSelector<RootState, User | null>(state => state.currentUser)
+  const [daySelected, setDaySelected] = useState<boolean>(false)
 
   if (!currentUser) { return <Redirect to='/' /> }
+  if (daySelected) {
+    let string = "2020-05-13"
+    return <Redirect to={`/${string}`} />
+  }
 
   return (
     <>
-      <h1>heyya {currentUser.username}</h1>
+      <h3>heyya {currentUser.username}</h3>
       <div className="parent">
         {weekdayz.map((_, dayIndex) => {
           console.log(dayIndex)
           let theday = new Date(today);
           theday.setDate(today.getDate() + dayIndex)
+          let r = theday.getMonth();
           let p = theday.getDate();
           let g = theday.getDay();
-          let r = theday.getMonth();
           return <div key={p + dayIndex}>
-            <h1>{p}</h1>
-            <p>{Weekdays[g]}</p>
-            <p>{MonthNames[r]}</p>
+            <span>   {Weekdays[g]} {MonthNames[r]} {p}  </span>
+            <button onClick={() => setDaySelected(true)}>GO TO DAY</button>
           </div>
 
         })}

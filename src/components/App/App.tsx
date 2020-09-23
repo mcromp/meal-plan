@@ -12,10 +12,10 @@ const App: React.FC = () => {
         <Route exact path="/">
           <Login />
         </Route>
-        <Route exact path="/week">
+        <Route path="/week">
           <Week />
         </Route>
-        <Route exact path="/date">
+        <Route path="/:date">
           <Day />
         </Route>
       </Switch>

@@ -8,13 +8,16 @@ import FilterButtonList from "../FilterBar/FilterBar";
 import MenuBoard from "../Menu/MenuBoard";
 import { fetchMenuList, MenuState } from "../../redux/fooddata";
 import { RootState } from "../../redux";
+import { Redirect, useParams } from 'react-router-dom'
+import { User } from "../../redux/users/users";
 import './Day.css'
-
 
 const Day = () => {
   const dispatch = useDispatch()
+  const currentUser = useSelector<RootState, User | null>(state => state.currentUser)
   const calendar = useSelector<RootState, CalendarItem[]>(state => state.calendar)
   const { data: menuList, loading, error } = useSelector<RootState, MenuState>(state => state.menuList)
+  const day: string = useParams()
 
   useEffect(() => {
     dispatch(fetchMenuList())
@@ -22,7 +25,6 @@ const Day = () => {
 
 
   const addItemToCalendar = (id: string, amount: number) => {
-    const day = "2020-05-13"
     const newCalendarItem: CalendarItem = { id, quantity: amount, day };
     dispatch(addCalendarItem(newCalendarItem))
   };
@@ -40,33 +42,35 @@ const Day = () => {
     else dispatch(modifyCalendarItemQuantity(selectedItemIndex, updatedQuantity))
   }
 
+  if (!currentUser) { return <Redirect to='/' /> }
+  if (loading) { return <span>loading...</span> }
+
   return (
     <div style={{ backgroundColor: "pink" }}>
-      {loading ? <span>loading...</span> :
-        <>
-          {
-            calendar ? calendar.map((calendarItem: any) => (
-              <CheckoutBoardItem
-                key={calendarItem.id}
-                calendarItem={calendarItem}
-                handleItemCardClick={handleItemCardClick}
-              />
-            )) : null}
+      <>
+        {
+          calendar ? calendar.map((calendarItem: any) => (
+            <CheckoutBoardItem
+              key={calendarItem.id}
+              calendarItem={calendarItem}
+              handleItemCardClick={handleItemCardClick}
+            />
+          )) : null}
 
-          <button>SUBMIT</button>
+        <button>SUBMIT</button>
 
-          <SearchBar
-            menuList={menuList}
-            calendar={calendar}
-            addToCalendar={addItemToCalendar} />
+        <SearchBar
+          menuList={menuList}
+          calendar={calendar}
+          addToCalendar={addItemToCalendar} />
 
-          <FilterButtonList />
+        <FilterButtonList />
 
-          <MenuBoard
-            handleClick={handleItemCardClick}
-            calendar={calendar} />
-        </>
-      }
+        <MenuBoard
+          handleClick={handleItemCardClick}
+          calendar={calendar} />
+      </>
+
     </div>
 
   );
