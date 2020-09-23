@@ -1,4 +1,8 @@
 import React, { useEffect } from 'react'
+import { useSelector } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { RootState } from '../../redux';
+import { User } from '../../redux/users/users';
 import './Week.css'
 
 
@@ -28,23 +32,30 @@ function Week() {
 
 
   }, [])
-  return (
-    <div className="parent">
-      {weekdayz.map((_, dayIndex) => {
-        console.log(dayIndex)
-        let theday = new Date(today);
-        theday.setDate(today.getDate() + dayIndex)
-        let p = theday.getDate();
-        let g = theday.getDay();
-        let r = theday.getMonth();
-        return <div key={p + dayIndex}>
-          <h1>{p}</h1>
-          <p>{Weekdays[g]}</p>
-          <p>{MonthNames[r]}</p>
-        </div>
+  const currentUser = useSelector<RootState, User | null>(state => state.currentUser)
 
-      })}
-    </div>
+  if (!currentUser) { return <Redirect to='/' /> }
+
+  return (
+    <>
+      <h1>heyya {currentUser.username}</h1>
+      <div className="parent">
+        {weekdayz.map((_, dayIndex) => {
+          console.log(dayIndex)
+          let theday = new Date(today);
+          theday.setDate(today.getDate() + dayIndex)
+          let p = theday.getDate();
+          let g = theday.getDay();
+          let r = theday.getMonth();
+          return <div key={p + dayIndex}>
+            <h1>{p}</h1>
+            <p>{Weekdays[g]}</p>
+            <p>{MonthNames[r]}</p>
+          </div>
+
+        })}
+      </div>
+    </>
   );
 }
 

@@ -5,6 +5,7 @@ import { User, usersGet, UsersState } from '../../redux/users/users';
 import { useDispatch, useSelector } from 'react-redux';
 import { signupUserFetch } from '../../redux/users/userSignup';
 import { setCurrentUser } from '../../redux/users/userCurrent';
+import { Redirect } from 'react-router-dom';
 
 
 const Login = () => {
@@ -13,11 +14,12 @@ const Login = () => {
   const [value, setValue] = useState<string>("")
   const [selectedUser, setSelectedUser] = useState<User | null>(null)
   const [message, setMessage] = useState<string | null>(null)
+  const [loggedIn, setLoggedIn] = useState<boolean>(false)
+
   const usersState = useSelector<RootState, UsersState>(state => state.usersState)
   const deleteStateMessage = useSelector<RootState, string | null>(state => state.userDelete.message)
   const signupStateMessage = useSelector<RootState, string | null>(state => state.userSignup.message)
-  const currentUser = useSelector<RootState, User | {}>(state => state.currentUser)
-
+  const currentUser = useSelector<RootState, User | null>(state => state.currentUser)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -72,11 +74,14 @@ const Login = () => {
   const handleSignin = () => {
     if (selectedUser) dispatch(setCurrentUser(selectedUser))
     console.log(`BEEP BOOP ${value} SIGNED IN`)
+    setLoggedIn(true)
     setSelectedUser(null)
     setValue("")
   }
 
   const checkValue = value.length === 0;
+
+  if (loggedIn || currentUser) { return <Redirect to='/week' /> }
 
   return (
     <>

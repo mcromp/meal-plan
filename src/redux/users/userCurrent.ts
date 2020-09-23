@@ -15,7 +15,7 @@ export interface SetCurrentUser {
 type currentUserActions = SetCurrentUser;
 
 const currentUserReducer = (
- currentUser: User | {} = {},
+ currentUser: User | null = null,
  action: currentUserActions
 ) => {
  switch (action.type) {
