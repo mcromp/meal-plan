@@ -1,6 +1,6 @@
 import { combineReducers, createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import calendarReducer from "./calendar";
+import calendarReducer from "./calendar/calendar";
 import favListReducer from "./favList";
 import filterReducer from "./filterList";
 import { menuReducer } from "./menuList";
