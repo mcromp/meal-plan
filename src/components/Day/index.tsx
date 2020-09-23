@@ -11,6 +11,7 @@ import { RootState } from "../../redux";
 import { Redirect, useParams } from 'react-router-dom'
 import { User } from "../../redux/users/users";
 import './Day.css'
+import { calendarPostFetch, CalendarPostState } from "../../redux/calendar/calendarPost";
 
 
 // REFACTOR THISSSSSSS
@@ -20,23 +21,25 @@ type DayParam = {
 
 const Day = () => {
   const dispatch = useDispatch()
+  const [calendarDay, setCalendarDay] = useState<CalendarItem[]>()
+  const [calendarDaySubmitted, setCalendarDaySubmitted] = useState<boolean>(false)
   const currentUser = useSelector<RootState, User | null>(state => state.currentUser)
   const calendar = useSelector<RootState, CalendarItem[]>(state => state.calendar)
-  const [calendarDay, setCalendarDay] = useState<CalendarItem[]>()
-  const { data: menuList, loading, error } = useSelector<RootState, MenuState>(state => state.menuList)
+  const { data: menuList, loading: menuLoading, error: menuErr } = useSelector<RootState, MenuState>(state => state.menuList)
+  const { loading: postLoading, error: postErr } = useSelector<RootState, CalendarPostState>(state => state.calendarPost)
   const params: DayParam = useParams()
+
 
   useEffect(() => {
     dispatch(fetchMenuList())
   }, [dispatch])
 
+  //just for testing
   useEffect(() => {
-    // console.log(calendarDay)
     console.log(calendar)
   }, [])
 
   useEffect(() => {
-    console.log(calendar)
     const calendarFiltered = calendar.filter(item => item.user === currentUser?.id && item.day === params.day)
     setCalendarDay(calendarFiltered)
   }, [calendar])
@@ -63,12 +66,14 @@ const Day = () => {
   }
 
   const handleSubmit = () => {
-
+    dispatch(calendarPostFetch(calendar))
+    setCalendarDaySubmitted(true)
   }
 
   if (!currentUser) { return <Redirect to='/' /> }
-  if (loading) { return <span>Loading...</span> }
-  if (error) { return <span>{error}</span> }
+  if (calendarDaySubmitted) { setCalendarDaySubmitted(false); return <Redirect to='/week' /> }
+  if (menuLoading || postLoading) { return <span>Loading...</span> }
+  if (menuErr || postErr) { return <span>Error: {menuErr || postErr}</span> }
 
   return (
     <div style={{ backgroundColor: "pink" }}>
