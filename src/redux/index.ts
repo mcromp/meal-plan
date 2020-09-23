@@ -1,6 +1,7 @@
 import { combineReducers, createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import calendarReducer from "./calendar/calendar";
+import { calendarGetReducer } from "./calendar/calendarGet";
 import { calendarPostReducer } from "./calendar/calendarPost";
 import favListReducer from "./favList";
 import filterReducer from "./filterList";
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
  userSignup: userSignupReducer,
  currentUser: currentUserReducer,
  calendarPost: calendarPostReducer,
+ calendarGet: calendarGetReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

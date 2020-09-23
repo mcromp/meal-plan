@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 import { CalendarItem } from "../../types";
-import { APIURL } from "../apiUrl";
+import { CALENDAR_URL } from "./calendarGet";
 
 export const FETCH_CALENDAR_POST_REQUEST = "FETCH_CALENDAR_POST_REQUEST";
 export const FETCH_CALENDAR_POST_SUCCESS = "FETCH_CALENDAR_POST_SUCCESS";
@@ -37,7 +37,7 @@ export const calendarPostFetch = (calendar: CalendarItem[]) => {
   dispatch({
    type: FETCH_CALENDAR_POST_REQUEST,
   });
-  fetch(APIURL + "calendar/add", {
+  fetch(CALENDAR_URL + "add", {
    method: "POST",
    body: JSON.stringify({ calendar }),
    headers: {

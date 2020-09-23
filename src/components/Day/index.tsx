@@ -12,6 +12,7 @@ import { Redirect, useParams } from 'react-router-dom'
 import { User } from "../../redux/users/users";
 import './Day.css'
 import { calendarPostFetch, CalendarPostState } from "../../redux/calendar/calendarPost";
+import { calendarGet, CalendarState } from "../../redux/calendar/calendarGet";
 
 
 // REFACTOR THISSSSSSS
@@ -24,7 +25,10 @@ const Day = () => {
   const [calendarDay, setCalendarDay] = useState<CalendarItem[]>()
   const [calendarDaySubmitted, setCalendarDaySubmitted] = useState<boolean>(false)
   const currentUser = useSelector<RootState, User | null>(state => state.currentUser)
-  const calendar = useSelector<RootState, CalendarItem[]>(state => state.calendar)
+  const [calendarX, setCalendarX] = useState<CalendarItem[]>()
+  // const calendar = useSelector<RootState, CalendarItem[]>(state => state.calendar)
+  const { calendar, loading: calendarLoading, error: calendarErr } = useSelector<RootState, CalendarState>(state => state.calendarGet)
+
   const { data: menuList, loading: menuLoading, error: menuErr } = useSelector<RootState, MenuState>(state => state.menuList)
   const { loading: postLoading, error: postErr } = useSelector<RootState, CalendarPostState>(state => state.calendarPost)
   const params: DayParam = useParams()
@@ -32,6 +36,7 @@ const Day = () => {
 
   useEffect(() => {
     dispatch(fetchMenuList())
+    dispatch(calendarGet())
   }, [dispatch])
 
   //just for testing
