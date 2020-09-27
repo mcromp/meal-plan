@@ -20,18 +20,22 @@ type DayParam = {
   day: string
 }
 
-const Day = () => {
+const Day: React.FC<any> = ({ calendar }) => {
   const dispatch = useDispatch()
   const [calendarDay, setCalendarDay] = useState<CalendarItem[]>()
   const [calendarDaySubmitted, setCalendarDaySubmitted] = useState<boolean>(false)
   const currentUser = useSelector<RootState, User | null>(state => state.currentUser)
   const [calendarX, setCalendarX] = useState<CalendarItem[]>()
   // const calendar = useSelector<RootState, CalendarItem[]>(state => state.calendar)
-  const { calendar, loading: calendarLoading, error: calendarErr } = useSelector<RootState, CalendarState>(state => state.calendarGet)
 
   const { data: menuList, loading: menuLoading, error: menuErr } = useSelector<RootState, MenuState>(state => state.menuList)
   const { loading: postLoading, error: postErr } = useSelector<RootState, CalendarPostState>(state => state.calendarPost)
+
   const params: DayParam = useParams()
+
+  useEffect(() => {
+    dispatch(calendarGet())
+  }, [])
 
 
   useEffect(() => {
@@ -88,8 +92,7 @@ const Day = () => {
             <CheckoutBoardItem
               key={calendarItem.id}
               calendarItem={calendarItem}
-              handleItemCardClick={handleItemCardClick}
-            />
+              handleItemCardClick={handleItemCardClick} />
           )) : null}
 
         <button onClick={handleSubmit}>SUBMIT</button>

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { RootState } from '../../redux';
+import { calendarGet, CalendarState } from '../../redux/calendar/calendarGet';
 import { User } from '../../redux/users/users';
 import './Week.css'
 
@@ -24,6 +25,14 @@ let daysInMonth = new Date(currentYear, currentMonth, 32).getDate()
 let weekdayz: number[] = new Array(7).fill(null)
 
 function Week() {
+  const currentUser = useSelector<RootState, User | null>(state => state.currentUser)
+  const [daySelected, setDaySelected] = useState<boolean>(false)
+  const { calendar, loading: calendarLoading, error: calendarErr } = useSelector<RootState, CalendarState>(state => state.calendarGet)
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(calendarGet())
+  }, [])
+
   useEffect(() => {
     const tomorrow = new Date(today)
     tomorrow.setDate(tomorrow.getDate() + 1)
@@ -32,8 +41,6 @@ function Week() {
 
 
   }, [])
-  const currentUser = useSelector<RootState, User | null>(state => state.currentUser)
-  const [daySelected, setDaySelected] = useState<boolean>(false)
 
   if (!currentUser) { return <Redirect to='/' /> }
   if (daySelected) {
