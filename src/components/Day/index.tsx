@@ -20,14 +20,14 @@ type DayParam = {
   day: string
 }
 
-const Day: React.FC<any> = ({ calendar }) => {
+const Day: React.FC<any> = ({ calendar: any }) => {
   const dispatch = useDispatch()
   const [calendarDay, setCalendarDay] = useState<CalendarItem[]>()
   const [calendarDaySubmitted, setCalendarDaySubmitted] = useState<boolean>(false)
   const currentUser = useSelector<RootState, User | null>(state => state.currentUser)
   const [calendarX, setCalendarX] = useState<CalendarItem[]>()
   // const calendar = useSelector<RootState, CalendarItem[]>(state => state.calendar)
-
+  const calendar: any = [];
   const { data: menuList, loading: menuLoading, error: menuErr } = useSelector<RootState, MenuState>(state => state.menuList)
   const { loading: postLoading, error: postErr } = useSelector<RootState, CalendarPostState>(state => state.calendarPost)
 
@@ -49,7 +49,7 @@ const Day: React.FC<any> = ({ calendar }) => {
   }, [])
 
   useEffect(() => {
-    const calendarFiltered = calendar.filter(item => item.user === currentUser?.id && item.day === params.day)
+    const calendarFiltered = calendar.filter((item: any) => item.user === currentUser?.id && item.day === params.day)
     setCalendarDay(calendarFiltered)
   }, [calendar])
 

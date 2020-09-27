@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { USERURL } from "./users";
+import { USERURL } from "./USERURL";
 
 export const FETCH_USER_SIGNUP_REQUEST = "FETCH_USER_SIGNUP_REQUEST";
 export const FETCH_USER_SIGNUP_SUCCESS = "FETCH_USER_SIGNUP_SUCCESS";
@@ -49,7 +49,7 @@ export const signupUserFetch = (username: string) => {
   dispatch({
    type: FETCH_USER_SIGNUP_REQUEST,
   });
-  fetch(USERURL + "signup", {
+  fetch("http://localhost:5000/users/signup", {
    method: "POST",
    body: JSON.stringify({ username }),
    headers: {
@@ -58,7 +58,7 @@ export const signupUserFetch = (username: string) => {
   })
    .then((res) => res.json())
    .then((res) => {
-    const newUser = res.newUser.username;
+    const newUser = res.username;
     dispatch({
      type: FETCH_USER_SIGNUP_SUCCESS,
      payload: `${newUser} added successfully`,

@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
 import { User } from "./users";
-import { APIURL } from "../apiUrl";
+import { USERURL } from "./USERURL";
 
 export const FETCH_USER_DELETE_REQUEST = "FETCH_USER_DELETE_REQUEST";
 export const FETCH_USER_DELETE_SUCCESS = "FETCH_USER_DELETE_SUCCESS";
@@ -35,10 +35,6 @@ export interface UserDeleteState {
  error: string;
 }
 
-interface DeleteRes {
- deletedUser: User;
-}
-
 const initalState: UserDeleteState = {
  loading: false,
  message: null,
@@ -54,19 +50,22 @@ export const deleteUserFetch = (id: string) => {
   dispatch({
    type: FETCH_USER_DELETE_REQUEST,
   });
-  fetch(APIURL + id, {
+  fetch(USERURL, {
    method: "DELETE",
+   body: JSON.stringify({ id }),
+   headers: {
+    "Content-Type": "application/json",
+   },
   })
    .then((res) => res.json())
-   .then((data: DeleteRes) => {
-    const resUsername = data.deletedUser.username;
+   .then((data: User) => {
+    const resUsername = data.username;
     dispatch({
      type: FETCH_USER_DELETE_SUCCESS,
      payload: `${resUsername} deleted successfully`,
     });
    })
    .catch((err) => {
-    console.error(err);
     dispatch({
      type: FETCH_USER_DELETE_FAILURE,
      payload: err.message,

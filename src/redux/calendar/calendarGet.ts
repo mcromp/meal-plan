@@ -55,7 +55,6 @@ export const calendarGet = () => {
   fetch(CALENDAR_URL)
    .then((res) => res.json())
    .then((data: CalendarJSON[]) => {
-    console.log(data);
     const calendar: CalendarItem[] = data.map((calendarItem) => {
      const {
       foodItemId: id,

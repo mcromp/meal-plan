@@ -49,6 +49,7 @@ const Login = () => {
     e.preventDefault();
     setConfirmDelete(false)
     if (selectedUser) deleteUser(selectedUser.id)
+    if (selectedUser) console.log(selectedUser.id)
     setSelectedUser(null)
     setValue("")
   }
