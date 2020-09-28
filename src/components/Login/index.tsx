@@ -49,7 +49,6 @@ const Login = () => {
     e.preventDefault();
     setConfirmDelete(false)
     if (selectedUser) deleteUser(selectedUser.id)
-    if (selectedUser) console.log(selectedUser.id)
     setSelectedUser(null)
     setValue("")
   }
@@ -74,7 +73,6 @@ const Login = () => {
 
   const handleSignin = () => {
     if (selectedUser) dispatch(setCurrentUser(selectedUser))
-    console.log(`BEEP BOOP ${value} SIGNED IN`)
     setLoggedIn(true)
     setSelectedUser(null)
     setValue("")
