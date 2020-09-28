@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { USERURL } from "./USERURL";
+import { USER_URL } from "../apiUrl";
 
 export interface UserJSON {
  _id: string;
@@ -53,7 +53,7 @@ export const usersGet = () => {
   dispatch({
    type: FETCH_USERS_REQUEST,
   });
-  fetch(USERURL)
+  fetch(USER_URL)
    .then((res) => res.json())
    .then((data: UserJSON[]) => {
     const users: User[] = data.map((user) => {

@@ -1,7 +1,5 @@
 import { Dispatch } from "redux";
-import { APIURL } from "../apiUrl";
-
-export const CALENDAR_URL = APIURL + "calendar/";
+import { CALENDAR_URL } from "../apiUrl";
 
 export interface CalendarItem {
  menuItems: MenuItems[];

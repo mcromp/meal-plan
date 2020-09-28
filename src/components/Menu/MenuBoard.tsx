@@ -1,10 +1,10 @@
-import { MenuItem, FilterId, Filter } from "../../types";
 import React, { useState, useEffect } from "react";
 import MenuCard from "./MenuCard";
 import { MenuBoardProps } from "./types";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux";
-import { fetchMenuList } from "../../redux/menuList";
+import { fetchMenuList, MenuItem } from "../../redux/menuList/menuList";
+import { Filter, FilterId } from "../FilterBar/types";
 
 
 const MenuBoard: React.FC<MenuBoardProps> = ({
@@ -55,21 +55,23 @@ const MenuBoard: React.FC<MenuBoardProps> = ({
   }, [filterList, menuList, favList]);
 
 
-  const disableCheck = (id: string): boolean => {
-    const filtedItem = calendar.filter((item) => item.id === id);
-    return !filtedItem[0];
-  };
+  // const disableCheck = (id: string): boolean => {
+  //   const filtedItem = calendar.filter((item) => item.id === id);
+  //   return !filtedItem[0];
+  // };
 
   return (
     <div className="grid_i">
       {cardList ? cardList.map((item: MenuItem) => (
-        <MenuCard
-          key={item.ID}
-          item={item}
-          addCalendar={handleClick}
-          disableCheck={disableCheck}
-        />
-      )) : null}
+        // <MenuCard
+        //   key={item.ID}
+        //   item={item}
+        //   addCalendar={handleClick}
+        //   disableCheck={disableCheck}
+        // />
+        <p>fix this</p>
+      )
+      ) : null}
     </div>
   );
 };

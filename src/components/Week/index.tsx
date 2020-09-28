@@ -7,7 +7,6 @@ import { clearCurrentUser } from '../../redux/users/userCurrent';
 import { User } from '../../redux/users/users';
 import './Week.css'
 
-
 enum Weekdays {
   "Sun", "Mon", "Tues", "Wed", "Thur", "Fri", "Sat",
 }
@@ -17,10 +16,6 @@ enum MonthNames {
 }
 
 let today: Date = new Date();
-
-let currentYear = today.getFullYear();
-let currentMonth = today.getMonth();
-
 const calendarWeek: number[] = new Array(7).fill(null)
 
 function Week() {
@@ -30,7 +25,6 @@ function Week() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(calendarGet())
-    console.log(calendar)
   }, [])
 
   useEffect(() => {
@@ -46,26 +40,31 @@ function Week() {
   if (daySelected) { return <Redirect to={`/${daySelected}`} /> }
   return (
     <>
-      <div className="user-bar">
-        <h3>Logged in as: {currentUser.username}</h3>
-        <button onClick={handleSignout}>Sign Out</button>
-      </div>
-
-      <div className="parent">
-        {calendarWeek.map((_, dayIndex) => {
-          const theday = new Date(today);
-          theday.setDate(today.getDate() + dayIndex)
-          const month = theday.getMonth();
-          const date = theday.getDate();
-          const day = theday.getDay();
-          const year = theday.getFullYear();
-          const dateId: string = `${year}-${month}-${date}`
-          return <div key={dateId}>
-            <span>{Weekdays[day]} {MonthNames[month]} {date}  </span>
-            <button onClick={() => setDaySelected(dateId)}>GO TO DAY</button>
+      {calendarLoading ? <span>loading</span>
+        :
+        <>
+          <div className="user-bar">
+            <h3>Logged in as: {currentUser.username}</h3>
+            <button onClick={handleSignout}>Sign Out</button>
           </div>
-        })}
-      </div>
+
+          <div className="parent">
+            {calendarWeek.map((_, dayIndex) => {
+              const theday = new Date(today);
+              theday.setDate(today.getDate() + dayIndex)
+              const month = theday.getMonth();
+              const date = theday.getDate();
+              const day = theday.getDay();
+              const year = theday.getFullYear();
+              const dateId: string = `${year}-${month}-${date}`
+              return <div key={dateId}>
+                <span>{Weekdays[day]} {MonthNames[month]} {date}  </span>
+                <button onClick={() => setDaySelected(dateId)}>GO TO DAY</button>
+              </div>
+            })}
+          </div>
+        </>
+      }
     </>
   );
 }

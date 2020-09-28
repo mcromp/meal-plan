@@ -1,5 +1,7 @@
 import React, { useState, useRef, useLayoutEffect } from "react";
-import { CalendarItem, MenuItem } from "../../types";
+import { CalendarItem } from "../../redux/calendar/calendarGet";
+import { MenuItem } from "../../redux/menuList/menuList";
+
 
 
 interface SearchBarProps {

@@ -1,3 +1,14 @@
-import { Filter } from "../../types";
+export type FilterId =
+ | "BURGERSANDWICH"
+ | "BEVERAGE"
+ | "CHICKENFISH"
+ | "DESSERTSHAKE"
+ | "SNACKSIDE"
+ | "BREAKFAST"
+ | "FAVORITES";
 
-export interface FilterButtonListProps {}
+export interface Filter {
+ id: FilterId;
+ name: string;
+ selected: boolean;
+}

@@ -1,4 +1,4 @@
-import { Filter } from "../types";
+import { Filter } from "../components/FilterBar/types";
 
 const initalState: Filter[] = [
  { id: "FAVORITES", name: "User Favorites", selected: false },

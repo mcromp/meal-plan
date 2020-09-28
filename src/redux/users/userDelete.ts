@@ -1,6 +1,6 @@
 import { Dispatch } from "redux";
+import { USER_URL } from "../apiUrl";
 import { User } from "./users";
-import { USERURL } from "./USERURL";
 
 export const FETCH_USER_DELETE_REQUEST = "FETCH_USER_DELETE_REQUEST";
 export const FETCH_USER_DELETE_SUCCESS = "FETCH_USER_DELETE_SUCCESS";
@@ -50,7 +50,7 @@ export const deleteUserFetch = (id: string) => {
   dispatch({
    type: FETCH_USER_DELETE_REQUEST,
   });
-  fetch(USERURL, {
+  fetch(USER_URL, {
    method: "DELETE",
    body: JSON.stringify({ id }),
    headers: {

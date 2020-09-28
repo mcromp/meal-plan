@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addCalendarItem, removeCalendarItemById, modifyCalendarItemQuantity } from "../../redux/calendar/calendar";
-import { CalendarItem } from "../../types";
+// import { addCalendarItem, removeCalendarItemById, modifyCalendarItemQuantity } from "../../redux/calendar/calendar";
 import CheckoutBoardItem from "../CheckoutBoard/CheckoutBoard";
 import SearchBar from "../SearchBar/SearchBar";
 import FilterButtonList from "../FilterBar/FilterBar";
 import MenuBoard from "../Menu/MenuBoard";
-import { fetchMenuList, MenuState } from "../../redux/menuList";
+import { fetchMenuList, MenuState } from "../../redux/menuList/menuList";
 import { RootState } from "../../redux";
 import { Redirect, useParams } from 'react-router-dom'
 import { User } from "../../redux/users/users";
 import './Day.css'
 import { calendarPostFetch, CalendarPostState } from "../../redux/calendar/calendarPost";
-import { calendarGet, CalendarState } from "../../redux/calendar/calendarGet";
+import { calendarGet, CalendarItem, CalendarState } from "../../redux/calendar/calendarGet";
 
 
 // REFACTOR THISSSSSSS
@@ -54,25 +53,25 @@ const Day: React.FC<any> = ({ calendar: any }) => {
   }, [calendar])
 
 
-  const addItemToCalendar = (id: string, amount: number) => {
-    let user: string = "";
-    if (currentUser) user = currentUser.id
-    const newCalendarItem: CalendarItem = { id, quantity: amount, day: params.day, user };
-    dispatch(addCalendarItem(newCalendarItem))
-  };
+  // const addItemToCalendar = (id: string, amount: number) => {
+  //   let user: string = "";
+  //   if (currentUser) user = currentUser.id
+  //   const newCalendarItem: CalendarItem = { id, quantity: amount, day: params.day, user };
+  //   dispatch(addCalendarItem(newCalendarItem))
+  // };
 
-  const handleItemCardClick = (id: string, amount: number) => {
-    const selectedItemIndex = calendar.findIndex((item: CalendarItem) => item.id === id);
-    if (selectedItemIndex === -1) {
-      if (amount > 0) addItemToCalendar(id, amount);
-    } else modifyQuantityOfCalendarItem(selectedItemIndex, id, amount)
-  };
+  // const handleItemCardClick = (id: string, amount: number) => {
+  //   const selectedItemIndex = calendar.findIndex((item: CalendarItem) => item.id === id);
+  //   if (selectedItemIndex === -1) {
+  //     if (amount > 0) addItemToCalendar(id, amount);
+  //   } else modifyQuantityOfCalendarItem(selectedItemIndex, id, amount)
+  // };
 
-  const modifyQuantityOfCalendarItem = (selectedItemIndex: number, id: string, amount: number) => {
-    const updatedQuantity = calendar[selectedItemIndex].quantity + amount;
-    if (updatedQuantity <= 0) dispatch(removeCalendarItemById(id))
-    else dispatch(modifyCalendarItemQuantity(selectedItemIndex, updatedQuantity))
-  }
+  // const modifyQuantityOfCalendarItem = (selectedItemIndex: number, id: string, amount: number) => {
+  //   const updatedQuantity = calendar[selectedItemIndex].quantity + amount;
+  //   if (updatedQuantity <= 0) dispatch(removeCalendarItemById(id))
+  //   else dispatch(modifyCalendarItemQuantity(selectedItemIndex, updatedQuantity))
+  // }
 
   const handleSubmit = () => {
     dispatch(calendarPostFetch(calendar))
@@ -87,26 +86,26 @@ const Day: React.FC<any> = ({ calendar: any }) => {
   return (
     <div style={{ backgroundColor: "pink" }}>
       <>
-        {
+        {/* {
           calendarDay ? calendarDay.map((calendarItem: CalendarItem) => (
             <CheckoutBoardItem
               key={calendarItem.id}
               calendarItem={calendarItem}
               handleItemCardClick={handleItemCardClick} />
-          )) : null}
+          )) : null} */}
 
         <button onClick={handleSubmit}>SUBMIT</button>
 
-        <SearchBar
+        {/* <SearchBar
           menuList={menuList}
           calendar={calendar}
-          addToCalendar={addItemToCalendar} />
+          addToCalendar={addItemToCalendar} /> */}
 
         <FilterButtonList />
 
-        <MenuBoard
+        {/* <MenuBoard
           handleClick={handleItemCardClick}
-          calendar={calendar} />
+          calendar={calendar} /> */}
       </>
 
     </div>

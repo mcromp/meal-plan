@@ -1,4 +1,5 @@
-import { MenuItem, CalendarItem } from "../../types";
+import { CalendarItem } from "../../redux/calendar/calendarGet";
+import { MenuItem } from "../../redux/menuList/menuList";
 
 export interface MenuCardProps {
  item: MenuItem;

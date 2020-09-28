@@ -1,11 +1,10 @@
 import { combineReducers, createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import calendarReducer from "./calendar/calendar";
 import { calendarGetReducer } from "./calendar/calendarGet";
 import { calendarPostReducer } from "./calendar/calendarPost";
 import favListReducer from "./favList";
 import filterReducer from "./filterList";
-import { menuReducer } from "./menuList";
+import { menuReducer } from "./menuList/menuList";
 import currentUserReducer from "./users/userCurrent";
 import { userDeleteReducer } from "./users/userDelete";
 import { userReducer } from "./users/users";
@@ -13,7 +12,6 @@ import { userSignupReducer } from "./users/userSignup";
 // import logger from "redux-logger";
 
 const rootReducer = combineReducers({
- calendar: calendarReducer,
  favList: favListReducer,
  filterList: filterReducer,
  menuList: menuReducer,
