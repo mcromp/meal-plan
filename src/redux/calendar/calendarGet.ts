@@ -1,16 +1,24 @@
 import { Dispatch } from "redux";
-import { CalendarItem } from "../../types";
 import { APIURL } from "../apiUrl";
 
 export const CALENDAR_URL = APIURL + "calendar/";
 
+export interface CalendarItem {
+ menuItems: MenuItems[];
+ date: string;
+ userId: string;
+}
+
+export interface MenuItems {
+ foodId: string;
+ quantity: number;
+}
+
 export interface CalendarJSON {
  _id: string;
- foodItemId: string;
- dateAdded: string;
- quantity: number;
+ menuItems: MenuItems[];
+ date: string;
  userId: string;
- id?: string;
  __v: number;
 }
 
@@ -56,13 +64,8 @@ export const calendarGet = () => {
    .then((res) => res.json())
    .then((data: CalendarJSON[]) => {
     const calendar: CalendarItem[] = data.map((calendarItem) => {
-     const {
-      foodItemId: id,
-      quantity,
-      dateAdded: day,
-      userId: user,
-     } = calendarItem;
-     return { id, quantity, day, user };
+     const { userId, date } = calendarItem;
+     return { userId, menuItems: [...calendarItem.menuItems], date };
     });
     dispatch({
      type: CALENDAR_GET_SUCCESS,

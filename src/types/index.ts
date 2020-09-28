@@ -6,13 +6,6 @@ export interface MenuItem {
  ID: string;
 }
 
-export interface CalendarItem {
- id: string;
- quantity: number;
- day: string;
- user: string;
-}
-
 export type FilterId =
  | "BURGERSANDWICH"
  | "BEVERAGE"
