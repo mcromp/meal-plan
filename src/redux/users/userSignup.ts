@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { USER_URL_SIGNUP } from "../apiUrl";
+import { USER_URL_SIGNUP } from "../urls/apiUrl";
 
 export const FETCH_USER_SIGNUP_REQUEST = "FETCH_USER_SIGNUP_REQUEST";
 export const FETCH_USER_SIGNUP_SUCCESS = "FETCH_USER_SIGNUP_SUCCESS";

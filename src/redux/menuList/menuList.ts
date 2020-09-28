@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { MENU_URL } from "../apiUrl";
+import { MENU_URL } from "../urls/apiUrl";
 
 export interface MenuItem {
  ITEM: string;

@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { USER_URL } from "../apiUrl";
+import { USER_URL } from "../urls/apiUrl";
 
 export interface UserJSON {
  _id: string;

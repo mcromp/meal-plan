@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { USER_URL } from "../apiUrl";
+import { USER_URL } from "../urls/apiUrl";
 import { User } from "./users";
 
 export const FETCH_USER_DELETE_REQUEST = "FETCH_USER_DELETE_REQUEST";

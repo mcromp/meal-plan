@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { CALENDAR_URL_ADD } from "../apiUrl";
+import { CALENDAR_URL_ADD } from "../urls/apiUrl";
 import { CalendarItem } from "./calendarGet";
 
 export const FETCH_CALENDAR_POST_REQUEST = "FETCH_CALENDAR_POST_REQUEST";
