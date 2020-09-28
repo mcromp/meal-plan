@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { signupUserFetch } from '../../redux/users/userSignup';
 import { setCurrentUser } from '../../redux/users/userCurrent';
 import { Redirect } from 'react-router-dom';
+import { fetchMenuList, MenuItem } from '../../redux/menuList/menuList';
 
 
 const Login = () => {
@@ -20,7 +21,10 @@ const Login = () => {
   const deleteStateMessage = useSelector<RootState, string | null>(state => state.userDelete.message)
   const signupStateMessage = useSelector<RootState, string | null>(state => state.userSignup.message)
   const currentUser = useSelector<RootState, User | null>(state => state.currentUser)
+  const menuList = useSelector<RootState, MenuItem[]>(state => state.menuList.data)
+
   const dispatch = useDispatch()
+
 
   // useEffect(() => {
   //   console.log(currentUser)
@@ -28,7 +32,9 @@ const Login = () => {
 
   useEffect(() => {
     dispatch(usersGet())
+    dispatch(fetchMenuList())
   }, [dispatch])
+
 
   useEffect(() => {
     if (deleteStateMessage) handleMessage(deleteStateMessage)

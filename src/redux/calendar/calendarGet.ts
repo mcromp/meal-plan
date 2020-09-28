@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { CALENDAR_URL } from "../apiUrl";
+import { CALENDAR_URL_GETMANY } from "../apiUrl";
 
 export interface CalendarItem {
  menuItems: MenuItems[];
@@ -53,12 +53,18 @@ const initalState: CalendarState = {
  error: "",
 };
 
-export const calendarGet = () => {
+export const calendarGet = (dateList: string[], id: string) => {
  return (dispatch: Dispatch<CalendarGetAction>) => {
   dispatch({
    type: CALENDAR_GET_REQUEST,
   });
-  fetch(CALENDAR_URL)
+  fetch(CALENDAR_URL_GETMANY + id, {
+   method: "POST",
+   body: JSON.stringify({ dateList }),
+   headers: {
+    "Content-Type": "application/json",
+   },
+  })
    .then((res) => res.json())
    .then((data: CalendarJSON[]) => {
     const calendar: CalendarItem[] = data.map((calendarItem) => {

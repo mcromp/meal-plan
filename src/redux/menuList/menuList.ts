@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { USER_MENU } from "../apiUrl";
+import { MENU_URL } from "../apiUrl";
 
 export interface MenuItem {
  ITEM: string;
@@ -40,7 +40,7 @@ export const fetchMenuList = () => {
   dispatch({
    type: FETCH_DATA_REQUEST,
   });
-  fetch(USER_MENU)
+  fetch(MENU_URL)
    .then((res) => res.json())
    .then((data: MenuItem[]) => {
     dispatch({

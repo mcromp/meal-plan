@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { RootState } from '../../redux';
-import { calendarGet, CalendarState } from '../../redux/calendar/calendarGet';
-import { clearCurrentUser } from '../../redux/users/userCurrent';
+import { calendarGet, CalendarItem, CalendarState } from '../../redux/calendar/calendarGet';
+import { MenuItem } from '../../redux/menuList/menuList';
+import { clearCurrentUser, setCurrentUser } from '../../redux/users/userCurrent';
 import { User } from '../../redux/users/users';
 import './Week.css'
 
@@ -24,6 +25,12 @@ interface WeekDay {
 
 }
 
+interface DayCardProps {
+  day: WeekDay,
+  calendar: CalendarItem[],
+  handleDateCardClick: (dateId: string) => void;
+}
+
 const generateWeekDays = () => {
   const today: Date = new Date();
   const emptyWeek: number[] = new Array(7).fill(null)
@@ -34,7 +41,7 @@ const generateWeekDays = () => {
     const day = theday.getDay();
     const date = String(theday.getDate())
     const year = String(theday.getFullYear())
-    const dateId: string = `${year}-${month}-${date}`
+    const dateId: string = `${date}-${month}-${year}`
     acc.push({
       month: MonthNames[month],
       day: Weekdays[day],
@@ -46,30 +53,71 @@ const generateWeekDays = () => {
   }, [])
 }
 
-function Week() {
+const DayCard: React.FC<DayCardProps> = ({ day, calendar, handleDateCardClick }) => {
+  const [calendarDisplay, setCalendarDisplay] = useState<CalendarItem | null>(null)
+  const menuList = useSelector<RootState, MenuItem[]>(state => state.menuList.data)
+
+  useEffect(() => {
+    const temp: CalendarItem | undefined = calendar.find(item => item.date === day.dateId)
+    if (temp)
+      setCalendarDisplay(temp)
+  }, [])
+  return (
+    <>
+      <span>{day.dateId}</span>
+
+      {calendarDisplay ? <div>
+        {calendarDisplay.menuItems.map(item => {
+          const menuItem = menuList.find(f => f.ID === item.foodId)
+          console.log(menuList)
+          return (<div key={item.foodId}>
+            <span>{menuItem?.ITEM}, {item.quantity}</span>
+          </div>)
+        })}
+      </div> : null}
+      <button onClick={() => handleDateCardClick(day.dateId)}>Click to edit</button>
+
+    </>
+  )
+}
+
+const Week = () => {
   const currentUser = useSelector<RootState, User | null>(state => state.currentUser)
   const [daySelected, setDaySelected] = useState<string | null>(null)
   const [week, setWeek] = useState<WeekDay[] | null>(null)
   const { calendar, loading: calendarLoading, error: calendarErr } = useSelector<RootState, CalendarState>(state => state.calendarGet)
+
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(calendarGet())
-  }, [])
+    console.log(calendar)
+  }, [calendar])
 
   useEffect(() => {
-    if (!week) {
-      const generatedWeek = generateWeekDays()
-      console.log(generatedWeek)
-      setWeek([...generatedWeek])
-    }
+    console.log(week)
   }, [week])
+
+  useEffect(() => {
+    const generatedWeek = generateWeekDays()
+    setWeek([...generatedWeek])
+    const dateList = generatedWeek.map(day => day.dateId).sort()
+    if (currentUser)
+      dispatch(calendarGet(dateList, currentUser.id))
+  }, [])
+
 
   const handleSignout = () => {
     dispatch(clearCurrentUser())
   }
 
+  const handleDateCardClick = (dateId: any) => {
+    setDaySelected(dateId)
+  }
+
+
+
   if (!currentUser) { return <Redirect to='/' /> }
   if (daySelected) { return <Redirect to={`/${daySelected}`} /> }
+
   return (
     <>
       {calendarLoading ? <span>loading</span>
@@ -81,12 +129,16 @@ function Week() {
           </div>
 
           <div className="parent">
-            {/* {
-              return <div key={dateId}>
-              <span>{Weekdays[day]} {MonthNames[month]} {date}  </span>
-              <button onClick={() => setDaySelected(dateId)}>GO TO DAY</button>
-            </div>
-            })} */}
+            {week ?
+              week.map(day => (
+                <DayCard
+                  key={day.dateId}
+                  day={day}
+                  handleDateCardClick={handleDateCardClick}
+                  calendar={calendar} />
+              ))
+              : null
+            }
           </div>
         </>
       }

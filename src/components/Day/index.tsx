@@ -33,13 +33,13 @@ const Day: React.FC<any> = ({ calendar: any }) => {
   const params: DayParam = useParams()
 
   useEffect(() => {
-    dispatch(calendarGet())
+    // dispatch(calendarGet())
   }, [])
 
 
   useEffect(() => {
     dispatch(fetchMenuList())
-    dispatch(calendarGet())
+    // dispatch(calendarGet())
   }, [dispatch])
 
   //just for testing
