@@ -15,12 +15,41 @@ enum MonthNames {
   "July", "Aug", "Sept", "Oct", "Nov", "Dec"
 }
 
-let today: Date = new Date();
-const calendarWeek: number[] = new Array(7).fill(null)
+interface WeekDay {
+  month: string;
+  day: string;
+  date: string;
+  year: string;
+  dateId: string;
+
+}
+
+const generateWeekDays = () => {
+  const today: Date = new Date();
+  const emptyWeek: number[] = new Array(7).fill(null)
+  return emptyWeek.reduce((acc: WeekDay[], _, dayIndex) => {
+    const theday = new Date(today);
+    theday.setDate(today.getDate() + dayIndex)
+    const month = theday.getMonth();
+    const day = theday.getDay();
+    const date = String(theday.getDate())
+    const year = String(theday.getFullYear())
+    const dateId: string = `${year}-${month}-${date}`
+    acc.push({
+      month: MonthNames[month],
+      day: Weekdays[day],
+      date,
+      year,
+      dateId
+    })
+    return acc
+  }, [])
+}
 
 function Week() {
   const currentUser = useSelector<RootState, User | null>(state => state.currentUser)
   const [daySelected, setDaySelected] = useState<string | null>(null)
+  const [week, setWeek] = useState<WeekDay[] | null>(null)
   const { calendar, loading: calendarLoading, error: calendarErr } = useSelector<RootState, CalendarState>(state => state.calendarGet)
   const dispatch = useDispatch();
   useEffect(() => {
@@ -28,9 +57,12 @@ function Week() {
   }, [])
 
   useEffect(() => {
-    const tomorrow = new Date(today)
-    tomorrow.setDate(tomorrow.getDate() + 1)
-  }, [])
+    if (!week) {
+      const generatedWeek = generateWeekDays()
+      console.log(generatedWeek)
+      setWeek([...generatedWeek])
+    }
+  }, [week])
 
   const handleSignout = () => {
     dispatch(clearCurrentUser())
@@ -49,19 +81,12 @@ function Week() {
           </div>
 
           <div className="parent">
-            {calendarWeek.map((_, dayIndex) => {
-              const theday = new Date(today);
-              theday.setDate(today.getDate() + dayIndex)
-              const month = theday.getMonth();
-              const date = theday.getDate();
-              const day = theday.getDay();
-              const year = theday.getFullYear();
-              const dateId: string = `${year}-${month}-${date}`
+            {/* {
               return <div key={dateId}>
-                <span>{Weekdays[day]} {MonthNames[month]} {date}  </span>
-                <button onClick={() => setDaySelected(dateId)}>GO TO DAY</button>
-              </div>
-            })}
+              <span>{Weekdays[day]} {MonthNames[month]} {date}  </span>
+              <button onClick={() => setDaySelected(dateId)}>GO TO DAY</button>
+            </div>
+            })} */}
           </div>
         </>
       }
