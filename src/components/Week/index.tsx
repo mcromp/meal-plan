@@ -69,10 +69,10 @@ const DayCard: React.FC<DayCardProps> = ({ day, calendar, handleDateCardClick })
       {calendarDisplay ? <div>
         {calendarDisplay.menuItems.map(item => {
           const menuItem = menuList.find(f => f.ID === item.foodId)
-          console.log(menuList)
           return (<div key={item.foodId}>
             <span>{menuItem?.ITEM}, {item.quantity}</span>
-          </div>)
+          </div>
+          )
         })}
       </div> : null}
       <button onClick={() => handleDateCardClick(day.dateId)}>Click to edit</button>
@@ -131,13 +131,19 @@ const Week = () => {
           <div className="parent">
             {week ?
               week.map(day => (
-                <DayCard
-                  key={day.dateId}
-                  day={day}
-                  handleDateCardClick={handleDateCardClick}
-                  calendar={calendar} />
-              ))
-              : null
+                <div key={day.dateId}>
+                  <DayCard
+
+                    day={day}
+                    handleDateCardClick={handleDateCardClick}
+                    calendar={calendar} />
+                  <br />
+                  <br />
+
+                  <br />
+
+                </ div>
+              )) : null
             }
           </div>
         </>
