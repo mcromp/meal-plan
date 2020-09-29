@@ -34,7 +34,7 @@ const Day: React.FC = () => {
   useEffect(() => {
     // console.log(calendar)
     // console.log(params.day)
-    let ppp: any | undefined = calendar.find(((x) => x.date === params.day))
+    let ppp = calendar.find(((x) => x.date === params.day))
     if (ppp) {
       setCheckoutBoardItems(ppp.menuItems)
     }

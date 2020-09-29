@@ -58,7 +58,7 @@ const DayCard: React.FC<DayCardProps> = ({ day, calendar, handleDateCardClick })
   const menuList = useSelector<RootState, MenuItem[]>(state => state.menuList.data)
 
   useEffect(() => {
-    const temp: CalendarItem | undefined = calendar.find(item => item.date === day.dateId)
+    const temp = calendar.find(item => item.date === day.dateId)
     if (temp)
       setCalendarDisplay(temp)
   }, [])
