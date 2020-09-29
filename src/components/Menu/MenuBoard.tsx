@@ -1,17 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux";
 import { MenuItem } from "../../redux/menuList/menuList";
+import { CalendarMenuItem } from "../Day";
 import { Filter } from "../FilterBar/types";
 
 const MenuBoard: React.FC<any> = ({
-  addCheckOutBoardItem
+  addCheckOutBoardItem,
+  checkoutBoardItems
 }) => {
   // const [cardList, setCardList] = useState<MenuItem[] | null>(null);
   // const filterList = useSelector<RootState, Filter[]>(state => state.filterList)
   const menuList = useSelector<RootState, MenuItem[]>(state => state.menuList.data)
   const dispatch = useDispatch()
 
+
+
+  useEffect(() => {
+    console.log(checkoutBoardItems)
+  }, [checkoutBoardItems])
 
   // useEffect(() => {
   //   if (menuList.length === 0) dispatch(fetchMenuList())
@@ -50,17 +57,18 @@ const MenuBoard: React.FC<any> = ({
   // }, [filterList, menuList]);
 
 
-  // const disableCheck = (id: string): boolean => {
-  //   const filtedItem = calendar.filter((item) => item.id === id);
-  //   return !filtedItem[0];
-  // };
+  const disableCheck = (id: string): boolean => {
+    return checkoutBoardItems ?
+      (checkoutBoardItems.some((item: CalendarMenuItem) => item.foodId === id))
+      : false
+  };
 
   return (
     <div className="grid_i">
       {menuList ? menuList.map((item: MenuItem) => (
         <div key={item.ID}>
           <span>{item.ITEM}</span>
-          <button onClick={() => addCheckOutBoardItem(item)} >Add 2 checkout</button>
+          <button disabled={disableCheck(item.ID)} onClick={() => addCheckOutBoardItem(item)} >Add 2 checkout</button>
         </div>
       )) : null}
     </div>

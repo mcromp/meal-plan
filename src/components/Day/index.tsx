@@ -40,9 +40,6 @@ const Day: React.FC = () => {
   }, [])
 
 
-  useEffect(() => {
-    console.log(checkoutBoardItems)
-  }, [checkoutBoardItems])
 
   const handleSubmit = () => {
     dispatch(calendarPostFetch(calendar))
@@ -106,6 +103,7 @@ const Day: React.FC = () => {
         {/* <FilterButtonList /> */}
 
         <MenuBoard
+          checkoutBoardItems={checkoutBoardItems}
           addCheckOutBoardItem={addCheckOutBoardItem}
         />
       </>
