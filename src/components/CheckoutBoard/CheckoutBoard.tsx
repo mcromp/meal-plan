@@ -1,37 +1,38 @@
-
-import React from 'react'
-import { useDispatch, useSelector } from "react-redux";
-// import { removeCalendarItemById } from "../../redux/calendar/calendar";
-import { RootState } from "../../redux";
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../redux';
 import { MenuItem } from '../../redux/menuList/menuList';
-
-import { CalendarItem } from "../../redux/calendar/calendarGet";
+import { CalendarMenuItem } from '../Day/index'
 
 export interface CheckoutBoardItemProps {
-  calendarItem: CalendarItem;
-  handleItemCardClick: (id: string, number: number) => void;
+  item: CalendarMenuItem;
+  modifyQuantityOfCheckoutBoardItem: (item: CalendarMenuItem, amount: number) => void;
 }
 
 
+
 const CheckoutBoardItem: React.FC<CheckoutBoardItemProps> = ({
-  calendarItem,
-  handleItemCardClick,
+  item, modifyQuantityOfCheckoutBoardItem
 }) => {
   const dispatch = useDispatch()
   const menuList = useSelector<RootState, MenuItem[]>(state => state.menuList.data)
-  const MenuItem = null
-  // menuList.find((i: MenuItem) => i.ID === calendarItem.id);
+  const [name, setName] = useState<string>("")
+  const [itemState, setItemState] = useState<CalendarMenuItem>(item)
 
-  return MenuItem ? (
-    <div></div>
-    // <>
-    //   <span>{MenuItem.ITEM}</span>
-    //   <span>{calendarItem.quantity}</span>
-    //   <button onClick={() => dispatch(removeCalendarItemById(calendarItem.id))}>Remove Item</button>
-    //   <button onClick={() => handleItemCardClick(calendarItem.id, 1)}>+1</button>
-    //   <button onClick={() => handleItemCardClick(calendarItem.id, -1)}>-1</button>
-    // </>
-  ) : null;
+  useEffect(() => {
+    const findName = menuList.find(i => i.ID === item.foodId)
+    if (findName) setName(findName?.ITEM)
+  }, [menuList, item.foodId])
+
+  return (
+    <>
+      <span>{name}</span>
+      <span>{itemState.quantity}</span>
+      {/* <button onClick={() => dispatch(removeCalendarItemById(calendarItem.id))}>Remove Item</button> */}
+      <button onClick={() => modifyQuantityOfCheckoutBoardItem(item, 1)}>+1</button>
+      <button onClick={() => modifyQuantityOfCheckoutBoardItem(item, -1)}>-1</button>
+    </>
+  )
 };
 
 export default CheckoutBoardItem

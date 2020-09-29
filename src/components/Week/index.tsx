@@ -88,13 +88,10 @@ const Week = () => {
   const { calendar, loading: calendarLoading, error: calendarErr } = useSelector<RootState, CalendarState>(state => state.calendarGet)
 
   const dispatch = useDispatch();
-  useEffect(() => {
-    console.log(calendar)
-  }, [calendar])
+  // useEffect(() => {
+  //   console.log(calendar)
+  // }, [calendar])
 
-  useEffect(() => {
-    console.log(week)
-  }, [week])
 
   useEffect(() => {
     const generatedWeek = generateWeekDays()
@@ -111,12 +108,13 @@ const Week = () => {
 
   const handleDateCardClick = (dateId: any) => {
     setDaySelected(dateId)
+
   }
 
 
 
   if (!currentUser) { return <Redirect to='/' /> }
-  if (daySelected) { return <Redirect to={`/${daySelected}`} /> }
+  if (daySelected) { return <Redirect to={`/d/${daySelected}`} /> }
 
   return (
     <>
@@ -133,7 +131,6 @@ const Week = () => {
               week.map(day => (
                 <div key={day.dateId}>
                   <DayCard
-
                     day={day}
                     handleDateCardClick={handleDateCardClick}
                     calendar={calendar} />
