@@ -8,6 +8,7 @@ import { MenuItem, MenuState } from "../../redux/menuList/menuList";
 import { User } from "../../redux/users/users";
 import CheckoutBoardItem from "../CheckoutBoard/CheckoutBoard";
 import FilterButtonList from "../FilterBar/FilterBar";
+import MenuBoard from "../Menu/MenuBoard";
 
 
 // REFACTOR THISSSSSSS1212
@@ -32,8 +33,6 @@ const Day: React.FC = () => {
   const params: DayParam = useParams()
 
   useEffect(() => {
-    // console.log(calendar)
-    // console.log(params.day)
     let ppp = calendar.find(((x) => x.date === params.day))
     if (ppp) {
       setCheckoutBoardItems(ppp.menuItems)
@@ -56,11 +55,25 @@ const Day: React.FC = () => {
       let tempBoard: CalendarMenuItem[] = [...checkoutBoardItems]
       const index: number = tempBoard?.indexOf(item);
       const updatedQuantity = tempBoard[index].quantity + amount
-      if (updatedQuantity >= 0) {
+      updatedQuantity > 0 ?
         tempBoard[index].quantity = updatedQuantity
-        setCheckoutBoardItems(tempBoard)
-      }
+        : tempBoard.splice(index, 1)
+      setCheckoutBoardItems(tempBoard)
     }
+  }
+
+  const addCheckOutBoardItem = (item: MenuItem) => {
+    if (checkoutBoardItems?.find(i => i.foodId === item.ID)) return;
+    const itemToAdd: CalendarMenuItem = {
+      foodId: item.ID,
+      quantity: 1,
+    }
+    if (checkoutBoardItems) {
+      const newArr = [...checkoutBoardItems]
+      newArr.push(itemToAdd)
+      setCheckoutBoardItems(newArr)
+    }
+
   }
 
 
@@ -75,13 +88,11 @@ const Day: React.FC = () => {
       <>
         {
           checkoutBoardItems ? checkoutBoardItems.map((checkoutItem: CalendarMenuItem) => (
-            checkoutItem.quantity > 0 ?
-              <CheckoutBoardItem
-                key={checkoutItem._id}
-                item={checkoutItem}
-                // setCheckoutBoardItems={setCheckoutBoardItems}
-                modifyQuantityOfCheckoutBoardItem={modifyQuantityOfCheckoutBoardItem} />
-              : null
+            <CheckoutBoardItem
+              key={checkoutItem.foodId}
+              item={checkoutItem}
+              // setCheckoutBoardItems={setCheckoutBoardItems}
+              modifyQuantityOfCheckoutBoardItem={modifyQuantityOfCheckoutBoardItem} />
           )
           ) : null}
 
@@ -92,11 +103,11 @@ const Day: React.FC = () => {
           calendar={calendar}
           addToCalendar={addItemToCalendar} /> */}
 
-        <FilterButtonList />
+        {/* <FilterButtonList /> */}
 
-        {/* <MenuBoard
-          handleClick={handleItemCardClick}
-          calendar={calendar} /> */}
+        <MenuBoard
+          addCheckOutBoardItem={addCheckOutBoardItem}
+        />
       </>
 
     </div>
