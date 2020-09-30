@@ -1,5 +1,7 @@
 import { Dispatch } from "redux";
-import { CALENDAR_URL_ADD } from "../urls/apiUrl";
+import { CalendarMenuItem } from "../../components/Day";
+import { MenuItem } from "../menuList/menuList";
+import { CALENDAR_URL_UPDATE } from "../urls/apiUrl";
 import { CalendarItem } from "./calendarGet";
 
 export const FETCH_CALENDAR_POST_REQUEST = "FETCH_CALENDAR_POST_REQUEST";
@@ -32,14 +34,23 @@ const initalState: CalendarPostState = {
  error: "",
 };
 
-export const calendarPostFetch = (calendar: CalendarItem[]) => {
+export const calendarPostFetch = (
+ userId: string,
+ date: string,
+ menuItems: CalendarMenuItem[]
+) => {
+ const payload = {
+  userId,
+  date,
+  menuItems,
+ };
  return (dispatch: Dispatch<CalendarPostAction>) => {
   dispatch({
    type: FETCH_CALENDAR_POST_REQUEST,
   });
-  fetch(CALENDAR_URL_ADD, {
+  fetch(CALENDAR_URL_UPDATE, {
    method: "POST",
-   body: JSON.stringify({ calendar }),
+   body: JSON.stringify({ payload }),
    headers: {
     "Content-Type": "application/json",
    },

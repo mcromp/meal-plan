@@ -7,12 +7,13 @@ import { CalendarMenuItem } from '../Day/index'
 export interface CheckoutBoardItemProps {
   item: CalendarMenuItem;
   modifyQuantityOfCheckoutBoardItem: (item: CalendarMenuItem, amount: number) => void;
+  removeFromCheckoutBoard: (item: CalendarMenuItem) => void
 }
 
 
 
 const CheckoutBoardItem: React.FC<CheckoutBoardItemProps> = ({
-  item, modifyQuantityOfCheckoutBoardItem
+  item, modifyQuantityOfCheckoutBoardItem, removeFromCheckoutBoard
 }) => {
   const dispatch = useDispatch()
   const menuList = useSelector<RootState, MenuItem[]>(state => state.menuList.data)
@@ -28,9 +29,10 @@ const CheckoutBoardItem: React.FC<CheckoutBoardItemProps> = ({
     <>
       <span>{name}</span>
       <span>{itemState.quantity}</span>
-      {/* <button onClick={() => dispatch(removeCalendarItemById(calendarItem.id))}>Remove Item</button> */}
       <button onClick={() => modifyQuantityOfCheckoutBoardItem(item, 1)}>+1</button>
       <button onClick={() => modifyQuantityOfCheckoutBoardItem(item, -1)}>-1</button>
+      <button onClick={() => removeFromCheckoutBoard(item)}>Remove</button>
+      <br />
     </>
   )
 };

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams, Redirect } from "react-router-dom";
 import { RootState } from "../../redux";
 import { CalendarItem } from "../../redux/calendar/calendarGet";
-import { calendarPostFetch } from "../../redux/calendar/calendarPost";
+import { calendarPostFetch } from "../../redux/calendar/calendarUpdate";
 import { MenuItem, MenuState } from "../../redux/menuList/menuList";
 import { User } from "../../redux/users/users";
 import CheckoutBoardItem from "../CheckoutBoard/CheckoutBoard";
@@ -42,20 +42,31 @@ const Day: React.FC = () => {
 
 
   const handleSubmit = () => {
-    dispatch(calendarPostFetch(calendar))
+    if (currentUser && checkoutBoardItems) {
+      dispatch(calendarPostFetch(currentUser?.id, params.day, checkoutBoardItems))
+    }
     setCalendarDaySubmitted(true)
   }
 
 
   const modifyQuantityOfCheckoutBoardItem = (item: CalendarMenuItem, amount: number) => {
     if (checkoutBoardItems) {
-      let tempBoard: CalendarMenuItem[] = [...checkoutBoardItems]
+      const tempBoard: CalendarMenuItem[] = [...checkoutBoardItems]
       const index: number = tempBoard?.indexOf(item);
       const updatedQuantity = tempBoard[index].quantity + amount
       updatedQuantity > 0 ?
         tempBoard[index].quantity = updatedQuantity
         : tempBoard.splice(index, 1)
       setCheckoutBoardItems(tempBoard)
+    }
+  }
+
+  const removeFromCheckoutBoard = (item: CalendarMenuItem) => {
+    if (checkoutBoardItems) {
+      const temp = [...checkoutBoardItems]
+      const index: number = temp?.indexOf(item);
+      temp.splice(index, 1)
+      setCheckoutBoardItems(temp)
     }
   }
 
@@ -88,7 +99,7 @@ const Day: React.FC = () => {
             <CheckoutBoardItem
               key={checkoutItem.foodId}
               item={checkoutItem}
-              // setCheckoutBoardItems={setCheckoutBoardItems}
+              removeFromCheckoutBoard={removeFromCheckoutBoard}
               modifyQuantityOfCheckoutBoardItem={modifyQuantityOfCheckoutBoardItem} />
           )
           ) : null}
@@ -105,6 +116,7 @@ const Day: React.FC = () => {
         <MenuBoard
           checkoutBoardItems={checkoutBoardItems}
           addCheckOutBoardItem={addCheckOutBoardItem}
+
         />
       </>
 
