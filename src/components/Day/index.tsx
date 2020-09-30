@@ -87,7 +87,7 @@ const Day: React.FC = () => {
 
 
   if (!currentUser) { return <Redirect to='/' /> }
-  if (calendarDaySubmitted) { setCalendarDaySubmitted(false); return <Redirect to='/week' /> }
+  if (calendarDaySubmitted) { return <Redirect to='/week' /> }
   if (menuLoading) { return <span>Loading...</span> }
   // if (menuErr || postErr) { return <span>Error: {menuErr || postErr}</span> }
 

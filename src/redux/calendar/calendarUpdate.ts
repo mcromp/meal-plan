@@ -1,8 +1,6 @@
 import { Dispatch } from "redux";
 import { CalendarMenuItem } from "../../components/Day";
-import { MenuItem } from "../menuList/menuList";
 import { CALENDAR_URL_UPDATE } from "../urls/apiUrl";
-import { CalendarItem } from "./calendarGet";
 
 export const FETCH_CALENDAR_POST_REQUEST = "FETCH_CALENDAR_POST_REQUEST";
 export const FETCH_CALENDAR_POST_SUCCESS = "FETCH_CALENDAR_POST_SUCCESS";
@@ -50,7 +48,7 @@ export const calendarPostFetch = (
   });
   fetch(CALENDAR_URL_UPDATE, {
    method: "POST",
-   body: JSON.stringify({ payload }),
+   body: JSON.stringify(payload),
    headers: {
     "Content-Type": "application/json",
    },
@@ -62,6 +60,7 @@ export const calendarPostFetch = (
     });
    })
    .catch((err) => {
+    console.log("err", err);
     dispatch({
      type: FETCH_CALENDAR_POST_FAILURE,
      payload: err.message,

@@ -10,15 +10,12 @@ export interface CheckoutBoardItemProps {
   removeFromCheckoutBoard: (item: CalendarMenuItem) => void
 }
 
-
-
 const CheckoutBoardItem: React.FC<CheckoutBoardItemProps> = ({
   item, modifyQuantityOfCheckoutBoardItem, removeFromCheckoutBoard
 }) => {
   const dispatch = useDispatch()
   const menuList = useSelector<RootState, MenuItem[]>(state => state.menuList.data)
   const [name, setName] = useState<string>("")
-  const [itemState, setItemState] = useState<CalendarMenuItem>(item)
 
   useEffect(() => {
     const findName = menuList.find(i => i.ID === item.foodId)
@@ -28,7 +25,7 @@ const CheckoutBoardItem: React.FC<CheckoutBoardItemProps> = ({
   return (
     <>
       <span>{name}</span>
-      <span>{itemState.quantity}</span>
+      <span>{item.quantity}</span>
       <button onClick={() => modifyQuantityOfCheckoutBoardItem(item, 1)}>+1</button>
       <button onClick={() => modifyQuantityOfCheckoutBoardItem(item, -1)}>-1</button>
       <button onClick={() => removeFromCheckoutBoard(item)}>Remove</button>
