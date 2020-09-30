@@ -29,13 +29,13 @@ const Day: React.FC = () => {
   const currentUser = useSelector<RootState, User | null>(state => state.currentUser)
   const calendar = useSelector<RootState, CalendarItem[]>(state => state.calendarGet.calendar)
   const { data: menuList, loading: menuLoading } = useSelector<RootState, MenuState>(state => state.menuList)
-  const [checkoutBoardItems, setCheckoutBoardItems] = useState<CalendarMenuItem[]>()
+  const [checkoutBoardItems, setCheckoutBoardItems] = useState<CalendarMenuItem[]>([])
   const params: DayParam = useParams()
 
   useEffect(() => {
-    let ppp = calendar.find(((x) => x.date === params.day))
-    if (ppp) {
-      setCheckoutBoardItems(ppp.menuItems)
+    const menuItemFind = calendar.find(((x) => x.date === params.day))
+    if (menuItemFind) {
+      setCheckoutBoardItems(menuItemFind.menuItems)
     }
   }, [])
 
@@ -48,6 +48,9 @@ const Day: React.FC = () => {
     setCalendarDaySubmitted(true)
   }
 
+  const handleClearAll = () => {
+    setCheckoutBoardItems([])
+  }
 
   const modifyQuantityOfCheckoutBoardItem = (item: CalendarMenuItem, amount: number) => {
     if (checkoutBoardItems) {
@@ -105,6 +108,7 @@ const Day: React.FC = () => {
           ) : null}
 
         <button onClick={handleSubmit}>SUBMIT</button>
+        <button onClick={handleClearAll}>CLEAR ALL</button>
 
         {/* <SearchBar
           menuList={menuList}
