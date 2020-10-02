@@ -5,7 +5,7 @@ import { MenuItem } from "../../redux/menuList/menuList";
 import { CalendarMenuItem } from "../Day";
 import { Filter, FilterId } from "../FilterBar/types";
 
-const MenuBoard: React.FC<any> = ({
+const MenuBoard: React.FC<MenuBoardProps> = ({
   addCheckOutBoardItem,
   checkoutBoardItems
 }) => {
@@ -63,5 +63,10 @@ const MenuBoard: React.FC<any> = ({
     </div>
   );
 };
+
+interface MenuBoardProps {
+  addCheckOutBoardItem: (item: MenuItem) => void,
+  checkoutBoardItems: CalendarMenuItem[]
+}
 
 export default MenuBoard

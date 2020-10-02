@@ -4,12 +4,6 @@ import { RootState } from '../../redux';
 import { MenuItem } from '../../redux/menuList/menuList';
 import { CalendarMenuItem } from '../Day/index'
 
-export interface CheckoutBoardItemProps {
-  item: CalendarMenuItem;
-  modifyQuantityOfCheckoutBoardItem: (item: CalendarMenuItem, amount: number) => void;
-  removeFromCheckoutBoard: (item: CalendarMenuItem) => void
-}
-
 const CheckoutBoardItem: React.FC<CheckoutBoardItemProps> = ({
   item, modifyQuantityOfCheckoutBoardItem, removeFromCheckoutBoard
 }) => {
@@ -32,5 +26,11 @@ const CheckoutBoardItem: React.FC<CheckoutBoardItemProps> = ({
     </>
   )
 };
+
+interface CheckoutBoardItemProps {
+  item: CalendarMenuItem;
+  modifyQuantityOfCheckoutBoardItem: (item: CalendarMenuItem, amount: number) => void;
+  removeFromCheckoutBoard: (item: CalendarMenuItem) => void
+}
 
 export default CheckoutBoardItem

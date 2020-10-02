@@ -88,10 +88,6 @@ const Week = () => {
   const { calendar, loading: calendarLoading } = useSelector<RootState, CalendarState>(state => state.calendarGet)
 
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   console.log(calendar)
-  // }, [calendar])
-
 
   useEffect(() => {
     const generatedWeek = generateWeekDays()

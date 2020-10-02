@@ -25,11 +25,6 @@ const Login = () => {
 
   const dispatch = useDispatch()
 
-
-  // useEffect(() => {
-  //   console.log(currentUser)
-  // }, [currentUser])
-
   useEffect(() => {
     dispatch(usersGet())
     dispatch(fetchMenuList())

@@ -39,9 +39,6 @@ const Day: React.FC = () => {
     }
   }, [params.day, calendar])
 
-  // useEffect(() => {
-  // }, [])
-
   const handleSubmit = () => {
     if (currentUser && checkoutBoardItems) {
       dispatch(calendarPostFetch(currentUser?.id, params.day, checkoutBoardItems))
@@ -88,12 +85,6 @@ const Day: React.FC = () => {
 
   }
 
-  // const itemFiltered = (checkoutItem: CalendarMenuItem) => {
-  //   const menuItem = menuList.find(mItem => mItem.ID === checkoutItem.foodId)
-  //   let pp = filterList.filter(filter => filter.id === menuItem?.CATEGORY)
-  //   return pp
-  // }
-
   const checkoutBoardMap =
     checkoutBoardItems.map((checkoutItem: CalendarMenuItem) => (
       <CheckoutBoardItem
@@ -109,7 +100,6 @@ const Day: React.FC = () => {
 
   return (
     <div style={{ backgroundColor: "pink" }}>
-
 
       {checkoutBoardMap}
 

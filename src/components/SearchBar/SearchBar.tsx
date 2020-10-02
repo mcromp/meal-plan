@@ -2,14 +2,6 @@ import React, { useState, useRef, useLayoutEffect } from "react";
 import { MenuItem } from "../../redux/menuList/menuList"
 import { CalendarMenuItem } from "../Day";
 
-
-
-interface SearchBarProps {
-  menuList: MenuItem[];
-  checkoutBoardItems: CalendarMenuItem[];
-  addCheckOutBoardItem: (item: MenuItem) => void
-}
-
 const SearchBar: React.FC<SearchBarProps> = ({ menuList, checkoutBoardItems, addCheckOutBoardItem }) => {
   const [textValue, setTextValue] = useState<string>("")
   const [searchListDisplay, setSearchListDisplay] = useState<MenuItem[]>([])
@@ -83,5 +75,11 @@ const SearchBar: React.FC<SearchBarProps> = ({ menuList, checkoutBoardItems, add
     </div>
   );
 };
+
+interface SearchBarProps {
+  menuList: MenuItem[];
+  checkoutBoardItems: CalendarMenuItem[];
+  addCheckOutBoardItem: (item: MenuItem) => void
+}
 
 export default SearchBar
