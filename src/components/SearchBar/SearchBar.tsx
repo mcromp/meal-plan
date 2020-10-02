@@ -1,16 +1,18 @@
 import React, { useState, useRef, useLayoutEffect } from "react";
 import { CalendarItem } from "../../redux/calendar/calendarGet";
 import { MenuItem } from "../../redux/menuList/menuList";
+import { CheckoutBoardItemProps } from "../CheckoutBoard/CheckoutBoard";
+import { CalendarMenuItem } from "../Day";
 
 
 
 interface SearchBarProps {
   menuList: MenuItem[];
-  calendar: CalendarItem[];
-  addToCalendar: (id: string, amount: number) => void
+  checkoutBoardItems: CalendarMenuItem[];
+  addCheckOutBoardItem: (item: MenuItem) => void
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ menuList, calendar, addToCalendar }) => {
+const SearchBar: React.FC<SearchBarProps> = ({ menuList, checkoutBoardItems, addCheckOutBoardItem }) => {
   const [textValue, setTextValue] = useState<string>("")
   const [searchListDisplay, setSearchListDisplay] = useState<MenuItem[]>([])
   const [showList, setShowList] = useState(true)
@@ -49,9 +51,11 @@ const SearchBar: React.FC<SearchBarProps> = ({ menuList, calendar, addToCalendar
   const handleClick = (item: MenuItem) => {
     setSearchListDisplay([])
     setTextValue("")
-    const itemAlreadyInCalendar = calendar.map((item: any) => item.id)
-    if (itemAlreadyInCalendar.includes(item.ID)) errorMessage(item.ITEM)
-    else addToCalendar(item.ID, 1)
+    const itemAlreadyInCheckout = checkoutBoardItems.map((item: CalendarMenuItem) => item.foodId)
+    if (itemAlreadyInCheckout.includes(item.ID)) {
+      errorMessage(item.ITEM)
+    }
+    else addCheckOutBoardItem(item)
 
   }
 
@@ -69,15 +73,13 @@ const SearchBar: React.FC<SearchBarProps> = ({ menuList, calendar, addToCalendar
         onClick={() => setShowList(true)}
         placeholder="Type to search"
         value={textValue}
-        onChange={e => handleChange(e)}
-      />
+        onChange={e => handleChange(e)} />
       <span>{errorText}</span>
       {showList && searchListDisplay.map(item =>
         <div
           onClick={() => handleClick(item)}
           key={item.ID}
-          tabIndex={0}
-        >
+          tabIndex={0}>
           <span>{item.ITEM}</span>
         </div>)}
     </div>
