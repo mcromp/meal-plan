@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, Redirect } from "react-router-dom";
+import { useParams, Redirect, Prompt } from "react-router-dom";
 import { RootState } from "../../redux";
 import { CalendarItem } from "../../redux/calendar/calendarGet";
 import { calendarPostFetch } from "../../redux/calendar/calendarUpdate";
@@ -25,7 +25,7 @@ export type CalendarMenuItem = {
 
 const Day: React.FC = () => {
   const dispatch = useDispatch()
-  const [calendarDaySubmitted, setCalendarDaySubmitted] = useState<boolean>(false)
+  const [returnToWeek, setReturnToWeek] = useState<boolean>(false)
   const currentUser = useSelector<RootState, User | null>(state => state.currentUser)
   const calendar = useSelector<RootState, CalendarItem[]>(state => state.calendarGet.calendar)
   const { data: menuList, loading: menuLoading } = useSelector<RootState, MenuState>(state => state.menuList)
@@ -45,7 +45,7 @@ const Day: React.FC = () => {
     if (currentUser && checkoutBoardItems) {
       dispatch(calendarPostFetch(currentUser?.id, params.day, checkoutBoardItems))
     }
-    setCalendarDaySubmitted(true)
+    setReturnToWeek(true)
   }
 
   const handleClearAll = () => {
@@ -90,9 +90,8 @@ const Day: React.FC = () => {
 
 
   if (!currentUser) { return <Redirect to='/' /> }
-  if (calendarDaySubmitted) { return <Redirect to='/week' /> }
+  if (returnToWeek) { return <Redirect to='/week' /> }
   if (menuLoading) { return <span>Loading...</span> }
-  // if (menuErr || postErr) { return <span>Error: {menuErr || postErr}</span> }
 
   return (
     <div style={{ backgroundColor: "pink" }}>
@@ -109,6 +108,7 @@ const Day: React.FC = () => {
 
         <button onClick={handleSubmit}>SUBMIT</button>
         <button onClick={handleClearAll}>CLEAR ALL</button>
+        <button onClick={() => setReturnToWeek(true)}>return to week, without submitting</button>
 
         {/* <SearchBar
           menuList={menuList}
