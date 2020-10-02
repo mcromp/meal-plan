@@ -68,5 +68,4 @@ interface MenuBoardProps {
   addCheckOutBoardItem: (item: MenuItem) => void,
   checkoutBoardItems: CalendarMenuItem[]
 }
-
 export default MenuBoard

@@ -150,7 +150,7 @@ const CreateUser: React.FC<CreateUserProps> = ({
       { usernameIncluded ?
         <span>name already included</span> : null
       }
-      {value.length <= 3 || value.length >= 25 ?
+      {value.length <= 2 || value.length >= 25 ?
         <span>Username must be between 3 and 25 characters</span> : null
       }
     </div>
