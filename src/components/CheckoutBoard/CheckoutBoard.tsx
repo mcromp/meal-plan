@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from '../../redux';
 import { MenuItem } from '../../redux/menuList/menuList';
 import { CalendarMenuItem } from '../Day/index'
@@ -13,7 +13,6 @@ export interface CheckoutBoardItemProps {
 const CheckoutBoardItem: React.FC<CheckoutBoardItemProps> = ({
   item, modifyQuantityOfCheckoutBoardItem, removeFromCheckoutBoard
 }) => {
-  const dispatch = useDispatch()
   const menuList = useSelector<RootState, MenuItem[]>(state => state.menuList.data)
   const [name, setName] = useState<string>("")
 

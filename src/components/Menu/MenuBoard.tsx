@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "../../redux";
 import { MenuItem } from "../../redux/menuList/menuList";
 import { CalendarMenuItem } from "../Day";
@@ -9,10 +9,9 @@ const MenuBoard: React.FC<any> = ({
   addCheckOutBoardItem,
   checkoutBoardItems
 }) => {
-  const filterList = useSelector<RootState, Filter[]>(state => state.filterList)
-  const menuList = useSelector<RootState, MenuItem[]>(state => state.menuList.data)
+  const filterList = useSelector<RootState, Filter[]>(state => state.filterList);
+  const menuList = useSelector<RootState, MenuItem[]>(state => state.menuList.data);
   const [cardList, setCardList] = useState<MenuItem[] | null>(null);
-  const dispatch = useDispatch()
 
   useEffect(() => {
     const filterCardList = () => {

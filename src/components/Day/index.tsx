@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, Redirect, Prompt } from "react-router-dom";
+import { useParams, Redirect } from "react-router-dom";
 import { RootState } from "../../redux";
 import { CalendarItem } from "../../redux/calendar/calendarGet";
 import { calendarPostFetch } from "../../redux/calendar/calendarUpdate";
@@ -8,9 +8,8 @@ import { MenuItem, MenuState } from "../../redux/menuList/menuList";
 import { User } from "../../redux/users/users";
 import CheckoutBoardItem from "../CheckoutBoard/CheckoutBoard";
 import FilterButtonList from "../FilterBar/FilterBar";
-import { Filter } from "../FilterBar/types";
 import MenuBoard from "../Menu/MenuBoard";
-
+import SearchBar from "../SearchBar/SearchBar";
 
 // REFACTOR THISSSSSSS1212
 type DayParam = {
@@ -32,19 +31,16 @@ const Day: React.FC = () => {
   const { data: menuList, loading: menuLoading } = useSelector<RootState, MenuState>(state => state.menuList)
   const [checkoutBoardItems, setCheckoutBoardItems] = useState<CalendarMenuItem[]>([])
   const params: DayParam = useParams()
-  const filterList = useSelector<RootState, Filter[]>(state => state.filterList)
 
   useEffect(() => {
     const menuItemFind = calendar.find(((x) => x.date === params.day))
     if (menuItemFind) {
       setCheckoutBoardItems(menuItemFind.menuItems)
     }
-  }, [])
+  }, [params.day, calendar])
 
   // useEffect(() => {
-
-  //   console.log(menuList)
-  // }, [menuList])
+  // }, [])
 
   const handleSubmit = () => {
     if (currentUser && checkoutBoardItems) {
@@ -107,39 +103,32 @@ const Day: React.FC = () => {
         modifyQuantityOfCheckoutBoardItem={modifyQuantityOfCheckoutBoardItem} />
     ));
 
-
-
-
   if (!currentUser) { return <Redirect to='/' /> }
   if (returnToWeek) { return <Redirect to='/week' /> }
   if (menuLoading) { return <span>Loading...</span> }
 
   return (
     <div style={{ backgroundColor: "pink" }}>
-      <>
 
-        {checkoutBoardMap}
 
-        <button onClick={handleSubmit}>SUBMIT</button>
-        <button onClick={handleClearAll}>CLEAR ALL</button>
-        <button onClick={() => setReturnToWeek(true)}>return to week, without submitting</button>
+      {checkoutBoardMap}
 
-        {/* <SearchBar
-          menuList={menuList}
-          calendar={calendar}
-          addToCalendar={addItemToCalendar} /> */}
+      <button onClick={handleSubmit}>SUBMIT</button>
+      <button onClick={handleClearAll}>CLEAR ALL</button>
+      <button onClick={() => setReturnToWeek(true)}>return to week, without submitting</button>
 
-        <FilterButtonList />
+      <SearchBar
+        menuList={menuList}
+        checkoutBoardItems={checkoutBoardItems}
+        addCheckOutBoardItem={addCheckOutBoardItem} />
 
-        <MenuBoard
-          checkoutBoardItems={checkoutBoardItems}
-          addCheckOutBoardItem={addCheckOutBoardItem}
+      <FilterButtonList />
 
-        />
-      </>
+      <MenuBoard
+        checkoutBoardItems={checkoutBoardItems}
+        addCheckOutBoardItem={addCheckOutBoardItem} />
 
     </div>
-
   );
 }
 

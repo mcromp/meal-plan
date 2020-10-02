@@ -1,7 +1,5 @@
 import React, { useState, useRef, useLayoutEffect } from "react";
-import { CalendarItem } from "../../redux/calendar/calendarGet";
-import { MenuItem } from "../../redux/menuList/menuList";
-import { CheckoutBoardItemProps } from "../CheckoutBoard/CheckoutBoard";
+import { MenuItem } from "../../redux/menuList/menuList"
 import { CalendarMenuItem } from "../Day";
 
 

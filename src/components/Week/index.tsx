@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { RootState } from '../../redux';
 import { calendarGet, CalendarItem, CalendarState } from '../../redux/calendar/calendarGet';
 import { MenuItem } from '../../redux/menuList/menuList';
-import { clearCurrentUser, setCurrentUser } from '../../redux/users/userCurrent';
+import { clearCurrentUser } from '../../redux/users/userCurrent';
 import { User } from '../../redux/users/users';
 import './Week.css'
 
@@ -61,7 +61,7 @@ const DayCard: React.FC<DayCardProps> = ({ day, calendar, handleDateCardClick })
     const temp = calendar.find(item => item.date === day.dateId)
     if (temp)
       setCalendarDisplay(temp)
-  }, [])
+  }, [day.dateId, calendar])
   return (
     <>
       <span>{day.dateId}</span>
@@ -85,7 +85,7 @@ const Week = () => {
   const currentUser = useSelector<RootState, User | null>(state => state.currentUser)
   const [daySelected, setDaySelected] = useState<string | null>(null)
   const [week, setWeek] = useState<WeekDay[] | null>(null)
-  const { calendar, loading: calendarLoading, error: calendarErr } = useSelector<RootState, CalendarState>(state => state.calendarGet)
+  const { calendar, loading: calendarLoading } = useSelector<RootState, CalendarState>(state => state.calendarGet)
 
   const dispatch = useDispatch();
   // useEffect(() => {
@@ -99,7 +99,7 @@ const Week = () => {
     const dateList = generatedWeek.map(day => day.dateId).sort()
     if (currentUser)
       dispatch(calendarGet(dateList, currentUser.id))
-  }, [])
+  }, [currentUser, dispatch])
 
 
   const handleSignout = () => {
