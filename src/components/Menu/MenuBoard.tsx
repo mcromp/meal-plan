@@ -1,60 +1,50 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux";
 import { MenuItem } from "../../redux/menuList/menuList";
 import { CalendarMenuItem } from "../Day";
-import { Filter } from "../FilterBar/types";
+import { Filter, FilterId } from "../FilterBar/types";
 
 const MenuBoard: React.FC<any> = ({
   addCheckOutBoardItem,
   checkoutBoardItems
 }) => {
-  // const [cardList, setCardList] = useState<MenuItem[] | null>(null);
-  // const filterList = useSelector<RootState, Filter[]>(state => state.filterList)
+  const filterList = useSelector<RootState, Filter[]>(state => state.filterList)
   const menuList = useSelector<RootState, MenuItem[]>(state => state.menuList.data)
+  const [cardList, setCardList] = useState<MenuItem[] | null>(null);
   const dispatch = useDispatch()
 
-
-
   useEffect(() => {
-    console.log(checkoutBoardItems)
-  }, [checkoutBoardItems])
+    const filterCardList = () => {
+      let cardArr: MenuItem[] = [];
 
-  // useEffect(() => {
-  //   if (menuList.length === 0) dispatch(fetchMenuList())
-  //   setCardList(menuList)
-  // }, [menuList, dispatch])
+      const selectedFilterIdList = filterList.reduce<FilterId[]>((acc, filter) => {
+        if (filter.selected) acc.push(filter.id)
+        return acc
+      }, []);
 
-  // useEffect(() => {
-  //   const filterCardList = () => {
-  //     let tempArr: MenuItem[] = [];
+      selectedFilterIdList.length === 0
+        ? (cardArr = menuList)
+        : (cardArr = createCardList(selectedFilterIdList));
 
-  //     const selectedFilterIdList = filterList.reduce<FilterId[]>((acc, item) => {
-  //       if (item.selected) acc.push(item.id);
-  //       return acc;
-  //     }, []);
+      setCardList(cardArr);
+    };
 
-  //     selectedFilterIdList.length <= 0
-  //       ? (tempArr = menuList)
-  //       : (tempArr = createCardList(selectedFilterIdList));
+    const createCardList = (selectedFilterIdList: FilterId[]) =>
+      menuList.reduce<MenuItem[]>((acc, food) => {
+        const foodCategory = food.CATEGORY as FilterId;
+        if (
+          selectedFilterIdList.includes(foodCategory)
+          // (favList.includes(food.ID) &&
+          //   selectedFilterIdList.includes("FAVORITES"))
+        ) acc.push(food);
+        return acc;
+      }, []);
 
-  //     setCardList(tempArr);
-  //   };
+    setCardList([]);
+    filterCardList();
+  }, [filterList, menuList]);
 
-  //   const createCardList = (selectedFilterIdList: FilterId[]) =>
-  //     menuList.reduce<MenuItem[]>((acc, food) => {
-  //       const foodCategory = food.CATEGORY as FilterId;
-  //       if (
-  //         selectedFilterIdList.includes(foodCategory) ||
-  //         (favList.includes(food.ID) &&
-  //           selectedFilterIdList.includes("FAVORITES"))
-  //       ) acc.push(food);
-  //       return acc;
-  //     }, []);
-
-  //   setCardList([]);
-  //   filterCardList();
-  // }, [filterList, menuList]);
 
 
   const disableCheck = (id: string): boolean => {
@@ -65,12 +55,12 @@ const MenuBoard: React.FC<any> = ({
 
   return (
     <div className="grid_i">
-      {menuList ? menuList.map((item: MenuItem) => (
+      {cardList && cardList.map((item: MenuItem) => (
         <div key={item.ID}>
           <span>{item.ITEM}</span>
           <button disabled={disableCheck(item.ID)} onClick={() => addCheckOutBoardItem(item)} >Add 2 checkout</button>
         </div>
-      )) : null}
+      ))}
     </div>
   );
 };

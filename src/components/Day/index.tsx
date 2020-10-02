@@ -8,6 +8,7 @@ import { MenuItem, MenuState } from "../../redux/menuList/menuList";
 import { User } from "../../redux/users/users";
 import CheckoutBoardItem from "../CheckoutBoard/CheckoutBoard";
 import FilterButtonList from "../FilterBar/FilterBar";
+import { Filter } from "../FilterBar/types";
 import MenuBoard from "../Menu/MenuBoard";
 
 
@@ -19,7 +20,7 @@ type DayParam = {
 export type CalendarMenuItem = {
   foodId: string,
   quantity: number,
-  _id?: string
+  _id?: string,
 }
 
 
@@ -31,6 +32,7 @@ const Day: React.FC = () => {
   const { data: menuList, loading: menuLoading } = useSelector<RootState, MenuState>(state => state.menuList)
   const [checkoutBoardItems, setCheckoutBoardItems] = useState<CalendarMenuItem[]>([])
   const params: DayParam = useParams()
+  const filterList = useSelector<RootState, Filter[]>(state => state.filterList)
 
   useEffect(() => {
     const menuItemFind = calendar.find(((x) => x.date === params.day))
@@ -39,7 +41,10 @@ const Day: React.FC = () => {
     }
   }, [])
 
+  // useEffect(() => {
 
+  //   console.log(menuList)
+  // }, [menuList])
 
   const handleSubmit = () => {
     if (currentUser && checkoutBoardItems) {
@@ -87,6 +92,22 @@ const Day: React.FC = () => {
 
   }
 
+  // const itemFiltered = (checkoutItem: CalendarMenuItem) => {
+  //   const menuItem = menuList.find(mItem => mItem.ID === checkoutItem.foodId)
+  //   let pp = filterList.filter(filter => filter.id === menuItem?.CATEGORY)
+  //   return pp
+  // }
+
+  const checkoutBoardMap =
+    checkoutBoardItems.map((checkoutItem: CalendarMenuItem) => (
+      <CheckoutBoardItem
+        key={checkoutItem.foodId}
+        item={checkoutItem}
+        removeFromCheckoutBoard={removeFromCheckoutBoard}
+        modifyQuantityOfCheckoutBoardItem={modifyQuantityOfCheckoutBoardItem} />
+    ));
+
+
 
 
   if (!currentUser) { return <Redirect to='/' /> }
@@ -96,15 +117,8 @@ const Day: React.FC = () => {
   return (
     <div style={{ backgroundColor: "pink" }}>
       <>
-        {
-          checkoutBoardItems ? checkoutBoardItems.map((checkoutItem: CalendarMenuItem) => (
-            <CheckoutBoardItem
-              key={checkoutItem.foodId}
-              item={checkoutItem}
-              removeFromCheckoutBoard={removeFromCheckoutBoard}
-              modifyQuantityOfCheckoutBoardItem={modifyQuantityOfCheckoutBoardItem} />
-          )
-          ) : null}
+
+        {checkoutBoardMap}
 
         <button onClick={handleSubmit}>SUBMIT</button>
         <button onClick={handleClearAll}>CLEAR ALL</button>
@@ -115,7 +129,7 @@ const Day: React.FC = () => {
           calendar={calendar}
           addToCalendar={addItemToCalendar} /> */}
 
-        {/* <FilterButtonList /> */}
+        <FilterButtonList />
 
         <MenuBoard
           checkoutBoardItems={checkoutBoardItems}
