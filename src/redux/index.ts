@@ -1,6 +1,6 @@
 import { combineReducers, createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import { calendarGetReducer } from "./calendar/calendar";
+import { calendarReducer } from "./calendar/calendar";
 import { calendarPostReducer } from "./calendar/calendarUpdate";
 
 import filterReducer from "./filterList/filterList";
@@ -22,7 +22,7 @@ const rootReducer = combineReducers({
  userSignup: userSignupReducer,
  currentUser: currentUserReducer,
  calendarPost: calendarPostReducer,
- calendarGet: calendarGetReducer,
+ calendar: calendarReducer,
  isLoading: isLoadingReducer,
  hasErrored: hasErroredReducer,
 });

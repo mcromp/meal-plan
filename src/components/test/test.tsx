@@ -7,22 +7,23 @@ export const Test: React.FC<any> = () => {
 
 
   const loading = useSelector<RootState, any>(state => state.isLoading)
-  const users = useSelector<RootState, any>(state => state.users)
+  // const users = useSelector<RootState, any>(state => state.users)
+  const cal = useSelector<RootState, any>(state => state.calendar)
+
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("TESTSTTSTSTSTST#($)#($)#($)#$)(#)$#$)(", users)
+    console.log("TESTSTTSTSTSTST#($)#($)#($)#$)(#)$#$)(", cal)
 
-  }, [users])
+  }, [cal])
 
   useEffect(() => {
-    console.log("loading", loading)
 
   }, [loading])
 
   const handleClick = () => {
-    dispatch(fetchDispatch("req_getUsers"))
+    dispatch(fetchDispatch("req_getCalendar", "5f6f3d42cd9bedc5e0f8db81", ["28-8-2020", "30-8-2020"]))
   }
 
   return (
