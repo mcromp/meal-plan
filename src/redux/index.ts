@@ -4,7 +4,7 @@ import { calendarReducer } from "./calendar/calendar";
 import { calendarPostReducer } from "./calendar/calendarUpdate";
 
 import filterReducer from "./filterList/filterList";
-import { hasErroredReducer } from "./hasErrored/hasErrored";
+import { alertMessageReducer } from "./alertMessage/alertMessage";
 import { isLoadingReducer } from "./isLoading/isLoading";
 
 import { menuReducer } from "./menuList/menuList";
@@ -20,7 +20,7 @@ const rootReducer = combineReducers({
  calendarPost: calendarPostReducer,
  calendar: calendarReducer,
  isLoading: isLoadingReducer,
- hasErrored: hasErroredReducer,
+ alertMessage: alertMessageReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

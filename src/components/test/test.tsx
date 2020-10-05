@@ -9,7 +9,7 @@ export const Test: React.FC<any> = () => {
   const loading = useSelector<RootState, any>(state => state.isLoading)
   // const users = useSelector<RootState, any>(state => state.users)
   const cal = useSelector<RootState, any>(state => state.calendar)
-  const err = useSelector<RootState, any>(state => state.hasErrored)
+  const err = useSelector<RootState, any>(state => state.alertMessage)
   const [error, setError] = useState("")
   const dispatch = useDispatch();
 
@@ -42,7 +42,7 @@ export const Test: React.FC<any> = () => {
   return (
     <div>
       <h1>test</h1>
-      {loading ? "whuddup bitch" : null}
+      {loading ? "whuddup" : null}
       {error}
       <button onClick={handleClick}>OKDIE</button>
     </div>
