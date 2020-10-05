@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../redux'
 import { fetchDispatch } from '../../redux/fetchDispatch/fetchDispatch'
@@ -9,8 +9,8 @@ export const Test: React.FC<any> = () => {
   const loading = useSelector<RootState, any>(state => state.isLoading)
   // const users = useSelector<RootState, any>(state => state.users)
   const cal = useSelector<RootState, any>(state => state.calendar)
-
-
+  const err = useSelector<RootState, any>(state => state.hasErrored)
+  const [error, setError] = useState("")
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,17 +19,31 @@ export const Test: React.FC<any> = () => {
   }, [cal])
 
   useEffect(() => {
+    setError(err)
+  }, [err])
+
+  useEffect(() => {
+    setTimeout(() => {
+      setError("")
+    }, 3000);
+  }, [error])
+
+  useEffect(() => {
 
   }, [loading])
 
   const handleClick = () => {
-    dispatch(fetchDispatch("req_getCalendar", "5f6f3d42cd9bedc5e0f8db81", ["28-8-2020", "30-8-2020"]))
+    // let dateList = ["28-8-2020", "30-8-2020"]
+    // dispatch(fetchDispatch("req_getCalendar", "5f6f3d42cd9bedc5e0f8db81", { dateList }))
+    const username = "Abbea"
+    dispatch(fetchDispatch("req_addUser", "", { username }))
   }
 
   return (
     <div>
       <h1>test</h1>
       {loading ? "whuddup bitch" : null}
+      {error}
       <button onClick={handleClick}>OKDIE</button>
     </div>
   )

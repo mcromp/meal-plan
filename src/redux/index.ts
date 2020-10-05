@@ -9,7 +9,6 @@ import { isLoadingReducer } from "./isLoading/isLoading";
 
 import { menuReducer } from "./menuList/menuList";
 import currentUserReducer from "./users/userCurrent";
-import { userDeleteReducer } from "./users/userDelete";
 import { userReducer } from "./users/users";
 import { userSignupReducer } from "./users/userSignup";
 // import logger from "redux-logger";
@@ -18,7 +17,6 @@ const rootReducer = combineReducers({
  filterList: filterReducer,
  menuList: menuReducer,
  users: userReducer,
- userDelete: userDeleteReducer,
  userSignup: userSignupReducer,
  currentUser: currentUserReducer,
  calendarPost: calendarPostReducer,
