@@ -17,8 +17,6 @@ const Login = () => {
 
   const alertMessage = useSelector<RootState, string>(state => state.alertMessage)
   const users = useSelector<RootState, User[]>(state => state.users)
-  // const deleteStateMessage = useSelector<RootState, string | null>(state => state.userDelete.message)
-  // const signupStateMessage = useSelector<RootState, string | null>(state => state.userSignup.message)
   const currentUser = useSelector<RootState, User | null>(state => state.currentUser)
 
 
