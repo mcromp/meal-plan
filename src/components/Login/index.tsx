@@ -6,7 +6,6 @@ import { Redirect } from 'react-router-dom';
 import { fetchDispatch, reqAddUser, reqDeleteUser, reqGetUsers } from '../../redux/fetchDispatch/fetchDispatch';
 import { User } from '../../redux/users/users';
 import { setAlertMessage } from '../../redux/alertMessage/alertMessage';
-// import { fetchMenuList } from '../../redux/menuList/menuList';
 
 const Login = () => {
   const [confirmDelete, setConfirmDelete] = useState<boolean>(false)

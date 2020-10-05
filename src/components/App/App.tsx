@@ -3,7 +3,7 @@ import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // import Day from '../Day';
 import Login from '../Login';
-// import Week from '../Week';
+import Week from '../Week';
 
 
 const App: React.FC = () => {
@@ -13,10 +13,10 @@ const App: React.FC = () => {
         <Route exact path="/">
           <Login />
         </Route>
-        {/* <Route path="/week">
+        <Route path="/week">
           <Week />
         </Route>
-        <Route path="/d/:day">
+        {/* <Route path="/d/:day">
           <Day />
         </Route> */}
       </Switch>
