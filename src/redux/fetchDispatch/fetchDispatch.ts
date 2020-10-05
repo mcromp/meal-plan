@@ -66,6 +66,7 @@ const setReqData = (dispatch: any, data: any, reqSelect: string) => {
  if (reqSelect === reqAddUser)
   dispatch(setAlertMessage(`${data.username} added`));
  //remove this line after dev
- if (reqSelect === reqUpdateCalendar || reqAddFav || reqClearFavList)
-  console.log("Update worked");
+ if (reqSelect === reqUpdateCalendar) {
+  console.log("Update worked " + reqSelect);
+ }
 };
