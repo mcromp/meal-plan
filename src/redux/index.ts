@@ -1,8 +1,12 @@
 import { combineReducers, createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import { calendarGetReducer } from "./calendar/calendarGet";
+import { calendarGetReducer } from "./calendar/calendar";
 import { calendarPostReducer } from "./calendar/calendarUpdate";
-import filterReducer from "./filterList";
+
+import filterReducer from "./filterList/filterList";
+import { hasErroredReducer } from "./hasErrored/hasErrored";
+import { isLoadingReducer } from "./isLoading/isLoading";
+
 import { menuReducer } from "./menuList/menuList";
 import currentUserReducer from "./users/userCurrent";
 import { userDeleteReducer } from "./users/userDelete";
@@ -13,12 +17,14 @@ import { userSignupReducer } from "./users/userSignup";
 const rootReducer = combineReducers({
  filterList: filterReducer,
  menuList: menuReducer,
- usersState: userReducer,
+ users: userReducer,
  userDelete: userDeleteReducer,
  userSignup: userSignupReducer,
  currentUser: currentUserReducer,
  calendarPost: calendarPostReducer,
  calendarGet: calendarGetReducer,
+ isLoading: isLoadingReducer,
+ hasErrored: hasErroredReducer,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

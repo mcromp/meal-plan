@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { CalendarMenuItem } from "../../components/Day";
+// import { CalendarMenuItem } from "../../components/Day";
 import { CALENDAR_URL_UPDATE } from "../urls/apiUrl";
 
 export const FETCH_CALENDAR_POST_REQUEST = "FETCH_CALENDAR_POST_REQUEST";
@@ -34,13 +34,13 @@ const initalState: CalendarPostState = {
 
 export const calendarPostFetch = (
  userId: string,
- date: string,
- menuItems: CalendarMenuItem[]
+ date: string
+ //  menuItems: CalendarMenuItem[]
 ) => {
  const payload = {
   userId,
   date,
-  menuItems,
+  // menuItems,
  };
  return (dispatch: Dispatch<CalendarPostAction>) => {
   dispatch({

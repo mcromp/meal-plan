@@ -1,44 +1,115 @@
-export const te = () => {};
-// import { CalendarItem } from "./calendarGet";
+import { Dispatch } from "redux";
+// import { setApiError } from "../apiStatus/apiStatus";
+import { CALENDAR_URL_GETMANY } from "../urls/apiUrl";
 
-// export default function calendarReducer(
-//  calendar: CalendarItem[] = [],
-//  action: any
-// ) {
-//  switch (action.type) {
-//   case "ADD_CALENDAR_ITEM":
-//    return [...calendar, action.payload];
-//   case "REMOVE_CALENDAR_ITEM_BY_ID":
-//    const filteredCalendar = calendar.filter(
-//     (item) => item.id !== action.payload
-//    );
-//    return [...filteredCalendar];
-//   case "MODIFY_CALENDAR_ITEM_QUANTITY":
-//    const prevState = [...calendar];
-//    prevState[action.payload.index].quantity = action.payload.quantity;
-//    return prevState;
-//   default:
-//    return calendar;
-//  }
-// }
+export interface CalendarItem {
+ menuItems: MenuItems[];
+ date: string;
+ userId: string;
+}
 
-// export const addCalendarItem = (newCalendarItem: CalendarItem) => ({
-//  type: "ADD_CALENDAR_ITEM",
-//  payload: newCalendarItem,
-// });
+export interface MenuItems {
+ foodId: string;
+ quantity: number;
+}
 
-// export const removeCalendarItemById = (id: string) => ({
-//  type: "REMOVE_CALENDAR_ITEM_BY_ID",
-//  payload: id,
-// });
+export interface CalendarJSON {
+ _id: string;
+ menuItems: MenuItems[];
+ date: string;
+ userId: string;
+ __v: number;
+}
 
-// export const modifyCalendarItemQuantity = (
-//  index: number,
-//  quantity: number
-// ) => ({
-//  type: "MODIFY_CALENDAR_ITEM_QUANTITY",
-//  payload: {
-//   index,
-//   quantity,
-//  },
-// });
+export type CalendarGetAction =
+ | CalendarGetRequest
+ | CalendarGetSuccess
+ | CalendarGetFailure;
+
+export const CALENDAR_GET_REQUEST = "CALENDAR_GET_REQUEST";
+export const CALENDAR_GET_SUCCESS = "CALENDAR_GET_SUCCESS";
+export const CALENDAR_GET_FAILURE = "CALENDAR_GET_FAILURE";
+
+export interface CalendarGetRequest {
+ type: typeof CALENDAR_GET_REQUEST;
+}
+export interface CalendarGetSuccess {
+ type: typeof CALENDAR_GET_SUCCESS;
+ payload: CalendarItem[];
+}
+export interface CalendarGetFailure {
+ type: typeof CALENDAR_GET_FAILURE;
+ payload: string;
+}
+
+export interface CalendarState {
+ loading: boolean;
+ calendar: CalendarItem[];
+ error: string;
+}
+
+const initalState: CalendarState = {
+ loading: false,
+ calendar: [],
+ error: "",
+};
+
+export const calendarGet = (dateList: string[], id: string) => {
+ return (dispatch: Dispatch<CalendarGetAction>) => {
+  dispatch({
+   type: CALENDAR_GET_REQUEST,
+  });
+  fetch(CALENDAR_URL_GETMANY + id, {
+   method: "POST",
+   body: JSON.stringify({ dateList }),
+   headers: {
+    "Content-Type": "application/json",
+   },
+  })
+   .then((res) => res.json())
+   .then((data: CalendarJSON[]) => {
+    const calendar: CalendarItem[] = data.map((calendarItem) => {
+     const { userId, date } = calendarItem;
+     return { userId, menuItems: [...calendarItem.menuItems], date };
+    });
+    dispatch({
+     type: CALENDAR_GET_SUCCESS,
+     payload: calendar,
+    });
+   })
+   .catch((err) => {
+    console.error(err);
+    dispatch({
+     type: CALENDAR_GET_FAILURE,
+     payload: err.message,
+    });
+   });
+ };
+};
+
+export const calendarGetReducer = (
+ state = initalState,
+ action: CalendarGetAction
+): CalendarState => {
+ switch (action.type) {
+  case CALENDAR_GET_REQUEST:
+   return {
+    ...state,
+    loading: true,
+   };
+  case CALENDAR_GET_SUCCESS:
+   return {
+    loading: false,
+    calendar: action.payload,
+    error: "",
+   };
+  case CALENDAR_GET_FAILURE:
+   return {
+    loading: false,
+    calendar: [],
+    error: action.payload,
+   };
+  default:
+   return state;
+ }
+};

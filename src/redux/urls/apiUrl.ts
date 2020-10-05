@@ -8,3 +8,7 @@ export const MENU_URL = API_URL + "menu/";
 
 export const USER_URL: string = API_URL + "users/";
 export const USER_URL_SIGNUP: string = USER_URL + "signup/";
+
+export const FAV_ADD: string = USER_URL + "favAdd/";
+export const FAV_REMOVE: string = USER_URL + "favRemove/";
+export const FAV_CLEAR: string = USER_URL + "favClear/";

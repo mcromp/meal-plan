@@ -1,6 +1,3 @@
-import { Dispatch } from "redux";
-import { USER_URL } from "../urls/apiUrl";
-
 export interface UserJSON {
  _id: string;
  favList: string[];
@@ -15,92 +12,32 @@ export interface User {
  username: string;
 }
 
-export type UserGetAction =
- | FetchUsersRequest
- | FetchUsersSuccess
- | FetchUsersFailure;
+export const SET_USERS = "SET_USERS";
 
-export const FETCH_USERS_REQUEST = "FETCH_USERS_REQUEST";
-export const FETCH_USERS_SUCCESS = "FETCH_USERS_SUCCESS";
-export const FETCH_USERS_FAILURE = "FETCH_USERS_FAILURE";
-
-export interface FetchUsersRequest {
- type: typeof FETCH_USERS_REQUEST;
-}
-export interface FetchUsersSuccess {
- type: typeof FETCH_USERS_SUCCESS;
- payload: User[];
-}
-export interface FetchUsersFailure {
- type: typeof FETCH_USERS_FAILURE;
- payload: string;
-}
-
-export interface UsersState {
- loading: boolean;
+export interface SetUsers {
+ type: typeof SET_USERS;
  users: User[];
- error: string;
 }
 
-const initalState: UsersState = {
- loading: false,
- users: [],
- error: "",
-};
-
-export const usersGet = () => {
- return (dispatch: Dispatch<UserGetAction>) => {
-  dispatch({
-   type: FETCH_USERS_REQUEST,
-  });
-  fetch(USER_URL)
-   .then((res) => res.json())
-   .then((data: UserJSON[]) => {
-    const users: User[] = data.map((user) => {
-     const id = user._id;
-     return {
-      id,
-      favList: [...user.favList],
-      username: user.username,
-     };
-    });
-    dispatch({
-     type: FETCH_USERS_SUCCESS,
-     payload: users,
-    });
-   })
-   .catch((err) => {
-    console.error(err);
-    dispatch({
-     type: FETCH_USERS_FAILURE,
-     payload: err.message,
-    });
-   });
+export const setUsers = (userJSON: UserJSON[]) => {
+ let users: User[] = userJSON.map((user) => {
+  const id = user._id;
+  return {
+   id,
+   favList: [...user.favList],
+   username: user.username,
+  };
+ });
+ return {
+  type: SET_USERS,
+  users,
  };
 };
 
-export const userReducer = (
- state = initalState,
- action: UserGetAction
-): UsersState => {
+export const userReducer = (state = [], action: SetUsers) => {
  switch (action.type) {
-  case FETCH_USERS_REQUEST:
-   return {
-    ...state,
-    loading: true,
-   };
-  case FETCH_USERS_SUCCESS:
-   return {
-    loading: false,
-    users: action.payload,
-    error: "",
-   };
-  case FETCH_USERS_FAILURE:
-   return {
-    loading: false,
-    users: [],
-    error: action.payload,
-   };
+  case SET_USERS:
+   return action.users;
   default:
    return state;
  }

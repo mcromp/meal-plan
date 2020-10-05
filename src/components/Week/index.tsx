@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { RootState } from '../../redux';
-import { calendarGet, CalendarItem, CalendarState } from '../../redux/calendar/calendarGet';
+import { calendarGet, CalendarItem, CalendarState } from '../../redux/calendar/calendar';
 import { MenuItem } from '../../redux/menuList/menuList';
 import { clearCurrentUser } from '../../redux/users/userCurrent';
 import { User } from '../../redux/users/users';
@@ -55,7 +55,7 @@ const generateWeekDays = () => {
 
 const DayCard: React.FC<DayCardProps> = ({ day, calendar, handleDateCardClick }) => {
   const [calendarDisplay, setCalendarDisplay] = useState<CalendarItem | null>(null)
-  const menuList = useSelector<RootState, MenuItem[]>(state => state.menuList.data)
+  // const menuList = useSelector<RootState, MenuItem[]>(state => state.menuList.data)
 
   useEffect(() => {
     const temp = calendar.find(item => item.date === day.dateId)
@@ -68,9 +68,9 @@ const DayCard: React.FC<DayCardProps> = ({ day, calendar, handleDateCardClick })
 
       {calendarDisplay ? <div>
         {calendarDisplay.menuItems.map(item => {
-          const menuItem = menuList.find(f => f.ID === item.foodId)
+          // const menuItem = menuList.find(f => f.ID === item.foodId)
           return (<div key={item.foodId}>
-            <span>{menuItem?.ITEM}, {item.quantity}</span>
+            {/* <span>{menuItem?.ITEM}, {item.quantity}</span> */}
           </div>
           )
         })}
