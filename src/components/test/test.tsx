@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '../../redux'
 import { MenuItems } from '../../redux/calendar/calendar'
-import { fetchDispatch } from '../../redux/fetchDispatch/fetchDispatch'
+import { fetchDispatch, reqAddFav, reqClearFavList, reqRemoveFav, reqUpdateCalendar } from '../../redux/fetchDispatch/fetchDispatch'
 
 export const Test: React.FC<any> = () => {
 
@@ -35,23 +35,31 @@ export const Test: React.FC<any> = () => {
 
   const handleClick = () => {
     // let dateList = ["28-8-2020", "30-8-2020"]
-    // dispatch(fetchDispatch("req_getCalendar", "5f6f3d42cd9bedc5e0f8db81", { dateList }))
+    // dispatch(fetchDispatch("req_getCalendar", { dateList }, "5f6f3d42cd9bedc5e0f8db81"))
     // const username = "Abbea"
-    // dispatch(fetchDispatch("req_addUser", "", { username }))
-    const userId = "5f6f3d42cd9bedc5e0f8db81"
-    const date = "28-8-2020"
-    const menuItems: MenuItems[] = [
-      {
-        "foodId": "1",
-        "quantity": 0
-      },
-    ]
-    const body = {
-      userId,
-      date,
-      menuItems
-    }
-    dispatch(fetchDispatch("reqUpdateCalendar", body, ""))
+    // dispatch(fetchDispatch("req_addUser", { username }, ""))
+    // const userId = "5f6f3d42cd9bedc5e0f8db81"
+    // const date = "28-8-2020"
+    // const menuItems: MenuItems[] = [
+    //   {
+    //     "foodId": "1",
+    //     "quantity": 0
+    //   },
+    // ]
+    // const body = {
+    //   userId,
+    //   date,
+    //   menuItems
+    // }
+    // dispatch(fetchDispatch(reqUpdateCalendar, body, ""))
+    //fav add
+    let userId = "5f6f3d42cd9bedc5e0f8db81";
+    let itemId = "20"
+
+    // dispatch(fetchDispatch(reqAddFav, { userId, itemId }))
+    //fav remove
+    dispatch(fetchDispatch(reqClearFavList, { userId }))
+
   }
 
   return (

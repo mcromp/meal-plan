@@ -5,6 +5,16 @@ import { setMenuList } from "../menuList/menuList";
 import * as url from "../urls/apiUrl";
 import { setUsers } from "../users/users";
 
+export const reqGetMenu = "reqGetMenu";
+export const reqGetUsers = "reqGetUsers";
+export const reqGetCalendar = "reqGetCalendar";
+export const reqDeleteUser = "reqDeleteUser";
+export const reqAddUser = "reqAddUser";
+export const reqUpdateCalendar = "reqUpdateCalendar";
+export const reqAddFav = "reqAddFav";
+export const reqRemoveFav = "reqRemoveFav";
+export const reqClearFavList = "reqClearFavList";
+
 export const reqList: any = {
  reqGetMenu: { URL: url.MENU_URL, method: "" },
  reqGetUsers: { URL: url.USER_URL, method: "" },
@@ -12,6 +22,9 @@ export const reqList: any = {
  reqDeleteUser: { URL: url.USER_URL, method: "DELETE" },
  reqAddUser: { URL: url.USER_URL_SIGNUP, method: "POST" },
  reqUpdateCalendar: { URL: url.CALENDAR_URL_UPDATE, method: "POST" },
+ reqAddFav: { URL: url.FAV_ADD, method: "POST" },
+ reqRemoveFav: { URL: url.FAV_REMOVE, method: "POST" },
+ reqClearFavList: { URL: url.FAV_CLEAR, method: "POST" },
 };
 
 export const fetchDispatch = (
@@ -45,15 +58,14 @@ export const fetchDispatch = (
 };
 
 const setReqData = (dispatch: any, data: any, reqSelect: string) => {
- if (reqSelect === "reqGetMenu") dispatch(setMenuList(data));
- if (reqSelect === "reqGetUsers") dispatch(setUsers(data));
- if (reqSelect === "reqGetCalendar") dispatch(setCalendar(data));
- if (reqSelect === "reqDeleteUser")
+ if (reqSelect === reqGetMenu) dispatch(setMenuList(data));
+ if (reqSelect === reqGetUsers) dispatch(setUsers(data));
+ if (reqSelect === reqGetCalendar) dispatch(setCalendar(data));
+ if (reqSelect === reqDeleteUser)
   dispatch(setAlertMessage(`User: ${data.username} deleted`));
- if (reqSelect === "reqAddUser")
+ if (reqSelect === reqAddUser)
   dispatch(setAlertMessage(`${data.username} added`));
- if (reqSelect === "reqUpdateCalendar") {
-  console.log("WHUDDUP");
-  dispatch(setAlertMessage(`IT WORKKEDDDD`));
- }
+ //remove this line after dev
+ if (reqSelect === reqUpdateCalendar || reqAddFav || reqClearFavList)
+  console.log("Update worked");
 };
