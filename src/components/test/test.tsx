@@ -58,7 +58,7 @@ export const Test: React.FC<any> = () => {
 
     // dispatch(fetchDispatch(reqAddFav, { userId, itemId }))
     //fav remove
-    dispatch(fetchDispatch(reqClearFavList, { userId }))
+    // dispatch(fetchDispatch(reqClearFavList, { userId }))
 
   }
 
