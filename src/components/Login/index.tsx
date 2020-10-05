@@ -35,10 +35,6 @@ const Login = () => {
     dispatch(setAlertMessage(""))
   }, [dispatch, alertMessage])
 
-  // useEffect(() => {
-  //   if (signupStateMessage) handleMessage(signupStateMessage)
-  //   // dispatch(resetDeleteMessage())
-  // }, [dispatch, signupStateMessage])
 
   const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setValue(e.target.value)

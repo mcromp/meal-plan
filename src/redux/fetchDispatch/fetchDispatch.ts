@@ -60,11 +60,16 @@ export const fetchDispatch = (
 const setReqData = (dispatch: any, data: any, reqSelect: string) => {
  if (reqSelect === reqGetMenu) dispatch(setMenuList(data));
  if (reqSelect === reqGetUsers) dispatch(setUsers(data));
+
  if (reqSelect === reqGetCalendar) dispatch(setCalendar(data));
- if (reqSelect === reqDeleteUser)
-  dispatch(setAlertMessage(`User: ${data.username} deleted`));
- if (reqSelect === reqAddUser)
-  dispatch(setAlertMessage(`${data.username} added`));
+ if (reqSelect === reqDeleteUser) {
+  const deleteMessage: string = `User: ${data.username} deleted`;
+  dispatch(setAlertMessage(deleteMessage));
+ }
+ if (reqSelect === reqAddUser) {
+  const userAddMessage: string = `${data.username} added`;
+  dispatch(setAlertMessage(userAddMessage));
+ }
  //remove this line after dev
  if (reqSelect === reqUpdateCalendar) {
   console.log("Update worked " + reqSelect);
