@@ -16,7 +16,6 @@ export const isLoggedInReducer = (
 ) => {
  switch (action.type) {
   case IS_LOGGED_IN:
-   console.log(action);
    return action.isLoggedIn;
   default:
    return state;
