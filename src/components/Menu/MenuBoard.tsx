@@ -21,7 +21,6 @@ const MenuBoard: React.FC<MenuBoardProps> = ({
   useEffect(() => {
     const filterCardList = () => {
       let cardArr: MenuItem[] = [];
-
       const selectedFilterIdList = filterList.reduce<FilterId[]>((acc, filter) => {
         if (filter.selected) acc.push(filter.id)
         return acc
@@ -65,7 +64,6 @@ const MenuBoard: React.FC<MenuBoardProps> = ({
   return (
     <div className="grid_i">
       {cardList && cardList.map((item: MenuItem) => (
-
         <MenuCard
           key={item.ID}
           item={item}

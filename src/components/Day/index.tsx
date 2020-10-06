@@ -84,6 +84,7 @@ const Day: React.FC = () => {
   }
 
   const addCheckOutBoardItem = (item: MenuItem) => {
+    console.log(item)
     if (checkoutBoardItems?.find(i => i.foodId === item.ID)) return;
     const itemToAdd: CalendarMenuItem = {
       foodId: item.ID,
@@ -100,7 +101,7 @@ const Day: React.FC = () => {
   const checkoutBoardMap =
     checkoutBoardItems.map((checkoutItem: CalendarMenuItem) => (
       <CheckoutBoardItem
-        key={checkoutItem.foodId}
+        key={checkoutItem.foodId + "checkout"}
         item={checkoutItem}
         removeFromCheckoutBoard={removeFromCheckoutBoard}
         modifyQuantityOfCheckoutBoardItem={modifyQuantityOfCheckoutBoardItem} />

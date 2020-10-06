@@ -14,7 +14,8 @@ const MenuCard: React.FC<any> = ({
   const dispatch = useDispatch()
 
   useEffect(() => {
-  }, [isFav])
+    console.log(item.ID)
+  }, [])
 
   const toggleFav = () => {
     const body = {
@@ -30,16 +31,10 @@ const MenuCard: React.FC<any> = ({
   return (
     <div style={{ backgroundColor: "mediumpurple" }}>
       <span>{item.ITEM}</span>
-      <button onClick={() => addCheckOutBoardItem(item.ID, 1)}>plus 1</button>
-      <button
-        onClick={() => addCheckOutBoardItem(item.ID, -1)}
-        disabled={disableCheck(item.ID)}>
-        minus 1
-            </button>
+      <button disabled={disableCheck(item.ID)} onClick={() => addCheckOutBoardItem(item)} >Add</button>
       <button onClick={toggleFav}>
         {isFav ? "💟" : "♡"}
       </button>
-      <span>hello is this thing on?</span>
     </div >
   );
 };
