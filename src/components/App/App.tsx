@@ -2,11 +2,13 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Day from '../Day';
+import Header from '../Header/Header';
 import Login from '../Login';
 import Week from '../Week';
 
 
 const App: React.FC = () => {
+
   return (
     <Router>
       <Switch>
@@ -14,10 +16,16 @@ const App: React.FC = () => {
           <Login />
         </Route>
         <Route path="/week">
-          <Week />
+          <>
+            <Header />
+            <Week />
+          </>
         </Route>
         <Route path="/d/:day">
-          <Day />
+          <>
+            <Header />
+            <Day />
+          </>
         </Route>
       </Switch>
     </Router>
