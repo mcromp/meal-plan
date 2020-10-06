@@ -64,7 +64,10 @@ export const fetchDispatch = (
 const setReqData = (dispatch: any, data: any, reqSelect: string) => {
  if (reqSelect === reqGetMenu) dispatch(setMenuList(data));
  if (reqSelect === reqGetUsers) dispatch(setUsers(data));
- if (reqSelect === reqGetUser) dispatch(setCurrentUser(data));
+ if (reqSelect === reqGetUser) {
+  console.log(data);
+  dispatch(setCurrentUser(data));
+ }
  if (reqSelect === reqGetCalendar) dispatch(setCalendar(data));
  if (reqSelect === reqDeleteUser) {
   const deleteMessage: string = `User: ${data.username} deleted`;

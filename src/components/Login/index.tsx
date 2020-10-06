@@ -3,7 +3,7 @@ import { RootState } from '../../redux';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentUser } from '../../redux/users/currentUser';
 import { Redirect } from 'react-router-dom';
-import { fetchDispatch, reqAddUser, reqDeleteUser, reqGetUsers } from '../../redux/fetchDispatch/fetchDispatch';
+import { fetchDispatch, reqAddUser, reqDeleteUser, reqGetUser, reqGetUsers } from '../../redux/fetchDispatch/fetchDispatch';
 import { User } from '../../redux/users/users';
 import { setAlertMessage } from '../../redux/alertMessage/alertMessage';
 import { setIsLoggedIn } from '../../redux/isLoggedIn/isLoggedIn';
@@ -65,7 +65,7 @@ const Login = () => {
   }
 
   const handleSignin = () => {
-    if (selectedUser) dispatch(setCurrentUser(selectedUser))
+    dispatch(fetchDispatch(reqGetUser, "", selectedUser?.id))
     dispatch(setIsLoggedIn(true))
     setSelectedUser(null)
     setValue("")

@@ -33,8 +33,14 @@ const Day: React.FC = () => {
   const [checkoutBoardItems, setCheckoutBoardItems] = useState<CalendarMenuItem[]>([])
   const params: DayParam = useParams()
 
+  // useEffect(() => {
+  //   console.log("currentUser")
+
+  //   console.log(currentUser)
+  // }, [currentUser])
+
   useEffect(() => {
-    const menuItemFind = calendar.find(((x) => x.date === params.day))
+    const menuItemFind = calendar.find(((item) => item.date === params.day))
     if (menuItemFind) {
       setCheckoutBoardItems(menuItemFind.menuItems)
     }

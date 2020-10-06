@@ -1,9 +1,9 @@
-import { User } from "./users";
+import { User, UserJSON } from "./users";
 
 export const SET_CURRENT_USER = "SET_CURRENT_USER";
 export const CLEAR_CURRENT_USER = "CLEAR_CURRENT_USER";
 
-export const setCurrentUser = (user: User) => ({
+export const setCurrentUser = (user: UserJSON) => ({
  type: SET_CURRENT_USER,
  payload: user,
 });
@@ -13,7 +13,7 @@ export const clearCurrentUser = () => ({
 
 export interface SetCurrentUser {
  type: typeof SET_CURRENT_USER;
- payload: User;
+ payload: UserJSON;
 }
 
 export interface ClearCurrentUser {
@@ -28,7 +28,13 @@ const currentUserReducer = (
 ) => {
  switch (action.type) {
   case SET_CURRENT_USER:
-   return action.payload;
+   const { _id, favList, username } = action.payload;
+   const user = {
+    id: _id,
+    favList,
+    username,
+   };
+   return user;
   case CLEAR_CURRENT_USER:
    return "";
   default:

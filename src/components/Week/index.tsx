@@ -57,6 +57,7 @@ const generateWeekDays = () => {
 const DayCard: React.FC<DayCardProps> = ({ day, calendar, handleDateCardClick }) => {
   const [calendarDisplay, setCalendarDisplay] = useState<CalendarItem | null>(null)
   const menuList = useSelector<RootState, MenuItem[]>(state => state.menuList)
+
   useEffect(() => {
     const temp = calendar.find(item => item.date === day.dateId)
     if (temp)
@@ -87,6 +88,9 @@ const Week = () => {
   const [week, setWeek] = useState<WeekDay[] | null>(null)
   const calendar = useSelector<RootState, CalendarItem[]>(state => state.calendar)
   const isLoading = useSelector<RootState, boolean>(state => state.isLoading)
+  const isLoggedIn = useSelector<RootState, boolean>(state => state.isLoggedIn)
+
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -112,7 +116,7 @@ const Week = () => {
 
 
 
-  if (!currentUser) { return <Redirect to='/' /> }
+  if (!isLoggedIn && !currentUser) { return <Redirect to='/' /> }
   if (daySelected) { return <Redirect to={`/d/${daySelected}`} /> }
 
   return (
@@ -128,9 +132,6 @@ const Week = () => {
                     day={day}
                     handleDateCardClick={handleDateCardClick}
                     calendar={calendar} />
-                  <br />
-                  <br />
-
                   <br />
 
                 </ div>
