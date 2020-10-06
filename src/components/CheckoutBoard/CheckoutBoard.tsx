@@ -7,13 +7,13 @@ import { CalendarMenuItem } from '../Day/index'
 const CheckoutBoardItem: React.FC<CheckoutBoardItemProps> = ({
   item, modifyQuantityOfCheckoutBoardItem, removeFromCheckoutBoard
 }) => {
-  // const menuList = useSelector<RootState, MenuItem[]>(state => state.menuList.data)
+  const menuList = useSelector<RootState, MenuItem[]>(state => state.menuList)
   const [name, setName] = useState<string>("")
 
-  // useEffect(() => {
-  //   const findName = menuList.find(i => i.ID === item.foodId)
-  //   if (findName) setName(findName?.ITEM)
-  // }, [menuList, item.foodId])
+  useEffect(() => {
+    const findName = menuList.find(i => i.ID === item.foodId)
+    if (findName) setName(findName?.ITEM)
+  }, [menuList, item.foodId])
 
 
   return (

@@ -5,7 +5,7 @@ import { RootState } from '../../redux';
 import { CalendarItem } from '../../redux/calendar/calendar';
 import { fetchDispatch, reqGetCalendar, reqGetMenu } from '../../redux/fetchDispatch/fetchDispatch';
 import { MenuItem } from '../../redux/menuList/menuList';
-import { clearCurrentUser } from '../../redux/users/userCurrent';
+import { clearCurrentUser } from '../../redux/users/currentUser';
 import { User } from '../../redux/users/users';
 import './Week.css'
 
@@ -120,11 +120,6 @@ const Week = () => {
       {isLoading ? <span>loading</span>
         :
         <>
-          <div className="user-bar">
-            <h3>Logged in as: {currentUser.username}</h3>
-            <button onClick={handleSignout}>Sign Out</button>
-          </div>
-
           <div className="parent">
             {week ?
               week.map(day => (

@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux";
+import { fetchDispatch, reqGetUser } from "../../redux/fetchDispatch/fetchDispatch";
 import { MenuItem } from "../../redux/menuList/menuList";
+import { User } from "../../redux/users/users";
 import { CalendarMenuItem } from "../Day";
 import { Filter, FilterId } from "../FilterBar/types";
+import MenuCard from "./MenuCard";
 
 const MenuBoard: React.FC<MenuBoardProps> = ({
   addCheckOutBoardItem,
@@ -12,6 +15,8 @@ const MenuBoard: React.FC<MenuBoardProps> = ({
   const filterList = useSelector<RootState, Filter[]>(state => state.filterList);
   const menuList = useSelector<RootState, MenuItem[]>(state => state.menuList);
   const [cardList, setCardList] = useState<MenuItem[] | null>(null);
+  const { favList, id: userId } = useSelector<RootState, User>(state => state.currentUser);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const filterCardList = () => {
@@ -21,6 +26,8 @@ const MenuBoard: React.FC<MenuBoardProps> = ({
         if (filter.selected) acc.push(filter.id)
         return acc
       }, []);
+
+
 
       selectedFilterIdList.length === 0
         ? (cardArr = menuList)
@@ -33,9 +40,9 @@ const MenuBoard: React.FC<MenuBoardProps> = ({
       menuList.reduce<MenuItem[]>((acc, food) => {
         const foodCategory = food.CATEGORY as FilterId;
         if (
-          selectedFilterIdList.includes(foodCategory)
-          // (favList.includes(food.ID) &&
-          //   selectedFilterIdList.includes("FAVORITES"))
+          selectedFilterIdList.includes(foodCategory) ||
+          (favList.includes(food.ID) &&
+            selectedFilterIdList.includes("FAVORITES"))
         ) acc.push(food);
         return acc;
       }, []);
@@ -44,6 +51,9 @@ const MenuBoard: React.FC<MenuBoardProps> = ({
     filterCardList();
   }, [filterList, menuList]);
 
+  useEffect(() => {
+    dispatch(fetchDispatch(reqGetUser, null, userId))
+  }, [dispatch])
 
 
   const disableCheck = (id: string): boolean => {
@@ -55,11 +65,12 @@ const MenuBoard: React.FC<MenuBoardProps> = ({
   return (
     <div className="grid_i">
       {cardList && cardList.map((item: MenuItem) => (
-        <div key={item.ID}>
-          <span>{item.ITEM}</span>
-          <button disabled={disableCheck(item.ID)} onClick={() => addCheckOutBoardItem(item)} >Add</button>
-          <button>{}</button>
-        </div>
+
+        <MenuCard
+          key={item.ID}
+          item={item}
+          addCheckOutBoardItem={addCheckOutBoardItem}
+          disableCheck={disableCheck} />
       ))}
     </div>
   );

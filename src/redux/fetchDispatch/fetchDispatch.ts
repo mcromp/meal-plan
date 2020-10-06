@@ -4,9 +4,11 @@ import { isLoading } from "../isLoading/isLoading";
 import { setMenuList } from "../menuList/menuList";
 import * as url from "../urls/apiUrl";
 import { setUsers } from "../users/users";
+import { setCurrentUser } from "../users/currentUser";
 
 export const reqGetMenu = "reqGetMenu";
 export const reqGetUsers = "reqGetUsers";
+export const reqGetUser = "reqGetUser";
 export const reqGetCalendar = "reqGetCalendar";
 export const reqDeleteUser = "reqDeleteUser";
 export const reqAddUser = "reqAddUser";
@@ -16,8 +18,9 @@ export const reqRemoveFav = "reqRemoveFav";
 export const reqClearFavList = "reqClearFavList";
 
 export const reqList: any = {
- reqGetMenu: { URL: url.MENU_URL, method: "" },
- reqGetUsers: { URL: url.USER_URL, method: "" },
+ reqGetMenu: { URL: url.MENU_URL, method: "GET" },
+ reqGetUsers: { URL: url.USER_URL, method: "GET" },
+ reqGetUser: { URL: url.USER_URL, method: "GET" },
  reqGetCalendar: { URL: url.CALENDAR_URL_GETMANY, method: "POST" },
  reqDeleteUser: { URL: url.USER_URL, method: "DELETE" },
  reqAddUser: { URL: url.USER_URL_SIGNUP, method: "POST" },
@@ -45,7 +48,7 @@ export const fetchDispatch = (
        "Content-Type": "application/json",
       },
      })
-   : await fetch(fetchURL + urlParam);
+   : await fetch(fetchURL);
 
   if (!res.ok) throw Error(await res.json());
   const data = await res.json();
@@ -53,14 +56,15 @@ export const fetchDispatch = (
   dispatch(isLoading(false));
  } catch (error) {
   dispatch(isLoading(false));
-  dispatch(setAlertMessage(error.message));
+  console.error(`Error with ${reqSelect} call`);
+  console.error(error.message);
  }
 };
 
 const setReqData = (dispatch: any, data: any, reqSelect: string) => {
  if (reqSelect === reqGetMenu) dispatch(setMenuList(data));
  if (reqSelect === reqGetUsers) dispatch(setUsers(data));
-
+ if (reqSelect === reqGetUser) dispatch(setCurrentUser(data));
  if (reqSelect === reqGetCalendar) dispatch(setCalendar(data));
  if (reqSelect === reqDeleteUser) {
   const deleteMessage: string = `User: ${data.username} deleted`;
@@ -69,9 +73,5 @@ const setReqData = (dispatch: any, data: any, reqSelect: string) => {
  if (reqSelect === reqAddUser) {
   const userAddMessage: string = `${data.username} added`;
   dispatch(setAlertMessage(userAddMessage));
- }
- //remove this line after dev
- if (reqSelect === reqUpdateCalendar) {
-  console.log("Update worked " + reqSelect);
  }
 };

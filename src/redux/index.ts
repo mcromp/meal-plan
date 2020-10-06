@@ -5,8 +5,9 @@ import filterReducer from "./filterList/filterList";
 import { alertMessageReducer } from "./alertMessage/alertMessage";
 import { isLoadingReducer } from "./isLoading/isLoading";
 import { menuReducer } from "./menuList/menuList";
-import currentUserReducer from "./users/userCurrent";
+import currentUserReducer from "./users/currentUser";
 import { userReducer } from "./users/users";
+import { isLoggedInReducer } from "./isLoggedIn/isLoggedIn";
 // import logger from "redux-logger";
 
 const rootReducer = combineReducers({
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
  currentUser: currentUserReducer,
  calendar: calendarReducer,
  isLoading: isLoadingReducer,
+ isLoggedIn: isLoggedInReducer,
  alertMessage: alertMessageReducer,
 });
 

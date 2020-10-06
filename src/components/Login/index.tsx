@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { RootState } from '../../redux';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCurrentUser } from '../../redux/users/userCurrent';
+import { setCurrentUser } from '../../redux/users/currentUser';
 import { Redirect } from 'react-router-dom';
 import { fetchDispatch, reqAddUser, reqDeleteUser, reqGetUsers } from '../../redux/fetchDispatch/fetchDispatch';
 import { User } from '../../redux/users/users';
@@ -24,7 +24,6 @@ const Login = () => {
 
   useEffect(() => {
     dispatch(fetchDispatch(reqGetUsers))
-    console.log(users)
   }, [dispatch])
 
   useEffect(() => {
