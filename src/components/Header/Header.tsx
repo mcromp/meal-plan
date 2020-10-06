@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux";
-import { isLoggedIn } from "../../redux/isLoggedIn/isLoggedIn";
+import { setIsLoggedIn } from "../../redux/isLoggedIn/isLoggedIn";
 import { clearCurrentUser } from "../../redux/users/currentUser";
 import { User } from "../../redux/users/users";
 
@@ -10,7 +10,7 @@ const Header: React.FC<any> = () => {
   const dispatch = useDispatch();
 
   const handleLogout = () => {
-    dispatch(isLoggedIn(false))
+    dispatch(setIsLoggedIn(false))
     dispatch(clearCurrentUser())
   }
 

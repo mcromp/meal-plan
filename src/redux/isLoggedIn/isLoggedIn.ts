@@ -1,13 +1,13 @@
 export const IS_LOGGED_IN = "IS_LOGGED_IN";
 
-export const isLoggedIn = (isLoggedIn: boolean) => ({
+export const setIsLoggedIn = (isLoggedIn: boolean) => ({
  type: IS_LOGGED_IN,
- isLoading: isLoggedIn,
+ isLoggedIn,
 });
 
 export interface Is_Logged_In {
  type: typeof IS_LOGGED_IN;
- isLoading: boolean;
+ isLoggedIn: boolean;
 }
 
 export const isLoggedInReducer = (
@@ -16,7 +16,8 @@ export const isLoggedInReducer = (
 ) => {
  switch (action.type) {
   case IS_LOGGED_IN:
-   return action.isLoading;
+   console.log(action);
+   return action.isLoggedIn;
   default:
    return state;
  }

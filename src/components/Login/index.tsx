@@ -6,6 +6,7 @@ import { Redirect } from 'react-router-dom';
 import { fetchDispatch, reqAddUser, reqDeleteUser, reqGetUsers } from '../../redux/fetchDispatch/fetchDispatch';
 import { User } from '../../redux/users/users';
 import { setAlertMessage } from '../../redux/alertMessage/alertMessage';
+import { setIsLoggedIn } from '../../redux/isLoggedIn/isLoggedIn';
 
 const Login = () => {
   const [confirmDelete, setConfirmDelete] = useState<boolean>(false)
@@ -13,8 +14,8 @@ const Login = () => {
   const [value, setValue] = useState<string>("")
   const [selectedUser, setSelectedUser] = useState<User | null>(null)
   const [message, setMessage] = useState<string | null>(null)
-  const [loggedIn, setLoggedIn] = useState<boolean>(false)
 
+  const isLoggedIn = useSelector<RootState, boolean>(state => state.isLoggedIn)
   const alertMessage = useSelector<RootState, string>(state => state.alertMessage)
   const users = useSelector<RootState, User[]>(state => state.users)
   const currentUser = useSelector<RootState, User | null>(state => state.currentUser)
@@ -65,14 +66,14 @@ const Login = () => {
 
   const handleSignin = () => {
     if (selectedUser) dispatch(setCurrentUser(selectedUser))
-    setLoggedIn(true)
+    dispatch(setIsLoggedIn(true))
     setSelectedUser(null)
     setValue("")
   }
 
   const checkValue = value.length === 0;
 
-  if (loggedIn || currentUser) { return <Redirect to='/week' /> }
+  if (isLoggedIn && currentUser) { return <Redirect to='/week' /> }
   return (
     <>
       {showAddUser ?
