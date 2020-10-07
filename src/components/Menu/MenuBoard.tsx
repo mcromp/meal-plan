@@ -48,11 +48,11 @@ const MenuBoard: React.FC<MenuBoardProps> = ({
 
     setCardList([]);
     filterCardList();
-  }, [filterList, menuList]);
+  }, [filterList, menuList, favList]);
 
   useEffect(() => {
     dispatch(fetchDispatch(reqGetUser, null, userId))
-  }, [dispatch])
+  }, [dispatch, userId])
 
 
   const disableCheck = (id: string): boolean => {

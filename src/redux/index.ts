@@ -8,6 +8,7 @@ import { menuReducer } from "./menuList/menuList";
 import currentUserReducer from "./users/currentUser";
 import { userReducer } from "./users/users";
 import { isLoggedInReducer } from "./isLoggedIn/isLoggedIn";
+
 // import logger from "redux-logger";
 
 const rootReducer = combineReducers({

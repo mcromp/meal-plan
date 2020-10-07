@@ -5,7 +5,7 @@ import { RootState } from "../../redux";
 import { CalendarItem } from "../../redux/calendar/calendar";
 import { fetchDispatch, reqUpdateCalendar } from "../../redux/fetchDispatch/fetchDispatch";
 
-import { MenuItem, MenuState } from "../../redux/menuList/menuList";
+import { MenuItem } from "../../redux/menuList/menuList";
 import { User } from "../../redux/users/users";
 import CheckoutBoardItem from "../CheckoutBoard/CheckoutBoard";
 import FilterButtonList from "../FilterBar/FilterBar";
