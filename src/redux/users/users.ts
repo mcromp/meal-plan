@@ -1,16 +1,16 @@
-export interface UserJSON {
+export type UserJSON = {
  _id: string;
  favList: string[];
  username: string;
  createdAt: string;
  updatedAt: string;
  __v: number;
-}
-export interface User {
+};
+export type User = {
  id: string;
  favList: string[];
  username: string;
-}
+};
 
 export const SET_USERS_FROM_JSON = "SET_USERS_FROM_JSON";
 export const DELETE_ONE_USER = "DELETE_ONE_USER";

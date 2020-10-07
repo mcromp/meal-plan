@@ -7,8 +7,8 @@ export type FilterId =
  | "BREAKFAST"
  | "FAVORITES";
 
-export interface Filter {
+export type Filter = {
  id: FilterId;
  name: string;
  selected: boolean;
-}
+};

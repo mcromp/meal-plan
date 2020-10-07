@@ -74,7 +74,7 @@ const MenuBoard: React.FC<MenuBoardProps> = ({
   );
 };
 
-interface MenuBoardProps {
+type MenuBoardProps = {
   addCheckOutBoardItem: (item: MenuItem) => void,
   checkoutBoardItems: CalendarMenuItem[]
 }

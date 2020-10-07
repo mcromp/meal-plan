@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { RootState } from '../../redux';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCurrentUser } from '../../redux/users/currentUser';
+// import { setCurrentUser } from '../../redux/users/currentUser';
 import { Redirect } from 'react-router-dom';
 import { fetchDispatch, reqAddUser, reqDeleteUser, reqGetUser, reqGetUsers } from '../../redux/fetchDispatch/fetchDispatch';
-import { deleteOneUser, setUsersFromJSON, User } from '../../redux/users/users';
+import { User } from '../../redux/users/users';
 import { setAlertMessage } from '../../redux/alertMessage/alertMessage';
 import { setIsLoggedIn } from '../../redux/isLoggedIn/isLoggedIn';
 
@@ -105,7 +105,7 @@ const Login = () => {
   )
 }
 
-export interface CreateUserProps {
+export type CreateUserProps = {
   setShowAddUser: (boolean: boolean) => void;
   signupUser: (username: string) => void;
 }
@@ -148,7 +148,7 @@ const CreateUser: React.FC<CreateUserProps> = ({
 }
 
 
-export interface SelectUserFormProps {
+export type SelectUserFormProps = {
   value: string;
   handleSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
@@ -170,7 +170,7 @@ const SelectUserForm: React.FC<SelectUserFormProps> = ({ value, handleSelect }) 
   )
 }
 
-export interface ConfirmDeleteProps {
+export type ConfirmDeleteProps = {
   handleSubmit: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   selectedUser: User | null;
   setConfirmDelete: (boolean: boolean) => void;

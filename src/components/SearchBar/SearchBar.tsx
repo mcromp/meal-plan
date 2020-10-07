@@ -76,7 +76,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ menuList, checkoutBoardItems, add
   );
 };
 
-interface SearchBarProps {
+type SearchBarProps = {
   menuList: MenuItem[];
   checkoutBoardItems: CalendarMenuItem[];
   addCheckOutBoardItem: (item: MenuItem) => void

@@ -17,7 +17,7 @@ enum MonthNames {
   "July", "Aug", "Sept", "Oct", "Nov", "Dec"
 }
 
-interface WeekDay {
+type WeekDay = {
   month: string;
   day: string;
   date: string;
@@ -26,9 +26,9 @@ interface WeekDay {
 
 }
 
-interface DayCardProps {
-  day: WeekDay,
-  calendarDisplay: CalendarItem | null | undefined,
+type DayCardProps = {
+  day: WeekDay;
+  calendarDisplay: CalendarItem | null | undefined;
   handleDateCardClick: (dateId: string) => void;
 }
 

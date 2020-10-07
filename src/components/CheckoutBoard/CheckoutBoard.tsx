@@ -28,7 +28,7 @@ const CheckoutBoardItem: React.FC<CheckoutBoardItemProps> = ({
   )
 };
 
-interface CheckoutBoardItemProps {
+type CheckoutBoardItemProps = {
   item: CalendarMenuItem;
   modifyQuantityOfCheckoutBoardItem: (item: CalendarMenuItem, amount: number) => void;
   removeFromCheckoutBoard: (item: CalendarMenuItem) => void
