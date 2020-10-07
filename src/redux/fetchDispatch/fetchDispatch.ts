@@ -75,4 +75,6 @@ const setReqData = (dispatch: any, response: any, reqSelect: string) => {
   const userAddMessage: string = `${response.username} added`;
   dispatch(setAlertMessage(userAddMessage));
  }
+ if (reqSelect === reqAddFav) dispatch(setCurrentUser(response));
+ if (reqSelect === reqRemoveFav) dispatch(setCurrentUser(response));
 };
