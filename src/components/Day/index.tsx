@@ -12,7 +12,6 @@ import FilterButtonList from "../FilterBar/FilterBar";
 import MenuBoard from "../Menu/MenuBoard";
 import SearchBar from "../SearchBar/SearchBar";
 
-// REFACTOR THISSSSSSS1212
 type DayParam = {
   day: string
 }
@@ -32,12 +31,6 @@ const Day: React.FC = () => {
   const menuList = useSelector<RootState, MenuItem[]>(state => state.menuList)
   const [checkoutBoardItems, setCheckoutBoardItems] = useState<CalendarMenuItem[]>([])
   const params: DayParam = useParams()
-
-  // useEffect(() => {
-  //   console.log("currentUser")
-
-  //   console.log(currentUser)
-  // }, [currentUser])
 
   useEffect(() => {
     const menuItemFind = calendar.find(((item) => item.date === params.day))
@@ -84,7 +77,6 @@ const Day: React.FC = () => {
   }
 
   const addCheckOutBoardItem = (item: MenuItem) => {
-    console.log(item)
     if (checkoutBoardItems?.find(i => i.foodId === item.ID)) return;
     const itemToAdd: CalendarMenuItem = {
       foodId: item.ID,

@@ -13,10 +13,6 @@ const MenuCard: React.FC<any> = ({
   const [isFav, setIsFav] = useState<boolean>(favList.includes(item.ID))
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    console.log(item.ID)
-  }, [])
-
   const toggleFav = () => {
     const body = {
       userId,
