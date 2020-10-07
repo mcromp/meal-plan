@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentUser } from '../../redux/users/currentUser';
 import { Redirect } from 'react-router-dom';
 import { fetchDispatch, reqAddUser, reqDeleteUser, reqGetUser, reqGetUsers } from '../../redux/fetchDispatch/fetchDispatch';
-import { User } from '../../redux/users/users';
+import { deleteOneUser, setUsersFromJSON, User } from '../../redux/users/users';
 import { setAlertMessage } from '../../redux/alertMessage/alertMessage';
 import { setIsLoggedIn } from '../../redux/isLoggedIn/isLoggedIn';
 
@@ -38,7 +38,7 @@ const Login = () => {
     setSelectedUser(users[+e.target.value])
   }
 
-  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handleDeleteSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     setConfirmDelete(false)
     if (selectedUser) deleteUser(selectedUser.id)
@@ -48,7 +48,6 @@ const Login = () => {
 
   const deleteUser = (id: string) => {
     dispatch(fetchDispatch(reqDeleteUser, { id }))
-    window.location.reload();
   }
 
   const signupUser = (username: string) => {
@@ -84,13 +83,13 @@ const Login = () => {
         confirmDelete ?
 
           <ConfirmDelete
-            handleSubmit={handleSubmit}
+            handleSubmit={handleDeleteSubmit}
             setConfirmDelete={setConfirmDelete}
             selectedUser={selectedUser} />
           :
           <>
 
-            <SelectForm
+            <SelectUserForm
               value={value}
               handleSelect={handleSelect} />
 
@@ -149,12 +148,12 @@ const CreateUser: React.FC<CreateUserProps> = ({
 }
 
 
-export interface SelectFormProps {
+export interface SelectUserFormProps {
   value: string;
   handleSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-const SelectForm: React.FC<SelectFormProps> = ({ value, handleSelect }) => {
+const SelectUserForm: React.FC<SelectUserFormProps> = ({ value, handleSelect }) => {
   const users = useSelector<RootState, User[]>(state => state.users)
   const optionMap = (users.map((user: User, i: number) =>
     <option key={user.id} value={i}>{user.username}</option>

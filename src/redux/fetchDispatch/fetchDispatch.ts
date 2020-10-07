@@ -3,7 +3,7 @@ import { setAlertMessage } from "../alertMessage/alertMessage";
 import { isLoading } from "../isLoading/isLoading";
 import { setMenuList } from "../menuList/menuList";
 import * as url from "../urls/apiUrl";
-import { setUsers } from "../users/users";
+import { deleteOneUser, setUsersFromJSON } from "../users/users";
 import { setCurrentUser } from "../users/currentUser";
 
 export const reqGetMenu = "reqGetMenu";
@@ -51,8 +51,8 @@ export const fetchDispatch = (
    : await fetch(fetchURL);
 
   if (!res.ok) throw Error(await res.json());
-  const data = await res.json();
-  setReqData(dispatch, data, reqSelect);
+  const response = await res.json();
+  setReqData(dispatch, response, reqSelect);
   dispatch(isLoading(false));
  } catch (error) {
   dispatch(isLoading(false));
@@ -61,17 +61,18 @@ export const fetchDispatch = (
  }
 };
 
-const setReqData = (dispatch: any, data: any, reqSelect: string) => {
- if (reqSelect === reqGetMenu) dispatch(setMenuList(data));
- if (reqSelect === reqGetUsers) dispatch(setUsers(data));
- if (reqSelect === reqGetUser) dispatch(setCurrentUser(data));
- if (reqSelect === reqGetCalendar) dispatch(setCalendar(data));
+const setReqData = (dispatch: any, response: any, reqSelect: string) => {
+ if (reqSelect === reqGetMenu) dispatch(setMenuList(response));
+ if (reqSelect === reqGetUsers) dispatch(setUsersFromJSON(response));
+ if (reqSelect === reqGetUser) dispatch(setCurrentUser(response));
+ if (reqSelect === reqGetCalendar) dispatch(setCalendar(response));
  if (reqSelect === reqDeleteUser) {
-  const deleteMessage: string = `User: ${data.username} deleted`;
+  dispatch(deleteOneUser(response._id));
+  const deleteMessage: string = `User: ${response.username} deleted`;
   dispatch(setAlertMessage(deleteMessage));
  }
  if (reqSelect === reqAddUser) {
-  const userAddMessage: string = `${data.username} added`;
+  const userAddMessage: string = `${response.username} added`;
   dispatch(setAlertMessage(userAddMessage));
  }
 };

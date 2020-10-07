@@ -12,14 +12,19 @@ export interface User {
  username: string;
 }
 
-export const SET_USERS = "SET_USERS";
+export const SET_USERS_FROM_JSON = "SET_USERS_FROM_JSON";
+export const DELETE_ONE_USER = "DELETE_ONE_USER";
 
-export interface SetUsers {
- type: typeof SET_USERS;
+export interface SetUsersFromJSON {
+ type: typeof SET_USERS_FROM_JSON;
  users: User[];
 }
+export interface DeleteOneUser {
+ type: typeof DELETE_ONE_USER;
+ id: string;
+}
 
-export const setUsers = (userJSON: UserJSON[]) => {
+export const setUsersFromJSON = (userJSON: UserJSON[]) => {
  let users: User[] = userJSON.map((user) => {
   const id = user._id;
   return {
@@ -29,15 +34,26 @@ export const setUsers = (userJSON: UserJSON[]) => {
   };
  });
  return {
-  type: SET_USERS,
+  type: SET_USERS_FROM_JSON,
   users,
  };
 };
 
-export const userReducer = (state = [], action: SetUsers) => {
+export const deleteOneUser = (id: string) => {
+ return {
+  type: DELETE_ONE_USER,
+  id,
+ };
+};
+
+export type UsersActions = SetUsersFromJSON | DeleteOneUser;
+
+export const userReducer = (state: User[] = [], action: UsersActions) => {
  switch (action.type) {
-  case SET_USERS:
+  case SET_USERS_FROM_JSON:
    return action.users;
+  case DELETE_ONE_USER:
+   return state.filter((u) => !(u.id === action.id));
   default:
    return state;
  }
