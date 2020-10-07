@@ -4,8 +4,8 @@ import { Redirect } from 'react-router-dom';
 import { RootState } from '../../redux';
 import { CalendarItem } from '../../redux/calendar/calendar';
 import { fetchDispatch, reqGetCalendar, reqGetMenu } from '../../redux/fetchDispatch/fetchDispatch';
+import { resetFilter } from '../../redux/filterList/filterList';
 import { MenuItem } from '../../redux/menuList/menuList';
-import { clearCurrentUser } from '../../redux/users/currentUser';
 import { User } from '../../redux/users/users';
 import './Week.css'
 
@@ -83,7 +83,6 @@ const Week = () => {
   const isLoading = useSelector<RootState, boolean>(state => state.isLoading)
   const isLoggedIn = useSelector<RootState, boolean>(state => state.isLoggedIn)
 
-
   const dispatch = useDispatch();
 
 
@@ -94,6 +93,10 @@ const Week = () => {
     const dateList = generatedWeek.map(day => day.dateId).sort()
     if (currentUser) dispatch(fetchDispatch(reqGetCalendar, { dateList }, currentUser.id))
   }, [currentUser, dispatch])
+
+  useEffect(() => {
+    dispatch(resetFilter())
+  }, [dispatch])
 
   useEffect(() => {
     dispatch(fetchDispatch(reqGetMenu))
