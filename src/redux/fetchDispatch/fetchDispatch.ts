@@ -3,7 +3,11 @@ import { setAlertMessage } from "../alertMessage/alertMessage";
 import { isLoading } from "../isLoading/isLoading";
 import { setMenuList } from "../menuList/menuList";
 import * as url from "../urls/apiUrl";
-import { deleteOneUser, setUsersFromJSON } from "../users/users";
+import {
+ addUserFromJSON,
+ deleteOneUser,
+ setUsersFromJSON,
+} from "../users/users";
 import { setCurrentUser } from "../users/currentUser";
 
 export const reqGetMenu = "reqGetMenu";
@@ -73,6 +77,7 @@ const setReqData = (dispatch: any, response: any, reqSelect: string) => {
  }
  if (reqSelect === reqAddUser) {
   const userAddMessage: string = `${response.username} added`;
+  dispatch(addUserFromJSON(response));
   dispatch(setAlertMessage(userAddMessage));
  }
  if (reqSelect === reqAddFav) dispatch(setCurrentUser(response));

@@ -52,7 +52,6 @@ const Login = () => {
 
   const signupUser = (username: string) => {
     dispatch(fetchDispatch(reqAddUser, { username }))
-    dispatch(fetchDispatch(reqGetUsers))
     setShowAddUser(false)
   }
 
