@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Day from '../Day';
 import Header from '../Header/Header';
 import Login from '../Login';
-import Week from '../Week';
+import PrintableWeek from '../PrintableWeek';
 
 
 const App: React.FC = () => {
@@ -18,7 +18,7 @@ const App: React.FC = () => {
         <Route path="/week">
           <>
             <Header />
-            <Week />
+            <PrintableWeek />
           </>
         </Route>
         <Route path="/d/:day">

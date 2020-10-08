@@ -75,7 +75,7 @@ const DayCard: React.FC<DayCardProps> = ({ day, calendarDisplay, handleDateCardC
   )
 }
 
-const Week = () => {
+const Week: React.FC<any> = React.forwardRef((props, ref: any) => {
   const currentUser = useSelector<RootState, User | null>(state => state.currentUser)
   const [daySelected, setDaySelected] = useState<string | null>(null)
   const [week, setWeek] = useState<WeekDay[] | null>(null)
@@ -114,7 +114,7 @@ const Week = () => {
       {isLoading ? <span>loading</span>
         :
         <>
-          <div className="parent">
+          <div className="parent" ref={ref}>
             {week ?
               week.map(day => {
                 const calendarDisplay = calendar.find(item => item.date === day.dateId);
@@ -132,6 +132,11 @@ const Week = () => {
       }
     </>
   );
-}
+})
+
+
+
+
+
 
 export default Week;

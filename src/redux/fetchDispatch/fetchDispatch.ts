@@ -76,7 +76,7 @@ const setReqData = (dispatch: any, response: any, reqSelect: string) => {
   dispatch(setAlertMessage(deleteMessage));
  }
  if (reqSelect === reqAddUser) {
-  const userAddMessage: string = `${response.username} added`;
+  const userAddMessage: string = `User: ${response.username} added`;
   dispatch(addUserFromJSON(response));
   dispatch(setAlertMessage(userAddMessage));
  }
