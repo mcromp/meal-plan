@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { RootState } from '../../redux';
 import { useDispatch, useSelector } from 'react-redux';
-// import { setCurrentUser } from '../../redux/users/currentUser';
-import { Redirect, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { fetchDispatch, reqAddUser, reqDeleteUser, reqGetUser, reqGetUsers } from '../../redux/fetchDispatch/fetchDispatch';
 import { User } from '../../redux/users/users';
 import { setAlertMessage } from '../../redux/alertMessage/alertMessage';
@@ -15,10 +14,9 @@ const Login = () => {
   const [selectedUser, setSelectedUser] = useState<User | null>(null)
   const [message, setMessage] = useState<string | null>(null)
 
-  const isLoggedIn = useSelector<RootState, boolean>(state => state.isLoggedIn)
   const alertMessage = useSelector<RootState, string>(state => state.alertMessage)
   const users = useSelector<RootState, User[]>(state => state.users)
-  const currentUser = useSelector<RootState, User | null>(state => state.currentUser)
+
 
 
   const dispatch = useDispatch()
@@ -73,7 +71,6 @@ const Login = () => {
 
   const checkValue = value.length === 0;
 
-  // if (isLoggedIn && currentUser) { return <Redirect to='/w' /> }
   return (
     <>
       {showAddUser ?

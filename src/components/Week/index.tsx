@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect, useHistory } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { RootState } from '../../redux';
 import { CalendarItem } from '../../redux/calendar/calendar';
 import { fetchDispatch, reqGetCalendar, reqGetMenu } from '../../redux/fetchDispatch/fetchDispatch';
@@ -29,7 +29,6 @@ type WeekDay = {
 type DayCardProps = {
   day: WeekDay;
   calendarDisplay: CalendarItem | null | undefined;
-  handleDateCardClick: (dateId: string) => void;
 }
 
 const generateWeekDays = () => {
@@ -54,7 +53,7 @@ const generateWeekDays = () => {
   }, [])
 }
 
-const DayCard: React.FC<DayCardProps> = ({ day, calendarDisplay, handleDateCardClick }) => {
+const DayCard: React.FC<DayCardProps> = ({ day, calendarDisplay }) => {
   const menuList = useSelector<RootState, MenuItem[]>(state => state.menuList)
   return (
     <>
@@ -69,7 +68,7 @@ const DayCard: React.FC<DayCardProps> = ({ day, calendarDisplay, handleDateCardC
           )
         })}
       </div> : null}
-      <button onClick={() => handleDateCardClick(day.dateId)}>Click to edit</button>
+      <Link to={`/d/${day.dateId}`}><button>Edit</button></Link>
 
     </>
   )
@@ -77,14 +76,13 @@ const DayCard: React.FC<DayCardProps> = ({ day, calendarDisplay, handleDateCardC
 
 const Week: React.FC<any> = React.forwardRef((props, ref: any) => {
   const currentUser = useSelector<RootState, User | null>(state => state.currentUser)
-  const [daySelected, setDaySelected] = useState<string | null>(null)
+  // const [daySelected, setDaySelected] = useState<string | null>(null)
   const [week, setWeek] = useState<WeekDay[] | null>(null)
   const calendar = useSelector<RootState, CalendarItem[]>(state => state.calendar)
   const isLoading = useSelector<RootState, boolean>(state => state.isLoading)
   const isLoggedIn = useSelector<RootState, boolean>(state => state.isLoggedIn)
 
   const dispatch = useDispatch();
-  const history = useHistory();
 
 
   useEffect(() => {
@@ -102,14 +100,7 @@ const Week: React.FC<any> = React.forwardRef((props, ref: any) => {
     dispatch(fetchDispatch(reqGetMenu))
   }, [dispatch])
 
-  const handleDateCardClick = (dateId: any) => {
-    setDaySelected(dateId)
-    history.push(`/d/${dateId}`)
-
-  }
-
   if (!isLoggedIn && !currentUser) { return <Redirect to='/' /> }
-  // if (daySelected) { return <Redirect to={`/d/${daySelected}`} /> }
 
   return (
     <>
@@ -123,9 +114,7 @@ const Week: React.FC<any> = React.forwardRef((props, ref: any) => {
                 return <DayCard
                   key={day.dateId}
                   day={day}
-                  calendarDisplay={calendarDisplay}
-                  handleDateCardClick={handleDateCardClick}
-                />
+                  calendarDisplay={calendarDisplay} />
               }
               ) : null
             }

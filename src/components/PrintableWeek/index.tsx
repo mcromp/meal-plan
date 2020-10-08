@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import ReactToPrint, { useReactToPrint } from "react-to-print";
+import ReactToPrint from "react-to-print";
 import Week from "../Week";
 
 const PrintableWeek = () => {
@@ -7,7 +7,7 @@ const PrintableWeek = () => {
   return (
     <div>
       <ReactToPrint
-        trigger={() => <a href="#">Print this out!</a>}
+        trigger={() => <a href="#/"><button>Print</button></a>}
         content={() => componentRef.current}
       />
       <Week ref={componentRef} />
