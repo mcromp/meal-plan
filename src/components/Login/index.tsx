@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { RootState } from '../../redux';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -13,7 +13,6 @@ const Login = () => {
   const [value, setValue] = useState<string>("")
   const [selectedUser, setSelectedUser] = useState<User | null>(null)
   const [message, setMessage] = useState<string | null>(null)
-
   const alertMessage = useSelector<RootState, string>(state => state.alertMessage)
   const users = useSelector<RootState, User[]>(state => state.users)
 
@@ -30,6 +29,7 @@ const Login = () => {
     if (alertMessage) handleMessage(alertMessage)
     dispatch(setAlertMessage(""))
   }, [dispatch, alertMessage])
+
 
 
   const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -92,6 +92,7 @@ const Login = () => {
               handleSelect={handleSelect} />
 
 
+
             <button disabled={checkValue} onClick={() => handleSignin()}>Sign in!</button>
             <button disabled={checkValue} onClick={() => setConfirmDelete(true)}>Delete user</button>
             <br />
@@ -116,6 +117,7 @@ const CreateUser: React.FC<CreateUserProps> = ({
   const [value, setValue] = useState("")
   const [usernameList, setUsernameList] = useState<string[]>([])
   const users = useSelector<RootState, User[]>(state => state.users)
+  const focusRef: React.MutableRefObject<any> = useRef();
 
   useEffect(() => {
     const newlist = users.reduce((acc: string[], user: User) => {
@@ -125,13 +127,22 @@ const CreateUser: React.FC<CreateUserProps> = ({
     setUsernameList(newlist)
   }, [users])
 
+  useEffect(() => {
+    focusRef.current.focus()
+  }, [])
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && !submitDisabled) signupUser(value)
+  }
+
+
   const usernameIncluded = usernameList.includes(value);
   const submitDisabled = value.length <= 3 || usernameIncluded || value.length >= 15;
   return (
     <div>
       <span>Input Username for new user</span>
       <br />
-      <input type="text" value={value} onChange={(e) => setValue(e.target.value)} />
+      <input type="text" value={value} ref={focusRef} onKeyDown={(e) => handleKeyDown(e)} onChange={(e) => setValue(e.target.value)} />
       <button disabled={submitDisabled} onClick={() => signupUser(value)}>Submit</button>
       <button onClick={() => setShowAddUser(false)}>X</button>
       <br />
@@ -178,11 +189,15 @@ const ConfirmDelete: React.FC<ConfirmDeleteProps> = ({
   selectedUser,
   setConfirmDelete
 }) => {
+  const focusRef: React.MutableRefObject<any> = useRef();
+  useEffect(() => {
+    focusRef.current.focus();
+  }, [])
 
   return (
     <div style={{ backgroundColor: "plum" }}>
       <span>Delete {selectedUser ? selectedUser.username : null}?</span>
-      <button onClick={(e) => handleSubmit(e)}>YES</button>
+      <button ref={focusRef} onClick={(e) => handleSubmit(e)}>YES</button>
       <button onClick={() => setConfirmDelete(false)}>NO</button>
     </div>
   )
