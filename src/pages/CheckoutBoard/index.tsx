@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux';
-import { MenuItem } from '../../redux/modules/menuList';
-import { CalendarMenuItem } from '../Day/index'
+import { CalendarMenuItem, MenuItemJSON } from '../../shared/types';
 
 const CheckoutBoardItem: React.FC<CheckoutBoardItemProps> = ({
   item, modifyQuantityOfCheckoutBoardItem, removeFromCheckoutBoard
 }) => {
-  const menuList = useSelector<RootState, MenuItem[]>(state => state.menuList)
+  const menuList = useSelector<RootState, MenuItemJSON[]>(state => state.menuList)
   const [name, setName] = useState<string>("")
 
   useEffect(() => {

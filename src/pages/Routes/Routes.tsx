@@ -4,16 +4,17 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Day from '../Day';
 import Header from '../Header/Header';
-import Login from '../Login';
+import Home from '../Home';
+import NotFound404 from '../NotFound404';
 import PrintableWeek from '../PrintableWeek';
 
 
-const App: React.FC = () => {
+const Routes: React.FC = () => {
   return (
     <Router>
       <Switch>
         <Route exact path="/">
-          <Login />
+          <Home />
         </Route>
         <Route path="/w">
           <>
@@ -27,18 +28,12 @@ const App: React.FC = () => {
             <Day />
           </>
         </Route>
-        <Route component={NotFound} />
+        <Route component={NotFound404} />
       </Switch>
     </Router>
   )
 }
 
-const NotFound: React.FC = () => {
-  return (
-    <div>
-      404
-    </div>
-  )
-}
 
-export default App
+
+export default Routes

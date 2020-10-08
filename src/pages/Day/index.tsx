@@ -1,26 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams, Redirect } from "react-router-dom";
-import { RootState } from "../../redux";
-import { CalendarItem } from "../../redux/modules/calendar";
-import { fetchDispatch, reqUpdateCalendar } from "../../redux/helpers/fetchDispatch";
-
-import { MenuItem } from "../../redux/modules/menuList";
-import { User } from "../../redux/modules/users";
-import CheckoutBoardItem from "../CheckoutBoard/CheckoutBoard";
-import FilterButtonList from "../FilterBar/FilterBar";
-import MenuBoard from "../Menu/MenuBoard";
-import SearchBar from "../SearchBar/SearchBar";
-
-type DayParam = {
-  day: string
-}
-
-export type CalendarMenuItem = {
-  foodId: string,
-  quantity: number,
-  _id?: string,
-}
+import React, { useState, useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { Redirect, useParams } from "react-router-dom"
+import { RootState } from "../../redux"
+import { fetchDispatch, reqUpdateCalendar } from "../../redux/helpers/fetchDispatch"
+import { User, CalendarItem, CalendarMenuItem, MenuItemJSON } from "../../shared/types"
+import CheckoutBoardItem from "../CheckoutBoard"
+import MenuBoard from "./MenuBoard"
+import FilterButtonList from "./FilterBar"
+import SearchBar from "./SearchBar"
 
 
 const Day: React.FC = () => {
@@ -28,9 +15,9 @@ const Day: React.FC = () => {
   const [returnToWeek, setReturnToWeek] = useState<boolean>(false)
   const currentUser = useSelector<RootState, User | null>(state => state.currentUser)
   const calendar = useSelector<RootState, CalendarItem[]>(state => state.calendar)
-  const menuList = useSelector<RootState, MenuItem[]>(state => state.menuList)
+  const menuList = useSelector<RootState, MenuItemJSON[]>(state => state.menuList)
   const [checkoutBoardItems, setCheckoutBoardItems] = useState<CalendarMenuItem[]>([])
-  const params: DayParam = useParams()
+  const params: { day: string } = useParams()
 
   useEffect(() => {
     const menuItemFind = calendar.find(((item) => item.date === params.day))
@@ -76,7 +63,7 @@ const Day: React.FC = () => {
     }
   }
 
-  const addCheckOutBoardItem = (item: MenuItem) => {
+  const addCheckOutBoardItem = (item: MenuItemJSON) => {
     if (checkoutBoardItems?.find(i => i.foodId === item.ID)) return;
     const itemToAdd: CalendarMenuItem = {
       foodId: item.ID,

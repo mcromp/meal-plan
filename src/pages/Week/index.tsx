@@ -1,60 +1,22 @@
-import React, { useEffect, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
-import { RootState } from '../../redux';
-import { CalendarItem } from '../../redux/modules/calendar';
-import { fetchDispatch, reqGetCalendar, reqGetMenu } from '../../redux/helpers/fetchDispatch';
-import { resetFilter } from '../../redux/modules/filterList';
-import { MenuItem } from '../../redux/modules/menuList';
-import { User } from '../../redux/modules/users';
-import './Week.css'
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link, Redirect } from "react-router-dom";
+import { RootState } from "../../redux";
+import { fetchDispatch, reqGetCalendar, reqGetMenu } from "../../redux/helpers/fetchDispatch";
+import { resetFilter } from "../../redux/modules/filterList";
+import { CalendarItem, MenuItemJSON, User, WeekDay } from "../../shared/types";
+import { generateWeekDays } from "./generateWeek";
 
-enum Weekdays {
-  "Sun", "Mon", "Tues", "Wed", "Thur", "Fri", "Sat",
-}
-enum MonthNames {
-  "Jan", "Feb", "Mar", "Apr", "May", "June",
-  "July", "Aug", "Sept", "Oct", "Nov", "Dec"
-}
 
-type WeekDay = {
-  month: string;
-  day: string;
-  date: string;
-  year: string;
-  dateId: string;
-
-}
 
 type DayCardProps = {
   day: WeekDay;
   calendarDisplay: CalendarItem | null | undefined;
 }
 
-const generateWeekDays = () => {
-  const today: Date = new Date();
-  const emptyWeek: number[] = new Array(7).fill(null)
-  return emptyWeek.reduce((acc: WeekDay[], _, dayIndex) => {
-    const theday = new Date(today);
-    theday.setDate(today.getDate() + dayIndex)
-    const month = theday.getMonth();
-    const day = theday.getDay();
-    const date = String(theday.getDate())
-    const year = String(theday.getFullYear())
-    const dateId: string = `${date}-${month}-${year}`
-    acc.push({
-      month: MonthNames[month],
-      day: Weekdays[day],
-      date,
-      year,
-      dateId
-    })
-    return acc
-  }, [])
-}
 
 const DayCard: React.FC<DayCardProps> = ({ day, calendarDisplay }) => {
-  const menuList = useSelector<RootState, MenuItem[]>(state => state.menuList)
+  const menuList = useSelector<RootState, MenuItemJSON[]>(state => state.menuList)
   return (
     <>
       <span>{day.dateId}</span>

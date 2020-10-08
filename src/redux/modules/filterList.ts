@@ -1,4 +1,4 @@
-import { Filter } from "../../components/FilterBar/types";
+import { Filter } from "../../shared/types";
 
 const SET_FILTER = "food-app/filterList/SET_FILTER";
 const RESET_FILTER = "food-app/filterList/RESET_FILTER";

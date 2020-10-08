@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux";
 import { fetchDispatch, reqGetUser } from "../../redux/helpers/fetchDispatch";
-import { MenuItem } from "../../redux/modules/menuList";
-import { User } from "../../redux/modules/users";
-import { CalendarMenuItem } from "../Day";
-import { Filter, FilterId } from "../FilterBar/types";
+import { Filter, User, FilterId, MenuItemJSON, CalendarMenuItem } from "../../shared/types";
 import MenuCard from "./MenuCard";
 
 const MenuBoard: React.FC<MenuBoardProps> = ({
@@ -13,20 +10,18 @@ const MenuBoard: React.FC<MenuBoardProps> = ({
   checkoutBoardItems
 }) => {
   const filterList = useSelector<RootState, Filter[]>(state => state.filterList);
-  const menuList = useSelector<RootState, MenuItem[]>(state => state.menuList);
-  const [cardList, setCardList] = useState<MenuItem[] | null>(null);
+  const menuList = useSelector<RootState, MenuItemJSON[]>(state => state.menuList);
+  const [cardList, setCardList] = useState<MenuItemJSON[] | null>(null);
   const { favList, id: userId } = useSelector<RootState, User>(state => state.currentUser);
   const dispatch = useDispatch();
 
   useEffect(() => {
     const filterCardList = () => {
-      let cardArr: MenuItem[] = [];
+      let cardArr: MenuItemJSON[] = [];
       const selectedFilterIdList = filterList.reduce<FilterId[]>((acc, filter) => {
         if (filter.selected) acc.push(filter.id)
         return acc
       }, []);
-
-
 
       selectedFilterIdList.length === 0
         ? (cardArr = menuList)
@@ -36,7 +31,7 @@ const MenuBoard: React.FC<MenuBoardProps> = ({
     };
 
     const createCardList = (selectedFilterIdList: FilterId[]) =>
-      menuList.reduce<MenuItem[]>((acc, food) => {
+      menuList.reduce<MenuItemJSON[]>((acc, food) => {
         const foodCategory = food.CATEGORY as FilterId;
         if (
           selectedFilterIdList.includes(foodCategory) ||
@@ -63,7 +58,7 @@ const MenuBoard: React.FC<MenuBoardProps> = ({
 
   return (
     <div className="grid_i">
-      {cardList && cardList.map((item: MenuItem) => (
+      {cardList && cardList.map((item: MenuItemJSON) => (
         <MenuCard
           key={item.ID}
           item={item}
@@ -75,7 +70,7 @@ const MenuBoard: React.FC<MenuBoardProps> = ({
 };
 
 type MenuBoardProps = {
-  addCheckOutBoardItem: (item: MenuItem) => void,
+  addCheckOutBoardItem: (item: MenuItemJSON) => void,
   checkoutBoardItems: CalendarMenuItem[]
 }
 export default MenuBoard

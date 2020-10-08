@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '../../redux';
-import { fetchDispatch, reqAddFav, reqRemoveFav } from '../../redux/helpers/fetchDispatch';
-import { User } from '../../redux/modules/users';
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "../../redux";
+import { fetchDispatch, reqAddFav, reqRemoveFav } from "../../redux/helpers/fetchDispatch";
+import { User } from "../../shared/types";
 
 const MenuCard: React.FC<any> = ({
   item,

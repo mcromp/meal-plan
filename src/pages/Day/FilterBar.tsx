@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setFilter, resetFilter } from "../../redux/modules/filterList";
 import { RootState } from "../../redux";
-import { Filter } from "./types";
+import { Filter } from "../../shared/types";
+
 
 const FilterButtonList: React.FC = () => {
   const [showAll, setShowAll] = useState<boolean>(false);

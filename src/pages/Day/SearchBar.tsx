@@ -1,10 +1,10 @@
 import React, { useState, useRef, useLayoutEffect } from "react";
-import { MenuItem } from "../../redux/modules/menuList"
-import { CalendarMenuItem } from "../Day";
+import { CalendarMenuItem, MenuItemJSON } from "../../shared/types";
+
 
 const SearchBar: React.FC<SearchBarProps> = ({ menuList, checkoutBoardItems, addCheckOutBoardItem }) => {
   const [textValue, setTextValue] = useState<string>("")
-  const [searchListDisplay, setSearchListDisplay] = useState<MenuItem[]>([])
+  const [searchListDisplay, setSearchListDisplay] = useState<MenuItemJSON[]>([])
   const [showList, setShowList] = useState(true)
   const [errorText, setErrorText] = useState("")
   const wrapperRef = useRef<HTMLDivElement>(null)
@@ -30,7 +30,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ menuList, checkoutBoardItems, add
     setSearchListDisplay([])
     setTextValue(word)
     if (word.length > 0) {
-      const searchList = menuList.reduce((acc: any, item: MenuItem) => {
+      const searchList = menuList.reduce((acc: any, item: MenuItemJSON) => {
         if (checkSubStingIncludes(item.ITEM, word)) acc.push(item)
         return acc
       }, []).splice(0, 5)
@@ -38,7 +38,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ menuList, checkoutBoardItems, add
     }
   }
 
-  const handleClick = (item: MenuItem) => {
+  const handleClick = (item: MenuItemJSON) => {
     setSearchListDisplay([])
     setTextValue("")
     const itemAlreadyInCheckout = checkoutBoardItems.map((item: CalendarMenuItem) => item.foodId)
@@ -77,9 +77,9 @@ const SearchBar: React.FC<SearchBarProps> = ({ menuList, checkoutBoardItems, add
 };
 
 type SearchBarProps = {
-  menuList: MenuItem[];
+  menuList: MenuItemJSON[];
   checkoutBoardItems: CalendarMenuItem[];
-  addCheckOutBoardItem: (item: MenuItem) => void
+  addCheckOutBoardItem: (item: MenuItemJSON) => void
 }
 
 export default SearchBar
