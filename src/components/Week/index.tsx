@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { RootState } from '../../redux';
 import { CalendarItem } from '../../redux/modules/calendar';
-import { fetchDispatch, reqGetCalendar, reqGetMenu } from '../../redux/fetchDispatch/fetchDispatch';
+import { fetchDispatch, reqGetCalendar, reqGetMenu } from '../../redux/helpers/fetchDispatch';
 import { resetFilter } from '../../redux/modules/filterList';
 import { MenuItem } from '../../redux/modules/menuList';
 import { User } from '../../redux/modules/users';

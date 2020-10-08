@@ -2,7 +2,7 @@ import { setCalendar } from "../modules/calendar";
 import { setAlertMessage } from "../modules/alertMessage";
 import { isLoading } from "../modules/isLoading";
 import { setMenuList } from "../modules/menuList";
-import * as url from "../urls/apiUrl";
+import * as url from "../utils/apiUrl";
 import {
  addUserFromJSON,
  deleteOneUser,

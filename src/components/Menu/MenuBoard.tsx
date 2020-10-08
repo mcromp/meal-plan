@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux";
-import { fetchDispatch, reqGetUser } from "../../redux/fetchDispatch/fetchDispatch";
+import { fetchDispatch, reqGetUser } from "../../redux/helpers/fetchDispatch";
 import { MenuItem } from "../../redux/modules/menuList";
 import { User } from "../../redux/modules/users";
 import { CalendarMenuItem } from "../Day";
