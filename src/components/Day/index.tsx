@@ -100,7 +100,7 @@ const Day: React.FC = () => {
     ));
 
   if (!currentUser) { return <Redirect to='/' /> }
-  if (returnToWeek) { return <Redirect to='/week' /> }
+  if (returnToWeek) { return <Redirect to='/w' /> }
   // if (menuLoading) { return <span>Loading...</span> }
 
   return (

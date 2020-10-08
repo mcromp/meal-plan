@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { RootState } from '../../redux';
 import { CalendarItem } from '../../redux/calendar/calendar';
 import { fetchDispatch, reqGetCalendar, reqGetMenu } from '../../redux/fetchDispatch/fetchDispatch';
@@ -84,7 +84,7 @@ const Week: React.FC<any> = React.forwardRef((props, ref: any) => {
   const isLoggedIn = useSelector<RootState, boolean>(state => state.isLoggedIn)
 
   const dispatch = useDispatch();
-
+  const history = useHistory();
 
 
   useEffect(() => {
@@ -104,10 +104,12 @@ const Week: React.FC<any> = React.forwardRef((props, ref: any) => {
 
   const handleDateCardClick = (dateId: any) => {
     setDaySelected(dateId)
+    history.push(`/d/${dateId}`)
+
   }
 
   if (!isLoggedIn && !currentUser) { return <Redirect to='/' /> }
-  if (daySelected) { return <Redirect to={`/d/${daySelected}`} /> }
+  // if (daySelected) { return <Redirect to={`/d/${daySelected}`} /> }
 
   return (
     <>

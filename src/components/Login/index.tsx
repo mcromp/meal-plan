@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { RootState } from '../../redux';
 import { useDispatch, useSelector } from 'react-redux';
 // import { setCurrentUser } from '../../redux/users/currentUser';
-import { Redirect } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { fetchDispatch, reqAddUser, reqDeleteUser, reqGetUser, reqGetUsers } from '../../redux/fetchDispatch/fetchDispatch';
 import { User } from '../../redux/users/users';
 import { setAlertMessage } from '../../redux/alertMessage/alertMessage';
@@ -22,6 +22,7 @@ const Login = () => {
 
 
   const dispatch = useDispatch()
+  const history = useHistory();
 
   useEffect(() => {
     dispatch(fetchDispatch(reqGetUsers))
@@ -67,11 +68,12 @@ const Login = () => {
     dispatch(setIsLoggedIn(true))
     setSelectedUser(null)
     setValue("")
+    history.push("/w")
   }
 
   const checkValue = value.length === 0;
 
-  if (isLoggedIn && currentUser) { return <Redirect to='/week' /> }
+  // if (isLoggedIn && currentUser) { return <Redirect to='/w' /> }
   return (
     <>
       {showAddUser ?

@@ -15,7 +15,7 @@ const App: React.FC = () => {
         <Route exact path="/">
           <Login />
         </Route>
-        <Route path="/week">
+        <Route path="/w">
           <>
             <Header />
             <PrintableWeek />
