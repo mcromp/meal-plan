@@ -27,8 +27,17 @@ const App: React.FC = () => {
             <Day />
           </>
         </Route>
+        <Route component={NotFound} />
       </Switch>
     </Router>
+  )
+}
+
+const NotFound: React.FC = () => {
+  return (
+    <div>
+      404
+    </div>
   )
 }
 
