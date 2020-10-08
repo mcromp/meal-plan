@@ -1,13 +1,9 @@
 export interface CalendarItem {
- menuItems: MenuItem[];
+ menuItems: CalendarMenuItem[];
  date: string;
  userId: string;
 }
 
-export interface MenuItem {
- foodId: string;
- quantity: number;
-}
 export type CalendarMenuItem = {
  foodId: string;
  quantity: number;
@@ -24,7 +20,7 @@ export interface MenuItemJSON {
 
 export interface CalendarJSON {
  _id: string;
- menuItems: MenuItem[];
+ menuItems: CalendarMenuItem[];
  date: string;
  userId: string;
  __v: number;
