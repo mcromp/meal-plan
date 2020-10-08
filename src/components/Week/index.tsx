@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import { RootState } from '../../redux';
-import { CalendarItem } from '../../redux/calendar/calendar';
+import { CalendarItem } from '../../redux/modules/calendar';
 import { fetchDispatch, reqGetCalendar, reqGetMenu } from '../../redux/fetchDispatch/fetchDispatch';
-import { resetFilter } from '../../redux/filterList/filterList';
-import { MenuItem } from '../../redux/menuList/menuList';
-import { User } from '../../redux/users/users';
+import { resetFilter } from '../../redux/modules/filterList';
+import { MenuItem } from '../../redux/modules/menuList';
+import { User } from '../../redux/modules/users';
 import './Week.css'
 
 enum Weekdays {

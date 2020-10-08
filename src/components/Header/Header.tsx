@@ -1,9 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../redux";
-import { setIsLoggedIn } from "../../redux/isLoggedIn/isLoggedIn";
-import { clearCurrentUser } from "../../redux/users/currentUser";
-import { User } from "../../redux/users/users";
+import { setIsLoggedIn } from "../../redux/modules/isLoggedIn";
+import { clearCurrentUser } from "../../redux/modules/currentUser";
+import { User } from "../../redux/modules/users";
 
 const Header: React.FC<any> = () => {
   const currentUser = useSelector<RootState, User>(state => state.currentUser)

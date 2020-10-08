@@ -1,25 +1,23 @@
 import { combineReducers, createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
-import { calendarReducer } from "./calendar/calendar";
-import filterReducer from "./filterList/filterList";
-import { alertMessageReducer } from "./alertMessage/alertMessage";
-import { isLoadingReducer } from "./isLoading/isLoading";
-import { menuReducer } from "./menuList/menuList";
-import currentUserReducer from "./users/currentUser";
-import { userReducer } from "./users/users";
-import { isLoggedInReducer } from "./isLoggedIn/isLoggedIn";
-
-// import logger from "redux-logger";
+import calendar from "./modules/calendar";
+import filterList from "./modules/filterList";
+import alertMessage from "./modules/alertMessage";
+import isLoading from "./modules/isLoading";
+import menuList from "./modules/menuList";
+import currentUser from "./modules/currentUser";
+import users from "./modules/users";
+import isLoggedIn from "./modules/isLoggedIn";
 
 const rootReducer = combineReducers({
- filterList: filterReducer,
- menuList: menuReducer,
- users: userReducer,
- currentUser: currentUserReducer,
- calendar: calendarReducer,
- isLoading: isLoadingReducer,
- isLoggedIn: isLoggedInReducer,
- alertMessage: alertMessageReducer,
+ filterList,
+ menuList,
+ users,
+ currentUser,
+ calendar,
+ isLoading,
+ isLoggedIn,
+ alertMessage,
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

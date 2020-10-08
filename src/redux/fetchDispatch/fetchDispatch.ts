@@ -1,14 +1,14 @@
-import { setCalendar } from "../calendar/calendar";
-import { setAlertMessage } from "../alertMessage/alertMessage";
-import { isLoading } from "../isLoading/isLoading";
-import { setMenuList } from "../menuList/menuList";
+import { setCalendar } from "../modules/calendar";
+import { setAlertMessage } from "../modules/alertMessage";
+import { isLoading } from "../modules/isLoading";
+import { setMenuList } from "../modules/menuList";
 import * as url from "../urls/apiUrl";
 import {
  addUserFromJSON,
  deleteOneUser,
  setUsersFromJSON,
-} from "../users/users";
-import { setCurrentUser } from "../users/currentUser";
+} from "../modules/users";
+import { setCurrentUser } from "../modules/currentUser";
 
 export const reqGetMenu = "reqGetMenu";
 export const reqGetUsers = "reqGetUsers";

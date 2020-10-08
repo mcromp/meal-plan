@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setFilter, resetFilter } from "../../redux/filterList/filterList";
+import { setFilter, resetFilter } from "../../redux/modules/filterList";
 import { RootState } from "../../redux";
 import { Filter } from "./types";
 

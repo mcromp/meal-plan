@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux';
-import { MenuItem } from '../../redux/menuList/menuList';
+import { MenuItem } from '../../redux/modules/menuList';
 import { CalendarMenuItem } from '../Day/index'
 
 const CheckoutBoardItem: React.FC<CheckoutBoardItemProps> = ({

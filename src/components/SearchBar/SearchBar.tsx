@@ -1,5 +1,5 @@
 import React, { useState, useRef, useLayoutEffect } from "react";
-import { MenuItem } from "../../redux/menuList/menuList"
+import { MenuItem } from "../../redux/modules/menuList"
 import { CalendarMenuItem } from "../Day";
 
 const SearchBar: React.FC<SearchBarProps> = ({ menuList, checkoutBoardItems, addCheckOutBoardItem }) => {

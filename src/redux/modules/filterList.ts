@@ -1,5 +1,8 @@
 import { Filter } from "../../components/FilterBar/types";
 
+const SET_FILTER = "food-app/filterList/SET_FILTER";
+const RESET_FILTER = "food-app/filterList/RESET_FILTER";
+
 const initalState: Filter[] = [
  { id: "FAVORITES", name: "User Favorites", selected: false },
  { id: "BURGERSANDWICH", name: "Burger and Sandwhich", selected: false },
@@ -10,32 +13,7 @@ const initalState: Filter[] = [
  { id: "BREAKFAST", name: "Breakfast", selected: false },
 ];
 
-const SET_FILTER = "SET_FILTER";
-const RESET_FILTER = "RESET_FILTER";
-
-export const setFilter = (filter: Filter, selected: boolean) => ({
- type: SET_FILTER,
- payload: {
-  filter,
-  selected,
- },
-});
-
-export const resetFilter = () => ({
- type: RESET_FILTER,
-});
-
-export interface SetFiler {
- type: typeof SET_FILTER;
- payload: { filter: Filter; selected: boolean };
-}
-export interface ResetFilter {
- type: typeof RESET_FILTER;
-}
-
-export type FilterReducerActions = SetFiler | ResetFilter;
-
-const filterReducer = (
+const reducer = (
  filterList: Filter[] = initalState,
  action: FilterReducerActions
 ) => {
@@ -55,4 +33,26 @@ const filterReducer = (
  }
 };
 
-export default filterReducer;
+export const setFilter = (filter: Filter, selected: boolean) => ({
+ type: SET_FILTER,
+ payload: {
+  filter,
+  selected,
+ },
+});
+
+export const resetFilter = () => ({
+ type: RESET_FILTER,
+});
+
+interface SetFiler {
+ type: typeof SET_FILTER;
+ payload: { filter: Filter; selected: boolean };
+}
+interface ResetFilter {
+ type: typeof RESET_FILTER;
+}
+
+type FilterReducerActions = SetFiler | ResetFilter;
+
+export default reducer;

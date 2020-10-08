@@ -3,9 +3,9 @@ import { RootState } from '../../redux';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { fetchDispatch, reqAddUser, reqDeleteUser, reqGetUser, reqGetUsers } from '../../redux/fetchDispatch/fetchDispatch';
-import { User } from '../../redux/users/users';
-import { setAlertMessage } from '../../redux/alertMessage/alertMessage';
-import { setIsLoggedIn } from '../../redux/isLoggedIn/isLoggedIn';
+import { User } from '../../redux/modules/users';
+import { setAlertMessage } from '../../redux/modules/alertMessage';
+import { setIsLoggedIn } from '../../redux/modules/isLoggedIn';
 
 const Login = () => {
   const [confirmDelete, setConfirmDelete] = useState<boolean>(false)

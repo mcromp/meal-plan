@@ -2,11 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams, Redirect } from "react-router-dom";
 import { RootState } from "../../redux";
-import { CalendarItem } from "../../redux/calendar/calendar";
+import { CalendarItem } from "../../redux/modules/calendar";
 import { fetchDispatch, reqUpdateCalendar } from "../../redux/fetchDispatch/fetchDispatch";
 
-import { MenuItem } from "../../redux/menuList/menuList";
-import { User } from "../../redux/users/users";
+import { MenuItem } from "../../redux/modules/menuList";
+import { User } from "../../redux/modules/users";
 import CheckoutBoardItem from "../CheckoutBoard/CheckoutBoard";
 import FilterButtonList from "../FilterBar/FilterBar";
 import MenuBoard from "../Menu/MenuBoard";

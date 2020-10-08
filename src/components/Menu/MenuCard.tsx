@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../redux';
 import { fetchDispatch, reqAddFav, reqRemoveFav } from '../../redux/fetchDispatch/fetchDispatch';
-import { User } from '../../redux/users/users';
+import { User } from '../../redux/modules/users';
 
 const MenuCard: React.FC<any> = ({
   item,
