@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux";
-import { fetchDispatch, reqGetUser } from "../../redux/fetchHelper/fetchDispatch";
+import { fetchHelper } from "../../redux/fetchHelper/fetchHelper";
+
+import { ReqType } from "../../redux/fetchHelper/types";
+
 import { Filter, User, FilterId, MenuItemJSON, CalendarMenuItem } from "../../shared/types";
 import MenuCard from "./MenuCard";
 
@@ -46,7 +49,7 @@ const MenuBoard: React.FC<MenuBoardProps> = ({
   }, [filterList, menuList, favList]);
 
   useEffect(() => {
-    dispatch(fetchDispatch(reqGetUser, null, userId))
+    dispatch(fetchHelper(ReqType.reqGetUser, "", userId))
   }, [dispatch, userId])
 
 

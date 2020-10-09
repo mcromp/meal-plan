@@ -2,16 +2,17 @@ import React, { useState, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { useHistory } from "react-router-dom"
 import { RootState } from "../../redux"
+import { fetchHelper } from "../../redux/fetchHelper/fetchHelper"
+import { ReqType } from "../../redux/fetchHelper/types"
 import { setAlertMessage } from "../../redux/modules/alertMessage"
 import { setIsLoggedIn } from "../../redux/modules/isLoggedIn"
 import { User } from "../../shared/types"
+import BigButton from "./BigButton"
 import ConfirmDelete from "./ConfirmDelete"
 import CreateUser from "./CreateUser"
-import SelectUserForm from "./SelectUserForm"
-import BigButton from "./BigButton"
 import MedButton from "./MedButton"
-import { fetchDispatch } from "../../redux/fetchHelper/fetchDispatch"
-import { ReqType } from "../../redux/fetchHelper/types"
+import SelectForm from "./SelectForm"
+
 
 const Home = () => {
   const [confirmDelete, setConfirmDelete] = useState<boolean>(false)
@@ -26,7 +27,7 @@ const Home = () => {
   const history = useHistory();
 
   useEffect(() => {
-    dispatch(fetchDispatch(ReqType.reqGetUsers))
+    dispatch(fetchHelper(ReqType.reqGetUsers))
   }, [dispatch])
 
   useEffect(() => {
@@ -50,11 +51,11 @@ const Home = () => {
   }
 
   const deleteUser = (id: string) => {
-    dispatch(fetchDispatch(ReqType.reqDeleteUser, { id }))
+    dispatch(fetchHelper(ReqType.reqDeleteUser, { id }))
   }
 
   const signupUser = (username: string) => {
-    dispatch(fetchDispatch(ReqType.reqAddUser, { username }))
+    dispatch(fetchHelper(ReqType.reqAddUser, { username }))
     setShowAddUser(false)
   }
 
@@ -66,7 +67,7 @@ const Home = () => {
   }
 
   const handleSignin = () => {
-    dispatch(fetchDispatch(ReqType.reqGetUser, "", selectedUser?.id))
+    dispatch(fetchHelper(ReqType.reqGetUser, "", selectedUser?.id))
     dispatch(setIsLoggedIn(true))
     setSelectedUser(null)
     setValue("")
@@ -91,15 +92,21 @@ const Home = () => {
           :
           <>
 
-            <SelectUserForm
+            <SelectForm
               value={value}
+              label={"Select Login Username"}
+              selectMessage={"Select"}
+              optionMap={users}
               handleSelect={handleSelect} />
+
             <BigButton disabled={checkValue} onClick={() => handleSignin()}>Sign in</BigButton>
+            <br />
             <MedButton disabled={checkValue} onClick={() => setConfirmDelete(true)}>Delete User</MedButton>
             <br />
+
             <span>Don't have an account?</span>
-            <MedButton disabled={checkValue} onClick={() => setConfirmDelete(true)}>Delete User</MedButton>
-            <button onClick={() => setShowAddUser(true)}>Sign up!</button>
+            <BigButton onClick={() => setShowAddUser(true)}>Sign up!</BigButton>
+
             {message ? <span>{message}</span> : null}
           </>
       }

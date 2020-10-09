@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Redirect, useParams } from "react-router-dom"
 import { RootState } from "../../redux"
-import { fetchDispatch } from "../../redux/fetchHelper/fetchDispatch"
+import { fetchHelper } from "../../redux/fetchHelper/fetchHelper"
 import { ReqType } from "../../redux/fetchHelper/types"
 import { User, CalendarItem, MenuItemJSON, CalendarMenuItem } from "../../shared/types"
 import CheckoutBoardItem from "./CheckoutBoard"
@@ -34,7 +34,7 @@ const Day: React.FC = () => {
         date: params.day,
         menuItems: [...checkoutBoardItems]
       }
-      dispatch(fetchDispatch(ReqType.reqUpdateCalendar, body))
+      dispatch(fetchHelper(ReqType.reqUpdateCalendar, body))
     }
     setReturnToWeek(true)
   }
@@ -93,8 +93,6 @@ const Day: React.FC = () => {
 
   return (
     <div style={{ backgroundColor: "pink" }}>
-
-
 
       { checkoutBoardMap}
 

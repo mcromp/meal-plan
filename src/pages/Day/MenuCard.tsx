@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux";
-import { fetchDispatch, reqAddFav, reqRemoveFav } from "../../redux/fetchHelper/fetchDispatch";
+import { fetchHelper } from "../../redux/fetchHelper/fetchHelper";
+import { ReqType } from "../../redux/fetchHelper/types";
 import { User } from "../../shared/types";
+
 
 const MenuCard: React.FC<any> = ({
   item,
@@ -18,8 +20,8 @@ const MenuCard: React.FC<any> = ({
       userId,
       itemId: item.ID
     }
-    !isFav ? dispatch(fetchDispatch(reqAddFav, body))
-      : dispatch(fetchDispatch(reqRemoveFav, body))
+    !isFav ? dispatch(fetchHelper(ReqType.reqAddFav, body))
+      : dispatch(fetchHelper(ReqType.reqRemoveFav, body))
     setIsFav(prevState => !prevState)
   };
 

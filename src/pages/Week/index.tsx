@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import { RootState } from "../../redux";
-import { fetchDispatch } from "../../redux/fetchHelper/fetchDispatch";
+import { fetchHelper } from "../../redux/fetchHelper/fetchHelper";
+
 import { ReqType } from "../../redux/fetchHelper/types";
 
 import { resetFilter } from "../../redux/modules/filterList";
@@ -52,7 +53,8 @@ const Week: React.FC<any> = React.forwardRef((props, ref: any) => {
     const generatedWeek = generateWeekDays()
     setWeek([...generatedWeek])
     const dateList = generatedWeek.map(day => day.dateId).sort()
-    if (currentUser) dispatch(fetchDispatch(ReqType.reqGetCalendar, { dateList }, currentUser.id))
+    if (currentUser)
+      dispatch(fetchHelper(ReqType.reqGetCalendar, { dateList }, currentUser.id))
   }, [currentUser, dispatch])
 
   useEffect(() => {
@@ -60,7 +62,7 @@ const Week: React.FC<any> = React.forwardRef((props, ref: any) => {
   }, [dispatch])
 
   useEffect(() => {
-    dispatch(fetchDispatch(ReqType.reqGetMenu))
+    dispatch(fetchHelper(ReqType.reqGetMenu))
   }, [dispatch])
 
   if (!isLoggedIn && !currentUser) { return <Redirect to='/' /> }

@@ -1,12 +1,13 @@
-import { setCalendar } from "../modules/calendar";
 import { setAlertMessage } from "../modules/alertMessage";
+import { setCalendar } from "../modules/calendar";
+import { setCurrentUser } from "../modules/currentUser";
 import { isLoading } from "../modules/isLoading";
 import { setMenuList } from "../modules/menuList";
-import { setCurrentUser } from "../modules/currentUser";
 import { setUsersFromJSON, deleteOneUser, addUserFromJSON } from "../modules/users";
-import { ReqList, ReqType } from "./types";
+import { ReqType, ReqList } from "./types";
 
-export const fetchDispatch = (
+
+export const fetchHelper = (
  reqSelect: ReqType,
  body: any = null,
  urlParam: string = ""
