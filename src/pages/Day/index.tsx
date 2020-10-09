@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Redirect, useParams } from "react-router-dom"
 import { RootState } from "../../redux"
-import { fetchDispatch, reqUpdateCalendar } from "../../redux/helpers/fetchDispatch"
+import { fetchDispatch } from "../../redux/fetchHelper/fetchDispatch"
+import { ReqType } from "../../redux/fetchHelper/types"
 import { User, CalendarItem, MenuItemJSON, CalendarMenuItem } from "../../shared/types"
 import CheckoutBoardItem from "./CheckoutBoard"
-import MenuBoard from "./MenuBoard"
 import FilterButtonList from "./FilterBar"
+import MenuBoard from "./MenuBoard"
 import SearchBar from "./SearchBar"
 
 
@@ -33,7 +34,7 @@ const Day: React.FC = () => {
         date: params.day,
         menuItems: [...checkoutBoardItems]
       }
-      dispatch(fetchDispatch(reqUpdateCalendar, body))
+      dispatch(fetchDispatch(ReqType.reqUpdateCalendar, body))
     }
     setReturnToWeek(true)
   }
@@ -93,7 +94,9 @@ const Day: React.FC = () => {
   return (
     <div style={{ backgroundColor: "pink" }}>
 
-      {checkoutBoardMap}
+
+
+      { checkoutBoardMap}
 
       <button onClick={handleSubmit}>SUBMIT</button>
       <button onClick={handleClearAll}>CLEAR ALL</button>
@@ -110,7 +113,7 @@ const Day: React.FC = () => {
         checkoutBoardItems={checkoutBoardItems}
         addCheckOutBoardItem={addCheckOutBoardItem} />
 
-    </div>
+    </div >
   );
 }
 

@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../redux';
 import { CalendarMenuItem, MenuItemJSON } from '../../shared/types';
 
+
 const CheckoutBoardItem: React.FC<CheckoutBoardItemProps> = ({
   item, modifyQuantityOfCheckoutBoardItem, removeFromCheckoutBoard
 }) => {

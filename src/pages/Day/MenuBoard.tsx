@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux";
-import { fetchDispatch, reqGetUser } from "../../redux/helpers/fetchDispatch";
+import { fetchDispatch, reqGetUser } from "../../redux/fetchHelper/fetchDispatch";
 import { Filter, User, FilterId, MenuItemJSON, CalendarMenuItem } from "../../shared/types";
 import MenuCard from "./MenuCard";
 

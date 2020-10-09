@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, Redirect } from "react-router-dom";
 import { RootState } from "../../redux";
-import { fetchDispatch, reqGetCalendar, reqGetMenu } from "../../redux/helpers/fetchDispatch";
+import { fetchDispatch } from "../../redux/fetchHelper/fetchDispatch";
+import { ReqType } from "../../redux/fetchHelper/types";
+
 import { resetFilter } from "../../redux/modules/filterList";
 import { CalendarItem, MenuItemJSON, User, WeekDay } from "../../shared/types";
 import { generateWeekDays } from "./generateWeek";
@@ -50,7 +52,7 @@ const Week: React.FC<any> = React.forwardRef((props, ref: any) => {
     const generatedWeek = generateWeekDays()
     setWeek([...generatedWeek])
     const dateList = generatedWeek.map(day => day.dateId).sort()
-    if (currentUser) dispatch(fetchDispatch(reqGetCalendar, { dateList }, currentUser.id))
+    if (currentUser) dispatch(fetchDispatch(ReqType.reqGetCalendar, { dateList }, currentUser.id))
   }, [currentUser, dispatch])
 
   useEffect(() => {
@@ -58,31 +60,29 @@ const Week: React.FC<any> = React.forwardRef((props, ref: any) => {
   }, [dispatch])
 
   useEffect(() => {
-    dispatch(fetchDispatch(reqGetMenu))
+    dispatch(fetchDispatch(ReqType.reqGetMenu))
   }, [dispatch])
 
   if (!isLoggedIn && !currentUser) { return <Redirect to='/' /> }
+  if (isLoading) return <span>loading</span>
+
 
   return (
-    <>
-      {isLoading ? <span>loading</span>
-        :
-        <>
-          <div className="parent" ref={ref}>
-            {week ?
-              week.map(day => {
-                const calendarDisplay = calendar.find(item => item.date === day.dateId);
-                return <DayCard
-                  key={day.dateId}
-                  day={day}
-                  calendarDisplay={calendarDisplay} />
-              }
-              ) : null
-            }
-          </div>
-        </>
+    <div className="parent" ref={ref}>
+      {week ?
+        week.map(day => {
+          const calendarDisplay = calendar.find(item => item.date === day.dateId);
+          return <DayCard
+            key={day.dateId}
+            day={day}
+            calendarDisplay={calendarDisplay} />
+        }
+        ) : null
       }
-    </>
+    </div>
+
+
+
   );
 })
 
