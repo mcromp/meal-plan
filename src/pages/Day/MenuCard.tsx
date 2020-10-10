@@ -3,10 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux";
 import { fetchHelper } from "../../redux/fetchHelper/fetchHelper";
 import { ReqType } from "../../redux/fetchHelper/types";
-import { User } from "../../shared/types";
+import { MenuItemJSON, User } from "../../shared/types";
 
-
-const MenuCard: React.FC<any> = ({
+const MenuCard: React.FC<MenuCardProps> = ({
   item,
   addCheckOutBoardItem,
   disableCheck,
@@ -20,8 +19,8 @@ const MenuCard: React.FC<any> = ({
       userId,
       itemId: item.ID
     }
-    !isFav ? dispatch(fetchHelper(ReqType.reqAddFav, body))
-      : dispatch(fetchHelper(ReqType.reqRemoveFav, body))
+    isFav ? dispatch(fetchHelper(ReqType.reqRemoveFav, body))
+      : dispatch(fetchHelper(ReqType.reqAddFav, body))
     setIsFav(prevState => !prevState)
   };
 
@@ -36,5 +35,11 @@ const MenuCard: React.FC<any> = ({
     </div >
   );
 };
+
+type MenuCardProps = {
+  item: MenuItemJSON,
+  addCheckOutBoardItem: (item: MenuItemJSON) => void,
+  disableCheck: (id: string) => boolean
+}
 
 export default MenuCard
