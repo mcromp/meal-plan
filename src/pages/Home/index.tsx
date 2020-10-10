@@ -8,15 +8,15 @@ import { setAlertMessage } from "../../redux/modules/alertMessage"
 import { setIsLoggedIn } from "../../redux/modules/isLoggedIn"
 import { User } from "../../shared/types"
 import BigButton from "../../shared/BigButton"
-import ConfirmDelete from "./ConfirmDelete"
-import CreateUser from "./CreateUser"
+import UserDelete from "./UserDelete"
+import UserSignup from "./UserSignup"
 import MedButton from "../../shared/MedButton"
-import SelectForm from "./SelectForm"
 import { useFlashText } from "../../customHooks/useFlashText"
 import AlertText from "../../shared/AlertText"
+import UsersSelectForm from "./UsersForm"
 
 const Home = () => {
-  const [confirmDelete, setConfirmDelete] = useState<boolean>(false)
+  const [isDeleteConfirmShown, setIsDeleteConfirmShown] = useState<boolean>(false)
   const [isSignupShown, setIsSignupShown] = useState<boolean>(false)
   const [value, setValue] = useState<string>("")
   const [selectedUser, setSelectedUser] = useState<User | null>(null)
@@ -37,20 +37,6 @@ const Home = () => {
   }, [dispatch, alertMessage])
 
 
-
-  const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setValue(e.target.value)
-    setSelectedUser(users[+e.target.value])
-  }
-
-  const handleDeleteSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    e.preventDefault();
-    setConfirmDelete(false)
-    if (selectedUser) deleteUser(selectedUser.id)
-    setSelectedUser(null)
-    setValue("")
-  }
-
   const deleteUser = (id: string) => {
     dispatch(fetchHelper(ReqType.reqDeleteUser, { id }))
   }
@@ -60,6 +46,18 @@ const Home = () => {
     setIsSignupShown(false)
   }
 
+  const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setValue(e.target.value)
+    setSelectedUser(users[+e.target.value])
+  }
+
+  const handleDeleteSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault();
+    setIsDeleteConfirmShown(false)
+    if (selectedUser) deleteUser(selectedUser.id)
+    setSelectedUser(null)
+    setValue("")
+  }
 
   const handleSignin = () => {
     dispatch(fetchHelper(ReqType.reqGetUser, "", selectedUser?.id))
@@ -71,36 +69,33 @@ const Home = () => {
 
   const checkValue = value.length === 0;
 
+  if (isSignupShown) {
+    return (
+      <UserSignup
+        setShowAddUser={setIsSignupShown}
+        signupUser={signupUser} />)
+  }
+  if (isDeleteConfirmShown) {
+    return (
+      <UserDelete
+        handleSubmit={handleDeleteSubmit}
+        setConfirmDelete={setIsDeleteConfirmShown}
+        selectedUser={selectedUser} />)
+  }
   return (
     <>
-      {isSignupShown ?
-        <CreateUser
-          setShowAddUser={setIsSignupShown}
-          signupUser={signupUser} />
-        :
-        confirmDelete ?
+      <UsersSelectForm
+        value={value}
+        label={"Select Login Username"}
+        selectMessage={"Select"}
+        optionMap={users}
+        handleSelect={handleSelect} />
 
-          <ConfirmDelete
-            handleSubmit={handleDeleteSubmit}
-            setConfirmDelete={setConfirmDelete}
-            selectedUser={selectedUser} />
-          :
-          <>
-
-            <SelectForm
-              value={value}
-              label={"Select Login Username"}
-              selectMessage={"Select"}
-              optionMap={users}
-              handleSelect={handleSelect} />
-
-            <BigButton disabled={checkValue} onClick={() => handleSignin()}>Sign in</BigButton>
-            <MedButton disabled={checkValue} onClick={() => setConfirmDelete(true)}>Delete User</MedButton>
-            <span>Don't have an account?</span>
-            <BigButton onClick={() => setIsSignupShown(true)}>Sign up!</BigButton>
-            <AlertText>{flashText}</AlertText>
-          </>
-      }
+      <BigButton disabled={checkValue} onClick={() => handleSignin()}>Sign in</BigButton>
+      <MedButton disabled={checkValue} onClick={() => setIsDeleteConfirmShown(true)}>Delete User</MedButton>
+      <span>Don't have an account?</span>
+      <BigButton onClick={() => setIsSignupShown(true)}>Sign up!</BigButton>
+      <AlertText>{flashText}</AlertText>
     </>
   )
 }

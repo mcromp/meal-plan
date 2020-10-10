@@ -1,7 +1,7 @@
 import React from "react"
 import { User } from "../../shared/types"
 
-const SelectForm: React.FC<SelectFormProps> = ({ value, label = "Select", selectMessage = " ", optionMap, handleSelect, }) => {
+const UsersSelectForm: React.FC<SelectFormProps> = ({ value, label = "Select", selectMessage = " ", optionMap, handleSelect, }) => {
   const options = (optionMap.map((option: User, i: number) =>
     <option key={option.id} value={i}>{option.username}</option>
   ))
@@ -25,4 +25,4 @@ type SelectFormProps = {
   handleSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-export default SelectForm
+export default UsersSelectForm

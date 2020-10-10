@@ -2,11 +2,12 @@ import React, { useEffect, useRef } from 'react'
 import { User } from '../../shared/types';
 
 
-const ConfirmDelete: React.FC<ConfirmDeleteProps> = ({
+const UserDelete: React.FC<ConfirmDeleteProps> = ({
   handleSubmit,
   selectedUser,
   setConfirmDelete
 }) => {
+
   const focusRef: React.MutableRefObject<any> = useRef();
   useEffect(() => {
     focusRef.current.focus();
@@ -26,4 +27,4 @@ type ConfirmDeleteProps = {
   selectedUser: User | null;
   setConfirmDelete: (boolean: boolean) => void;
 }
-export default ConfirmDelete
+export default UserDelete

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../redux';
 import { User } from '../../shared/types';
 
-const CreateUser: React.FC<CreateUserProps> = ({
+const UserSignup: React.FC<UserSignupProps> = ({
   setShowAddUser,
   signupUser
 }) => {
@@ -50,10 +50,10 @@ const CreateUser: React.FC<CreateUserProps> = ({
 }
 
 
-type CreateUserProps = {
+type UserSignupProps = {
   setShowAddUser: (boolean: boolean) => void;
   signupUser: (username: string) => void;
 }
 
 
-export default CreateUser
+export default UserSignup
