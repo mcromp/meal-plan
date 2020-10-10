@@ -11,12 +11,6 @@ const FilterButtonList: React.FC = () => {
   const filterList = useSelector<RootState, Filter[]>(state => state.filterList)
   const dispatch = useDispatch()
 
-  const clearAll = () => {
-    dispatch(resetFilter())
-    setEnabledFilterList([]);
-    setShowAll(false);
-  };
-
   const handleFilterClick = (filter: Filter, boo: boolean) => {
     dispatch(setFilter(filter, boo))
     setShowAll(true);
@@ -34,6 +28,11 @@ const FilterButtonList: React.FC = () => {
     setEnabledFilterList(prevEnabledFilterList);
   };
 
+  const clearAll = () => {
+    dispatch(resetFilter())
+    setEnabledFilterList([]);
+    setShowAll(false);
+  };
   return (
     <div>
       <div>
