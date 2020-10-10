@@ -7,21 +7,22 @@ import { ReqType } from "../../redux/fetchHelper/types"
 import { setAlertMessage } from "../../redux/modules/alertMessage"
 import { setIsLoggedIn } from "../../redux/modules/isLoggedIn"
 import { User } from "../../shared/types"
-import BigButton from "./BigButton"
+import BigButton from "../../shared/BigButton"
 import ConfirmDelete from "./ConfirmDelete"
 import CreateUser from "./CreateUser"
-import MedButton from "./MedButton"
+import MedButton from "../../shared/MedButton"
 import SelectForm from "./SelectForm"
-
+import { useFlashText } from "./useFlashText"
+import AlertText from "./AlertText"
 
 const Home = () => {
   const [confirmDelete, setConfirmDelete] = useState<boolean>(false)
-  const [showAddUser, setShowAddUser] = useState<boolean>(false)
+  const [isSignupShown, setIsSignupShown] = useState<boolean>(false)
   const [value, setValue] = useState<string>("")
   const [selectedUser, setSelectedUser] = useState<User | null>(null)
-  const [message, setMessage] = useState<string | null>(null)
   const alertMessage = useSelector<RootState, string>(state => state.alertMessage)
   const users = useSelector<RootState, User[]>(state => state.users)
+  const [flashText, setFlashText] = useFlashText("")
 
   const dispatch = useDispatch()
   const history = useHistory();
@@ -31,7 +32,7 @@ const Home = () => {
   }, [dispatch])
 
   useEffect(() => {
-    if (alertMessage) handleMessage(alertMessage)
+    if (alertMessage) setFlashText(alertMessage)
     dispatch(setAlertMessage(""))
   }, [dispatch, alertMessage])
 
@@ -56,15 +57,9 @@ const Home = () => {
 
   const signupUser = (username: string) => {
     dispatch(fetchHelper(ReqType.reqAddUser, { username }))
-    setShowAddUser(false)
+    setIsSignupShown(false)
   }
 
-  const handleMessage = (text: string) => {
-    setMessage(text)
-    setTimeout(() => {
-      setMessage(null)
-    }, 1500);
-  }
 
   const handleSignin = () => {
     dispatch(fetchHelper(ReqType.reqGetUser, "", selectedUser?.id))
@@ -78,9 +73,9 @@ const Home = () => {
 
   return (
     <>
-      {showAddUser ?
+      {isSignupShown ?
         <CreateUser
-          setShowAddUser={setShowAddUser}
+          setShowAddUser={setIsSignupShown}
           signupUser={signupUser} />
         :
         confirmDelete ?
@@ -100,14 +95,10 @@ const Home = () => {
               handleSelect={handleSelect} />
 
             <BigButton disabled={checkValue} onClick={() => handleSignin()}>Sign in</BigButton>
-            <br />
             <MedButton disabled={checkValue} onClick={() => setConfirmDelete(true)}>Delete User</MedButton>
-            <br />
-
             <span>Don't have an account?</span>
-            <BigButton onClick={() => setShowAddUser(true)}>Sign up!</BigButton>
-
-            {message ? <span>{message}</span> : null}
+            <BigButton onClick={() => setIsSignupShown(true)}>Sign up!</BigButton>
+            <AlertText>{flashText}</AlertText>
           </>
       }
     </>
