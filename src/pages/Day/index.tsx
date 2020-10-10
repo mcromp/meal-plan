@@ -23,6 +23,11 @@ const Day: React.FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+
+    console.log(isLoading)
+  }, [isLoading])
+
+  useEffect(() => {
     const menuItemFind = calendar.find(((item) => item.date === params.day))
     if (menuItemFind) {
       setCheckoutBoardItems(menuItemFind.menuItems)
@@ -80,7 +85,7 @@ const Day: React.FC = () => {
 
   if (!currentUser) { return <Redirect to='/' /> }
   if (isSubmitted) { return <Redirect to='/w' /> }
-  // if (isLoading) { return <Loading /> }
+
 
   return (
     <div style={{ backgroundColor: "pink" }}>

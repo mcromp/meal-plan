@@ -4,37 +4,35 @@ import { useHistory } from "react-router-dom"
 import { RootState } from "../../redux"
 import { fetchHelper } from "../../redux/fetchHelper/fetchHelper"
 import { ReqType } from "../../redux/fetchHelper/types"
-import { setAlertMessage } from "../../redux/modules/alertMessage"
 import { setIsLoggedIn } from "../../redux/modules/isLoggedIn"
 import { User } from "../../shared/types"
 import BigButton from "../../shared/BigButton"
 import UserDelete from "./UserDelete"
 import UserSignup from "./UserSignup"
 import MedButton from "../../shared/MedButton"
-import { useFlashText } from "../../customHooks/useFlashText"
-import AlertText from "../../shared/AlertText"
 import UsersSelectForm from "./UsersSelectForm"
+import AlertText from "../../shared/AlertText"
 
 const Home = () => {
   const [isDeleteConfirmShown, setIsDeleteConfirmShown] = useState<boolean>(false)
   const [isSignupShown, setIsSignupShown] = useState<boolean>(false)
   const [value, setValue] = useState<string>("")
   const [selectedUser, setSelectedUser] = useState<User | null>(null)
-  const alertMessage = useSelector<RootState, string>(state => state.alertMessage)
   const users = useSelector<RootState, User[]>(state => state.users)
-  const [flashText, setFlashText] = useFlashText("")
 
   const dispatch = useDispatch()
   const history = useHistory();
+
 
   useEffect(() => {
     dispatch(fetchHelper(ReqType.reqGetUsers))
   }, [dispatch])
 
-  useEffect(() => {
-    if (alertMessage) setFlashText(alertMessage)
-    dispatch(setAlertMessage(""))
-  }, [dispatch, alertMessage])
+  // useEffect(() => {
+  //   if (alertMessage) {
+  //     dispatch(setAlertMessage(""))
+  //   }
+  // }, [dispatch, alertMessage])
 
   const handleDeleteSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
@@ -94,7 +92,7 @@ const Home = () => {
       <MedButton disabled={checkValue} onClick={() => setIsDeleteConfirmShown(true)}>Delete User</MedButton>
       <span>Don't have an account?</span>
       <BigButton onClick={() => setIsSignupShown(true)}>Sign up!</BigButton>
-      <AlertText>{flashText}</AlertText>
+      <AlertText />
     </>
   )
 }

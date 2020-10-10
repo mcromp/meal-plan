@@ -15,11 +15,11 @@ const Header: React.FC = () => {
   }
 
   return (
-    currentUser ?
-      <div style={{ backgroundColor: "yellowgreen" }}>
-        <h3>howdy, {currentUser.username}</h3>
-        <button onClick={handleLogout}>Signout</button>
-      </div> : null)
+    currentUser &&
+    <div style={{ backgroundColor: "yellowgreen" }}>
+      <h3>{currentUser.username}</h3>
+      <button onClick={handleLogout}>Signout</button>
+    </div>)
 };
 
 export default Header;

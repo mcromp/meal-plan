@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux";
 import { fetchHelper } from "../../redux/fetchHelper/fetchHelper";
-
 import { ReqType } from "../../redux/fetchHelper/types";
-
-import { Filter, User, FilterId, MenuItemJSON, CalendarMenuItem } from "../../shared/types";
+import { Filter, MenuItemJSON, User, FilterId, CalendarMenuItem } from "../../shared/types";
 import MenuCard from "./MenuCard";
+
 
 const MenuBoard: React.FC<MenuBoardProps> = ({
   addCheckOutBoardItem,
@@ -50,7 +49,7 @@ const MenuBoard: React.FC<MenuBoardProps> = ({
 
   useEffect(() => {
     dispatch(fetchHelper(ReqType.reqGetUser, "", userId))
-  }, [dispatch, userId])
+  }, [dispatch, userId]);
 
 
   const disableCheck = (id: string): boolean => {
@@ -75,5 +74,6 @@ const MenuBoard: React.FC<MenuBoardProps> = ({
 type MenuBoardProps = {
   addCheckOutBoardItem: (item: MenuItemJSON) => void,
   checkoutBoardItems: CalendarMenuItem[]
-}
-export default MenuBoard
+};
+
+export default MenuBoard;

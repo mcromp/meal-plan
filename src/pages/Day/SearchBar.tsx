@@ -1,24 +1,20 @@
 import React, { useState, useRef } from "react";
 import { CalendarMenuItem, MenuItemJSON } from "../../shared/types";
 import { useOnClickOutside } from "../../hooks/useOnClickOutside";
-
-
+import AlertText from "../../shared/AlertText";
 
 const SearchBar: React.FC<SearchBarProps> = ({ menuList, checkoutBoardItems, addCheckOutBoardItem }) => {
   const [textValue, setTextValue] = useState<string>("")
   const [searchListDisplay, setSearchListDisplay] = useState<MenuItemJSON[]>([])
   const [isListShown, setisListShown] = useState(true)
-  const [errorText, setErrorText] = useState("")
+  const [errorText, setErrorText] = useState<string>("")
 
   const wrapperRef = useRef() as React.MutableRefObject<HTMLInputElement>;
   useOnClickOutside(wrapperRef, () => setisListShown(false))
 
-
   const checkSubStingIncludes = (a: string, b: string) => a.toLocaleLowerCase().includes(b.toLocaleLowerCase())
 
-
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setErrorText("")
     const word = e.target.value;
     setSearchListDisplay([])
     setTextValue(word)
@@ -36,19 +32,10 @@ const SearchBar: React.FC<SearchBarProps> = ({ menuList, checkoutBoardItems, add
     setTextValue("")
     const itemAlreadyInCheckout = checkoutBoardItems.map((item: CalendarMenuItem) => item.foodId)
     if (itemAlreadyInCheckout.includes(item.ID)) {
-      errorMessage(item.ITEM)
+      setErrorText(`${item.ITEM} has already been added`)
     }
     else addCheckOutBoardItem(item)
-
   }
-
-  const errorMessage = (item: string) => {
-    setErrorText(`${item} has already been added`)
-    setTimeout(() => {
-      setErrorText("")
-    }, 1500);
-  }
-
 
   return (
     <div ref={wrapperRef} className="flex-container flex-column pos-rel">
@@ -57,7 +44,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ menuList, checkoutBoardItems, add
         placeholder="Type to search"
         value={textValue}
         onChange={e => handleChange(e)} />
-      <span>{errorText}</span>
+      <AlertText>{errorText}</AlertText>
       {isListShown && searchListDisplay.map(item =>
         <div
           onClick={() => handleClick(item)}

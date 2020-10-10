@@ -11,14 +11,14 @@ const FilterButtonList: React.FC = () => {
   const filterList = useSelector<RootState, Filter[]>(state => state.filterList)
   const dispatch = useDispatch()
 
-  const handleFilterClick = (filter: Filter, boo: boolean) => {
-    dispatch(setFilter(filter, boo))
+  const handleFilterClick = (filter: Filter, isEnabled: boolean) => {
+    dispatch(setFilter(filter, isEnabled))
     setShowAll(true);
   };
 
   const addFilter = (filter: Filter) => {
-    const temp = [...enabledFilterList, filter];
-    setEnabledFilterList(temp);
+    const UpdatedEnabledFilters = [...enabledFilterList, filter];
+    setEnabledFilterList(UpdatedEnabledFilters);
   };
 
   const removeFilter = (filter: Filter) => {
@@ -35,30 +35,29 @@ const FilterButtonList: React.FC = () => {
   };
   return (
     <div>
-      <div>
-        {enabledFilterList.map((filter: Filter) =>
-          <button
-            key={filter.name}
-            style={{ backgroundColor: "red" }}
-            onClick={() => {
-              handleFilterClick(filter, false);
-              removeFilter(filter);
-            }}>{filter.name} X</button>
-        )}
-      </div>
-      <div>
-        {filterList.map((filter: Filter) =>
-          <button
-            key={filter.name}
-            disabled={filter.selected}
-            onClick={() => {
-              handleFilterClick(filter, true);
-              addFilter(filter);
-            }}
-          >{filter.name}</button>
-        )}
-        {showAll ? <button onClick={clearAll}>clear all filters</button> : null}
-      </div>
+      {enabledFilterList.map((filter: Filter) =>
+        <button
+          key={filter.name}
+          style={{ backgroundColor: "red" }}
+          onClick={() => {
+            handleFilterClick(filter, false);
+            removeFilter(filter);
+          }}>{filter.name} X</button>
+      )}
+
+      {filterList.map((filter: Filter) =>
+        <button
+          key={filter.name}
+          disabled={filter.selected}
+          onClick={() => {
+            handleFilterClick(filter, true);
+            addFilter(filter);
+          }}
+        >{filter.name}</button>
+      )}
+
+      {showAll ? <button onClick={clearAll}>clear all filters</button> : null}
+
     </div>
   );
 };
