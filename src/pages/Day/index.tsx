@@ -4,6 +4,7 @@ import { Redirect, useParams } from "react-router-dom"
 import { RootState } from "../../redux"
 import { fetchHelper } from "../../redux/fetchHelper/fetchHelper"
 import { ReqType } from "../../redux/fetchHelper/types"
+import Loading from "../../shared/Loading"
 import { User, CalendarItem, MenuItemJSON, CalendarMenuItem } from "../../shared/types"
 import CheckoutBoardItem from "./CheckoutBoard"
 import FilterButtonList from "./FilterBar"
@@ -12,13 +13,14 @@ import SearchBar from "./SearchBar"
 
 
 const Day: React.FC = () => {
-  const dispatch = useDispatch()
-  const [returnToWeek, setReturnToWeek] = useState<boolean>(false)
-  const currentUser = useSelector<RootState, User | null>(state => state.currentUser)
-  const calendar = useSelector<RootState, CalendarItem[]>(state => state.calendar)
-  const menuList = useSelector<RootState, MenuItemJSON[]>(state => state.menuList)
-  const [checkoutBoardItems, setCheckoutBoardItems] = useState<CalendarMenuItem[]>([])
-  const params: { day: string } = useParams()
+  const currentUser = useSelector<RootState, User | null>(state => state.currentUser);
+  const calendar = useSelector<RootState, CalendarItem[]>(state => state.calendar);
+  const menuList = useSelector<RootState, MenuItemJSON[]>(state => state.menuList);
+  const isLoading = useSelector<RootState, boolean>(state => state.isLoading);
+  const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+  const [checkoutBoardItems, setCheckoutBoardItems] = useState<CalendarMenuItem[]>([]);
+  const params: { day: string } = useParams();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const menuItemFind = calendar.find(((item) => item.date === params.day))
@@ -36,33 +38,25 @@ const Day: React.FC = () => {
       }
       dispatch(fetchHelper(ReqType.reqUpdateCalendar, body))
     }
-    setReturnToWeek(true)
-  }
-
-  const handleClearAll = () => {
-    setCheckoutBoardItems([])
+    setIsSubmitted(true)
   }
 
   const modifyQuantityOfCheckoutBoardItem = (item: CalendarMenuItem, amount: number) => {
-    if (checkoutBoardItems) {
-      const tempBoard: CalendarMenuItem[] = [...checkoutBoardItems]
-      const index: number = tempBoard?.indexOf(item);
-      const updatedQuantity = tempBoard[index].quantity + amount
-      updatedQuantity > 0 ?
-        tempBoard[index].quantity = updatedQuantity
-        : tempBoard.splice(index, 1)
-      setCheckoutBoardItems(tempBoard)
-    }
-  }
+    const tempBoard: CalendarMenuItem[] = [...checkoutBoardItems]
+    const index: number = tempBoard?.indexOf(item);
+    const updatedQuantity = tempBoard[index].quantity + amount
+    updatedQuantity > 0 ?
+      tempBoard[index].quantity = updatedQuantity
+      : tempBoard.splice(index, 1)
+    setCheckoutBoardItems(tempBoard)
+  };
 
   const removeFromCheckoutBoard = (item: CalendarMenuItem) => {
-    if (checkoutBoardItems) {
-      const temp = [...checkoutBoardItems]
-      const index: number = temp?.indexOf(item);
-      temp.splice(index, 1)
-      setCheckoutBoardItems(temp)
-    }
-  }
+    const temp = [...checkoutBoardItems]
+    const index: number = temp?.indexOf(item);
+    temp.splice(index, 1)
+    setCheckoutBoardItems(temp)
+  };
 
   const addCheckOutBoardItem = (item: MenuItemJSON) => {
     if (checkoutBoardItems?.find(i => i.foodId === item.ID)) return;
@@ -70,13 +64,10 @@ const Day: React.FC = () => {
       foodId: item.ID,
       quantity: 1,
     }
-    if (checkoutBoardItems) {
-      const newArr = [...checkoutBoardItems]
-      newArr.push(itemToAdd)
-      setCheckoutBoardItems(newArr)
-    }
+    const updatedItems = [...checkoutBoardItems, itemToAdd]
+    setCheckoutBoardItems(updatedItems)
 
-  }
+  };
 
   const checkoutBoardMap =
     checkoutBoardItems.map((checkoutItem: CalendarMenuItem) => (
@@ -88,17 +79,17 @@ const Day: React.FC = () => {
     ));
 
   if (!currentUser) { return <Redirect to='/' /> }
-  if (returnToWeek) { return <Redirect to='/w' /> }
-  // if (menuLoading) { return <span>Loading...</span> }
+  if (isSubmitted) { return <Redirect to='/w' /> }
+  if (isLoading) { return <Loading /> }
 
   return (
     <div style={{ backgroundColor: "pink" }}>
 
-      { checkoutBoardMap}
+      {checkoutBoardMap}
 
       <button onClick={handleSubmit}>SUBMIT</button>
-      <button onClick={handleClearAll}>CLEAR ALL</button>
-      <button onClick={() => setReturnToWeek(true)}>return to week, without submitting</button>
+      <button onClick={() => setCheckoutBoardItems([])}>CLEAR ALL</button>
+      <button onClick={() => setIsSubmitted(true)}>return to week, without submitting</button>
 
       <SearchBar
         menuList={menuList}
