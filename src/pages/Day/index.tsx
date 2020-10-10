@@ -80,7 +80,7 @@ const Day: React.FC = () => {
 
   if (!currentUser) { return <Redirect to='/' /> }
   if (isSubmitted) { return <Redirect to='/w' /> }
-  if (isLoading) { return <Loading /> }
+  // if (isLoading) { return <Loading /> }
 
   return (
     <div style={{ backgroundColor: "pink" }}>

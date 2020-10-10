@@ -1,25 +1,18 @@
-import React, { useState, useRef, useLayoutEffect } from "react";
+import React, { useState, useRef } from "react";
 import { CalendarMenuItem, MenuItemJSON } from "../../shared/types";
+import { useOnClickOutside } from "../../hooks/useOnClickOutside";
+
 
 
 const SearchBar: React.FC<SearchBarProps> = ({ menuList, checkoutBoardItems, addCheckOutBoardItem }) => {
   const [textValue, setTextValue] = useState<string>("")
   const [searchListDisplay, setSearchListDisplay] = useState<MenuItemJSON[]>([])
-  const [showList, setShowList] = useState(true)
+  const [isListShown, setisListShown] = useState(true)
   const [errorText, setErrorText] = useState("")
-  const wrapperRef = useRef<HTMLDivElement>(null)
 
+  const wrapperRef = useRef() as React.MutableRefObject<HTMLInputElement>;
+  useOnClickOutside(wrapperRef, () => setisListShown(false))
 
-  useLayoutEffect(() => {
-    window.addEventListener("mousedown", handleClickOutside)
-    return () => {
-      window.removeEventListener("mousedown", handleClickOutside);
-    };
-  });
-
-  const handleClickOutside = (event: MouseEvent): void => {
-    if (wrapperRef.current && !wrapperRef.current.contains(event.target as HTMLElement)) setShowList(false)
-  }
 
   const checkSubStingIncludes = (a: string, b: string) => a.toLocaleLowerCase().includes(b.toLocaleLowerCase())
 
@@ -60,12 +53,12 @@ const SearchBar: React.FC<SearchBarProps> = ({ menuList, checkoutBoardItems, add
   return (
     <div ref={wrapperRef} className="flex-container flex-column pos-rel">
       <input
-        onClick={() => setShowList(true)}
+        onClick={() => setisListShown(true)}
         placeholder="Type to search"
         value={textValue}
         onChange={e => handleChange(e)} />
       <span>{errorText}</span>
-      {showList && searchListDisplay.map(item =>
+      {isListShown && searchListDisplay.map(item =>
         <div
           onClick={() => handleClick(item)}
           key={item.ID}
