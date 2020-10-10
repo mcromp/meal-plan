@@ -13,7 +13,7 @@ import UserSignup from "./UserSignup"
 import MedButton from "../../shared/MedButton"
 import { useFlashText } from "../../customHooks/useFlashText"
 import AlertText from "../../shared/AlertText"
-import UsersSelectForm from "./UsersForm"
+import UsersSelectForm from "./UsersSelectForm"
 
 const Home = () => {
   const [isDeleteConfirmShown, setIsDeleteConfirmShown] = useState<boolean>(false)
@@ -36,21 +36,6 @@ const Home = () => {
     dispatch(setAlertMessage(""))
   }, [dispatch, alertMessage])
 
-
-  const deleteUser = (id: string) => {
-    dispatch(fetchHelper(ReqType.reqDeleteUser, { id }))
-  }
-
-  const signupUser = (username: string) => {
-    dispatch(fetchHelper(ReqType.reqAddUser, { username }))
-    setIsSignupShown(false)
-  }
-
-  const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setValue(e.target.value)
-    setSelectedUser(users[+e.target.value])
-  }
-
   const handleDeleteSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     setIsDeleteConfirmShown(false)
@@ -65,6 +50,20 @@ const Home = () => {
     setSelectedUser(null)
     setValue("")
     history.push("/w")
+  }
+
+  const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setValue(e.target.value)
+    setSelectedUser(users[+e.target.value])
+  }
+
+  const deleteUser = (id: string) => {
+    dispatch(fetchHelper(ReqType.reqDeleteUser, { id }))
+  }
+
+  const signupUser = (username: string) => {
+    dispatch(fetchHelper(ReqType.reqAddUser, { username }))
+    setIsSignupShown(false)
   }
 
   const checkValue = value.length === 0;
