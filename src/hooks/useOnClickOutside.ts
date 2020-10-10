@@ -1,6 +1,5 @@
 import {  useLayoutEffect } from 'react'
 
-
 export function useOnClickOutside(wrapperRef: React.MutableRefObject<HTMLInputElement>, handler: () => void) {
   useLayoutEffect(() => {
     const handleClickOutside = (event: MouseEvent | KeyboardEvent): void => {
