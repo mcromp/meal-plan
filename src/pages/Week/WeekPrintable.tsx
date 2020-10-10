@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import ReactToPrint from "react-to-print";
-import Week from "../Week";
+import Week from ".";
 
 const PrintableWeek = () => {
   const componentRef = useRef(null);

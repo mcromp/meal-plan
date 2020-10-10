@@ -6,7 +6,7 @@ import Day from '../Day';
 import Header from '../Header/Header';
 import Home from '../Home';
 import NotFound404 from '../NotFound404';
-import PrintableWeek from '../PrintableWeek';
+import PrintableWeek from '../Week/WeekPrintable';
 
 
 const Routes: React.FC = () => {
