@@ -12,8 +12,8 @@ import ConfirmDelete from "./ConfirmDelete"
 import CreateUser from "./CreateUser"
 import MedButton from "../../shared/MedButton"
 import SelectForm from "./SelectForm"
-import { useFlashText } from "./useFlashText"
-import AlertText from "./AlertText"
+import { useFlashText } from "../../customHooks/useFlashText"
+import AlertText from "../../shared/AlertText"
 
 const Home = () => {
   const [confirmDelete, setConfirmDelete] = useState<boolean>(false)
