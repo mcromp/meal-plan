@@ -1,0 +1,12 @@
+@mixin flex-center {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
+
+@mixin fill-all {
+ height: 100vh;
+ width: 100vw;
+}
+
+$bkgnd-light: #b37c57;

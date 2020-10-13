@@ -1,13 +1,15 @@
 import React, { useState, useRef } from "react";
-import { CalendarMenuItem, MenuItemJSON } from "../../shared/types";
+import { useDispatch } from "react-redux";
 import { useOnClickOutside } from "../../hooks/useOnClickOutside";
+import { setAlertMessage } from "../../redux/modules/alertMessage";
 import AlertText from "../../shared/AlertText";
+import { MenuItemJSON, CalendarMenuItem } from "../../shared/types";
 
 const SearchBar: React.FC<SearchBarProps> = ({ menuList, checkoutBoardItems, addCheckOutBoardItem }) => {
   const [textValue, setTextValue] = useState<string>("")
   const [searchListDisplay, setSearchListDisplay] = useState<MenuItemJSON[]>([])
   const [isListShown, setisListShown] = useState(true)
-  const [errorText, setErrorText] = useState<string>("")
+  const dispatch = useDispatch();
 
   const wrapperRef = useRef() as React.MutableRefObject<HTMLInputElement>;
   useOnClickOutside(wrapperRef, () => setisListShown(false))
@@ -32,7 +34,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ menuList, checkoutBoardItems, add
     setTextValue("")
     const itemAlreadyInCheckout = checkoutBoardItems.map((item: CalendarMenuItem) => item.foodId)
     if (itemAlreadyInCheckout.includes(item.ID)) {
-      setErrorText(`${item.ITEM} has already been added`)
+      dispatch(setAlertMessage(`${item.ITEM} has already been added`))
     }
     else addCheckOutBoardItem(item)
   }

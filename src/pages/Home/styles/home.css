@@ -1,0 +1,86 @@
+body {
+  background: #ffe1a8;
+  background: -webkit-gradient(linear, right top, left top, from(#ffe1a8), to(#fff1e3));
+  background: linear-gradient(to left, #ffe1a8, #fff1e3);
+  background-size: 120%;
+}
+
+.home-container {
+  font-family: "Noto Sans", sans-serif;
+  font-weight: 300;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 0.5fr 9fr 0.5fr;
+      grid-template-rows: 0.5fr 9fr 0.5fr;
+  -ms-grid-columns: 0.5fr 5fr 0.5fr;
+      grid-template-columns: 0.5fr 5fr 0.5fr;
+      grid-template-areas: ". . ." ". home-container2 ." ". . .";
+}
+
+.icon {
+  position: absolute;
+  margin: auto;
+  top: -2rem;
+  opacity: 0.2;
+}
+
+.icon path,
+.icon g {
+  stroke: #e26d5c;
+}
+
+.home-container2 {
+  z-index: 3;
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  grid-area: home-container2;
+  height: 90vh;
+}
+
+.title-container {
+  margin: 20px;
+}
+
+.title {
+  color: #c9cba3;
+  font-family: "Lato", sans-serif;
+  text-transform: lowercase;
+  white-space: pre;
+  font-weight: 800;
+  font-size: clamp(40px, 18vw, 160px);
+  line-height: 40%;
+  opacity: 1;
+  text-shadow: 2px 3px 1px #e26d5c;
+}
+
+.sub-title-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  text-align: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+}
+
+.sub-title-container .sub-title {
+  padding: 0 20px;
+  margin: 20px;
+  font-weight: 900;
+  font-size: clamp(1px, 2rem, 25px);
+  color: #fff1e3;
+  font-family: "Sansita Swashed", cursive;
+  background-color: #555;
+  min-width: 1px;
+  opacity: 0.7;
+}
+
+.sub-title-container .sub-2 {
+  color: #777;
+  font-size: clamp(8px, 2rem, 15px);
+}
+/*# sourceMappingURL=home.css.map */

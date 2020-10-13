@@ -12,7 +12,8 @@ import UserSignup from "./UserSignup"
 import MedButton from "../../shared/MedButton"
 import UsersSelectForm from "./UsersSelectForm"
 import AlertText from "../../shared/AlertText"
-
+import "./styles/home.css"
+import MIcon from "./styles/micon"
 const Home = () => {
   const [isDeleteConfirmShown, setIsDeleteConfirmShown] = useState<boolean>(false)
   const [isSignupShown, setIsSignupShown] = useState<boolean>(false)
@@ -80,20 +81,34 @@ const Home = () => {
         selectedUser={selectedUser} />)
   }
   return (
-    <>
-      <UsersSelectForm
-        value={value}
-        label={"Select Login Username"}
-        selectMessage={"Select"}
-        optionMap={users}
-        handleSelect={handleSelect} />
+    <div className="home-container">
+      <MIcon />
+      <div className="home-container2">
 
-      <BigButton disabled={checkValue} onClick={() => handleSignin()}>Sign in</BigButton>
-      <MedButton disabled={checkValue} onClick={() => setIsDeleteConfirmShown(true)}>Delete User</MedButton>
-      <span>Don't have an account?</span>
-      <BigButton onClick={() => setIsSignupShown(true)}>Sign up!</BigButton>
-      <AlertText />
-    </>
+        <div className="title-container">
+          <span className="title">menu</span>
+          <span className="title"> planner</span>
+        </div>
+        <div className="sub-title-container">
+          <div className="sub-title-bkgd">
+            <span className="sub-title">Plan your 7 day menu</span>
+          </div>
+          <p className="sub-2">Plan your meals, simplify your life</p>
+        </div>
+        <UsersSelectForm
+          value={value}
+          label={""}
+          selectMessage={"Select Login Username"}
+          optionMap={users}
+          handleSelect={handleSelect} />
+
+        <BigButton disabled={checkValue} onClick={() => handleSignin()}>Sign in</BigButton>
+        <MedButton disabled={checkValue} onClick={() => setIsDeleteConfirmShown(true)}>Delete User</MedButton>
+        <span>Don't have an account?</span>
+        <BigButton onClick={() => setIsSignupShown(true)}>Sign up!</BigButton>
+        <AlertText />
+      </div>
+    </div>
   )
 }
 

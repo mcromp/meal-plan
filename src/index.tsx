@@ -5,7 +5,6 @@ import { store } from "./redux";
 import './index.css'
 import Routes from "./pages/Routes";
 
-
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
