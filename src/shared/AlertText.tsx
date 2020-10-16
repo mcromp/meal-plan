@@ -22,9 +22,9 @@ const AlertText: React.FC<AlertTextProps> = ({ time = 1200 }) => {
 
 
   return (
-    <div>
-      <span>{text}</span>
-    </div>);
+    <>
+      <span className="alert">{text}</span>
+    </>);
 };
 
 type AlertTextProps = {

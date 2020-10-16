@@ -9,7 +9,7 @@ const UsersSelectForm: React.FC<SelectFormProps> = ({ value, label = "Select", s
     <form>
       <label> {label}
         <select value={value} onChange={(e) => handleSelect(e)}>
-          <option value="" disabled>{selectMessage}</option>
+          <option className="option" value="" disabled>{selectMessage}</option>
           {options}
         </select>
       </label>
