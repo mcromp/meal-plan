@@ -12,6 +12,7 @@ import UsersSelectForm from "./UsersSelectForm"
 import AlertText from "../../shared/AlertText"
 import "./styles/home.css"
 import { useRef } from "react"
+import TitleContainer from "./TitleContainer"
 const Home = () => {
   const [isDeleteConfirmShown, setIsDeleteConfirmShown] = useState<boolean>(false)
   const [isSignupShown, setIsSignupShown] = useState<boolean>(false)
@@ -72,51 +73,41 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      <div className="title-container">
-        <h1>
-          <span>menu</span>
-          <span> planner</span>
-        </h1>
-        <div className="sub-title-container" onClick={() => scrollToRef(scrollRef)}>
-          <h2>Plan your 7 day menu</h2>
-          <p>Plan your meals, simplify your life</p>
-          <span className="down-arrow" onClick={() => scrollToRef(scrollRef)}>↓</span>
+      <TitleContainer scrollRef={scrollRef} />
+      <div className="cta-container">
+        {isAlertShown ? <AlertText /> : null}
+        <div className="form">
+          <h2 ref={scrollRef}>Select your username</h2>
+          {isDeleteConfirmShown ?
+            <UserDelete
+              handleSubmit={handleDeleteSubmit}
+              setConfirmDelete={setIsDeleteConfirmShown}
+              selectedUser={selectedUser} />
+            : <>
+
+              <UsersSelectForm
+                value={value}
+                label={""}
+                selectMessage={"SELECT"}
+                optionMap={users}
+                handleSelect={handleSelect} />
+              <button onClick={() => handleSignin()} disabled={checkValue}>Sign in</button>
+              <button onClick={() => setIsDeleteConfirmShown(true)} disabled={checkValue}>Delete User</button>
+            </>
+          }
         </div>
-        <div className="cta-container">
-          {isAlertShown ? <AlertText /> : null}
-          <div className="form">
-            <h2 ref={scrollRef}>Select your username</h2>
-            {isDeleteConfirmShown ?
-              <UserDelete
-                handleSubmit={handleDeleteSubmit}
-                setConfirmDelete={setIsDeleteConfirmShown}
-                selectedUser={selectedUser} />
-              : <>
 
-                <UsersSelectForm
-                  value={value}
-                  label={""}
-                  selectMessage={"SELECT"}
-                  optionMap={users}
-                  handleSelect={handleSelect} />
-                <button onClick={() => handleSignin()} disabled={checkValue}>Sign in</button>
-                <button onClick={() => setIsDeleteConfirmShown(true)} disabled={checkValue}>Delete User</button>
-              </>
-            }
-          </div>
-
-          <div className="signup">
-            {isSignupShown ?
-              <UserSignup
-                setShowAddUser={setIsSignupShown}
-                signupUser={signupUser} />
-              :
-              <>
-                <h2>Don't have a username?</h2>
-                <button onClick={() => setIsSignupShown(true)} >Sign up!</button>
-              </>
-            }
-          </div>
+        <div className="signup">
+          {isSignupShown ?
+            <UserSignup
+              setShowAddUser={setIsSignupShown}
+              signupUser={signupUser} />
+            :
+            <>
+              <h2>Don't have a username?</h2>
+              <button onClick={() => setIsSignupShown(true)} >Sign up!</button>
+            </>
+          }
         </div>
       </div>
     </div >
