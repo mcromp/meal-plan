@@ -1,4 +1,8 @@
 .header-container {
- background: pink;
+ display: flex;
+ flex-flow: row;
+ align-items: center;
+ justify-content: space-around;
  width: 100%;
+ background-color: lightcoral;
 }

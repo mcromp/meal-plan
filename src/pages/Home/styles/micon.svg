@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="SVGRoot" version="1.1" viewBox="0 0 980 1619" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:osb="http://www.openswatchbook.org/uri/2009/osb" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xlink="http://www.w3.org/1999/xlink">
+ <defs>
+  <linearGradient id="linearGradient1480" x1="39.5" x2="920.5" y1="660" y2="660" gradientTransform="matrix(1 0 0 1.0012 .0016425 -.046785)" gradientUnits="userSpaceOnUse">
+   <stop offset="0"/>
+  </linearGradient>
+ </defs>
+ <metadata>
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <g transform="translate(9.9985 287.46)" fill="none">
+  <rect x="40.001" y="40.001" width="880" height="1241.5" rx=".1" stroke="url(#linearGradient1480)" stroke-width="100"/>
+  <g stroke="#000">
+   <g>
+    <path d="m40 40 553.66-277.46 6.3396 277.46" stroke-linejoin="round" stroke-width="100"/>
+    <path d="m680 760s-3.0834-24.602-11.741-56.6c-15.999-59.135-58.482-143.4-188.26-143.4-129.45 0-169.95 84.72-186.06 143.83-8.78 32.218-13.937 56.169-13.937 56.169z" stroke-width="91.287"/>
+    <path d="m480 480v-40" stroke-width="91.287"/>
+   </g>
+   <path d="m240 880h480" stroke-linecap="round" stroke-width="92.582"/>
+  </g>
+  <path d="m360 600 40 40"/>
+ </g>
+</svg>

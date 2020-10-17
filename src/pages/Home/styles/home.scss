@@ -26,7 +26,6 @@ body {
 
 .home-container {
  font: 300 0.9rem "Noto Sans", sans-serif;
-
  .title-container {
   z-index: 1;
 
@@ -94,7 +93,6 @@ body {
   justify-content: center;
   flex: 1;
   @include fade-in(2s);
-
   button {
    text-transform: uppercase;
    margin: 20px;

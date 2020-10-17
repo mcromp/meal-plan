@@ -10,7 +10,7 @@ export const generateWeekDays = () => {
   const day = theday.getDay();
   const date = String(theday.getDate());
   const year = String(theday.getFullYear());
-  const dateId: string = `${date}-${month}-${year}`;
+  const dateId: string = `${date}-${month + 1}-${year}`;
   acc.push({
    month: MonthNames[month],
    day: Weekdays[day],
