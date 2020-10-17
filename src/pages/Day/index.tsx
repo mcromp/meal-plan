@@ -10,7 +10,7 @@ import CheckoutBoardItem from "./CheckoutBoard"
 import FilterButtonList from "./FilterBar"
 import MenuBoard from "./MenuBoard"
 import SearchBar from "./SearchBar"
-
+import './styles/day.css'
 
 const Day: React.FC = () => {
   const currentUser = useSelector<RootState, User | null>(state => state.currentUser);

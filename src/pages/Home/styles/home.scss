@@ -1,10 +1,10 @@
 @import "../../../shared/sass/animations";
 
-$home-bkgnd: #ffe1a8;
-$home-bkgnd-light: #fff1e3;
-$home-highlight: #e26d5c;
-$home-highlight-dark: #e07171;
-$home-secondary: #c9cba3;
+$bkgnd: #ffe1a8;
+$bkgnd-light: #fff1e3;
+$highlight: #e26d5c;
+$highlight-dark: #e07171;
+$secondary: #c9cba3;
 
 @mixin box-shadow-mix {
  box-shadow: 5px 5px 1px #777;
@@ -15,8 +15,8 @@ html {
 }
 
 body {
- background: $home-bkgnd;
- background: linear-gradient(to left, $home-bkgnd, $home-bkgnd-light);
+ background: $bkgnd;
+ background: linear-gradient(to left, $bkgnd, $bkgnd-light);
  background-size: 120%;
  padding: 0 2rem;
  display: flex;
@@ -31,13 +31,13 @@ body {
   z-index: 1;
 
   h1 {
-   @include fade-in(1s);
+   @include fade-in(0.5s);
    margin: 20px;
    span {
-    color: $home-secondary;
+    color: $secondary;
     font: 800 clamp(40px, 18vw, 160px) / 40% "Lato", sans-serif;
     white-space: pre;
-    text-shadow: 2px 3px 1px $home-highlight;
+    text-shadow: 2px 3px 1px $highlight;
    }
   }
 
@@ -49,7 +49,7 @@ body {
    cursor: pointer;
 
    h2 {
-    @include fade-in(3.5s);
+    @include fade-in(1.5s);
    }
 
    p {
@@ -59,7 +59,7 @@ body {
    }
    &:hover {
     .down-arrow {
-     color: $home-highlight;
+     color: $highlight;
     }
    }
   }
@@ -70,7 +70,7 @@ body {
    font-size: 10vw;
    //  @include pulse;
    &:hover {
-    color: $home-highlight;
+    color: $highlight;
     cursor: pointer;
    }
   }
@@ -78,10 +78,9 @@ body {
 
  h2 {
   padding: 0 20px;
-  font-weight: 900;
-  font-size: 4.5vw;
-  font-family: "Sansita Swashed", cursive;
-  color: $home-bkgnd-light;
+
+  font: 900 4.5vw "Sansita Swashed", cursive;
+  color: $bkgnd-light;
   background-color: #555;
   opacity: 0.7;
   white-space: nowrap;
@@ -94,7 +93,7 @@ body {
   text-align: center;
   justify-content: center;
   flex: 1;
-  @include fade-in(4s);
+  @include fade-in(2s);
 
   button {
    text-transform: uppercase;
@@ -118,7 +117,7 @@ body {
    max-height: 300px;
    max-width: 500px;
    font-family: "Arial";
-   background-color: $home-secondary;
+   background-color: $secondary;
    @include box-shadow-mix();
    margin: 0 10px 80px 0;
    select,
@@ -133,7 +132,7 @@ body {
    min-height: 100px;
    margin: 80px 0 0 0;
    padding: 70px 0;
-   background-color: $home-highlight-dark;
+   background-color: $highlight-dark;
    @include box-shadow-mix();
    button {
     margin: 0 5px;
@@ -149,7 +148,7 @@ body {
 
  .alert {
   z-index: 3;
-  background-color: $home-bkgnd;
+  background-color: $bkgnd;
   position: absolute;
   text-align: center;
   font: 300 30px "Noto Sans", sans-serif;

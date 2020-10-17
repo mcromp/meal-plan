@@ -9,6 +9,7 @@ import Loading from "../../shared/Loading"
 import { User, WeekDay, CalendarItem } from "../../shared/types"
 import DayCard from "./DayCard"
 import { generateWeekDays } from "./utils/generateWeek"
+import './styles/week.css'
 
 const Week: React.FC<any> = React.forwardRef((props, ref: any) => {
   const currentUser = useSelector<RootState, User | null>(state => state.currentUser)
@@ -41,7 +42,7 @@ const Week: React.FC<any> = React.forwardRef((props, ref: any) => {
 
 
   return (
-    <div className="parent" ref={ref}>
+    <div className="container" ref={ref}>
       { week?.map(day => {
         const calendarDisplay = calendar.find(item => item.date === day.dateId);
         return (
