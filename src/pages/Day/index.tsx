@@ -23,7 +23,6 @@ const Day: React.FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-
     console.log(isLoading)
   }, [isLoading])
 
