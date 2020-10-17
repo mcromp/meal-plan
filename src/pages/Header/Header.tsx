@@ -4,6 +4,7 @@ import { RootState } from "../../redux";
 import { setIsLoggedIn } from "../../redux/modules/isLoggedIn";
 import { clearCurrentUser } from "../../redux/modules/currentUser";
 import { User } from "../../shared/types";
+import './styles/header.css'
 
 const Header: React.FC = () => {
   const currentUser = useSelector<RootState, User>(state => state.currentUser)
@@ -16,8 +17,8 @@ const Header: React.FC = () => {
 
   return (
     currentUser &&
-    <div style={{ backgroundColor: "yellowgreen" }}>
-      <h3>{currentUser.username}</h3>
+    <div className="container">
+      <span>{currentUser.username}</span>
       <button onClick={handleLogout}>Signout</button>
     </div>)
 };

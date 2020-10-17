@@ -1,10 +1,22 @@
+@import "../../../shared/sass/animations";
+
+$home-bkgnd: #ffe1a8;
+$home-bkgnd-light: #fff1e3;
+$home-highlight: #e26d5c;
+$home-highlight-dark: #e07171;
+$home-secondary: #c9cba3;
+
+@mixin box-shadow-mix {
+ box-shadow: 5px 5px 1px #777;
+}
+
 html {
  scroll-behavior: smooth;
 }
 
 body {
- background: #ffe1a8;
- background: linear-gradient(to left, #ffe1a8, #fff1e3);
+ background: $home-bkgnd;
+ background: linear-gradient(to left, $home-bkgnd, $home-bkgnd-light);
  background-size: 120%;
  padding: 0 2rem;
  display: flex;
@@ -13,20 +25,19 @@ body {
 }
 
 .home-container {
- font-family: "Noto Sans", sans-serif;
- font-weight: 300;
+ font: 300 0.9rem "Noto Sans", sans-serif;
 
  .title-container {
   z-index: 1;
-  animation: fadeInOpacity 1 1s ease-in;
 
   h1 {
+   @include fade-in(1s);
    margin: 20px;
    span {
-    color: #c9cba3;
+    color: $home-secondary;
     font: 800 clamp(40px, 18vw, 160px) / 40% "Lato", sans-serif;
     white-space: pre;
-    text-shadow: 2px 3px 1px #e26d5c;
+    text-shadow: 2px 3px 1px $home-highlight;
    }
   }
 
@@ -36,34 +47,41 @@ body {
    justify-content: center;
    flex-flow: column;
    cursor: pointer;
+
+   h2 {
+    @include fade-in(3.5s);
+   }
+
    p {
     color: #777;
     text-shadow: 1px 1px 1px #bbb;
-    animation: scaleUp 5s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+    @include scale-up;
    }
    &:hover {
     .down-arrow {
-     color: #e26d5c;
+     color: $home-highlight;
     }
    }
   }
 
   .down-arrow {
+   @include pulse;
    color: #666;
    font-size: 10vw;
-   animation: 1s ease infinite pulse;
+   //  @include pulse;
    &:hover {
-    color: #e26d5c;
+    color: $home-highlight;
     cursor: pointer;
    }
   }
  }
+
  h2 {
   padding: 0 20px;
   font-weight: 900;
   font-size: 4.5vw;
-  color: #fff1e3;
   font-family: "Sansita Swashed", cursive;
+  color: $home-bkgnd-light;
   background-color: #555;
   opacity: 0.7;
   white-space: nowrap;
@@ -76,6 +94,8 @@ body {
   text-align: center;
   justify-content: center;
   flex: 1;
+  @include fade-in(4s);
+
   button {
    text-transform: uppercase;
    margin: 20px;
@@ -98,8 +118,8 @@ body {
    max-height: 300px;
    max-width: 500px;
    font-family: "Arial";
-   background-color: #c9cba3;
-   box-shadow: 5px 5px 1px #777;
+   background-color: $home-secondary;
+   @include box-shadow-mix();
    margin: 0 10px 80px 0;
    select,
    option {
@@ -113,8 +133,8 @@ body {
    min-height: 100px;
    margin: 80px 0 0 0;
    padding: 70px 0;
-   background-color: #e07171;
-   box-shadow: 5px 5px 1px #777;
+   background-color: $home-highlight-dark;
+   @include box-shadow-mix();
    button {
     margin: 0 5px;
    }
@@ -126,57 +146,34 @@ body {
    }
   }
  }
+
  .alert {
   z-index: 3;
-  background-color: #ffe1a8;
+  background-color: $home-bkgnd;
   position: absolute;
   text-align: center;
-  font-family: "Noto Sans", sans-serif;
-  font-weight: 900;
-  font-size: 30px;
+  font: 300 30px "Noto Sans", sans-serif;
   padding: 3rem;
-  //  opacity: 0.6;
-  animation: shadowPop 0.5s cubic-bezier(0.47, 0, 0.745, 0.715) both;
+  opacity: 0.6;
+  @include shadow-pop;
  }
 }
+
 @media screen and (max-width: 600px) {
  .cta-container {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
   padding: 200px 0 !important;
-  .signup {
-   margin: 10px 10px 100px 10px !important;
-   padding: 0 !important;
-   width: 100%;
-  }
   .form {
    margin: 10px !important;
    padding: 0 !important;
    width: 100%;
   }
- }
-}
-
-@keyframes pulse {
- 0% {
-  transform: scale(1);
- }
-
- 25% {
-  transform: scale(1.2);
- }
-
- 50% {
-  transform: scale(1);
- }
-}
-
-@keyframes fadeInOpacity {
- 0% {
-  opacity: 0;
- }
- 100% {
-  opacity: 1;
+  .signup {
+   margin: 10px 10px 200px 10px !important;
+   padding: 0 !important;
+   width: 100%;
+  }
  }
 }
