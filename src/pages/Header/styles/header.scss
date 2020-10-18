@@ -21,19 +21,18 @@ $secondary: #c9cba3;
   text-shadow: 1px 1px 1px $highlight;
  }
  span {
-  padding: 0 20px;
+  padding: 0 20px 0 0;
   color: $bkgnd;
  }
  button {
-  margin: 0 30px;
+  margin: 0 30px 0 0;
   text-transform: uppercase;
   padding: 7px 7px;
   box-shadow: 3px 4px 0px 0px #999;
   color: black;
   background: white;
   font: bold clamp(12px, 3rem) "Noto Sans", sans-serif;
-  border: 2px solid #444;
-  border-radius: 14%;
+  border: none;
   opacity: 0.8;
   &:enabled {
    cursor: pointer;

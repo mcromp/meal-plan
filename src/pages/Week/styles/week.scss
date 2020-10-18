@@ -5,6 +5,7 @@ $bkgnd-light: #fff1e3;
 $highlight: #e26d5c;
 $highlight-dark: #e07171;
 $secondary: #c9cba3;
+
 .print {
  background: #ccc;
  width: 100%;
@@ -26,12 +27,38 @@ $secondary: #c9cba3;
  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
  grid-gap: 0.7rem;
  background: #ccc;
- justify-items: stretch;
+
+ .header {
+  display: flex;
+  justify-content: space-around;
+  flex-flow: row nowrap;
+  align-items: center;
+  width: 100%;
+  background: #555;
+  height: 50px;
+  color: $bkgnd;
+  button {
+   font-size: 35px;
+   &:hover {
+    filter: invert(10%);
+   }
+  }
+
+  h3 {
+   font: 500 30px "Sansita Swashed", cursive;
+   margin: 0;
+   padding: 0;
+   text-align: center;
+  }
+  h4 {
+   font: 17px "Lato", sans-serif;
+  }
+ }
  .day-card {
-  text-decoration: "none";
+  font: 14px "Noto Sans", sans-serif;
+
   display: flex;
   flex-direction: column;
-  align-items: center;
   background: cream;
   border: solid 1px;
   min-height: 200px;
@@ -41,31 +68,12 @@ $secondary: #c9cba3;
    filter: brightness(110%);
    cursor: pointer;
   }
-  .header {
+  .item {
+   padding: 1px 10px;
    display: flex;
-   justify-content: space-around;
+   justify-content: space-between;
    flex-flow: row nowrap;
-   align-items: center;
-   width: 100%;
-   background: #555;
-   height: 50px;
-   color: $bkgnd;
-   button {
-    font-size: 35px;
-    &:hover {
-     filter: invert(10%);
-    }
-   }
-
-   h3 {
-    font: 500 30px "Sansita Swashed", cursive;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-   }
-   h4 {
-    font: 17px "Lato", sans-serif;
-   }
+   align-items: flex-start;
   }
  }
 }
@@ -76,6 +84,7 @@ $secondary: #c9cba3;
  }
  .container {
   background: none;
+
   .day-card {
    color: black;
    background: none;
@@ -86,9 +95,5 @@ $secondary: #c9cba3;
     color: black;
    }
   }
- }
- button {
-  position: absolute;
-  left: -999px;
  }
 }
