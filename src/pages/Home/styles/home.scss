@@ -14,146 +14,148 @@ html {
  scroll-behavior: smooth;
 }
 
-body {
+.home-container {
+ font: 300 0.9rem "Noto Sans", sans-serif;
  background: $bkgnd;
  background: linear-gradient(to left, $bkgnd, $bkgnd-light);
  background-size: 120%;
  padding: 0 2rem;
  display: flex;
+ flex-flow: column;
  align-items: center;
  justify-content: center;
 }
 
-.home-container {
- font: 300 0.9rem "Noto Sans", sans-serif;
- .title-container {
-  z-index: 1;
-
-  h1 {
-   @include fade-in(0.5s);
-   margin: 20px;
-   span {
-    color: $secondary;
-    font: 800 clamp(40px, 18vw, 160px) / 40% "Lato", sans-serif;
-    white-space: pre;
-    text-shadow: 2px 3px 1px $highlight;
-   }
-  }
-
-  .sub-title-container {
-   display: flex;
-   text-align: center;
-   justify-content: center;
-   flex-flow: column;
-   cursor: pointer;
-
-   h2 {
-    @include fade-in(1.5s);
-   }
-
-   p {
-    color: #777;
-    text-shadow: 1px 1px 1px #bbb;
-    @include scale-up;
-   }
-   &:hover {
-    .down-arrow {
-     color: $highlight;
-    }
-   }
-  }
-
-  .down-arrow {
-   @include pulse;
-   color: #666;
-   font-size: 10vw;
-   //  @include pulse;
-   &:hover {
-    color: $highlight;
-    cursor: pointer;
-   }
+.title-container {
+ z-index: 1;
+ h1 {
+  @include fade-in(0.5s);
+  margin: 20px;
+  span {
+   color: $secondary;
+   font: 800 clamp(40px, 18vw, 160px) / 40% "Lato", sans-serif;
+   white-space: pre;
+   text-shadow: 2px 3px 1px $highlight;
   }
  }
 
- h2 {
-  padding: 0 20px;
-
-  font: 900 4.5vw "Sansita Swashed", cursive;
-  color: $bkgnd-light;
-  background-color: #555;
-  opacity: 0.7;
-  white-space: nowrap;
- }
-
- .cta-container {
-  padding: 8rem 0 100px 0;
+ .sub-title-container {
   display: flex;
-  flex-direction: row;
   text-align: center;
   justify-content: center;
-  flex: 1;
-  @include fade-in(2s);
-  button {
-   text-transform: uppercase;
-   margin: 20px;
-   width: auto;
-   box-shadow: 3px 4px 0px 0px #899599;
-   background: white;
-   border: none;
-   color: #555;
+  flex-flow: column;
+  cursor: pointer;
+
+  h2 {
+   @include fade-in(1.5s);
+  }
+
+  p {
+   color: #777;
+   text-shadow: 1px 1px 1px #bbb;
+   @include scale-up;
+  }
+  &:hover {
+   .down-arrow {
+    color: $highlight;
+   }
+  }
+ }
+
+ .down-arrow {
+  @include pulse;
+  color: #666;
+  font-size: 10vw;
+  //  @include pulse;
+  &:hover {
+   color: $highlight;
    cursor: pointer;
-   font-family: 20px/500 "Noto Sans", sans-serif;
-   &:disabled {
-    opacity: 0.2;
-   }
-   &:hover {
-    filter: invert(10%);
-   }
   }
+ }
+}
+h2 {
+ padding: 0 20px;
 
-  .form {
-   max-height: 300px;
-   max-width: 500px;
-   font-family: "Arial";
-   background-color: $secondary;
-   @include box-shadow-mix();
-   margin: 0 10px 80px 0;
-   select,
-   option {
-    font: 3vw "Lato", sans-serif;
-   }
+ font: 900 4.5vw "Sansita Swashed", cursive;
+ color: $bkgnd-light;
+ background-color: #555;
+ opacity: 0.7;
+ white-space: nowrap;
+}
+
+.cta-container {
+ padding: 8rem 0 100px 0;
+ display: flex;
+ flex-direction: row;
+ text-align: center;
+ justify-content: center;
+ flex: 1;
+ @include fade-in(2s);
+ button {
+  text-transform: uppercase;
+  margin: 20px 15px;
+  padding: 7px 7px;
+  box-shadow: 3px 4px 0px 0px #999;
+  color: black;
+  background: white;
+  font: bold clamp(12px, 3rem) "Noto Sans", sans-serif;
+  border: 2px solid #444;
+  border-radius: 14%;
+  opacity: 0.8;
+  &:enabled {
+   cursor: pointer;
   }
-
-  .signup {
-   max-width: 500px;
-   max-height: 300px;
-   min-height: 100px;
-   margin: 80px 0 0 0;
-   padding: 70px 0;
-   background-color: $highlight-dark;
-   @include box-shadow-mix();
-   button {
-    margin: 0 5px;
-   }
-   .signup-input-container {
-    padding: 10px;
-   }
-   .signup-errortext {
-    font-size: 12px;
-   }
+  &:disabled {
+   filter: opacity(30%);
+  }
+  &:hover:enabled {
+   background: #555;
+   color: white;
   }
  }
 
- .alert {
-  z-index: 3;
-  background-color: $bkgnd;
-  position: absolute;
-  text-align: center;
-  font: 300 30px "Noto Sans", sans-serif;
-  padding: 3rem;
-  opacity: 0.6;
-  @include shadow-pop;
+ .form {
+  max-height: 300px;
+  max-width: 500px;
+  font-family: "Arial";
+  background-color: $secondary;
+  @include box-shadow-mix();
+  margin: 0 10px 80px 0;
+  select,
+  option {
+   font: 3vw "Lato", sans-serif;
+  }
  }
+
+ .signup {
+  max-width: 500px;
+  max-height: 300px;
+  min-height: 140px;
+  margin: 80px 0 0 0;
+  padding: 70px 0;
+  background-color: $highlight-dark;
+  @include box-shadow-mix();
+  button {
+   margin: 0 5px;
+  }
+  .signup-input-container {
+   padding: 10px;
+  }
+  .signup-errortext {
+   font-size: 12px;
+  }
+ }
+}
+
+.alert {
+ z-index: 3;
+ background-color: $bkgnd;
+ position: absolute;
+ text-align: center;
+ font: 300 30px "Noto Sans", sans-serif;
+ padding: 3rem;
+ opacity: 0.6;
+ @include shadow-pop;
 }
 
 @media screen and (max-width: 600px) {

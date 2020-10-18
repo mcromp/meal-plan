@@ -106,7 +106,8 @@ html {
   scroll-behavior: smooth;
 }
 
-body {
+.home-container {
+  font: 300 0.9rem "Noto Sans", sans-serif;
   background: #ffe1a8;
   background: -webkit-gradient(linear, right top, left top, from(#ffe1a8), to(#fff1e3));
   background: linear-gradient(to left, #ffe1a8, #fff1e3);
@@ -115,6 +116,10 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -123,28 +128,24 @@ body {
           justify-content: center;
 }
 
-.home-container {
-  font: 300 0.9rem "Noto Sans", sans-serif;
-}
-
-.home-container .title-container {
+.title-container {
   z-index: 1;
 }
 
-.home-container .title-container h1 {
+.title-container h1 {
   -webkit-animation: fade-in-opacity-keyframes 1 0.5s ease-in;
           animation: fade-in-opacity-keyframes 1 0.5s ease-in;
   margin: 20px;
 }
 
-.home-container .title-container h1 span {
+.title-container h1 span {
   color: #c9cba3;
   font: 800 clamp(40px, 18vw, 160px)/40% "Lato", sans-serif;
   white-space: pre;
   text-shadow: 2px 3px 1px #e26d5c;
 }
 
-.home-container .title-container .sub-title-container {
+.title-container .sub-title-container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -159,35 +160,35 @@ body {
   cursor: pointer;
 }
 
-.home-container .title-container .sub-title-container h2 {
+.title-container .sub-title-container h2 {
   -webkit-animation: fade-in-opacity-keyframes 1 1.5s ease-in;
           animation: fade-in-opacity-keyframes 1 1.5s ease-in;
 }
 
-.home-container .title-container .sub-title-container p {
+.title-container .sub-title-container p {
   color: #777;
   text-shadow: 1px 1px 1px #bbb;
   -webkit-animation: scale-up-keyframes 5s cubic-bezier(0.39, 0.575, 0.565, 1) both;
           animation: scale-up-keyframes 5s cubic-bezier(0.39, 0.575, 0.565, 1) both;
 }
 
-.home-container .title-container .sub-title-container:hover .down-arrow {
+.title-container .sub-title-container:hover .down-arrow {
   color: #e26d5c;
 }
 
-.home-container .title-container .down-arrow {
+.title-container .down-arrow {
   -webkit-animation: 1s ease infinite pulse-keyframes;
           animation: 1s ease infinite pulse-keyframes;
   color: #666;
   font-size: 10vw;
 }
 
-.home-container .title-container .down-arrow:hover {
+.title-container .down-arrow:hover {
   color: #e26d5c;
   cursor: pointer;
 }
 
-.home-container h2 {
+h2 {
   padding: 0 20px;
   font: 900 4.5vw "Sansita Swashed", cursive;
   color: #fff1e3;
@@ -196,7 +197,7 @@ body {
   white-space: nowrap;
 }
 
-.home-container .cta-container {
+.cta-container {
   padding: 8rem 0 100px 0;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -216,29 +217,35 @@ body {
           animation: fade-in-opacity-keyframes 1 2s ease-in;
 }
 
-.home-container .cta-container button {
+.cta-container button {
   text-transform: uppercase;
-  margin: 20px;
-  width: auto;
-  -webkit-box-shadow: 3px 4px 0px 0px #899599;
-          box-shadow: 3px 4px 0px 0px #899599;
+  margin: 20px 15px;
+  padding: 7px 7px;
+  -webkit-box-shadow: 3px 4px 0px 0px #999;
+          box-shadow: 3px 4px 0px 0px #999;
+  color: black;
   background: white;
-  border: none;
-  color: #555;
+  font: bold clamp(12px, 3rem) "Noto Sans", sans-serif;
+  border: 2px solid #444;
+  border-radius: 14%;
+  opacity: 0.8;
+}
+
+.cta-container button:enabled {
   cursor: pointer;
-  font-family: 20px/500 "Noto Sans", sans-serif;
 }
 
-.home-container .cta-container button:disabled {
-  opacity: 0.2;
+.cta-container button:disabled {
+  -webkit-filter: opacity(30%);
+          filter: opacity(30%);
 }
 
-.home-container .cta-container button:hover {
-  -webkit-filter: invert(10%);
-          filter: invert(10%);
+.cta-container button:hover:enabled {
+  background: #555;
+  color: white;
 }
 
-.home-container .cta-container .form {
+.cta-container .form {
   max-height: 300px;
   max-width: 500px;
   font-family: "Arial";
@@ -248,15 +255,15 @@ body {
   margin: 0 10px 80px 0;
 }
 
-.home-container .cta-container .form select,
-.home-container .cta-container .form option {
+.cta-container .form select,
+.cta-container .form option {
   font: 3vw "Lato", sans-serif;
 }
 
-.home-container .cta-container .signup {
+.cta-container .signup {
   max-width: 500px;
   max-height: 300px;
-  min-height: 100px;
+  min-height: 140px;
   margin: 80px 0 0 0;
   padding: 70px 0;
   background-color: #e07171;
@@ -264,19 +271,19 @@ body {
           box-shadow: 5px 5px 1px #777;
 }
 
-.home-container .cta-container .signup button {
+.cta-container .signup button {
   margin: 0 5px;
 }
 
-.home-container .cta-container .signup .signup-input-container {
+.cta-container .signup .signup-input-container {
   padding: 10px;
 }
 
-.home-container .cta-container .signup .signup-errortext {
+.cta-container .signup .signup-errortext {
   font-size: 12px;
 }
 
-.home-container .alert {
+.alert {
   z-index: 3;
   background-color: #ffe1a8;
   position: absolute;

@@ -109,9 +109,12 @@
   -ms-grid-columns: (minmax(300px, 1fr))[auto-fill];
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-gap: 0.5rem;
+  background: #ccc;
 }
 
 .container .day-card {
+  -webkit-text-decoration: "none";
+          text-decoration: "none";
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -127,6 +130,13 @@
   min-height: 200px;
   -webkit-box-shadow: 5px 5px 1px #777;
           box-shadow: 5px 5px 1px #777;
+  background: #fff1e3;
+}
+
+.container .day-card:hover {
+  -webkit-filter: brightness(110%);
+          filter: brightness(110%);
+  cursor: pointer;
 }
 
 .container .day-card .header {
@@ -172,11 +182,7 @@
   @page {
     size: landscape;
   }
-  body {
-    z-index: 1;
-  }
   .container {
-    z-index: 1;
     background: none;
   }
   .container .day-card {
