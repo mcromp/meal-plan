@@ -16,13 +16,29 @@ body {
   display: grid;
   -ms-grid-columns: (minmax(150px, 1fr))[auto-fill];
       grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  background-color: palegreen;
   overflow: scroll;
 }
 
-.menu-container .menu-card {
+.menu-container .menu-card, .menu-container .menu-card--disabled {
   margin: 10px;
   height: 100px;
   background-color: white;
+  -webkit-box-shadow: 3px 4px 0px 0px #999;
+          box-shadow: 3px 4px 0px 0px #999;
+  font: bold clamp(12px, 3rem) "Noto Sans", sans-serif;
+}
+
+.menu-container .menu-card .heart, .menu-container .menu-card--disabled .heart, .menu-container .menu-card .heart--fav, .menu-container .menu-card--disabled .heart--fav {
+  padding: 0;
+  margin: 0;
+}
+
+.menu-container .menu-card .heart--fav, .menu-container .menu-card--disabled .heart--fav {
+  background-color: red;
+}
+
+.menu-container .menu-card--disabled {
+  -webkit-filter: invert(20%);
+          filter: invert(20%);
 }
 /*# sourceMappingURL=day.css.map */

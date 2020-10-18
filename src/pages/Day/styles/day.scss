@@ -13,11 +13,26 @@ body {
 .menu-container {
  display: grid;
  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
- background-color: palegreen;
+
  overflow: scroll;
  .menu-card {
   margin: 10px;
   height: 100px;
   background-color: white;
+  box-shadow: 3px 4px 0px 0px #999;
+  font: bold clamp(12px, 3rem) "Noto Sans", sans-serif;
+
+  .heart {
+   padding: 0;
+   margin: 0;
+   &--fav {
+    @extend .heart;
+    background-color: red;
+   }
+  }
+  &--disabled {
+   @extend .menu-card;
+   filter: invert(20%);
+  }
  }
 }

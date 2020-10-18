@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useOnClickOutside } from "../../hooks/useOnClickOutside";
 import { setAlertMessage } from "../../redux/modules/alertMessage";
@@ -10,6 +10,10 @@ const SearchBar: React.FC<SearchBarProps> = ({ menuList, checkoutBoardItems, add
   const [searchListDisplay, setSearchListDisplay] = useState<MenuItemJSON[]>([])
   const [isListShown, setisListShown] = useState(true)
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(setAlertMessage(""))
+  }, [dispatch])
 
   const wrapperRef = useRef() as React.MutableRefObject<HTMLInputElement>;
   useOnClickOutside(wrapperRef, () => setisListShown(false))

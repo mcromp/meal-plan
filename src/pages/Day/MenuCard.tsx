@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../redux";
 import { fetchHelper } from "../../redux/fetchHelper/fetchHelper";
@@ -12,7 +13,12 @@ const MenuCard: React.FC<MenuCardProps> = ({
 }) => {
   const { favList, id: userId } = useSelector<RootState, User>(state => state.currentUser)
   const [isFav, setIsFav] = useState<boolean>(favList.includes(item.ID))
+  const [isDisabled, setIsDisabled] = useState<boolean>();
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    setIsDisabled(disableCheck(item.ID))
+  }, [disableCheck, item.ID])
 
   const toggleFav = () => {
     const body = {
@@ -26,11 +32,11 @@ const MenuCard: React.FC<MenuCardProps> = ({
 
 
   return (
-    <div className="menu-card" >
+    <div className={isDisabled ? "menu-card--disabled" : "menu-card"} >
       <span className="title">{item.ITEM}</span>
-      <button className="add" disabled={disableCheck(item.ID)} onClick={() => addCheckOutBoardItem(item)} >+</button>
-      <button className="fav" onClick={toggleFav} >
-        {isFav ? <span className="heart-true">♡</span> : <span className="heart-false">♡</span>}
+      <button className="add" disabled={isDisabled} onClick={() => addCheckOutBoardItem(item)} >+</button>
+      <button className={isFav ? "heart--fav" : "heart"} onClick={toggleFav} >
+        <span >♡</span>
       </button>
     </div >
   );
