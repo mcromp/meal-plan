@@ -4,7 +4,7 @@ import { Redirect, useParams } from "react-router-dom"
 import { RootState } from "../../redux"
 import { fetchHelper } from "../../redux/fetchHelper/fetchHelper"
 import { ReqType } from "../../redux/fetchHelper/types"
-import Loading from "../../shared/Loading"
+// import Loading from "../../shared/Loading"
 import { User, CalendarItem, MenuItemJSON, CalendarMenuItem } from "../../shared/types"
 import CheckoutBoardItem from "./CheckoutBoard"
 import FilterButtonList from "./FilterBar"
@@ -22,9 +22,9 @@ const Day: React.FC = () => {
   const params: { day: string } = useParams();
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log(isLoading)
-  }, [isLoading])
+  // useEffect(() => {
+  //   console.log(isLoading)
+  // }, [isLoading])
 
   useEffect(() => {
     const menuItemFind = calendar.find(((item) => item.date === params.day))
@@ -87,7 +87,7 @@ const Day: React.FC = () => {
 
 
   return (
-    <div style={{ backgroundColor: "pink" }}>
+    <div className="day-container">
 
       {checkoutBoardMap}
 

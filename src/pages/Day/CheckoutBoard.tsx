@@ -17,14 +17,14 @@ const CheckoutBoardItem: React.FC<CheckoutBoardItemProps> = ({
 
 
   return (
-    <>
+    <div className="checkout-board">
       <span>{name}</span>
       <span>{item.quantity}</span>
       <button onClick={() => modifyQuantityOfCheckoutBoardItem(item, 1)}>+1</button>
       <button onClick={() => modifyQuantityOfCheckoutBoardItem(item, -1)}>-1</button>
       <button onClick={() => removeFromCheckoutBoard(item)}>Remove</button>
       <br />
-    </>
+    </div>
   )
 };
 

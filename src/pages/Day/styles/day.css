@@ -1,5 +1,28 @@
 body {
- height: 100%;
- width: 100%;
+  height: 100%;
+  width: 100%;
+}
+
+.day-container {
+  background-color: orange;
+}
+
+.day-container .checkout-board {
+  background-color: pink;
+}
+
+.menu-container {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (minmax(150px, 1fr))[auto-fill];
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  background-color: palegreen;
+  overflow: scroll;
+}
+
+.menu-container .menu-card {
+  margin: 10px;
+  height: 100px;
+  background-color: white;
 }
 /*# sourceMappingURL=day.css.map */

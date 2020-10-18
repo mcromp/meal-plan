@@ -57,7 +57,7 @@ html {
   }
   &:hover {
    .down-arrow {
-    color: $highlight;
+    filter: invert(30%);
    }
   }
  }
@@ -146,16 +146,15 @@ h2 {
  }
 }
 
-.alert {
- z-index: 3;
- background-color: $bkgnd;
- position: absolute;
- text-align: center;
- font: 300 30px "Noto Sans", sans-serif;
- padding: 3rem;
- opacity: 0.6;
- @include shadow-pop;
-}
+// .alert {
+//  z-index: 3;
+//  background-color: $bkgnd;
+//  position: absolute;
+//  text-align: center;
+//  font: 300 30px "Noto Sans", sans-serif;
+//  padding: 3rem;
+//  opacity: 0.6;
+// }
 
 @media screen and (max-width: 600px) {
  .cta-container {

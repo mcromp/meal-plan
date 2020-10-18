@@ -26,11 +26,11 @@ const MenuCard: React.FC<MenuCardProps> = ({
 
 
   return (
-    <div style={{ backgroundColor: "mediumpurple" }}>
-      <span>{item.ITEM}</span>
-      <button disabled={disableCheck(item.ID)} onClick={() => addCheckOutBoardItem(item)} >Add</button>
-      <button onClick={toggleFav}>
-        {isFav ? "💟" : "♡"}
+    <div className="menu-card" >
+      <span className="title">{item.ITEM}</span>
+      <button className="add" disabled={disableCheck(item.ID)} onClick={() => addCheckOutBoardItem(item)} >+</button>
+      <button className="fav" onClick={toggleFav} >
+        {isFav ? <span className="heart-true">♡</span> : <span className="heart-false">♡</span>}
       </button>
     </div >
   );

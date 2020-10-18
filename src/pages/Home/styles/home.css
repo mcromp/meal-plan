@@ -173,7 +173,8 @@ html {
 }
 
 .title-container .sub-title-container:hover .down-arrow {
-  color: #e26d5c;
+  -webkit-filter: invert(30%);
+          filter: invert(30%);
 }
 
 .title-container .down-arrow {
@@ -280,18 +281,6 @@ h2 {
 
 .cta-container .signup .signup-errortext {
   font-size: 12px;
-}
-
-.alert {
-  z-index: 3;
-  background-color: #ffe1a8;
-  position: absolute;
-  text-align: center;
-  font: 300 30px "Noto Sans", sans-serif;
-  padding: 3rem;
-  opacity: 0.6;
-  -webkit-animation: shadow-pop-keyframes 0.5s cubic-bezier(0.47, 0, 0.745, 0.715) both;
-          animation: shadow-pop-keyframes 0.5s cubic-bezier(0.47, 0, 0.745, 0.715) both;
 }
 
 @media screen and (max-width: 600px) {

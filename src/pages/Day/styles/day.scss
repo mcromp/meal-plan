@@ -2,3 +2,22 @@ body {
  height: 100%;
  width: 100%;
 }
+
+.day-container {
+ background-color: orange;
+ .checkout-board {
+  background-color: pink;
+ }
+}
+
+.menu-container {
+ display: grid;
+ grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+ background-color: palegreen;
+ overflow: scroll;
+ .menu-card {
+  margin: 10px;
+  height: 100px;
+  background-color: white;
+ }
+}
