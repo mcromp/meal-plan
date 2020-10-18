@@ -5,12 +5,28 @@ $bkgnd-light: #fff1e3;
 $highlight: #e26d5c;
 $highlight-dark: #e07171;
 $secondary: #c9cba3;
+.print {
+ background: #ccc;
+ width: 100%;
+ text-align: right;
+ .icon {
+  background: #eee;
+  padding: 5px 29px;
+  margin: 5px 25px 0 0;
+  border: solid 1px;
+  &:hover {
+   cursor: pointer;
+   background: white;
+  }
+ }
+}
 .container {
- width: 99vw;
+ padding: 10px;
  display: grid;
  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
- grid-gap: 0.5rem;
+ grid-gap: 0.7rem;
  background: #ccc;
+ justify-items: stretch;
  .day-card {
   text-decoration: "none";
   display: flex;

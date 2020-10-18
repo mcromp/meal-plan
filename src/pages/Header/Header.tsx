@@ -18,7 +18,7 @@ const Header: React.FC = () => {
   return (
     currentUser &&
     <div className="header-container">
-      <h3>menu planner</h3>
+      <h3 className="title">menu planner</h3>
       <span>{currentUser.username}</span>
       <button onClick={handleLogout}>Signout</button>
     </div>)

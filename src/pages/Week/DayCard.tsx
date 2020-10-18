@@ -16,7 +16,6 @@ const DayCard: React.FC<DayCardProps> = ({ day, calendarDisplay }) => {
       <div className="header">
         <h3>{day.day}</h3>
         <h4>{day.dateId}</h4>
-        <button>✎</button>
       </div>
       <div>
         {calendarDisplay?.menuItems.map(item => {

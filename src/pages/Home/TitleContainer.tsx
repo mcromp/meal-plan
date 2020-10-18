@@ -12,7 +12,7 @@ const TitleContainer: React.FC<TitleContainerProps> = ({ scrollRef }) => {
       </h1>
       <div className="sub-title-container" onClick={() => scrollToRef(scrollRef)}>
         <h2>Plan your 7 day menu</h2>
-        <p>Plan your meals, simplify your life</p>
+        <p>Best viewed on Chrome desktop</p>
         <span className="down-arrow" onClick={() => scrollToRef(scrollRef)}>↓</span>
       </div>
     </div>
