@@ -9,6 +9,7 @@ $secondary: #c9cba3;
 
 .day-container {
  height: 100%;
+ z-index: 0;
 }
 .checkout-container {
  display: flex;
@@ -43,8 +44,9 @@ $secondary: #c9cba3;
   display: flex;
   padding: 0 10px;
   button {
-   font-size: 15px;
-   margin: 0 5px;
+   font-size: 17px;
+   margin: 3px 5px;
+   padding: 8px;
   }
  }
 }
@@ -62,7 +64,7 @@ $secondary: #c9cba3;
   box-shadow: 3px 4px 0px 0px #999;
   color: black;
   background: white;
-  font: bold clamp(12px, 3rem) "Noto Sans", sans-serif;
+  font: 14px "Noto Sans", sans-serif;
   border: none;
   opacity: 0.8;
   &:enabled {
@@ -123,7 +125,7 @@ $secondary: #c9cba3;
 
    &--fav {
     @extend .heart;
-    background: red;
+    background: $highlight;
    }
   }
   &--disabled {
@@ -136,6 +138,30 @@ $secondary: #c9cba3;
  background-color: #444;
  padding: 20px 0 20px 20px;
  box-shadow: 3px 4px 0px 0px #999;
+ .search-alert {
+  font: 25px "Noto Sans", sans-serif;
+  color: $highlight;
+  position: relative;
+  top: 10px;
+  z-index: 1;
+ }
+ .search-list-container {
+  position: absolute;
+  z-index: 1;
+  background: white;
+  margin: 5px;
+  box-shadow: 3px 4px 0px 0px #999;
+  min-width: 200px;
+  div {
+   padding: 2px 10px 2px 10px;
+   font: 16px "Noto Sans", sans-serif;
+   &:hover {
+    background: #aaa;
+    color: white;
+    cursor: pointer;
+   }
+  }
+ }
 }
 
 .filter-container {
@@ -184,7 +210,11 @@ $secondary: #c9cba3;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin: 0;
-  padding: 0;
+  margin: 10px;
+  padding: 10px;
+  button {
+   padding: auto;
+   margin: auto;
+  }
  }
 }

@@ -50,14 +50,18 @@ const SearchBar: React.FC<SearchBarProps> = ({ menuList, checkoutBoardItems, add
         placeholder="Type to search"
         value={textValue}
         onChange={e => handleChange(e)} />
-      <AlertText />
-      {isListShown && searchListDisplay.map(item =>
-        <div
-          onClick={() => handleClick(item)}
-          key={item.ID}
-          tabIndex={0}>
-          <span>{item.ITEM}</span>
-        </div>)}
+      <div className="search-alert">
+        <AlertText />
+      </div>
+      <div className="search-list-container">
+        {isListShown && searchListDisplay.map(item =>
+          <div
+            onClick={() => handleClick(item)}
+            key={item.ID}
+            tabIndex={0}>
+            <span>{item.ITEM}</span>
+          </div>)}
+      </div>
     </div>
   );
 };

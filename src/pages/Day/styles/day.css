@@ -4,6 +4,7 @@ body {
 
 .day-container {
   height: 100%;
+  z-index: 0;
 }
 
 .checkout-container {
@@ -67,8 +68,9 @@ body {
 }
 
 .checkout-board .button-container button {
-  font-size: 15px;
-  margin: 0 5px;
+  font-size: 17px;
+  margin: 3px 5px;
+  padding: 8px;
 }
 
 .submit-container {
@@ -94,7 +96,7 @@ body {
           box-shadow: 3px 4px 0px 0px #999;
   color: black;
   background: white;
-  font: bold clamp(12px, 3rem) "Noto Sans", sans-serif;
+  font: 14px "Noto Sans", sans-serif;
   border: none;
   opacity: 0.8;
 }
@@ -183,7 +185,7 @@ body {
 }
 
 .menu-container .menu-card .heart--fav, .menu-container .menu-card--disabled .heart--fav {
-  background: red;
+  background: #e26d5c;
 }
 
 .menu-container .menu-card--disabled {
@@ -196,6 +198,35 @@ body {
   padding: 20px 0 20px 20px;
   -webkit-box-shadow: 3px 4px 0px 0px #999;
           box-shadow: 3px 4px 0px 0px #999;
+}
+
+.search-container .search-alert {
+  font: 25px "Noto Sans", sans-serif;
+  color: #e26d5c;
+  position: relative;
+  top: 10px;
+  z-index: 1;
+}
+
+.search-container .search-list-container {
+  position: absolute;
+  z-index: 1;
+  background: white;
+  margin: 5px;
+  -webkit-box-shadow: 3px 4px 0px 0px #999;
+          box-shadow: 3px 4px 0px 0px #999;
+  min-width: 200px;
+}
+
+.search-container .search-list-container div {
+  padding: 2px 10px 2px 10px;
+  font: 16px "Noto Sans", sans-serif;
+}
+
+.search-container .search-list-container div:hover {
+  background: #aaa;
+  color: white;
+  cursor: pointer;
 }
 
 .filter-container {
@@ -260,8 +291,12 @@ body {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
-    margin: 0;
-    padding: 0;
+    margin: 10px;
+    padding: 10px;
+  }
+  .submit-container button {
+    padding: auto;
+    margin: auto;
   }
 }
 /*# sourceMappingURL=day.css.map */

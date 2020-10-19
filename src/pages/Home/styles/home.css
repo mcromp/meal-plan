@@ -191,11 +191,10 @@ html {
 
 h2 {
   padding: 0 20px;
-  font: 900 4.5vw "Sansita Swashed", cursive;
+  font: 900 3rem "Sansita Swashed", cursive;
   color: #fff1e3;
   background-color: #555;
   opacity: 0.7;
-  white-space: nowrap;
 }
 
 .cta-container {
@@ -226,7 +225,7 @@ h2 {
           box-shadow: 3px 4px 0px 0px #999;
   color: black;
   background: white;
-  font: bold clamp(12px, 3rem) "Noto Sans", sans-serif;
+  font: 30px "Noto Sans", sans-serif;
   border: none;
   opacity: 0.8;
 }
@@ -246,7 +245,6 @@ h2 {
 }
 
 .cta-container .form {
-  max-height: 300px;
   max-width: 500px;
   font-family: "Arial";
   background-color: #c9cba3;
@@ -257,18 +255,24 @@ h2 {
 
 .cta-container .form select,
 .cta-container .form option {
-  font: 3vw "Lato", sans-serif;
+  font-size: 20px;
+  margin: 10px;
+}
+
+.cta-container .form .delete-user span {
+  font-size: 20px;
 }
 
 .cta-container .signup {
-  max-width: 500px;
-  max-height: 300px;
-  min-height: 140px;
   margin: 80px 0 0 0;
   padding: 70px 0;
   background-color: #e07171;
   -webkit-box-shadow: 5px 5px 1px #777;
           box-shadow: 5px 5px 1px #777;
+}
+
+.cta-container .signup input {
+  font-size: 25px;
 }
 
 .cta-container .signup button {
@@ -280,7 +284,17 @@ h2 {
 }
 
 .cta-container .signup .signup-errortext {
-  font-size: 12px;
+  font-size: 20px;
+}
+
+.alert {
+  z-index: 3;
+  background-color: #ffe1a8;
+  position: absolute;
+  text-align: center;
+  font: 300 30px "Noto Sans", sans-serif;
+  padding: 3rem;
+  opacity: 0.6;
 }
 
 @media screen and (max-width: 600px) {

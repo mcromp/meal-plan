@@ -76,11 +76,11 @@ html {
 h2 {
  padding: 0 20px;
 
- font: 900 4.5vw "Sansita Swashed", cursive;
+ font: 900 3rem "Sansita Swashed", cursive;
  color: $bkgnd-light;
  background-color: #555;
  opacity: 0.7;
- white-space: nowrap;
+ //  white-space: wrap;
 }
 
 .cta-container {
@@ -98,7 +98,7 @@ h2 {
   box-shadow: 3px 4px 0px 0px #999;
   color: black;
   background: white;
-  font: bold clamp(12px, 3rem) "Noto Sans", sans-serif;
+  font: 30px "Noto Sans", sans-serif;
   border: none;
   opacity: 0.8;
   &:enabled {
@@ -114,7 +114,6 @@ h2 {
  }
 
  .form {
-  max-height: 300px;
   max-width: 500px;
   font-family: "Arial";
   background-color: $secondary;
@@ -122,18 +121,24 @@ h2 {
   margin: 0 10px 80px 0;
   select,
   option {
-   font: 3vw "Lato", sans-serif;
+   font-size: 20px;
+   margin: 10px;
+  }
+  .delete-user {
+   span {
+    font-size: 20px;
+   }
   }
  }
 
  .signup {
-  max-width: 500px;
-  max-height: 300px;
-  min-height: 140px;
   margin: 80px 0 0 0;
   padding: 70px 0;
   background-color: $highlight-dark;
   @include box-shadow-mix();
+  input {
+   font-size: 25px;
+  }
   button {
    margin: 0 5px;
   }
@@ -141,20 +146,20 @@ h2 {
    padding: 10px;
   }
   .signup-errortext {
-   font-size: 12px;
+   font-size: 20px;
   }
  }
 }
 
-// .alert {
-//  z-index: 3;
-//  background-color: $bkgnd;
-//  position: absolute;
-//  text-align: center;
-//  font: 300 30px "Noto Sans", sans-serif;
-//  padding: 3rem;
-//  opacity: 0.6;
-// }
+.alert {
+ z-index: 3;
+ background-color: $bkgnd;
+ position: absolute;
+ text-align: center;
+ font: 300 30px "Noto Sans", sans-serif;
+ padding: 3rem;
+ opacity: 0.6;
+}
 
 @media screen and (max-width: 600px) {
  .cta-container {
