@@ -5,7 +5,9 @@ $bkgnd-light: #fff1e3;
 $highlight: #e26d5c;
 $highlight-dark: #e07171;
 $secondary: #c9cba3;
-
+body {
+ background: #ccc;
+}
 .print {
  background: #ccc;
  width: 100%;
@@ -26,8 +28,6 @@ $secondary: #c9cba3;
  display: grid;
  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
  grid-gap: 0.7rem;
- background: #ccc;
-
  .header {
   display: flex;
   justify-content: space-around;
@@ -56,7 +56,6 @@ $secondary: #c9cba3;
  }
  .day-card {
   font: 14px "Noto Sans", sans-serif;
-
   display: flex;
   flex-direction: column;
   background: cream;
@@ -84,7 +83,6 @@ $secondary: #c9cba3;
  }
  .container {
   background: none;
-
   .day-card {
    color: black;
    background: none;

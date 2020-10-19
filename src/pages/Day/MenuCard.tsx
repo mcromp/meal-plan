@@ -34,10 +34,11 @@ const MenuCard: React.FC<MenuCardProps> = ({
   return (
     <div className={isDisabled ? "menu-card--disabled" : "menu-card"} >
       <span className="title">{item.ITEM}</span>
-      <button className="add" disabled={isDisabled} onClick={() => addCheckOutBoardItem(item)} >+</button>
-      <button className={isFav ? "heart--fav" : "heart"} onClick={toggleFav} >
-        <span >♡</span>
-      </button>
+      <div className="card-buttons">
+        <button className="add" disabled={isDisabled} onClick={() => addCheckOutBoardItem(item)} >+</button>
+        <button className={isFav ? "heart--fav" : "heart"} onClick={toggleFav}> ♡
+        </button>
+      </div>
     </div >
   );
 };

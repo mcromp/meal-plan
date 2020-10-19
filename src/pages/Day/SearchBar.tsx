@@ -44,7 +44,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ menuList, checkoutBoardItems, add
   }
 
   return (
-    <div ref={wrapperRef} className="flex-container flex-column pos-rel">
+    <div ref={wrapperRef} className="search-container">
       <input
         onClick={() => setisListShown(true)}
         placeholder="Type to search"

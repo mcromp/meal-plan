@@ -102,6 +102,10 @@
   }
 }
 
+body {
+  background: #ccc;
+}
+
 .print {
   background: #ccc;
   width: 100%;
@@ -127,7 +131,6 @@
   -ms-grid-columns: (minmax(300px, 1fr))[auto-fill];
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   grid-gap: 0.7rem;
-  background: #ccc;
 }
 
 .container .header {

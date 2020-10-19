@@ -88,12 +88,16 @@ const Day: React.FC = () => {
 
   return (
     <div className="day-container">
-
-      {checkoutBoardMap}
-
-      <button onClick={handleSubmit}>SUBMIT</button>
-      <button onClick={() => setCheckoutBoardItems([])}>CLEAR ALL</button>
-      <button onClick={() => setIsSubmitted(true)}>return to week, without submitting</button>
+      <div className="checkout-container">
+        <div className="board-container">
+          {checkoutBoardMap}
+        </div>
+        <div className="submit-container">
+          <button onClick={handleSubmit}>SUBMIT</button>
+          <button onClick={() => setCheckoutBoardItems([])}>CLEAR ALL</button>
+          <button onClick={() => setIsSubmitted(true)}>RETURN TO WEEK, WITHOUT SUBMITTING</button>
+        </div>
+      </div>
 
       <SearchBar
         menuList={menuList}
