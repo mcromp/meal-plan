@@ -1,0 +1,39 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
+
+$bkgd-white: #f3f3f3;
+$main: black;
+$main-light: #fff1e3;
+$highlight: #e26d5c;
+$highlight-dark: #e07171;
+$secondary: #c9cba3;
+
+$heading-font: "Poppins", sans-serif;
+$main-font: "Lato", sans-serif;
+
+@mixin shadow-radius {
+ box-shadow: 0 2px 3px #777, 0 0 3px #777;
+ border-radius: 6px;
+}
+
+@mixin btn {
+ padding: 7px 7px;
+ text-transform: uppercase;
+ box-shadow: 0 2px 3px #777, 0 0 3px #777;
+ border-radius: 6px;
+ color: black;
+ background: white;
+ font: bold 12px "Poppins", sans-serif;
+ border: none;
+ opacity: 0.8;
+ &:enabled {
+  cursor: pointer;
+ }
+ &:disabled {
+  filter: opacity(30%);
+ }
+ &:hover:enabled {
+  background: #555;
+  color: white;
+ }
+}

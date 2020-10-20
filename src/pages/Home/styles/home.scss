@@ -1,13 +1,11 @@
 @import "../../../shared/sass/animations";
+@import "../../../shared/sass/base";
 
-$bkgnd: #ffe1a8;
-$bkgnd-light: #fff1e3;
-$highlight: #e26d5c;
-$highlight-dark: #e07171;
-$secondary: #c9cba3;
-
-@mixin box-shadow-mix {
- box-shadow: 5px 5px 1px #777;
+@mixin heading {
+ font: 400 28px $main-font;
+ color: $bkgnd-light;
+ background-color: #555;
+ opacity: 0.7;
 }
 
 html {
@@ -15,15 +13,14 @@ html {
 }
 
 .home-container {
- font: 300 0.9rem "Noto Sans", sans-serif;
- background: $bkgnd;
- background: linear-gradient(to left, $bkgnd, $bkgnd-light);
- background-size: 120%;
- padding: 0 2rem;
  display: flex;
  flex-flow: column;
  align-items: center;
  justify-content: center;
+ background: $bkgnd;
+ background: linear-gradient(to left, $bkgnd, $bkgnd-light);
+ background-size: 120%;
+ padding: 0 2rem;
 }
 
 .title-container {
@@ -33,7 +30,7 @@ html {
   margin: 20px;
   span {
    color: $secondary;
-   font: 800 clamp(40px, 18vw, 160px) / 40% "Lato", sans-serif;
+   font: 800 clamp(40px, 18vw, 160px) / 40% $main-font;
    white-space: pre;
    text-shadow: 2px 3px 1px $highlight;
   }
@@ -42,17 +39,18 @@ html {
  .sub-title-container {
   display: flex;
   text-align: center;
-  justify-content: center;
+  justify-content: flex-end;
   flex-flow: column;
   cursor: pointer;
 
   h2 {
    @include fade-in(1.5s);
+   white-space: nowrap;
   }
 
   p {
    color: #777;
-   text-shadow: 1px 1px 1px #bbb;
+   //  text-shadow: 1px 1px 1px #bbb;
    @include scale-up;
   }
   &:hover {
@@ -61,44 +59,48 @@ html {
    }
   }
  }
+}
 
- .down-arrow {
-  @include pulse;
-  color: #666;
-  font-size: 10vw;
-  //  @include pulse;
-  &:hover {
-   color: $highlight;
-   cursor: pointer;
-  }
+.down-arrow {
+ @include pulse;
+ @include shadow-radius;
+ text-transform: uppercase;
+ color: black;
+ background: white;
+ border: none;
+
+ &:enabled {
+  cursor: pointer;
+ }
+ &:disabled {
+  filter: opacity(30%);
+ }
+ &:hover:enabled {
+  background: #555;
+  color: white;
  }
 }
 h2 {
- padding: 0 20px;
-
- font: 900 3rem "Sansita Swashed", cursive;
- color: $bkgnd-light;
- background-color: #555;
- opacity: 0.7;
- //  white-space: wrap;
+ padding: 4px 20px;
+ @include heading;
 }
 
 .cta-container {
- padding: 8rem 0 100px 0;
+ padding: 200px 0 100px 0;
  display: flex;
  flex-direction: row;
  text-align: center;
  justify-content: center;
- flex: 1;
  @include fade-in(2s);
+
  button {
   text-transform: uppercase;
   margin: 20px 15px;
   padding: 7px 7px;
-  box-shadow: 3px 4px 0px 0px #999;
+  @include shadow-radius;
   color: black;
   background: white;
-  font: 30px "Noto Sans", sans-serif;
+  font: 15px "Lato", sans-serif;
   border: none;
   opacity: 0.8;
   &:enabled {
@@ -115,18 +117,17 @@ h2 {
 
  .form {
   max-width: 500px;
-  font-family: "Arial";
-  background-color: $secondary;
-  @include box-shadow-mix();
   margin: 0 10px 80px 0;
+  background-color: $secondary;
+  @include shadow-radius();
   select,
   option {
-   font-size: 20px;
+   font-size: 12px;
    margin: 10px;
   }
   .delete-user {
    span {
-    font-size: 20px;
+    font-size: 12px;
    }
   }
  }
@@ -135,10 +136,7 @@ h2 {
   margin: 80px 0 0 0;
   padding: 70px 0;
   background-color: $highlight-dark;
-  @include box-shadow-mix();
-  input {
-   font-size: 25px;
-  }
+  @include shadow-radius();
   button {
    margin: 0 5px;
   }
@@ -146,19 +144,9 @@ h2 {
    padding: 10px;
   }
   .signup-errortext {
-   font-size: 20px;
+   font-size: 12px;
   }
  }
-}
-
-.alert {
- z-index: 3;
- background-color: $bkgnd;
- position: absolute;
- text-align: center;
- font: 300 30px "Noto Sans", sans-serif;
- padding: 3rem;
- opacity: 0.6;
 }
 
 @media screen and (max-width: 600px) {
@@ -174,7 +162,7 @@ h2 {
   }
   .signup {
    margin: 10px 10px 200px 10px !important;
-   padding: 0 !important;
+   padding: 0 0 20px 0 !important;
    width: 100%;
   }
  }

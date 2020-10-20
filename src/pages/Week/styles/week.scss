@@ -1,10 +1,11 @@
 @import "../../../shared/sass/animations";
+@import "../../../shared/sass/shared";
 
-$bkgnd: #ffe1a8;
-$bkgnd-light: #fff1e3;
-$highlight: #e26d5c;
-$highlight-dark: #e07171;
-$secondary: #c9cba3;
+@mixin shadow-radius {
+ box-shadow: 0 2px 3px #777, 0 0 3px #777;
+ border-radius: 6px;
+}
+
 body {
  background: #ccc;
 }
@@ -14,9 +15,9 @@ body {
  text-align: right;
  .icon {
   background: #eee;
-  padding: 5px 29px;
+  padding: 8px 20px;
   margin: 5px 25px 0 0;
-  border: solid 1px;
+  @include shadow-radius;
   &:hover {
    cursor: pointer;
    background: white;
@@ -29,6 +30,10 @@ body {
  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
  grid-gap: 0.7rem;
  .header {
+  // margin: 6px 0 0 0;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+
   display: flex;
   justify-content: space-around;
   flex-flow: row nowrap;
@@ -45,9 +50,7 @@ body {
   }
 
   h3 {
-   font: 500 30px "Sansita Swashed", cursive;
-   margin: 0;
-   padding: 0;
+   font: 500 30px "Lato", sans-serif;
    text-align: center;
   }
   h4 {
@@ -59,9 +62,8 @@ body {
   display: flex;
   flex-direction: column;
   background: cream;
-  border: solid 1px;
   min-height: 200px;
-  box-shadow: 5px 5px 1px #777;
+  @include shadow-radius;
   background: $bkgnd-light;
   &:hover {
    filter: brightness(110%);

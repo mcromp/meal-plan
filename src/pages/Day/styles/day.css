@@ -35,8 +35,9 @@ body {
   max-height: 200px;
   padding: 10px;
   background: #fff1e3;
-  -webkit-box-shadow: 3px 4px 0px 0px #999;
-          box-shadow: 3px 4px 0px 0px #999;
+  -webkit-box-shadow: 0 2px 3px #777, 0 0 3px #777;
+          box-shadow: 0 2px 3px #777, 0 0 3px #777;
+  border-radius: 6px;
 }
 
 .checkout-board {
@@ -92,8 +93,9 @@ body {
   text-transform: uppercase;
   padding: 10px;
   margin: 10px;
-  -webkit-box-shadow: 3px 4px 0px 0px #999;
-          box-shadow: 3px 4px 0px 0px #999;
+  -webkit-box-shadow: 0 2px 3px #777, 0 0 3px #777;
+          box-shadow: 0 2px 3px #777, 0 0 3px #777;
+  border-radius: 6px;
   color: black;
   background: white;
   font: 14px "Noto Sans", sans-serif;
@@ -138,8 +140,9 @@ body {
   margin: 10px;
   height: 100px;
   background-color: #ffe1a8;
-  -webkit-box-shadow: 3px 4px 0px 0px #999;
-          box-shadow: 3px 4px 0px 0px #999;
+  -webkit-box-shadow: 0 2px 3px #777, 0 0 3px #777;
+          box-shadow: 0 2px 3px #777, 0 0 3px #777;
+  border-radius: 6px;
 }
 
 .menu-container .menu-card .title, .menu-container .menu-card--disabled .title {
@@ -160,8 +163,9 @@ body {
       flex-basis: 50%;
   border: none;
   text-transform: uppercase;
-  -webkit-box-shadow: 3px 4px 0px 0px #999;
-          box-shadow: 3px 4px 0px 0px #999;
+  -webkit-box-shadow: 0 2px 3px #777, 0 0 3px #777;
+          box-shadow: 0 2px 3px #777, 0 0 3px #777;
+  border-radius: 6px;
   border: none;
 }
 
@@ -194,10 +198,7 @@ body {
 }
 
 .search-container {
-  background-color: #444;
-  padding: 20px 0 20px 20px;
-  -webkit-box-shadow: 3px 4px 0px 0px #999;
-          box-shadow: 3px 4px 0px 0px #999;
+  padding: 0 0 0 20px;
 }
 
 .search-container .search-alert {
@@ -213,8 +214,9 @@ body {
   z-index: 1;
   background: white;
   margin: 5px;
-  -webkit-box-shadow: 3px 4px 0px 0px #999;
-          box-shadow: 3px 4px 0px 0px #999;
+  -webkit-box-shadow: 0 2px 3px #777, 0 0 3px #777;
+          box-shadow: 0 2px 3px #777, 0 0 3px #777;
+  border-radius: 6px;
   min-width: 200px;
 }
 
@@ -232,17 +234,18 @@ body {
 .filter-container {
   margin: 10px 0;
   padding: 10px;
-  -webkit-box-shadow: 3px 4px 0px 0px #999;
-          box-shadow: 3px 4px 0px 0px #999;
-  background: #c9cba3;
+  -webkit-box-shadow: 0px 3px 0px 0px #aaa;
+          box-shadow: 0px 3px 0px 0px #aaa;
+  background: #999;
 }
 
 .filter-container button {
   text-transform: uppercase;
   padding: 5px;
   margin: 5px;
-  -webkit-box-shadow: 3px 4px 0px 0px #999;
-          box-shadow: 3px 4px 0px 0px #999;
+  -webkit-box-shadow: 0 2px 3px #777, 0 0 3px #777;
+          box-shadow: 0 2px 3px #777, 0 0 3px #777;
+  border-radius: 6px;
   color: black;
   background: white;
   font: 10px "Noto Sans", sans-serif;

@@ -13,6 +13,7 @@ import AlertText from "../../shared/AlertText"
 import "./styles/home.css"
 import { useRef } from "react"
 import TitleContainer from "./TitleContainer"
+
 const Home = () => {
   const [isDeleteConfirmShown, setIsDeleteConfirmShown] = useState<boolean>(false)
   const [isSignupShown, setIsSignupShown] = useState<boolean>(false)
@@ -31,10 +32,10 @@ const Home = () => {
     return () => clearTimeout(listener);
   })
 
-  const scrollToRef = (ref: React.MutableRefObject<any>) => window.scrollTo(0, ref.current.offsetTop)
-  useEffect(() => {
-    dispatch(fetchHelper(ReqType.reqGetUsers))
-  }, [dispatch])
+  // const scrollToRef = (ref: React.MutableRefObject<any>) => window.scrollTo(0, ref.current.offsetTop)
+  // useEffect(() => {
+  //   dispatch(fetchHelper(ReqType.reqGetUsers))
+  // }, [dispatch])
 
 
   const handleDeleteSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -72,12 +73,12 @@ const Home = () => {
   const checkValue = value.length === 0;
 
   return (
-    <div className="home-container">
+    <div className="home">
       <TitleContainer scrollRef={scrollRef} />
-      <div className="cta-container">
+      <div className="home__form">
         {isAlertShown ? <AlertText /> : null}
-        <div className="form">
-          <h2 ref={scrollRef}>Select your username</h2>
+        <div className="form__signin">
+          <span className="signin__header" ref={scrollRef}>Select your username</span>
           {isDeleteConfirmShown ?
             <UserDelete
               handleSubmit={handleDeleteSubmit}
@@ -97,15 +98,15 @@ const Home = () => {
           }
         </div>
 
-        <div className="signup">
+        <div className="form__signup">
           {isSignupShown ?
             <UserSignup
               setShowAddUser={setIsSignupShown}
               signupUser={signupUser} />
             :
             <>
-              <h2>Don't have a username?</h2>
-              <button onClick={() => setIsSignupShown(true)} >Sign up!</button>
+              <span className="signup__header">Don't have a username?</span>
+              <button className="signup__btn" onClick={() => setIsSignupShown(true)} >Sign up!</button>
             </>
           }
         </div>

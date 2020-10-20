@@ -1,48 +1,48 @@
-$bkgnd: #ffe1a8;
-$bkgnd-light: #fff1e3;
-$highlight: #e26d5c;
-$highlight-dark: #e07171;
-$secondary: #c9cba3;
+@import "../../../shared/sass/animations";
+@import "../../../shared/sass/base";
 
-.header-container {
+//
+// Note: to change icon svg's color, go into Header.tsx and change MIcon 'color' prop
+//
+
+.header {
  display: flex;
  flex-flow: row;
  flex-wrap: nowrap;
  align-items: center;
- //  justify-content: stretch;
+ justify-items: center;
  width: 100%;
- box-shadow: 3px 4px 0px 2px pruple;
- font: 19px "Lato", sans-serif;
- background-color: #444;
- h3 {
-  color: $secondary;
-  padding: 0 30px;
-  flex-grow: 1;
-  text-shadow: 1px 1px 1px $highlight;
+ margin: 0 0 10px 0;
+ padding: 3px;
+ background-color: $bkgd-white;
+ box-shadow: 0px 3px 3px 0px #999;
+}
+
+.header__title {
+ color: $main;
+ margin: 0;
+ padding: 0 20px 0 8px;
+ font-size: 20px;
+ font-family: $heading-font;
+}
+
+.header__icon {
+ padding: 0 0 0 30px;
+ width: 20px;
+ &:hover {
+  @include pulse;
  }
- span {
-  padding: 0 20px 0 0;
-  color: $bkgnd;
- }
- button {
-  margin: 0 30px 0 0;
-  text-transform: uppercase;
-  padding: 7px 7px;
-  box-shadow: 3px 4px 0px 0px #999;
-  color: black;
-  background: white;
-  font: bold clamp(12px, 3rem) "Noto Sans", sans-serif;
-  border: none;
-  opacity: 0.8;
-  &:enabled {
-   cursor: pointer;
-  }
-  &:disabled {
-   filter: opacity(30%);
-  }
-  &:hover:enabled {
-   background: #555;
-   color: white;
-  }
- }
+}
+
+.header__username {
+ color: $main;
+ font: 14px $heading;
+
+ padding: 0 20px 0 0;
+ margin: 0 30px 0 auto;
+}
+
+.header__signout {
+ margin: 0 40px 0 0;
+ @include btn;
 }

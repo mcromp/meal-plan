@@ -32,14 +32,14 @@ const UserSignup: React.FC<UserSignupProps> = ({
   const submitDisabled = value.length <= 3 || usernameIncluded || value.length >= 15;
 
   return (
-    <>
-      <h2>Input new username</h2>
-      <div className="signup-input-container">
+    <div className="signup__input">
+      <span className="input__title">Input new username</span>
+      <div className="input__input">
         <input type="text" value={value} ref={focusRef} onKeyDown={(e) => handleKeyDown(e)} onChange={(e) => setValue(e.target.value)} />
         <button disabled={submitDisabled} onClick={() => signupUser(value)}>Submit</button>
         <button onClick={() => setShowAddUser(false)}>X</button>
       </div>
-      <div className="signup-errortext">
+      <div className="input__errortext">
 
         {usernameIncluded ?
           <span>Name already included</span> : null
@@ -48,7 +48,7 @@ const UserSignup: React.FC<UserSignupProps> = ({
           <span>Username must be between 3 and 25 characters</span> : <br />
         }
       </div>
-    </>
+    </div>
   )
 }
 

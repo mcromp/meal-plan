@@ -68,40 +68,6 @@
   }
 }
 
-@-webkit-keyframes shadow-pop-keyframes {
-  0% {
-    -webkit-box-shadow: 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e;
-            box-shadow: 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e;
-    -webkit-transform: translateX(0) translateY(0);
-            transform: translateX(0) translateY(0);
-    opacity: 0;
-  }
-  100% {
-    -webkit-box-shadow: 1px -1px #3e3e3e, 2px -2px #3e3e3e, 3px -3px #3e3e3e, 4px -4px #3e3e3e, 5px -5px #3e3e3e, 6px -6px #3e3e3e, 7px -7px #3e3e3e, 8px -8px #3e3e3e;
-            box-shadow: 1px -1px #3e3e3e, 2px -2px #3e3e3e, 3px -3px #3e3e3e, 4px -4px #3e3e3e, 5px -5px #3e3e3e, 6px -6px #3e3e3e, 7px -7px #3e3e3e, 8px -8px #3e3e3e;
-    -webkit-transform: translateX(-8px) translateY(8px);
-            transform: translateX(-8px) translateY(8px);
-    opacity: 1;
-  }
-}
-
-@keyframes shadow-pop-keyframes {
-  0% {
-    -webkit-box-shadow: 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e;
-            box-shadow: 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e, 0 0 #3e3e3e;
-    -webkit-transform: translateX(0) translateY(0);
-            transform: translateX(0) translateY(0);
-    opacity: 0;
-  }
-  100% {
-    -webkit-box-shadow: 1px -1px #3e3e3e, 2px -2px #3e3e3e, 3px -3px #3e3e3e, 4px -4px #3e3e3e, 5px -5px #3e3e3e, 6px -6px #3e3e3e, 7px -7px #3e3e3e, 8px -8px #3e3e3e;
-            box-shadow: 1px -1px #3e3e3e, 2px -2px #3e3e3e, 3px -3px #3e3e3e, 4px -4px #3e3e3e, 5px -5px #3e3e3e, 6px -6px #3e3e3e, 7px -7px #3e3e3e, 8px -8px #3e3e3e;
-    -webkit-transform: translateX(-8px) translateY(8px);
-            transform: translateX(-8px) translateY(8px);
-    opacity: 1;
-  }
-}
-
 body {
   background: #ccc;
 }
@@ -114,9 +80,11 @@ body {
 
 .print .icon {
   background: #eee;
-  padding: 5px 29px;
+  padding: 8px 20px;
   margin: 5px 25px 0 0;
-  border: solid 1px;
+  -webkit-box-shadow: 0 2px 3px #777, 0 0 3px #777;
+          box-shadow: 0 2px 3px #777, 0 0 3px #777;
+  border-radius: 6px;
 }
 
 .print .icon:hover {
@@ -134,6 +102,8 @@ body {
 }
 
 .container .header {
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -162,9 +132,7 @@ body {
 }
 
 .container .header h3 {
-  font: 500 30px "Sansita Swashed", cursive;
-  margin: 0;
-  padding: 0;
+  font: 500 30px "Lato", sans-serif;
   text-align: center;
 }
 
@@ -182,10 +150,10 @@ body {
       -ms-flex-direction: column;
           flex-direction: column;
   background: cream;
-  border: solid 1px;
   min-height: 200px;
-  -webkit-box-shadow: 5px 5px 1px #777;
-          box-shadow: 5px 5px 1px #777;
+  -webkit-box-shadow: 0 2px 3px #777, 0 0 3px #777;
+          box-shadow: 0 2px 3px #777, 0 0 3px #777;
+  border-radius: 6px;
   background: #fff1e3;
 }
 
