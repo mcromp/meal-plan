@@ -28,8 +28,9 @@
 }
 
 .header__icon {
- padding: 0 0 0 30px;
- width: 20px;
+ margin: 0 0 0 30px;
+ padding: 0;
+ width: 25px;
  &:hover {
   @include pulse;
  }
