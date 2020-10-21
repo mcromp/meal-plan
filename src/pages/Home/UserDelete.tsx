@@ -16,8 +16,8 @@ const UserDelete: React.FC<ConfirmDeleteProps> = ({
   return (
     <div className="user-delete">
       <span className="user-delete__text">Delete {selectedUser ? selectedUser.username : null}?</span>
-      <button ref={focusRef} onClick={(e) => handleSubmit(e)}>YES</button>
-      <button onClick={() => setConfirmDelete(false)}>NO</button>
+      <button className="button" ref={focusRef} onClick={(e) => handleSubmit(e)}>YES</button>
+      <button className="button" onClick={() => setConfirmDelete(false)}>NO</button>
     </div>
   )
 }

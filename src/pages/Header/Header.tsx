@@ -17,14 +17,16 @@ const Header: React.FC = () => {
   }
 
   return (
-    currentUser &&
     <div className="header">
       <div className="header__icon">
         <MIcon color={"#000"} />
       </div>
-      <h3 className="header__title">Menu Plan</h3>
-      <span className="header__username">{currentUser.username}</span>
-      <button className="header__signout" onClick={handleLogout}>Signout</button>
+      <h1 className="header__title">Menu Plan</h1>
+      {currentUser ?
+        <>
+          <span className="header__username">{currentUser.username}</span>
+          <button className="header__signout" onClick={handleLogout}>Signout</button>
+        </> : null}
     </div>)
 };
 

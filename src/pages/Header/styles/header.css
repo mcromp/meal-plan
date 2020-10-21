@@ -70,6 +70,7 @@
 }
 
 .header {
+  z-index: 3;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -85,10 +86,10 @@
   justify-items: center;
   width: 100%;
   margin: 0 0 10px 0;
-  padding: 3px;
+  padding: 3px 0 7px 0;
   background-color: #f3f3f3;
-  -webkit-box-shadow: 0px 3px 3px 0px #999;
-          box-shadow: 0px 3px 3px 0px #999;
+  -webkit-box-shadow: 0px 3px 3px 0px rgba(66, 66, 66, 0.3);
+          box-shadow: 0px 3px 3px 0px rgba(66, 66, 66, 0.3);
 }
 
 .header__title {

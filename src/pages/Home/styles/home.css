@@ -69,222 +69,198 @@
   }
 }
 
-html {
-  scroll-behavior: smooth;
+html,
+body,
+.home {
+  padding: 0;
+  margin: 0;
+  min-height: 100%;
+  width: 100vw;
+  min-width: 100vw;
+  background: #f3f3f3;
+  background-image: url("./image.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
-.home-container {
-  font: 300 0.9rem "Lato", sans-serif;
-  background: #ffe1a8;
-  background: -webkit-gradient(linear, right top, left top, from(#ffe1a8), to(#fff1e3));
-  background: linear-gradient(to left, #ffe1a8, #fff1e3);
-  background-size: 120%;
-  padding: 0 2rem;
+.home {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 20px 1fr 0.75fr 20px;
+      grid-template-columns: 20px 1fr 0.75fr 20px;
+  -ms-grid-rows: 0.3fr 2.5fr 0.2fr;
+      grid-template-rows: 0.3fr 2.5fr 0.2fr;
+      grid-template-areas: "title__header title__header title__header title__header" ". title signup ." ". . . .";
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+}
+
+.home__header {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 4;
+  grid-area: title__header;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-flow: column;
-          flex-flow: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  font-size: 30px;
+  background-color: #f3f3f3;
+  font-family: "Poppins", sans-serif;
+  -webkit-box-shadow: 0 2px 3px #777, 0 0 3px #777;
+          box-shadow: 0 2px 3px #777, 0 0 3px #777;
 }
 
-.title-container {
-  z-index: 1;
+.home__icon {
+  width: 25px;
+  margin: 4px 15px;
 }
 
-.title-container h1 {
-  -webkit-animation: fade-in-opacity-keyframes 1 0.5s ease-in;
-          animation: fade-in-opacity-keyframes 1 0.5s ease-in;
-  margin: 20px;
-}
-
-.title-container h1 span {
-  color: #c9cba3;
-  font: 800 clamp(40px, 18vw, 160px)/40% "Lato", sans-serif;
-  white-space: pre;
-  text-shadow: 2px 3px 1px #e26d5c;
-}
-
-.title-container .sub-title-container {
+.home-title {
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  grid-area: title;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  text-align: center;
-  -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-flow: column;
-          flex-flow: column;
-  cursor: pointer;
-}
-
-.title-container .sub-title-container h2 {
-  -webkit-animation: fade-in-opacity-keyframes 1 1.5s ease-in;
-          animation: fade-in-opacity-keyframes 1 1.5s ease-in;
-  white-space: nowrap;
-}
-
-.title-container .sub-title-container p {
-  color: #777;
-  -webkit-animation: scale-up-keyframes 5s cubic-bezier(0.39, 0.575, 0.565, 1) both;
-          animation: scale-up-keyframes 5s cubic-bezier(0.39, 0.575, 0.565, 1) both;
-}
-
-.title-container .sub-title-container:hover .down-arrow {
-  -webkit-filter: invert(30%);
-          filter: invert(30%);
-}
-
-.down-arrow {
-  -webkit-animation: 1s ease infinite pulse-keyframes;
-          animation: 1s ease infinite pulse-keyframes;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 30px;
+  margin: 50px auto 0 auto;
+  width: 340px;
+  height: 270px;
+  background: #f3f3f3;
   -webkit-box-shadow: 0 2px 3px #777, 0 0 3px #777;
           box-shadow: 0 2px 3px #777, 0 0 3px #777;
   border-radius: 6px;
-  text-transform: uppercase;
-  color: black;
-  background: white;
-  border: none;
 }
 
-.down-arrow:enabled {
-  cursor: pointer;
+.home-title__sub-title {
+  font: bold 25px "Poppins", sans-serif;
+  -webkit-animation: fade-in-opacity-keyframes 1 0.5s ease-in;
+          animation: fade-in-opacity-keyframes 1 0.5s ease-in;
 }
 
-.down-arrow:disabled {
-  -webkit-filter: opacity(30%);
-          filter: opacity(30%);
-}
-
-.down-arrow:hover:enabled {
-  background: #555;
-  color: white;
-}
-
-h2 {
-  padding: 4px 20px;
-  font: 400 28px "Lato", sans-serif;
-  color: #fff1e3;
-  background-color: #555;
-  opacity: 0.7;
-}
-
-.cta-container {
-  padding: 200px 0 100px 0;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  text-align: center;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+.home-title__sub-text {
+  font: 14px "Lato", sans-serif;
+  color: #777;
   -webkit-animation: fade-in-opacity-keyframes 1 2s ease-in;
           animation: fade-in-opacity-keyframes 1 2s ease-in;
 }
 
-.cta-container button {
-  text-transform: uppercase;
-  margin: 20px 15px;
+.button {
+  margin: 10px 5px 10px 0;
   padding: 7px 7px;
+  text-transform: uppercase;
   -webkit-box-shadow: 0 2px 3px #777, 0 0 3px #777;
           box-shadow: 0 2px 3px #777, 0 0 3px #777;
   border-radius: 6px;
   color: black;
   background: white;
-  font: 15px "Lato", sans-serif;
+  font: bold 12px "Poppins", sans-serif;
   border: none;
   opacity: 0.8;
 }
 
-.cta-container button:enabled {
+.button:enabled {
   cursor: pointer;
 }
 
-.cta-container button:disabled {
+.button:disabled {
   -webkit-filter: opacity(30%);
           filter: opacity(30%);
 }
 
-.cta-container button:hover:enabled {
+.button:hover:enabled {
   background: #555;
   color: white;
 }
 
-.cta-container .form {
-  max-width: 500px;
-  margin: 0 10px 80px 0;
-  background-color: #c9cba3;
+.home__forms {
+  -ms-grid-row: 2;
+  -ms-grid-column: 3;
+  grid-area: signup;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 30px;
+  margin: 70px 12px;
   -webkit-box-shadow: 0 2px 3px #777, 0 0 3px #777;
           box-shadow: 0 2px 3px #777, 0 0 3px #777;
   border-radius: 6px;
+  background: #f3f3f3;
+  width: 340px;
 }
 
-.cta-container .form select,
-.cta-container .form option {
-  font-size: 12px;
-  margin: 10px;
+.signin__heading,
+.signup__heading {
+  font: 16px "Lato", sans-serif;
+  padding: 20px 10px 20px 0;
 }
 
-.cta-container .form .delete-user span {
-  font-size: 12px;
+.form__signin {
+  -ms-flex-item-align: stretch;
+      -ms-grid-row-align: stretch;
+      align-self: stretch;
+  -ms-grid-column-align: stretch;
+      justify-self: stretch;
 }
 
-.cta-container .signup {
-  margin: 80px 0 0 0;
-  padding: 70px 0;
-  background-color: #e07171;
-  -webkit-box-shadow: 0 2px 3px #777, 0 0 3px #777;
-          box-shadow: 0 2px 3px #777, 0 0 3px #777;
-  border-radius: 6px;
+.input__heading {
+  font: 16px "Lato", sans-serif;
+  padding: 20px 0 0 0;
 }
 
-.cta-container .signup button {
-  margin: 0 5px;
+.user-delete__text {
+  font: 18px "Lato", sans-serif;
 }
 
-.cta-container .signup .signup-input-container {
-  padding: 10px;
+.input__errortext {
+  font: 12px "Lato", sans-serif;
 }
 
-.cta-container .signup .signup-errortext {
-  font-size: 12px;
+.form__select {
+  width: 130px;
+  margin: 5px 0;
 }
 
-@media screen and (max-width: 600px) {
-  .cta-container {
+.alert {
+  font: 12px "Lato", sans-serif;
+}
+
+@media screen and (max-width: 900px) {
+  .home {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
-    padding: 200px 0 !important;
+    padding: 10px;
   }
-  .cta-container .form {
-    margin: 10px !important;
-    padding: 0 !important;
-    width: 100%;
-  }
-  .cta-container .signup {
-    margin: 10px 10px 200px 10px !important;
-    padding: 0 0 20px 0 !important;
-    width: 100%;
+  .home__header {
+    width: 140vw;
   }
 }
 /*# sourceMappingURL=home.css.map */

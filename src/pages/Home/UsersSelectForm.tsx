@@ -3,13 +3,13 @@ import { User } from "../../shared/types"
 
 const UsersSelectForm: React.FC<SelectFormProps> = ({ value, label = "Select", selectMessage = " ", optionMap, handleSelect, }) => {
   const options = (optionMap.map((option: User, i: number) =>
-    <option key={option.id} value={i}>{option.username}</option>
+    <option className="form__option" key={option.id} value={i}>{option.username}</option>
   ))
   return (
-    <form>
+    <form className="signin__form">
       <label> {label}
-        <select value={value} onChange={(e) => handleSelect(e)}>
-          <option value="" disabled>{selectMessage}</option>
+        <select className="form__select" value={value} onChange={(e) => handleSelect(e)}>
+          <option className="form__option--disabled" value="" disabled>{selectMessage}</option>
           {options}
         </select>
       </label>

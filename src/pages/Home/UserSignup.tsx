@@ -33,21 +33,19 @@ const UserSignup: React.FC<UserSignupProps> = ({
 
   return (
     <div className="signup__input">
-      <span className="input__title">Input new username</span>
+      <span className="input__heading">Input new username</span>
       <div className="input__input">
-        <input type="text" value={value} ref={focusRef} onKeyDown={(e) => handleKeyDown(e)} onChange={(e) => setValue(e.target.value)} />
-        <button disabled={submitDisabled} onClick={() => signupUser(value)}>Submit</button>
-        <button onClick={() => setShowAddUser(false)}>X</button>
+        <input className="input" type="text" value={value} ref={focusRef} onKeyDown={(e) => handleKeyDown(e)} onChange={(e) => setValue(e.target.value)} />
+        <button className="button" disabled={submitDisabled} onClick={() => signupUser(value)}>Submit</button>
+        <button className="button" onClick={() => setShowAddUser(false)}>X</button>
       </div>
-      <div className="input__errortext">
 
-        {usernameIncluded ?
-          <span>Name already included</span> : null
-        }
-        {value.length <= 3 || value.length >= 25 ?
-          <span>Username must be between 3 and 25 characters</span> : <br />
-        }
-      </div>
+      {usernameIncluded ?
+        <span className="input__errortext">Name already included</span> : null
+      }
+      {value.length <= 3 || value.length >= 25 ?
+        <span className="input__errortext">Username must be between 3 and 25 characters</span> : <br />
+      }
     </div>
   )
 }

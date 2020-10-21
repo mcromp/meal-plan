@@ -1,169 +1,119 @@
 @import "../../../shared/sass/animations";
 @import "../../../shared/sass/base";
-
-@mixin heading {
- font: 400 28px $main-font;
- color: $bkgnd-light;
- background-color: #555;
- opacity: 0.7;
+html,
+body,
+.home {
+ padding: 0;
+ margin: 0;
+ min-height: 100%;
+ width: 100vw;
+ min-width: 100vw;
+ //  position: relative;
+ background: $bkgd;
+ background-image: url("./image.jpg");
+ background-repeat: no-repeat;
+ background-attachment: fixed;
+}
+.home {
+ display: grid;
+ grid-template-columns: 20px 1fr 0.75fr 20px;
+ grid-template-rows: 0.3fr 2.5fr 0.2fr;
+ grid-template-areas:
+  "title__header title__header title__header title__header"
+  ". title signup ."
+  ". . . .";
+ justify-content: center;
+ align-content: center;
 }
 
-html {
- scroll-behavior: smooth;
-}
-
-.home-container {
+.home__header {
+ grid-area: title__header;
  display: flex;
- flex-flow: column;
+ justify-content: center;
  align-items: center;
- justify-content: center;
- background: $bkgnd;
- background: linear-gradient(to left, $bkgnd, $bkgnd-light);
- background-size: 120%;
- padding: 0 2rem;
+ font-size: 30px;
+ background-color: $bkgd-white;
+ font-family: $heading-font;
+ box-shadow: 0 2px 3px #777, 0 0 3px #777;
+}
+.home__icon {
+ width: 25px;
+ margin: 4px 15px;
 }
 
-.title-container {
- z-index: 1;
- h1 {
-  @include fade-in(0.5s);
-  margin: 20px;
-  span {
-   color: $secondary;
-   font: 800 clamp(40px, 18vw, 160px) / 40% $main-font;
-   white-space: pre;
-   text-shadow: 2px 3px 1px $highlight;
-  }
- }
-
- .sub-title-container {
-  display: flex;
-  text-align: center;
-  justify-content: flex-end;
-  flex-flow: column;
-  cursor: pointer;
-
-  h2 {
-   @include fade-in(1.5s);
-   white-space: nowrap;
-  }
-
-  p {
-   color: #777;
-   //  text-shadow: 1px 1px 1px #bbb;
-   @include scale-up;
-  }
-  &:hover {
-   .down-arrow {
-    filter: invert(30%);
-   }
-  }
- }
-}
-
-.down-arrow {
- @include pulse;
- @include shadow-radius;
- text-transform: uppercase;
- color: black;
- background: white;
- border: none;
-
- &:enabled {
-  cursor: pointer;
- }
- &:disabled {
-  filter: opacity(30%);
- }
- &:hover:enabled {
-  background: #555;
-  color: white;
- }
-}
-h2 {
- padding: 4px 20px;
- @include heading;
-}
-
-.cta-container {
- padding: 200px 0 100px 0;
+.home-title {
+ grid-area: title;
  display: flex;
- flex-direction: row;
- text-align: center;
- justify-content: center;
- @include fade-in(2s);
-
- button {
-  text-transform: uppercase;
-  margin: 20px 15px;
-  padding: 7px 7px;
-  @include shadow-radius;
-  color: black;
-  background: white;
-  font: 15px "Lato", sans-serif;
-  border: none;
-  opacity: 0.8;
-  &:enabled {
-   cursor: pointer;
-  }
-  &:disabled {
-   filter: opacity(30%);
-  }
-  &:hover:enabled {
-   background: #555;
-   color: white;
-  }
- }
-
- .form {
-  max-width: 500px;
-  margin: 0 10px 80px 0;
-  background-color: $secondary;
-  @include shadow-radius();
-  select,
-  option {
-   font-size: 12px;
-   margin: 10px;
-  }
-  .delete-user {
-   span {
-    font-size: 12px;
-   }
-  }
- }
-
- .signup {
-  margin: 80px 0 0 0;
-  padding: 70px 0;
-  background-color: $highlight-dark;
-  @include shadow-radius();
-  button {
-   margin: 0 5px;
-  }
-  .signup-input-container {
-   padding: 10px;
-  }
-  .signup-errortext {
-   font-size: 12px;
-  }
- }
+ flex-direction: column;
+ padding: 30px;
+ margin: 50px auto 0 auto;
+ width: 340px;
+ height: 270px;
+ background: $bkgd;
+ @include shadow-radius;
 }
 
-@media screen and (max-width: 600px) {
- .cta-container {
+.home-title__sub-title {
+ font: bold 25px $heading-font;
+ @include fade-in(0.5s);
+}
+
+.home-title__sub-text {
+ font: 14px $main-font;
+ color: #777;
+ @include fade-in(2s);
+}
+.button {
+ margin: 10px 5px 10px 0;
+ @include btn;
+}
+
+.home__forms {
+ grid-area: signup;
+ display: flex;
+ flex-direction: column;
+ padding: 30px;
+ margin: 70px 12px;
+ @include shadow-radius;
+ background: $bkgd-white;
+ width: 340px;
+}
+
+.signin__heading,
+.signup__heading {
+ font: 16px $main-font;
+ padding: 20px 10px 20px 0;
+}
+.form__signin {
+ align-self: stretch;
+ justify-self: stretch;
+}
+.input__heading {
+ font: 16px $main-font;
+ padding: 20px 0 0 0;
+}
+.user-delete__text {
+ font: 18px $main-font;
+}
+.input__errortext {
+ font: 12px $main-font;
+}
+.form__select {
+ width: 130px;
+ margin: 5px 0;
+}
+.alert {
+ font: 12px $main-font;
+}
+@media screen and (max-width: 900px) {
+ .home {
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
-  padding: 200px 0 !important;
-  .form {
-   margin: 10px !important;
-   padding: 0 !important;
-   width: 100%;
-  }
-  .signup {
-   margin: 10px 10px 200px 10px !important;
-   padding: 0 0 20px 0 !important;
-   width: 100%;
-  }
+  padding: 10px;
+ }
+ .home__header {
+  width: 140vw;
  }
 }
