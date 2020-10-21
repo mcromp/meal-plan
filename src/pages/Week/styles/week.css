@@ -111,7 +111,6 @@ body {
 }
 
 .week__day-card {
-  font: 14px "Lato", sans-serif;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -132,7 +131,7 @@ body {
   cursor: pointer;
 }
 
-.day-card__day-items {
+.day-card__menu-item {
   padding: 1px 10px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -147,7 +146,7 @@ body {
   -webkit-box-align: start;
       -ms-flex-align: start;
           align-items: flex-start;
-  background: pink;
+  font: 14px "Lato", sans-serif;
 }
 
 .day-card__heading {
@@ -175,8 +174,8 @@ body {
   text-align: center;
 }
 
-.heading_date {
-  font: 17px "Lato", sans-serif;
+.heading__date {
+  font: 14px "Lato", sans-serif;
 }
 
 @media print {

@@ -34,7 +34,6 @@ body {
 }
 
 .week__day-card {
- font: 14px $main-font;
  display: flex;
  flex-direction: column;
  min-height: 200px;
@@ -45,13 +44,13 @@ body {
   cursor: pointer;
  }
 }
-.day-card__day-items {
+.day-card__menu-item {
  padding: 1px 10px;
  display: flex;
  justify-content: space-between;
  flex-flow: row nowrap;
  align-items: flex-start;
- background: pink;
+ font: 14px $main-font;
 }
 
 .day-card__heading {
@@ -70,8 +69,8 @@ body {
  font: bold 18px $heading-font;
  text-align: center;
 }
-.heading_date {
- font: 17px $main-font;
+.heading__date {
+ font: 14px $main-font;
 }
 
 @media print {

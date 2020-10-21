@@ -20,9 +20,9 @@ const DayCard: React.FC<DayCardProps> = ({ day, calendarDisplay }) => {
       {calendarDisplay?.menuItems.map(item => {
         const menuItem = menuList.find(f => f.ID === item.foodId)
         return (
-          <div className="day-card__day-items">
-            <span className="day-items__name">{menuItem?.ITEM}</span>
-            <span className="day-items__amount">{item.quantity}</span>
+          <div className="day-card__menu-item">
+            <span className="menu-item__name">{menuItem?.ITEM}</span>
+            <span className="menu-item__amount">{item.quantity}</span>
           </div>
         )
       })}
