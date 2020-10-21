@@ -42,7 +42,7 @@ const Week: React.FC<any> = React.forwardRef((props, ref: any) => {
 
 
   return (
-    <div className="container" ref={ref}>
+    <div className="week" ref={ref}>
       { week?.map(day => {
         const calendarDisplay = calendar.find(item => item.date === day.dateId);
         return (

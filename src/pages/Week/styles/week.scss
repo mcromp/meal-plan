@@ -1,99 +1,95 @@
 @import "../../../shared/sass/animations";
-@import "../../../shared/sass/shared";
-
-@mixin shadow-radius {
- box-shadow: 0 2px 3px #777, 0 0 3px #777;
- border-radius: 6px;
+@import "../../../shared/sass/base";
+html {
+ background: none;
 }
-
 body {
  background: #ccc;
+ width: 100%;
+ height: 100%;
 }
 .print {
  background: #ccc;
  width: 100%;
  text-align: right;
- .icon {
-  background: #eee;
-  padding: 8px 20px;
-  margin: 5px 25px 0 0;
-  @include shadow-radius;
-  &:hover {
-   cursor: pointer;
-   background: white;
-  }
+}
+.print__icon {
+ background: #eee;
+ padding: 8px 20px;
+ margin: 5px 25px 0 0;
+ @include shadow-radius;
+ &:hover {
+  cursor: pointer;
+  background: white;
  }
 }
-.container {
+
+.week {
+ width: 100%;
+ height: 100%;
  padding: 10px;
  display: grid;
  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
- grid-gap: 0.7rem;
- .header {
-  // margin: 6px 0 0 0;
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
+ gap: 0.7rem;
+}
 
-  display: flex;
-  justify-content: space-around;
-  flex-flow: row nowrap;
-  align-items: center;
-  width: 100%;
-  background: #555;
-  height: 50px;
-  color: $bkgnd;
-  button {
-   font-size: 35px;
-   &:hover {
-    filter: invert(10%);
-   }
-  }
+.week__day-card {
+ font: 14px $main-font;
+ display: flex;
+ flex-direction: column;
+ min-height: 200px;
+ background: $bkgd;
+ @include shadow-radius;
+ &:hover {
+  filter: brightness(110%);
+  cursor: pointer;
+ }
+}
+.day-card__day-items {
+ padding: 1px 10px;
+ display: flex;
+ justify-content: space-between;
+ flex-flow: row nowrap;
+ align-items: flex-start;
+ background: pink;
+}
 
-  h3 {
-   font: 500 30px "Lato", sans-serif;
-   text-align: center;
-  }
-  h4 {
-   font: 17px "Lato", sans-serif;
-  }
- }
- .day-card {
-  font: 14px "Noto Sans", sans-serif;
-  display: flex;
-  flex-direction: column;
-  background: cream;
-  min-height: 200px;
-  @include shadow-radius;
-  background: $bkgnd-light;
-  &:hover {
-   filter: brightness(110%);
-   cursor: pointer;
-  }
-  .item {
-   padding: 1px 10px;
-   display: flex;
-   justify-content: space-between;
-   flex-flow: row nowrap;
-   align-items: flex-start;
-  }
- }
+.day-card__heading {
+ display: flex;
+ justify-content: space-around;
+ flex-flow: row nowrap;
+ align-items: center;
+ width: 100%;
+ height: 50px;
+ border-top-left-radius: 6px;
+ border-top-right-radius: 6px;
+ background: #ddd;
+}
+
+.heading__day {
+ font: bold 18px $heading-font;
+ text-align: center;
+}
+.heading_date {
+ font: 17px $main-font;
 }
 
 @media print {
  @page {
   size: landscape;
  }
- .container {
+ .week {
   background: none;
-  .day-card {
-   color: black;
-   background: none;
-   border: solid 1px;
-   box-shadow: none;
-   .header {
-    background: #eee;
-    color: black;
-   }
-  }
+ }
+ .week__day-card {
+  background: none;
+  color: black;
+  background: none;
+  border: solid 1px;
+  box-shadow: none;
+ }
+ .day-card__heading {
+  background: #eee;
+  color: black;
  }
 }

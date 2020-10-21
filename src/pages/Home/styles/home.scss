@@ -51,11 +51,11 @@ body,
  height: 270px;
  background: $bkgd;
  @include shadow-radius;
+ @include fade-in(1s);
 }
 
 .home-title__sub-title {
  font: bold 25px $heading-font;
- @include fade-in(0.5s);
 }
 
 .home-title__sub-text {
@@ -77,6 +77,7 @@ body,
  @include shadow-radius;
  background: $bkgd-white;
  width: 340px;
+ @include fade-in(1s);
 }
 
 .signin__heading,
@@ -94,6 +95,7 @@ body,
 }
 .user-delete__text {
  font: 18px $main-font;
+ margin: 0 15px 0 0;
 }
 .input__errortext {
  font: 12px $main-font;

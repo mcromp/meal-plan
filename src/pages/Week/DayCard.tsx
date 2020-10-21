@@ -12,22 +12,20 @@ const DayCard: React.FC<DayCardProps> = ({ day, calendarDisplay }) => {
 
   if (isClicked) { return <Redirect to={`/d/${day.dateId}`} /> }
   return (
-    <div className="day-card" onClick={() => setIsClicked(true)}>
-      <div className="header">
-        <h3>{day.day}</h3>
-        <h4>{day.dateId}</h4>
+    <div className="week__day-card" onClick={() => setIsClicked(true)}>
+      <div className="day-card__heading">
+        <span className="heading__day">{day.day}</span>
+        <span className="heading__date">{day.dateId}</span>
       </div>
-      <div>
-        {calendarDisplay?.menuItems.map(item => {
-          const menuItem = menuList.find(f => f.ID === item.foodId)
-          return (
-            <div key={item.foodId} className="item">
-              <span className="name">{menuItem?.ITEM}</span>
-              <span className="amount">{item.quantity}</span>
-            </div>
-          )
-        })}
-      </div>
+      {calendarDisplay?.menuItems.map(item => {
+        const menuItem = menuList.find(f => f.ID === item.foodId)
+        return (
+          <div className="day-card__day-items">
+            <span className="day-items__name">{menuItem?.ITEM}</span>
+            <span className="day-items__amount">{item.quantity}</span>
+          </div>
+        )
+      })}
     </div>
   )
 }

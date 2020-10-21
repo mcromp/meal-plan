@@ -143,12 +143,12 @@ body,
   -webkit-box-shadow: 0 2px 3px #777, 0 0 3px #777;
           box-shadow: 0 2px 3px #777, 0 0 3px #777;
   border-radius: 6px;
+  -webkit-animation: fade-in-opacity-keyframes 1 1s ease-in;
+          animation: fade-in-opacity-keyframes 1 1s ease-in;
 }
 
 .home-title__sub-title {
   font: bold 25px "Poppins", sans-serif;
-  -webkit-animation: fade-in-opacity-keyframes 1 0.5s ease-in;
-          animation: fade-in-opacity-keyframes 1 0.5s ease-in;
 }
 
 .home-title__sub-text {
@@ -204,6 +204,8 @@ body,
   border-radius: 6px;
   background: #f3f3f3;
   width: 340px;
+  -webkit-animation: fade-in-opacity-keyframes 1 1s ease-in;
+          animation: fade-in-opacity-keyframes 1 1s ease-in;
 }
 
 .signin__heading,
@@ -227,6 +229,7 @@ body,
 
 .user-delete__text {
   font: 18px "Lato", sans-serif;
+  margin: 0 15px 0 0;
 }
 
 .input__errortext {
