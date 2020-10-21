@@ -4,7 +4,7 @@ import { RootState } from "../../redux";
 import { setIsLoggedIn } from "../../redux/modules/isLoggedIn";
 import { clearCurrentUser } from "../../redux/modules/currentUser";
 import { User } from "../../shared/types";
-import MIcon from "../../shared/sass/micon";
+import MIcon from "../../shared/sass/micon"
 import './styles/header.css'
 
 const Header: React.FC = () => {
@@ -18,10 +18,8 @@ const Header: React.FC = () => {
 
   return (
     <div className="header">
-      <div className="header__icon">
-        <MIcon color={"#000"} />
-      </div>
-      <h1 className="header__title">Menu Plan</h1>
+      <div className="header__icon"><MIcon color="#000" /></div>
+      <div className="header__title">Menu Plan</div>
       {currentUser ?
         <>
           <span className="header__username">{currentUser.username}</span>

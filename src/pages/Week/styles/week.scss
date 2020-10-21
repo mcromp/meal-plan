@@ -3,16 +3,19 @@
 html {
  background: none;
 }
+
 body {
  background: #ccc;
  width: 100%;
  height: 100%;
 }
+
 .print {
  background: #ccc;
  width: 100%;
  text-align: right;
 }
+
 .print__icon {
  background: #eee;
  padding: 8px 20px;
@@ -44,6 +47,7 @@ body {
   cursor: pointer;
  }
 }
+
 .day-card__menu-item {
  padding: 1px 10px;
  display: flex;
@@ -69,6 +73,7 @@ body {
  font: bold 18px $heading-font;
  text-align: center;
 }
+
 .heading__date {
  font: 14px $main-font;
 }
@@ -77,9 +82,11 @@ body {
  @page {
   size: landscape;
  }
+
  .week {
   background: none;
  }
+
  .week__day-card {
   background: none;
   color: black;
@@ -87,6 +94,7 @@ body {
   border: solid 1px;
   box-shadow: none;
  }
+
  .day-card__heading {
   background: #eee;
   color: black;
