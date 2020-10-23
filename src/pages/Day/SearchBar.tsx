@@ -25,10 +25,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ menuList, checkoutBoardItems, add
     setSearchListDisplay([])
     setTextValue(word)
     if (word.length > 0) {
-      const searchList = menuList.reduce((acc: any, item: MenuItemJSON) => {
-        if (checkSubStingIncludes(item.ITEM, word)) acc.push(item)
-        return acc
-      }, []).splice(0, 5)
+      const searchList = menuList.filter((item: MenuItemJSON) => checkSubStingIncludes(item.ITEM, word)).splice(0, 5)
       setSearchListDisplay(searchList)
     }
   }
@@ -44,22 +41,24 @@ const SearchBar: React.FC<SearchBarProps> = ({ menuList, checkoutBoardItems, add
   }
 
   return (
-    <div ref={wrapperRef} className="search-container">
+    <div ref={wrapperRef} className="day__search">
       <input
+        type="search"
         onClick={() => setisListShown(true)}
         placeholder="Type to search"
         value={textValue}
         onChange={e => handleChange(e)} />
-      <div className="search-alert">
+      <div className="search__alert">
         <AlertText />
       </div>
-      <div className="search-list-container">
+      <div className="search__display-list">
         {isListShown && searchListDisplay.map(item =>
           <div
+            className="display-list__container"
             onClick={() => handleClick(item)}
             key={item.ID}
             tabIndex={0}>
-            <span>{item.ITEM}</span>
+            <span className="display-list__name">{item.ITEM}</span>
           </div>)}
       </div>
     </div>
