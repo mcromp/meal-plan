@@ -18,12 +18,12 @@ const CheckoutBoardItem: React.FC<CheckoutBoardItemProps> = ({
 
   return (
     <div className="checkout-board">
-      <span className="name">{name}</span>
+      <span className="checkout-board__name">{name}</span>
       <span className="quantity">{item.quantity}</span>
-      <div className="button-container">
-        <button onClick={() => modifyQuantityOfCheckoutBoardItem(item, 1)}>+</button>
-        <button onClick={() => modifyQuantityOfCheckoutBoardItem(item, -1)}>-</button>
-        <button onClick={() => removeFromCheckoutBoard(item)}>remove</button>
+      <div className="checkout-board__buttons">
+        <button className="button--checkout-item" onClick={() => modifyQuantityOfCheckoutBoardItem(item, 1)}>+</button>
+        <button className="button--checkout-item" onClick={() => modifyQuantityOfCheckoutBoardItem(item, -1)}>-</button>
+        <button className="button--checkout-item" onClick={() => removeFromCheckoutBoard(item)}>remove</button>
       </div>
     </div>
   )
