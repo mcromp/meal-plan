@@ -1,10 +1,9 @@
 @import "../../../shared/sass/animations";
 @import "../../../shared/sass/base";
 
-//
-// Note: to change icon svg's color, go into Header.tsx and change MIcon 'color' prop
-//
-
+body {
+ background: #ccc;
+}
 .header {
  z-index: 3;
  display: flex;
@@ -27,10 +26,12 @@
  font-family: $heading-font;
 }
 
-.header__icon {
+.svg__menu {
  margin: 0 0 0 30px;
  padding: 0;
  width: 25px;
+ fill: none;
+ stroke: black;
  &:hover {
   @include pulse;
  }
@@ -47,4 +48,18 @@
 .header__signout {
  margin: 0 40px 0 0;
  @include btn;
+}
+
+@media screen and (max-width: 400px) {
+ .header__icon {
+  margin: 0 0 0 30px;
+  padding: 0;
+  width: 25px;
+  &:hover {
+   @include pulse;
+  }
+ }
+ .header__title {
+  display: none;
+ }
 }

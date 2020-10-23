@@ -69,6 +69,10 @@
   }
 }
 
+body {
+  background: #ccc;
+}
+
 .header {
   z-index: 3;
   display: -webkit-box;
@@ -100,13 +104,15 @@
   font-family: "Poppins", sans-serif;
 }
 
-.header__icon {
+.svg__menu {
   margin: 0 0 0 30px;
   padding: 0;
   width: 25px;
+  fill: none;
+  stroke: black;
 }
 
-.header__icon:hover {
+.svg__menu:hover {
   -webkit-animation: 1s ease infinite pulse-keyframes;
           animation: 1s ease infinite pulse-keyframes;
 }
@@ -129,7 +135,6 @@
   background: white;
   font: bold 12px "Poppins", sans-serif;
   border: none;
-  opacity: 0.8;
 }
 
 .header__signout:enabled {
@@ -144,5 +149,20 @@
 .header__signout:hover:enabled {
   background: #555;
   color: white;
+}
+
+@media screen and (max-width: 400px) {
+  .header__icon {
+    margin: 0 0 0 30px;
+    padding: 0;
+    width: 25px;
+  }
+  .header__icon:hover {
+    -webkit-animation: 1s ease infinite pulse-keyframes;
+            animation: 1s ease infinite pulse-keyframes;
+  }
+  .header__title {
+    display: none;
+  }
 }
 /*# sourceMappingURL=header.css.map */
