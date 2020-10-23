@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect } from "react"
+import React, { useState, useLayoutEffect, useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { useHistory } from "react-router-dom"
 import { RootState } from "../../redux"
@@ -10,10 +10,11 @@ import UserDelete from "./UserDelete"
 import UserSignup from "./UserSignup"
 import UsersSelectForm from "./UsersSelectForm"
 import AlertText from "../../shared/AlertText"
-import { useRef } from "react"
 import TitleContainer from "./TitleContainer"
 import "./styles/home.css"
-import MIcon from "../../shared/sass/micon"
+import MenuIcon from "../../shared/sass/MenuIcon"
+import HeartIcon from "../../shared/sass/HeartIcon"
+import CloseIcon from "../../shared/sass/CloseIcon"
 
 const Home = () => {
   const [isDeleteConfirmShown, setIsDeleteConfirmShown] = useState<boolean>(false)
@@ -32,6 +33,9 @@ const Home = () => {
     return () => clearTimeout(listener);
   })
 
+  useEffect(() => {
+    dispatch(fetchHelper(ReqType.reqGetUsers))
+  }, [dispatch])
 
   const handleDeleteSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
@@ -69,11 +73,11 @@ const Home = () => {
 
   return (
     <div className="home">
-      <div className="home__header"><div className="home__icon"><MIcon color="#000" /></div>Menu Plan</div>
+      <div className="home__header"><MenuIcon /> Menu Plan</div>
       <TitleContainer />
       <div className="home__forms">
         <div className="form__signin">
-
+          <CloseIcon />
           {isDeleteConfirmShown ?
             <UserDelete
               handleSubmit={handleDeleteSubmit}

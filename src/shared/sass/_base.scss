@@ -28,7 +28,8 @@ $main-font: "Lato", sans-serif;
  background: white;
  font: bold 12px "Poppins", sans-serif;
  border: none;
- opacity: 0.8;
+ //  opacity: 0.8;/
+
  &:enabled {
   cursor: pointer;
  }

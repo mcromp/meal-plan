@@ -1,235 +1,283 @@
-body {
- background: #ccc;
-}
-$bkgnd: #ffe1a8;
-$bkgnd-light: #fff1e3;
-$highlight: #e26d5c;
-$highlight-dark: #e07171;
-$secondary: #c9cba3;
+@import "../../../shared/sass/animations";
+@import "../../../shared/sass/base";
 
-@mixin shadow-radius {
- box-shadow: 0 2px 3px #777, 0 0 3px #777;
- border-radius: 6px;
-}
-
-.day-container {
+.day {
  height: 100%;
  z-index: 0;
 }
-.checkout-container {
- display: flex;
- flex-direction: row;
- height: 250px;
- resize: vertical;
+.button {
+ @include btn;
+ &--checkout-item {
+  @include btn;
+  margin: 2px 4px;
+  padding: 1px 7px;
+ }
 }
-.board-container {
+
+.day__back {
+ @include btn;
+ padding: 3px 20px;
+ margin: 0 0 10px 15px;
+ font-size: 14px;
+ background: rgb(223, 122, 122);
+}
+
+.day__button-bar {
+ display: flex;
+ align-items: center;
+ justify-content: space-evenly;
+}
+
+.day__checkout {
+ display: flex;
+ flex-direction: column;
+ //  height: 350px;
+ max-height: 300px;
+ min-height: 200px;
+ padding: 10px;
+ margin: 0 40px;
+ background: #eee;
+ @include shadow-radius;
+}
+.checkout__heading {
+ font: 22px $heading-font;
+ text-align: center;
+}
+.checkout__board {
+ padding: 3px;
  height: 100%;
- flex-grow: 3;
+ flex-grow: 1;
  display: flex;
  flex-direction: column;
  overflow: scroll;
- max-height: 200px;
- padding: 10px;
- background: $bkgnd-light;
- //  box-shadow: 3px 4px 0px 0px #999;
- @include shadow-radius;
+ background: $bkgd-white;
+
+ border-radius: 10px;
 }
 
 .checkout-board {
  display: flex;
  flex-direction: row;
- font: 17px "Noto Sans", sans-serif;
+ align-items: center;
+ justify-content: space-around;
+ font: 14px $main-font;
  &:nth-child(2n) {
-  background: $bkgnd;
- }
- .name {
-  flex-grow: 1;
- }
-
- .button-container {
-  display: flex;
-  padding: 0 10px;
-  button {
-   font-size: 17px;
-   margin: 3px 5px;
-   padding: 8px;
-  }
+  background: rgba(204, 204, 204, 0.5);
  }
 }
-.submit-container {
- width: 200px;
+.checkout-board__name {
+ flex-grow: 1;
+ padding: 0 10px;
+}
+
+.checkout__button-bar {
  display: flex;
- flex-direction: column;
- justify-content: space-evenly;
- padding: 20px 0 40px 0;
-
- button {
-  text-transform: uppercase;
-  padding: 10px;
-  margin: 10px;
-  // box-shadow: 3px 4px 0px 0px #999;
-  @include shadow-radius;
-
-  color: black;
-  background: white;
-  font: 14px "Noto Sans", sans-serif;
-  border: none;
-  opacity: 0.8;
-  &:enabled {
-   cursor: pointer;
-  }
-  &:disabled {
-   filter: opacity(30%);
-  }
-  &:hover:enabled {
-   background: #555;
-   color: white;
+ align-items: flex-end;
+ justify-content: flex-end;
+ padding: 0 10px;
+ margin: 0;
+ .button {
+  margin: 2px 5px;
+  padding: 3px 5px;
+  &--checkout-submit {
+   @extend .button;
+   background: #b4e2b4;
   }
  }
 }
 
-.menu-container {
+// .checkout__submit {
+//  width: 200px;
+//  display: flex;
+//  flex-direction: row;
+//  align-items: stretch;
+//  justify-content: space-evenly;
+//  border-color: orange;
+//  //  padding: 20px 0 40px 0;
+// }
+.day__menu {
  display: grid;
  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
- overflow: scroll;
- .menu-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 10px;
-  margin: 10px;
-  height: 100px;
-  background-color: $bkgnd;
-  // box-shadow: 3px 4px 0px 0px #999;
-  @include shadow-radius;
-
-  .title {
-   color: #444;
-   font: 16px "Noto Sans", sans-serif;
-  }
-  .card-buttons {
-   display: flex;
-   height: 50%;
-   button {
-    margin: 2px;
-    flex-basis: 50%;
-    border: none;
-    text-transform: uppercase;
-    // box-shadow: 3px 4px 0px 0px #999;
-    @include shadow-radius;
-
-    border: none;
-    &:hover:enabled {
-     background: #555;
-     color: white;
-    }
-   }
-  }
-  .add {
-   flex-basis: 50%;
-   font-size: 30px;
-  }
-  .heart {
-   flex-basis: 50%;
-   padding: 0;
-   margin: 0;
-   font-size: 25px;
-
-   &--fav {
-    @extend .heart;
-    background: $highlight;
-   }
-  }
-  &--disabled {
-   @extend .menu-card;
-   filter: invert(20%);
-  }
- }
 }
-.search-container {
- //  background-color: #444;
- padding: 0 0 0 20px;
- //  box-shadow: 3px 4px 0px 0px #999;
- //  @include shadow-radius;
-
- .search-alert {
-  font: 25px "Noto Sans", sans-serif;
-  color: $highlight;
-  position: relative;
-  top: 10px;
-  z-index: 1;
- }
- .search-list-container {
-  position: absolute;
-  z-index: 1;
-  background: white;
-  margin: 5px;
-  @include shadow-radius;
-  min-width: 200px;
-  div {
-   padding: 2px 10px 2px 10px;
-   font: 16px "Noto Sans", sans-serif;
-   &:hover {
-    background: #aaa;
-    color: white;
-    cursor: pointer;
-   }
-  }
- }
-}
-
-.filter-container {
- margin: 10px 0;
+.menu__card {
+ display: flex;
+ flex-direction: column;
+ justify-content: space-between;
  padding: 10px;
- box-shadow: 0px 3px 0px 0px #aaa;
+ margin: 10px;
+ height: 100px;
+ background-color: $bkgd;
+ @include shadow-radius;
 
- background: #999;
- button {
-  text-transform: uppercase;
-  padding: 5px;
-  margin: 5px;
-  // box-shadow: 3px 4px 0px 0px #999;
-  @include shadow-radius;
-  color: black;
-  background: white;
-  font: 10px "Noto Sans", sans-serif;
-  border: none;
-  opacity: 0.8;
-  &:enabled {
-   cursor: pointer;
-  }
-  &:disabled {
-   filter: opacity(30%);
-  }
-  &:hover:enabled {
-   background: #555;
-   color: white;
-  }
+ .title {
+  color: #444;
+  font: 12px $main-font;
  }
- .filter-remove {
+ .card-buttons {
+  display: flex;
+  height: 50%;
   button {
-   background: $highlight-dark;
+   margin: 4px;
+   flex-basis: 50%;
+   border: none;
+   text-transform: uppercase;
+   // box-shadow: 3px 4px 0px 0px #999;
+   @include shadow-radius;
+
+   border: none;
+   &:hover:enabled {
+    background: #555;
+    color: white;
+   }
   }
  }
- .clear-all {
-  background: $bkgnd;
+ .add {
+  height: 35px;
+  width: 35px;
+  font-size: 22px;
  }
+
+ .svg__heart {
+  height: 50%;
+  width: 50%;
+  fill: #ccc;
+ }
+ .heart {
+  padding: 0;
+  margin: 0;
+  height: 35px;
+  width: 35px;
+  &--fav {
+   @extend .heart;
+   .svg__heart {
+    fill: #ff7474;
+   }
+  }
+ }
+ &--disabled {
+  @extend .menu__card;
+  filter: invert(20%);
+ }
+}
+.day__search {
+ padding: 0;
+ margin: 0;
+ input {
+  min-width: 200px;
+  margin: 0;
+  padding: 0;
+ }
+}
+.search-alert {
+ font: 25px "Noto Sans", sans-serif;
+ color: $highlight;
+ position: absolute;
+ left: 200px;
+ top: 10px;
+ z-index: 1;
+ padding: 0;
+ margin: 0;
+}
+
+.search__display-list {
+ margin: 0;
+ padding: 0;
+ display: flex;
+ flex-direction: column;
+ position: relative;
+ z-index: 1;
+ border-radius: 100%;
+}
+.display-list__name {
+ font: 16px $main-font;
+
+ margin: 0;
+ padding: 0;
+}
+
+.display-list__container {
+ background: $bkgd-white;
+ &:hover {
+  background: #aaa;
+  color: white;
+  cursor: pointer;
+ }
+}
+.day__filters {
+ padding: 4px;
+ margin: 0 20px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ flex-wrap: wrap;
+ &--disabled {
+  transform: scale(0);
+ }
+}
+
+.filters__button {
+ padding: 4px 18px 4px 6px;
+ border-radius: 20px;
+ margin: 0px 2px;
+ border: solid 2px #555;
+ color: #555;
+ font-size: 10px;
+ &:hover {
+  cursor: pointer;
+ }
+ &--add {
+  @extend .filters__button;
+  background: none;
+ }
+ &--remove {
+  @extend .filters__button;
+  background: #ddd;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 4px 4px 6px;
+ }
+}
+
+.svg__close {
+ margin: 0 2px;
+ stroke: black;
+ width: 10px;
+ height: 10px;
+}
+
+.checkout-board__buttons {
+ padding: 0 20px;
+}
+
+.day__search-filter {
+ display: flex;
+ flex-direction: row;
+ justify-content: space-between;
+ align-items: center;
+ margin: 0;
+ padding: 0;
+}
+
+.search-filter__button {
+ @include btn;
+ white-space: nowrap;
+ margin: 0 20px 0 0;
 }
 
 @media screen and (max-width: 600px) {
- .checkout-container {
-  flex-flow: column;
- }
- .submit-container {
+ .checkout__submit {
   width: auto;
   display: flex;
   flex-direction: row;
   justify-content: center;
   margin: 10px;
   padding: 10px;
-  button {
-   padding: auto;
-   margin: auto;
+ }
+ .button {
+  &--checkout-submit {
+   margin: 10px;
   }
  }
 }

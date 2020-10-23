@@ -5,6 +5,7 @@ import { RootState } from "../../redux";
 import { fetchHelper } from "../../redux/fetchHelper/fetchHelper";
 import { ReqType } from "../../redux/fetchHelper/types";
 import { MenuItemJSON, User } from "../../shared/types";
+import HeartIcon from "../../shared/sass/HeartIcon";
 
 const MenuCard: React.FC<MenuCardProps> = ({
   item,
@@ -32,12 +33,12 @@ const MenuCard: React.FC<MenuCardProps> = ({
 
 
   return (
-    <div className={isDisabled ? "menu-card--disabled" : "menu-card"} >
+    <div className={isDisabled ? "menu__card--disabled" : "menu__card"} >
       <span className="title">{item.ITEM}</span>
       <div className="card-buttons">
         <button className="add" disabled={isDisabled} onClick={() => addCheckOutBoardItem(item)} >+</button>
-        <button className={isFav ? "heart--fav" : "heart"} onClick={toggleFav}> ♡
-        </button>
+        {/* <button><HeartIcon /></button> */}
+        <button className={isFav ? "heart--fav" : "heart"} onClick={toggleFav}><HeartIcon /></button>
       </div>
     </div >
   );

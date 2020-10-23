@@ -59,7 +59,7 @@ const MenuBoard: React.FC<MenuBoardProps> = ({
   };
 
   return (
-    <div className="menu-container">
+    <div className="day__menu">
       {cardList && cardList.map((item: MenuItemJSON) => (
         <MenuCard
           key={item.ID}

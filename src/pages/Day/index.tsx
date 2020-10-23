@@ -16,15 +16,11 @@ const Day: React.FC = () => {
   const currentUser = useSelector<RootState, User | null>(state => state.currentUser);
   const calendar = useSelector<RootState, CalendarItem[]>(state => state.calendar);
   const menuList = useSelector<RootState, MenuItemJSON[]>(state => state.menuList);
-  const isLoading = useSelector<RootState, boolean>(state => state.isLoading);
+  // const isLoading = useSelector<RootState, boolean>(state => state.isLoading);
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   const [checkoutBoardItems, setCheckoutBoardItems] = useState<CalendarMenuItem[]>([]);
   const params: { day: string } = useParams();
   const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   console.log(isLoading)
-  // }, [isLoading])
 
   useEffect(() => {
     const menuItemFind = calendar.find(((item) => item.date === params.day))
@@ -87,28 +83,29 @@ const Day: React.FC = () => {
 
 
   return (
-    <div className="day-container">
-      <div className="checkout-container">
-        <div className="board-container">
+    <div className="day">
+      <button className="day__back" onClick={() => setIsSubmitted(true)}>⬅ BACK</button>
+      <div className="day__checkout">
+        <span className="checkout__heading">{params.day}</span>
+        <div className="checkout__board">
           {checkoutBoardMap}
         </div>
-        <div className="submit-container">
-          <button onClick={handleSubmit}>SUBMIT</button>
-          <button onClick={() => setCheckoutBoardItems([])}>CLEAR ALL</button>
-          <button onClick={() => setIsSubmitted(true)}>RETURN TO WEEK, WITHOUT SUBMITTING</button>
+        <div className="checkout__button-bar">
+          <button className="button" onClick={() => setCheckoutBoardItems([])}>CLEAR ALL</button>
+          <button className="button--checkout-submit" onClick={handleSubmit}>SUBMIT</button>
         </div>
       </div>
+      <FilterButtonList />
 
       <SearchBar
         menuList={menuList}
         checkoutBoardItems={checkoutBoardItems}
         addCheckOutBoardItem={addCheckOutBoardItem} />
 
-      <FilterButtonList />
-
       <MenuBoard
         checkoutBoardItems={checkoutBoardItems}
         addCheckOutBoardItem={addCheckOutBoardItem} />
+
 
     </div >
   );

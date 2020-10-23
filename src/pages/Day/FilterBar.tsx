@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setFilter, resetFilter } from "../../redux/modules/filterList";
 import { RootState } from "../../redux";
 import { Filter } from "../../shared/types";
+import CloseIcon from "../../shared/sass/CloseIcon";
 
 
 const FilterButtonList: React.FC = () => {
@@ -34,36 +35,34 @@ const FilterButtonList: React.FC = () => {
     setShowAll(false);
   };
   return (
-    <div className="filter-container">
-      <div className="filter-remove">
+    <div className="day__filters" >
 
-        {enabledFilterList.map((filter: Filter) =>
+      {filterList.map((filter: Filter) => {
+        return (enabledFilterList.includes(filter)) ?
           <button
+            className="filters__button--remove"
             key={filter.name}
             onClick={() => {
               handleFilterClick(filter, false);
               removeFilter(filter);
-            }}>{filter.name} X</button>
-        )}
-      </div>
-      <div className="filter-add">
-
-        {filterList.map((filter: Filter) =>
+            }}>{filter.name} <CloseIcon /></button>
+          :
           <button
+            className="filters__button--add"
             key={filter.name}
-            disabled={filter.selected}
             onClick={() => {
               handleFilterClick(filter, true);
               addFilter(filter);
             }}
           >{filter.name}</button>
-        )}
+      }
+      )}
 
-        {showAll ? <button className="clear-all" onClick={clearAll}>clear all filters</button> : null}
-      </div>
-
+      {showAll ? <button className="filter__clear-all" onClick={clearAll}>clear all filters</button> : null}
     </div>
   );
 };
+
+
 
 export default FilterButtonList
