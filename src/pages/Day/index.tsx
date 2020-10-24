@@ -95,12 +95,12 @@ const Day: React.FC = () => {
           <button className="button--checkout-submit" onClick={handleSubmit}>SUBMIT</button>
         </div>
       </div>
-      <FilterButtonList />
-
       <SearchBar
         menuList={menuList}
         checkoutBoardItems={checkoutBoardItems}
         addCheckOutBoardItem={addCheckOutBoardItem} />
+
+      <FilterButtonList />
 
       <MenuBoard
         checkoutBoardItems={checkoutBoardItems}

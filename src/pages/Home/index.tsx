@@ -13,8 +13,6 @@ import AlertText from "../../shared/AlertText"
 import TitleContainer from "./TitleContainer"
 import "./styles/home.css"
 import MenuIcon from "../../shared/sass/MenuIcon"
-import HeartIcon from "../../shared/sass/HeartIcon"
-import CloseIcon from "../../shared/sass/CloseIcon"
 
 const Home = () => {
   const [isDeleteConfirmShown, setIsDeleteConfirmShown] = useState<boolean>(false)
@@ -77,7 +75,6 @@ const Home = () => {
       <TitleContainer />
       <div className="home__forms">
         <div className="form__signin">
-          <CloseIcon />
           {isDeleteConfirmShown ?
             <UserDelete
               handleSubmit={handleDeleteSubmit}

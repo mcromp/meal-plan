@@ -51,7 +51,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ menuList, checkoutBoardItems, add
       <div className="search__alert">
         <AlertText />
       </div>
-      <div className="search__display-list">
+      <div className={isListShown && textValue ? "search__display-list" : ""}>
         {isListShown && searchListDisplay.map(item =>
           <div
             className="display-list__container"
@@ -61,7 +61,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ menuList, checkoutBoardItems, add
             <span className="display-list__name">{item.ITEM}</span>
           </div>)}
       </div>
-    </div>
+    </div >
   );
 };
 
