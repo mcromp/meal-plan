@@ -84,23 +84,27 @@ const Day: React.FC = () => {
 
   return (
     <div className="day">
-      <button className="day__back" onClick={() => setIsSubmitted(true)}>⬅ BACK</button>
-      <div className="day__checkout">
-        <span className="checkout__heading">{params.day}</span>
-        <div className="checkout__board">
-          {checkoutBoardMap}
-        </div>
-        <div className="checkout__button-bar">
-          <button className="button" onClick={() => setCheckoutBoardItems([])}>CLEAR ALL</button>
-          <button className="button--checkout-submit" onClick={handleSubmit}>SUBMIT</button>
+      <div className="checkout">
+        <button className="day__back" onClick={() => setIsSubmitted(true)}>⬅ BACK</button>
+        <div className="day__checkout">
+          <span className="checkout__heading">Menu for {params.day}</span>
+          <div className="checkout__board">
+            {checkoutBoardMap}
+          </div>
+          <div className="checkout__button-bar">
+            <button className="button" onClick={() => setCheckoutBoardItems([])}>CLEAR ALL</button>
+            <button className="button--checkout-submit" onClick={handleSubmit}>SUBMIT</button>
+          </div>
         </div>
       </div>
-      <SearchBar
-        menuList={menuList}
-        checkoutBoardItems={checkoutBoardItems}
-        addCheckOutBoardItem={addCheckOutBoardItem} />
+      <div className="day__search-filter">
+        <SearchBar
+          menuList={menuList}
+          checkoutBoardItems={checkoutBoardItems}
+          addCheckOutBoardItem={addCheckOutBoardItem} />
 
-      <FilterButtonList />
+        <FilterButtonList />
+      </div>
 
       <MenuBoard
         checkoutBoardItems={checkoutBoardItems}

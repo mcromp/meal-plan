@@ -86,7 +86,7 @@ const Home = () => {
               <UsersSelectForm
                 value={value}
                 label={""}
-                selectMessage={"SELECT"}
+                selectMessage={"Select"}
                 optionMap={users}
                 handleSelect={handleSelect} />
               <button className="button" onClick={() => handleSignin()} disabled={checkValue}>Sign in</button>
@@ -103,7 +103,7 @@ const Home = () => {
             :
             <>
               <span className="signup__heading">Don't have a username?</span>
-              <button className="button" onClick={() => setIsSignupShown(true)} >Sign up</button>
+              <button className="button--signup" onClick={() => setIsSignupShown(true)} >Sign up</button>
             </>
           }
           {isAlertShown ? <AlertText /> : null}

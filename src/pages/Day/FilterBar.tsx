@@ -35,8 +35,8 @@ const FilterButtonList: React.FC = () => {
     setShowAll(false);
   };
   return (
-    <div className="day__filters" >
-
+    // <div className="day__filters" >
+    <>
       {filterList.map((filter: Filter) => {
         return (enabledFilterList.includes(filter)) ?
           <button
@@ -58,8 +58,9 @@ const FilterButtonList: React.FC = () => {
       }
       )}
 
-      {showAll ? <button className="filter__clear-all" onClick={clearAll}>clear all filters</button> : null}
-    </div>
+      {showAll ? <button className="filters__button--clear-all" onClick={clearAll}>Clear All Filters</button> : null}
+      {/* // </div> */}
+    </>
   );
 };
 

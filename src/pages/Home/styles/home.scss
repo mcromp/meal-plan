@@ -62,6 +62,12 @@
 .button {
  margin: 10px 5px 10px 0;
  @include btn;
+ &--signup {
+  @extend .button;
+  font-size: 10px;
+  margin: 40px 5px 10px 0;
+  padding: 4px;
+ }
 }
 
 .home__forms {
@@ -75,10 +81,11 @@
  width: 340px;
  @include fade-in(1s);
  height: 270px;
+ overflow: hidden;
 }
 
 .form__signup {
- font: 16px $main-font;
+ font: 12px $main-font;
  padding: 5px 10px 20px 0;
 }
 
@@ -87,6 +94,9 @@
  justify-self: stretch;
  padding: 20px 10px 10px 0;
  font: 16px $main-font;
+}
+.signin__heading {
+ font-size: 18px;
 }
 
 .signup__heading {
