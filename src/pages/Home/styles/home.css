@@ -181,8 +181,8 @@
 }
 
 .button--signup {
-  font-size: 10px;
-  margin: 40px 5px 10px 0;
+  font-size: 12px;
+  margin: 20px 5px 10px 0;
   padding: 4px;
 }
 
@@ -211,7 +211,7 @@
 }
 
 .form__signup {
-  font: 12px "Lato", sans-serif;
+  font: 14px "Lato", sans-serif;
   padding: 5px 10px 20px 0;
 }
 
@@ -249,7 +249,9 @@
 
 .form__select {
   width: 130px;
+  font-size: 16px;
   margin: 5px 0;
+  padding: 2px;
 }
 
 .alert {
