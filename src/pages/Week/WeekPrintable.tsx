@@ -1,8 +1,8 @@
 import React, { useRef } from "react";
 import ReactToPrint from "react-to-print";
 import Week from ".";
-import './styles/week.css'
-import printer from '../../assets/printer.svg'
+import './styles/week.css';
+import printer from '../../assets/printer.svg';
 
 //this is a wrapper created for use with react-to-print
 
@@ -17,5 +17,6 @@ const PrintableWeek = () => {
       <Week ref={componentRef} />
     </div>
   );
-}
-export default PrintableWeek
+};
+
+export default PrintableWeek;

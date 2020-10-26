@@ -1,22 +1,22 @@
-import React, { useState, useEffect } from "react"
-import { useSelector, useDispatch } from "react-redux"
-import { Redirect } from "react-router-dom"
-import { RootState } from "../../redux"
-import { fetchHelper } from "../../redux/fetchHelper/fetchHelper"
-import { ReqType } from "../../redux/fetchHelper/types"
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Redirect } from "react-router-dom";
+import { RootState } from "../../redux";
+import { fetchHelper } from "../../redux/fetchHelper/fetchHelper";
+import { ReqType } from "../../redux/fetchHelper/types";
 import { resetFilter } from "../../redux/modules/filterList"
-import Loading from "../../shared/Loading"
-import { User, WeekDay, CalendarItem } from "../../shared/types"
-import DayMenu from "./DayMenu"
+import Loading from "../../shared/Loading";
+import { User, WeekDay, CalendarItem } from "../../shared/types";
+import DayMenu from "./DayMenu";
 import { generateWeekDays } from "./utils/generateWeek"
-import './styles/week.css'
+import './styles/week.css';
 
 const Week: React.FC<any> = React.forwardRef((props, ref: any) => {
-  const currentUser = useSelector<RootState, User | null>(state => state.currentUser)
-  const [week, setWeek] = useState<WeekDay[] | null>(null)
-  const calendar = useSelector<RootState, CalendarItem[]>(state => state.calendar)
-  const isLoading = useSelector<RootState, boolean>(state => state.isLoading)
-  const isLoggedIn = useSelector<RootState, boolean>(state => state.isLoggedIn)
+  const currentUser = useSelector<RootState, User | null>(state => state.currentUser);
+  const [week, setWeek] = useState<WeekDay[] | null>(null);
+  const calendar = useSelector<RootState, CalendarItem[]>(state => state.calendar);
+  const isLoading = useSelector<RootState, boolean>(state => state.isLoading);
+  const isLoggedIn = useSelector<RootState, boolean>(state => state.isLoggedIn);
 
   const dispatch = useDispatch();
 
@@ -30,15 +30,15 @@ const Week: React.FC<any> = React.forwardRef((props, ref: any) => {
   }, [currentUser, dispatch]);
 
   useEffect(() => {
-    dispatch(resetFilter())
+    dispatch(resetFilter());
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(fetchHelper(ReqType.reqGetMenu))
+    dispatch(fetchHelper(ReqType.reqGetMenu));
   }, [dispatch]);
 
   if (!isLoggedIn && !currentUser) { return <Redirect to='/' /> };
-  if (isLoading) return <Loading />
+  if (isLoading) return <Loading />;
 
 
   return (
@@ -53,6 +53,6 @@ const Week: React.FC<any> = React.forwardRef((props, ref: any) => {
       })}
     </div>
   );
-})
+});
 
 export default Week;
