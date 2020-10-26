@@ -44,14 +44,14 @@
  padding: 30px;
  margin: 50px auto 0 auto;
  width: 340px;
- height: 270px;
+ height: 300px;
  background: $bkgd;
  @include shadow-radius;
  @include fade-in(1s);
 }
 
 .home-title__sub-title {
- font: bold 25px $heading-font;
+ font: 25px $heading-font;
 }
 
 .home-title__sub-text {
@@ -80,7 +80,7 @@
  background: $bkgd-white;
  width: 340px;
  @include fade-in(1s);
- height: 270px;
+ height: 300px;
  overflow: hidden;
 }
 
@@ -132,7 +132,7 @@
  .home {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   flex-direction: column;
  }
 

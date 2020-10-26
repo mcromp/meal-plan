@@ -69,7 +69,8 @@ const Day: React.FC = () => {
 
   };
 
-  const checkoutBoardMap =
+  const checkoutBoardMap = checkoutBoardItems.length === 0 ?
+    <span className="board__empty-text">Menu is empty! Add items by clicking "+".<br /> Then click "SUBMIT" to save the menu, or click "BACK" to return without saving</span> :
     checkoutBoardItems.map((checkoutItem: CalendarMenuItem) => (
       <CheckoutBoardItem
         key={checkoutItem.foodId + "checkout"}

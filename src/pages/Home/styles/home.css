@@ -133,7 +133,7 @@
   padding: 30px;
   margin: 50px auto 0 auto;
   width: 340px;
-  height: 270px;
+  height: 300px;
   background: #f3f3f3;
   -webkit-box-shadow: 0 2px 3px #777, 0 0 3px #777;
           box-shadow: 0 2px 3px #777, 0 0 3px #777;
@@ -143,7 +143,7 @@
 }
 
 .home-title__sub-title {
-  font: bold 25px "Poppins", sans-serif;
+  font: 25px "Poppins", sans-serif;
 }
 
 .home-title__sub-text {
@@ -162,7 +162,7 @@
   border-radius: 6px;
   color: black;
   background: white;
-  font: bold 12px "Poppins", sans-serif;
+  font: 12px "Poppins", sans-serif;
   border: none;
 }
 
@@ -206,7 +206,7 @@
   width: 340px;
   -webkit-animation: fade-in-opacity-keyframes 1 1s ease-in;
           animation: fade-in-opacity-keyframes 1 1s ease-in;
-  height: 270px;
+  height: 300px;
   overflow: hidden;
 }
 
@@ -266,9 +266,9 @@
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
