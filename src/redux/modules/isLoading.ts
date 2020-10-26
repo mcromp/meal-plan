@@ -13,9 +13,10 @@ export const isLoading = (isLoading: boolean) => ({
  type: IS_LOADING,
  isLoading,
 });
+
 interface Is_Loading {
  type: typeof IS_LOADING;
  isLoading: boolean;
-}
+};
 
 export default reducer;

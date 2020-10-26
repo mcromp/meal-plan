@@ -21,15 +21,21 @@ const Home = () => {
   const [value, setValue] = useState<string>("")
   const [selectedUser, setSelectedUser] = useState<User | null>(null)
   const users = useSelector<RootState, User[]>(state => state.users);
+  const isLoading = useSelector<RootState, Boolean>(state => state.isLoading)
+  const isFailedToLoad = useSelector<RootState, Boolean>(state => state.isFailedToLoad)
   const dispatch = useDispatch()
   const history = useHistory();
+
+  useEffect(() => {
+    console.log(isFailedToLoad)
+  }, [isFailedToLoad])
 
   useLayoutEffect(() => {
     let listener = setTimeout(() => {
       setIsAlertShown(false)
     }, 1200)
     return () => clearTimeout(listener);
-  })
+  }, [isAlertShown])
 
   useEffect(() => {
     dispatch(fetchHelper(ReqType.reqGetUsers))
@@ -68,7 +74,7 @@ const Home = () => {
   }
 
   const checkValue = value.length === 0;
-
+  if (isFailedToLoad) { return (<div>File has failed to load</div>) }
   return (
     <div className="home">
       <div className="home__header"><MenuIcon /> Menu Plan</div>
@@ -94,17 +100,18 @@ const Home = () => {
             </>
           }
         </div>
-
         <div className="form__signup">
-          {isSignupShown ?
-            <UserSignup
-              setShowAddUser={setIsSignupShown}
-              signupUser={signupUser} />
+          {isLoading ? <div>Loading...</div>
             :
-            <>
-              <span className="signup__heading">Don't have a username?</span>
-              <button className="button--signup" onClick={() => setIsSignupShown(true)} >Sign up</button>
-            </>
+            isSignupShown ?
+              <UserSignup
+                setShowAddUser={setIsSignupShown}
+                signupUser={signupUser} />
+              :
+              <>
+                <span className="signup__heading">Don't have a username?</span>
+                <button className="button--signup" onClick={() => setIsSignupShown(true)} >Sign up</button>
+              </>
           }
           {isAlertShown ? <AlertText /> : null}
         </div>

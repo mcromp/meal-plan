@@ -1,6 +1,7 @@
 import { setAlertMessage } from "../modules/alertMessage";
 import { setCalendar } from "../modules/calendar";
 import { setCurrentUser } from "../modules/currentUser";
+import { isFailedToLoad } from "../modules/isFailedToLoad";
 import { isLoading } from "../modules/isLoading";
 import { setMenuList } from "../modules/menuList";
 import { setUsersFromJSON, deleteOneUser, addUserFromJSON } from "../modules/users";
@@ -33,6 +34,7 @@ export const fetchHelper = (
   dispatch(isLoading(false));
  } catch (error) {
   dispatch(isLoading(false));
+  dispatch(isFailedToLoad(true));
   console.error(`Error with ${reqSelect} call`);
   console.error(error.message);
  }

@@ -8,6 +8,7 @@ import menuList from "./modules/menuList";
 import currentUser from "./modules/currentUser";
 import users from "./modules/users";
 import isLoggedIn from "./modules/isLoggedIn";
+import isFailedToLoad from "./modules/isFailedToLoad";
 
 const rootReducer = combineReducers({
  filterList,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
  isLoading,
  isLoggedIn,
  alertMessage,
+ isFailedToLoad
 });
 
 export type RootState = ReturnType<typeof rootReducer>;
