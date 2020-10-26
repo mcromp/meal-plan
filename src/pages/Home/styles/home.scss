@@ -7,38 +7,47 @@
  min-height: 100vh;
  min-width: 100vw;
  background: no-repeat url("./image.jpg");
-}
-
-.svg__menu {
- stroke: black;
- fill: none;
- margin: 6px 15px;
-}
-.home {
  display: grid;
  grid-template-columns: 20px 1fr 1fr 20px;
  grid-template-rows: 0.3fr 2.5fr 0.2fr;
  grid-template-areas:
   "title__header title__header title__header title__header"
-  ". title signup ."
+  ". welcome login ."
   ". . . .";
  justify-content: center;
  align-content: center;
+ &__header {
+  grid-area: title__header;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  background-color: $bkgd-white;
+  font-family: $heading-font;
+  box-shadow: 0 2px 3px #777, 0 0 3px #777;
+ }
+ .button {
+  margin: 10px 5px 10px 5px;
+  @include btn;
+  &--signup {
+   @extend .button;
+   font-size: 12px;
+   margin: 20px 5px 10px 10px;
+   padding: 4px;
+  }
+ }
+ .svg__menu {
+  stroke: black;
+  fill: none;
+  margin: 6px 15px;
+ }
+ .alert {
+  font: 12px $main-font;
+ }
 }
 
-.home__header {
- grid-area: title__header;
- display: flex;
- justify-content: center;
- align-items: center;
- font-size: 30px;
- background-color: $bkgd-white;
- font-family: $heading-font;
- box-shadow: 0 2px 3px #777, 0 0 3px #777;
-}
-
-.home-title {
- grid-area: title;
+.welcome {
+ grid-area: welcome;
  display: flex;
  flex-direction: column;
  padding: 30px;
@@ -48,84 +57,70 @@
  background: $bkgd;
  @include shadow-radius;
  @include fade-in(1s);
-}
-
-.home-title__sub-title {
- font: 25px $heading-font;
-}
-
-.home-title__sub-text {
- font: 14px $main-font;
- color: #777;
- @include fade-in(2s);
-}
-.button {
- margin: 10px 5px 10px 0;
- @include btn;
- &--signup {
-  @extend .button;
-  font-size: 12px;
-  margin: 20px 5px 10px 0;
-  padding: 4px;
+ &__text {
+  font: 30px $heading-font;
+ }
+ &__sub-text {
+  font: 14px $main-font;
+  color: #777;
+  @include fade-in(2s);
  }
 }
 
-.home__forms {
- grid-area: signup;
+.login {
+ grid-area: login;
  display: flex;
  flex-direction: column;
  padding: 30px;
  margin: 50px auto 0 auto;
- @include shadow-radius;
- background: $bkgd-white;
  width: 340px;
- @include fade-in(1s);
  height: 300px;
+ background: $bkgd-white;
  overflow: hidden;
+ @include shadow-radius;
+ @include fade-in(1s);
 }
 
-.form__signup {
- font: 14px $main-font;
- padding: 25px 10px 20px 0;
-}
-
-.form__signin {
+.signin {
  align-self: stretch;
  justify-self: stretch;
  padding: 20px 10px 10px 0;
  font: 16px $main-font;
-}
-.signin__heading {
- font-size: 18px;
-}
-
-.signup__heading {
- padding: 0 10px 0 0;
+ &__heading {
+  font-size: 18px;
+ }
 }
 
-.input__heading {
- font: 16px $main-font;
- padding: 20px 0 0 0;
+.signin-form {
+ &__select {
+  width: 130px;
+  font-size: 16px;
+  margin: 5px 0;
+  padding: 2px;
+ }
+}
+
+.signup {
+ padding: 25px 10px 20px 0;
+ &__heading {
+  font: 14px $main-font;
+  padding: 0 10px 0 0;
+ }
+}
+
+.user-signup {
+ &__heading {
+  font: 16px $main-font;
+  padding: 20px 0 0 0;
+ }
+ &__error {
+  font: 12px $main-font;
+ }
 }
 
 .user-delete__text {
  font: 18px $main-font;
  margin: 0 15px 0 0;
-}
-
-.input__errortext {
- font: 12px $main-font;
-}
-
-.form__select {
- width: 130px;
- font-size: 16px;
- margin: 5px 0;
- padding: 2px;
-}
-
-.alert {
- font: 12px $main-font;
 }
 
 @media screen and (max-width: 900px) {
@@ -134,11 +129,10 @@
   align-items: center;
   justify-content: flex-start;
   flex-direction: column;
- }
-
- .home__header {
-  width: 100%;
-  margin: 0;
-  padding: 0;
+  &__header {
+   width: 100%;
+   margin: 0;
+   padding: 0;
+  }
  }
 }

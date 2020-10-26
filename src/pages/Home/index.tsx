@@ -1,86 +1,81 @@
-import React, { useState, useLayoutEffect, useEffect } from "react"
-import { useSelector, useDispatch } from "react-redux"
-import { useHistory } from "react-router-dom"
-import { RootState } from "../../redux"
-import { fetchHelper } from "../../redux/fetchHelper/fetchHelper"
-import { ReqType } from "../../redux/fetchHelper/types"
-import { setIsLoggedIn } from "../../redux/modules/isLoggedIn"
-import { User } from "../../shared/types"
-import UserDelete from "./UserDelete"
-import UserSignup from "./UserSignup"
-import UsersSelectForm from "./UsersSelectForm"
-import AlertText from "../../shared/AlertText"
-import TitleContainer from "./TitleContainer"
-import "./styles/home.css"
-import MenuIcon from "../../shared/sass/MenuIcon"
+import React, { useState, useLayoutEffect, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { RootState } from "../../redux";
+import { fetchHelper } from "../../redux/fetchHelper/fetchHelper";
+import { ReqType } from "../../redux/fetchHelper/types";
+import { setIsLoggedIn } from "../../redux/modules/isLoggedIn";
+import { User } from "../../shared/types";
+import UserDelete from "./UserDelete";
+import UserSignup from "./UserSignup";
+import SigninForm from "./SigninForm";
+import AlertText from "../../shared/AlertText";
+import Welcome from "./Welcome";
+import MenuIcon from "../../shared/sass/MenuIcon";
+import "./styles/home.css";
 
 const Home = () => {
-  const [isDeleteConfirmShown, setIsDeleteConfirmShown] = useState<boolean>(false)
-  const [isSignupShown, setIsSignupShown] = useState<boolean>(false)
-  const [isAlertShown, setIsAlertShown] = useState<boolean>(false)
-  const [value, setValue] = useState<string>("")
-  const [selectedUser, setSelectedUser] = useState<User | null>(null)
+  const [isDeleteConfirmShown, setIsDeleteConfirmShown] = useState<boolean>(false);
+  const [isSignupShown, setIsSignupShown] = useState<boolean>(false);
+  const [isAlertShown, setIsAlertShown] = useState<boolean>(false);
+  const [value, setValue] = useState<string>("");
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const users = useSelector<RootState, User[]>(state => state.users);
-  const isLoading = useSelector<RootState, Boolean>(state => state.isLoading)
-  const isFailedToLoad = useSelector<RootState, Boolean>(state => state.isFailedToLoad)
-  const dispatch = useDispatch()
+  const isFailedToLoad = useSelector<RootState, Boolean>(state => state.isFailedToLoad);
+  const dispatch = useDispatch();
   const history = useHistory();
-
-  useEffect(() => {
-    console.log(isFailedToLoad)
-  }, [isFailedToLoad])
 
   useLayoutEffect(() => {
     let listener = setTimeout(() => {
       setIsAlertShown(false)
-    }, 1200)
+    }, 1200);
     return () => clearTimeout(listener);
-  }, [isAlertShown])
+  }, [isAlertShown]);
 
   useEffect(() => {
-    dispatch(fetchHelper(ReqType.reqGetUsers))
-  }, [dispatch])
+    dispatch(fetchHelper(ReqType.reqGetUsers));
+  }, [dispatch]);
 
   const handleDeleteSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    setIsDeleteConfirmShown(false)
-    if (selectedUser) deleteUser(selectedUser.id)
-    setIsAlertShown(true)
-    setSelectedUser(null)
-    setValue("")
-  }
+    setIsDeleteConfirmShown(false);
+    if (selectedUser) deleteUser(selectedUser.id);
+    setIsAlertShown(true);
+    setSelectedUser(null);
+    setValue("");
+  };
 
   const handleSignin = () => {
-    dispatch(fetchHelper(ReqType.reqGetUser, "", selectedUser?.id))
-    dispatch(setIsLoggedIn(true))
-    setSelectedUser(null)
-    setValue("")
-    history.push("/w")
-  }
+    dispatch(fetchHelper(ReqType.reqGetUser, "", selectedUser?.id));
+    dispatch(setIsLoggedIn(true));
+    setSelectedUser(null);
+    setValue("");
+    history.push("/w");
+  };
 
   const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setValue(e.target.value)
-    setSelectedUser(users[+e.target.value])
-  }
+    setValue(e.target.value);
+    setSelectedUser(users[+e.target.value]);
+  };
 
   const deleteUser = (id: string) => {
-    dispatch(fetchHelper(ReqType.reqDeleteUser, { id }))
-  }
+    dispatch(fetchHelper(ReqType.reqDeleteUser, { id }));
+  };
 
   const signupUser = (username: string) => {
-    dispatch(fetchHelper(ReqType.reqAddUser, { username }))
-    setIsSignupShown(false)
-    setIsAlertShown(true)
-  }
+    dispatch(fetchHelper(ReqType.reqAddUser, { username }));
+    setIsSignupShown(false);
+    setIsAlertShown(true);
+  };
 
   const checkValue = value.length === 0;
-  if (isFailedToLoad) { return (<div>File has failed to load</div>) }
+  if (isFailedToLoad) { return (<div>File has failed to load</div>); };
   return (
     <div className="home">
       <div className="home__header"><MenuIcon /> Menu Plan</div>
-      <TitleContainer />
-      <div className="home__forms">
-        <div className="form__signin">
+      <Welcome />
+      <div className="login">
+        <div className="signin">
           {isDeleteConfirmShown ?
             <UserDelete
               handleSubmit={handleDeleteSubmit}
@@ -89,7 +84,7 @@ const Home = () => {
             : <>
 
               <span className="signin__heading">Select your username</span>
-              <UsersSelectForm
+              <SigninForm
                 value={value}
                 label={""}
                 selectMessage={"Select"}
@@ -100,9 +95,8 @@ const Home = () => {
             </>
           }
         </div>
-        <div className="form__signup">
-          {isLoading ? <div>Loading...</div>
-            :
+        <div className="signup">
+          {
             isSignupShown ?
               <UserSignup
                 setShowAddUser={setIsSignupShown}

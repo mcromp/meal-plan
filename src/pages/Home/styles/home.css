@@ -75,22 +75,13 @@
   min-height: 100vh;
   min-width: 100vw;
   background: no-repeat url("./image.jpg");
-}
-
-.svg__menu {
-  stroke: black;
-  fill: none;
-  margin: 6px 15px;
-}
-
-.home {
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 20px 1fr 1fr 20px;
       grid-template-columns: 20px 1fr 1fr 20px;
   -ms-grid-rows: 0.3fr 2.5fr 0.2fr;
       grid-template-rows: 0.3fr 2.5fr 0.2fr;
-      grid-template-areas: "title__header title__header title__header title__header" ". title signup ." ". . . .";
+      grid-template-areas: "title__header title__header title__header title__header" ". welcome login ." ". . . .";
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -119,42 +110,8 @@
           box-shadow: 0 2px 3px #777, 0 0 3px #777;
 }
 
-.home-title {
-  -ms-grid-row: 2;
-  -ms-grid-column: 2;
-  grid-area: title;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  padding: 30px;
-  margin: 50px auto 0 auto;
-  width: 340px;
-  height: 300px;
-  background: #f3f3f3;
-  -webkit-box-shadow: 0 2px 3px #777, 0 0 3px #777;
-          box-shadow: 0 2px 3px #777, 0 0 3px #777;
-  border-radius: 6px;
-  -webkit-animation: fade-in-opacity-keyframes 1 1s ease-in;
-          animation: fade-in-opacity-keyframes 1 1s ease-in;
-}
-
-.home-title__sub-title {
-  font: 25px "Poppins", sans-serif;
-}
-
-.home-title__sub-text {
-  font: 14px "Lato", sans-serif;
-  color: #777;
-  -webkit-animation: fade-in-opacity-keyframes 1 2s ease-in;
-          animation: fade-in-opacity-keyframes 1 2s ease-in;
-}
-
-.button, .button--signup {
-  margin: 10px 5px 10px 0;
+.home .button, .home .button--signup {
+  margin: 10px 5px 10px 5px;
   padding: 7px 7px;
   text-transform: uppercase;
   -webkit-box-shadow: 0 2px 3px #777, 0 0 3px #777;
@@ -166,30 +123,40 @@
   border: none;
 }
 
-.button:enabled, .button--signup:enabled {
+.home .button:enabled, .home .button--signup:enabled {
   cursor: pointer;
 }
 
-.button:disabled, .button--signup:disabled {
+.home .button:disabled, .home .button--signup:disabled {
   -webkit-filter: opacity(30%);
           filter: opacity(30%);
 }
 
-.button:hover:enabled, .button--signup:hover:enabled {
+.home .button:hover:enabled, .home .button--signup:hover:enabled {
   background: #555;
   color: white;
 }
 
-.button--signup {
+.home .button--signup {
   font-size: 12px;
-  margin: 20px 5px 10px 0;
+  margin: 20px 5px 10px 10px;
   padding: 4px;
 }
 
-.home__forms {
+.home .svg__menu {
+  stroke: black;
+  fill: none;
+  margin: 6px 15px;
+}
+
+.home .alert {
+  font: 12px "Lato", sans-serif;
+}
+
+.welcome {
   -ms-grid-row: 2;
-  -ms-grid-column: 3;
-  grid-area: signup;
+  -ms-grid-column: 2;
+  grid-area: welcome;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -199,23 +166,52 @@
           flex-direction: column;
   padding: 30px;
   margin: 50px auto 0 auto;
+  width: 340px;
+  height: 300px;
+  background: #f3f3f3;
   -webkit-box-shadow: 0 2px 3px #777, 0 0 3px #777;
           box-shadow: 0 2px 3px #777, 0 0 3px #777;
   border-radius: 6px;
-  background: #f3f3f3;
-  width: 340px;
   -webkit-animation: fade-in-opacity-keyframes 1 1s ease-in;
           animation: fade-in-opacity-keyframes 1 1s ease-in;
-  height: 300px;
-  overflow: hidden;
 }
 
-.form__signup {
+.welcome__text {
+  font: 30px "Poppins", sans-serif;
+}
+
+.welcome__sub-text {
   font: 14px "Lato", sans-serif;
-  padding: 25px 10px 20px 0;
+  color: #777;
+  -webkit-animation: fade-in-opacity-keyframes 1 2s ease-in;
+          animation: fade-in-opacity-keyframes 1 2s ease-in;
 }
 
-.form__signin {
+.login {
+  -ms-grid-row: 2;
+  -ms-grid-column: 3;
+  grid-area: login;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 30px;
+  margin: 50px auto 0 auto;
+  width: 340px;
+  height: 300px;
+  background: #f3f3f3;
+  overflow: hidden;
+  -webkit-box-shadow: 0 2px 3px #777, 0 0 3px #777;
+          box-shadow: 0 2px 3px #777, 0 0 3px #777;
+  border-radius: 6px;
+  -webkit-animation: fade-in-opacity-keyframes 1 1s ease-in;
+          animation: fade-in-opacity-keyframes 1 1s ease-in;
+}
+
+.signin {
   -ms-flex-item-align: stretch;
       -ms-grid-row-align: stretch;
       align-self: stretch;
@@ -229,33 +225,34 @@
   font-size: 18px;
 }
 
-.signup__heading {
-  padding: 0 10px 0 0;
-}
-
-.input__heading {
-  font: 16px "Lato", sans-serif;
-  padding: 20px 0 0 0;
-}
-
-.user-delete__text {
-  font: 18px "Lato", sans-serif;
-  margin: 0 15px 0 0;
-}
-
-.input__errortext {
-  font: 12px "Lato", sans-serif;
-}
-
-.form__select {
+.signin-form__select {
   width: 130px;
   font-size: 16px;
   margin: 5px 0;
   padding: 2px;
 }
 
-.alert {
+.signup {
+  padding: 25px 10px 20px 0;
+}
+
+.signup__heading {
+  font: 14px "Lato", sans-serif;
+  padding: 0 10px 0 0;
+}
+
+.user-signup__heading {
+  font: 16px "Lato", sans-serif;
+  padding: 20px 0 0 0;
+}
+
+.user-signup__error {
   font: 12px "Lato", sans-serif;
+}
+
+.user-delete__text {
+  font: 18px "Lato", sans-serif;
+  margin: 0 15px 0 0;
 }
 
 @media screen and (max-width: 900px) {
