@@ -6,7 +6,7 @@ import { WeekDay, CalendarItem, MenuItemJSON } from "../../shared/types"
 import './styles/week.css'
 
 
-const DayCard: React.FC<DayCardProps> = ({ day, calendarDisplay }) => {
+const DayMenu: React.FC<DayMenuProps> = ({ day, calendarDisplay }) => {
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const menuList = useSelector<RootState, MenuItemJSON[]>(state => state.menuList)
 
@@ -30,9 +30,9 @@ const DayCard: React.FC<DayCardProps> = ({ day, calendarDisplay }) => {
   )
 }
 
-type DayCardProps = {
+type DayMenuProps = {
   day: WeekDay;
   calendarDisplay: CalendarItem | null | undefined;
 }
 
-export default DayCard
+export default DayMenu

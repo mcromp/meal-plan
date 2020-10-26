@@ -7,7 +7,7 @@ import { ReqType } from "../../redux/fetchHelper/types"
 import { resetFilter } from "../../redux/modules/filterList"
 import Loading from "../../shared/Loading"
 import { User, WeekDay, CalendarItem } from "../../shared/types"
-import DayCard from "./DayCard"
+import DayMenu from "./DayMenu"
 import { generateWeekDays } from "./utils/generateWeek"
 import './styles/week.css'
 
@@ -46,7 +46,7 @@ const Week: React.FC<any> = React.forwardRef((props, ref: any) => {
       { week?.map(day => {
         const calendarDisplay = calendar.find(item => item.date === day.dateId);
         return (
-          <DayCard
+          <DayMenu
             key={day.dateId}
             day={day}
             calendarDisplay={calendarDisplay} />)
