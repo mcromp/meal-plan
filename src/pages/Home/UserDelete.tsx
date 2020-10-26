@@ -1,17 +1,18 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef } from 'react';
 import { User } from '../../shared/types';
 
 
-const UserDelete: React.FC<ConfirmDeleteProps> = ({
+const UserDelete: React.FC<UserDeleteProps> = ({
   handleSubmit,
   selectedUser,
   setConfirmDelete
 }) => {
 
   const focusRef: React.MutableRefObject<any> = useRef();
+
   useEffect(() => {
     focusRef.current.focus();
-  }, [])
+  }, []);
 
   return (
     <div className="user-delete">
@@ -19,12 +20,13 @@ const UserDelete: React.FC<ConfirmDeleteProps> = ({
       <button className="button" ref={focusRef} onClick={(e) => handleSubmit(e)}>YES</button>
       <button className="button" onClick={() => setConfirmDelete(false)}>NO</button>
     </div>
-  )
-}
+  );
+};
 
-type ConfirmDeleteProps = {
+type UserDeleteProps = {
   handleSubmit: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   selectedUser: User | null;
   setConfirmDelete: (boolean: boolean) => void;
-}
-export default UserDelete
+};
+
+export default UserDelete;

@@ -7,26 +7,28 @@ const UserSignup: React.FC<UserSignupProps> = ({
   setShowAddUser,
   signupUser
 }) => {
-  const [value, setValue] = useState("")
-  const [usernameList, setUsernameList] = useState<string[]>([])
-  const users = useSelector<RootState, User[]>(state => state.users)
+  const [value, setValue] = useState("");
+  const [usernameList, setUsernameList] = useState<string[]>([]);
+  const users = useSelector<RootState, User[]>(state => state.users);
+
   const focusRef: React.MutableRefObject<any> = useRef();
+
 
   useEffect(() => {
     const newlist = users.reduce((acc: string[], user: User) => {
       acc.push(user.username)
       return acc
-    }, [])
-    setUsernameList(newlist)
-  }, [users])
+    }, []);
+    setUsernameList(newlist);
+  }, [users]);
 
   useEffect(() => {
     focusRef.current.focus()
-  }, [])
+  }, []);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && !submitDisabled) signupUser(value)
-  }
+  };
 
   const usernameIncluded = usernameList.includes(value);
   const submitDisabled = value.length <= 3 || usernameIncluded || value.length >= 15;
@@ -45,14 +47,13 @@ const UserSignup: React.FC<UserSignupProps> = ({
         <span className="user-signup__error">Username must be between 3 and 25 characters</span> : <br />
       }
     </div>
-  )
-}
+  );
+};
 
 
 type UserSignupProps = {
   setShowAddUser: (boolean: boolean) => void;
   signupUser: (username: string) => void;
-}
+};
 
-
-export default UserSignup
+export default UserSignup;

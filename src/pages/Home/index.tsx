@@ -18,10 +18,10 @@ const Home = () => {
   const [isDeleteConfirmShown, setIsDeleteConfirmShown] = useState<boolean>(false);
   const [isSignupShown, setIsSignupShown] = useState<boolean>(false);
   const [isAlertShown, setIsAlertShown] = useState<boolean>(false);
-  const [value, setValue] = useState<string>("");
   const [selectedUser, setSelectedUser] = useState<User | null>(null);
   const users = useSelector<RootState, User[]>(state => state.users);
   const isFailedToLoad = useSelector<RootState, Boolean>(state => state.isFailedToLoad);
+  const [value, setValue] = useState<string>("");
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -69,7 +69,9 @@ const Home = () => {
   };
 
   const checkValue = value.length === 0;
+
   if (isFailedToLoad) { return (<div>File has failed to load</div>); };
+
   return (
     <div className="home">
       <div className="home__header"><MenuIcon /> Menu Plan</div>
@@ -111,8 +113,8 @@ const Home = () => {
         </div>
       </div>
     </div >
-  )
-}
+  );
+};
 
 
-export default Home
+export default Home;
