@@ -11,7 +11,7 @@ import UserSignup from "./UserSignup";
 import SigninForm from "./SigninForm";
 import AlertText from "../../shared/AlertText";
 import Welcome from "./Welcome";
-import MenuIcon from "../../shared/sass/MenuIcon";
+import MenuIcon from "../../assets/MenuIcon";
 import "./styles/home.css";
 
 const Home = () => {

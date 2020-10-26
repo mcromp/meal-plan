@@ -4,7 +4,7 @@ import { RootState } from "../../redux";
 import { setIsLoggedIn } from "../../redux/modules/isLoggedIn";
 import { clearCurrentUser } from "../../redux/modules/currentUser";
 import { User } from "../../shared/types";
-import MenuIcon from "../../shared/sass/MenuIcon"
+import MenuIcon from "../../assets/MenuIcon"
 import './styles/header.css'
 
 const Header: React.FC = () => {

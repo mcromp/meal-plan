@@ -5,7 +5,7 @@ import { RootState } from "../../redux";
 import { fetchHelper } from "../../redux/fetchHelper/fetchHelper";
 import { ReqType } from "../../redux/fetchHelper/types";
 import { MenuItemJSON, User } from "../../shared/types";
-import HeartIcon from "../../shared/sass/HeartIcon";
+import HeartIcon from "../../assets/HeartIcon";
 
 const MenuCard: React.FC<MenuCardProps> = ({
   item,

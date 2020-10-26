@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setFilter, resetFilter } from "../../redux/modules/filterList";
 import { RootState } from "../../redux";
 import { Filter } from "../../shared/types";
-import CloseIcon from "../../shared/sass/CloseIcon";
+import CloseIcon from "../../assets/CloseIcon";
 
 
 const FilterButtonList: React.FC = () => {
