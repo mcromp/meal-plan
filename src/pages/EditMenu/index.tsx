@@ -15,7 +15,6 @@ const EditMenu: React.FC = () => {
   const currentUser = useSelector<RootState, User | null>(state => state.currentUser);
   const calendar = useSelector<RootState, CalendarItem[]>(state => state.calendar);
   const menuList = useSelector<RootState, MenuItemJSON[]>(state => state.menuList);
-  // const isLoading = useSelector<RootState, boolean>(state => state.isLoading);
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   const [checkoutItems, setCheckoutBoardItems] = useState<CalendarMenuItem[]>([]);
   const params: { day: string } = useParams();

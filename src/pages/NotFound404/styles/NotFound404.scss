@@ -1,0 +1,22 @@
+@import "../../../shared/sass/animations";
+@import "../../../shared/sass/base";
+
+.main {
+ width: 100vw;
+ height: 100vh;
+ background: black;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ flex-direction: column;
+ &__text {
+  margin: 14px;
+  color: $bkgd;
+  font: 50px $heading-font;
+ }
+ &__sub-text {
+  padding: 4px;
+  color: $bkgd;
+  font: 20px $main-font;
+ }
+}
