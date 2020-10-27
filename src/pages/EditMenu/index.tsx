@@ -1,31 +1,31 @@
-import React, { useState, useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { Redirect, useParams } from "react-router-dom"
-import { RootState } from "../../redux"
-import { fetchHelper } from "../../redux/fetchHelper/fetchHelper"
-import { ReqType } from "../../redux/fetchHelper/types"
-import { User, CalendarItem, MenuItemJSON, CalendarMenuItem } from "../../shared/types"
-import CheckoutItem from "./Checkout"
-import FilterBar from "./FilterBar"
-import FoodItems from "./FoodItems"
-import SearchBar from "./SearchBar"
-import './styles/edit-menu.css'
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Redirect, useParams } from "react-router-dom";
+import { RootState } from "../../redux";
+import { fetchHelper } from "../../redux/fetchHelper/fetchHelper";
+import { ReqType } from "../../redux/fetchHelper/types";
+import { User, CalendarItem, MenuItemJSON, CalendarMenuItem } from "../../shared/types";
+import CheckoutItem from "./Checkout";
+import FilterBar from "./FilterBar";
+import FoodItems from "./FoodItems";
+import SearchBar from "./SearchBar";
+import './styles/edit-menu.css';
 
 const EditMenu: React.FC = () => {
   const currentUser = useSelector<RootState, User | null>(state => state.currentUser);
   const calendar = useSelector<RootState, CalendarItem[]>(state => state.calendar);
   const menuList = useSelector<RootState, MenuItemJSON[]>(state => state.menuList);
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
-  const [checkoutItems, setCheckoutBoardItems] = useState<CalendarMenuItem[]>([]);
+  const [checkoutItems, setCheckoutItems] = useState<CalendarMenuItem[]>([]);
   const params: { day: string } = useParams();
   const dispatch = useDispatch();
 
   useEffect(() => {
     const menuItemFind = calendar.find(((item) => item.date === params.day))
     if (menuItemFind) {
-      setCheckoutBoardItems(menuItemFind.menuItems)
-    }
-  }, [params.day, calendar])
+      setCheckoutItems(menuItemFind.menuItems)
+    };
+  }, [params.day, calendar]);
 
   const handleSubmit = () => {
     if (currentUser && checkoutItems) {
@@ -33,27 +33,27 @@ const EditMenu: React.FC = () => {
         userId: currentUser?.id,
         date: params.day,
         menuItems: [...checkoutItems]
-      }
-      dispatch(fetchHelper(ReqType.reqUpdateCalendar, body))
-    }
-    setIsSubmitted(true)
-  }
+      };
+      dispatch(fetchHelper(ReqType.reqUpdateCalendar, body));
+    };
+    setIsSubmitted(true);
+  };
 
   const modifyQuantityOfCheckoutItem = (item: CalendarMenuItem, amount: number) => {
-    const tempBoard: CalendarMenuItem[] = [...checkoutItems]
+    const tempBoard: CalendarMenuItem[] = [...checkoutItems];
     const index: number = tempBoard?.indexOf(item);
     const updatedQuantity = tempBoard[index].quantity + amount
     updatedQuantity > 0 ?
       tempBoard[index].quantity = updatedQuantity
-      : tempBoard.splice(index, 1)
-    setCheckoutBoardItems(tempBoard)
+      : tempBoard.splice(index, 1);
+    setCheckoutItems(tempBoard);
   };
 
   const removeFromCheckout = (item: CalendarMenuItem) => {
-    const temp = [...checkoutItems]
-    const index: number = temp?.indexOf(item);
-    temp.splice(index, 1)
-    setCheckoutBoardItems(temp)
+    const updatedCheckout = [...checkoutItems];
+    const index: number = updatedCheckout?.indexOf(item);
+    updatedCheckout.splice(index, 1);
+    setCheckoutItems(updatedCheckout);
   };
 
   const addCheckoutItem = (item: MenuItemJSON) => {
@@ -61,9 +61,9 @@ const EditMenu: React.FC = () => {
     const itemToAdd: CalendarMenuItem = {
       foodId: item.ID,
       quantity: 1,
-    }
-    const updatedItems = [...checkoutItems, itemToAdd]
-    setCheckoutBoardItems(updatedItems)
+    };
+    const updatedItems = [...checkoutItems, itemToAdd];
+    setCheckoutItems(updatedItems);
 
   };
 
@@ -77,8 +77,8 @@ const EditMenu: React.FC = () => {
         modifyQuantityOfCheckoutItem={modifyQuantityOfCheckoutItem} />
     ));
 
-  if (!currentUser) { return <Redirect to='/' /> }
-  if (isSubmitted) { return <Redirect to='/w' /> }
+  if (!currentUser) { return <Redirect to='/' /> };
+  if (isSubmitted) { return <Redirect to='/w' /> };
 
 
   return (
@@ -91,11 +91,12 @@ const EditMenu: React.FC = () => {
             {checkoutMap}
           </div>
           <div className="checkout__button-bar">
-            <button className="button" onClick={() => setCheckoutBoardItems([])}>CLEAR ALL</button>
+            <button className="button" onClick={() => setCheckoutItems([])}>CLEAR ALL</button>
             <button className="button--checkout-submit" onClick={handleSubmit}>SUBMIT</button>
           </div>
         </div>
       </div>
+
       <div className="day__search-filter">
         <SearchBar
           menuList={menuList}
@@ -109,9 +110,8 @@ const EditMenu: React.FC = () => {
         checkoutItems={checkoutItems}
         addCheckoutItem={addCheckoutItem} />
 
-
     </div >
   );
-}
+};
 
 export default EditMenu;
