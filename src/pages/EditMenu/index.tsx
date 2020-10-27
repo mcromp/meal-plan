@@ -4,8 +4,10 @@ import { Redirect, useParams } from "react-router-dom";
 import { RootState } from "../../redux";
 import { fetchHelper } from "../../redux/fetchHelper/fetchHelper";
 import { ReqType } from "../../redux/fetchHelper/types";
+import FailedToLoad from "../../shared/FailedToLoad";
+import Loading from "../../shared/Loading";
 import { User, CalendarItem, MenuItemJSON, CalendarMenuItem } from "../../shared/types";
-import CheckoutItem from "./Checkout";
+import CheckoutItem from "./CheckoutItem";
 import FilterBar from "./FilterBar";
 import FoodItems from "./FoodItems";
 import SearchBar from "./SearchBar";
@@ -15,6 +17,8 @@ const EditMenu: React.FC = () => {
   const currentUser = useSelector<RootState, User | null>(state => state.currentUser);
   const calendar = useSelector<RootState, CalendarItem[]>(state => state.calendar);
   const menuList = useSelector<RootState, MenuItemJSON[]>(state => state.menuList);
+  const isLoading = useSelector<RootState, boolean>(state => state.isLoading);
+  const isFailedToLoad = useSelector<RootState, Boolean>(state => state.isFailedToLoad);
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   const [checkoutItems, setCheckoutItems] = useState<CalendarMenuItem[]>([]);
   const params: { day: string } = useParams();
@@ -68,7 +72,7 @@ const EditMenu: React.FC = () => {
   };
 
   const checkoutMap = checkoutItems.length === 0 ?
-    <span className="checkout__empty-text">Menu is empty! Add items by clicking "+".<br /> Then click "SUBMIT" to save the menu, or click "BACK" to return without saving</span> :
+    <span className="checkout__empty-text">Menu is empty! Add items by clicking "+" on items of food below.<br /> Then click "SUBMIT" to save the menu, or click "BACK" to return without saving</span> :
     checkoutItems.map((checkoutItem: CalendarMenuItem) => (
       <CheckoutItem
         key={checkoutItem.foodId + "checkout"}
@@ -79,23 +83,24 @@ const EditMenu: React.FC = () => {
 
   if (!currentUser) { return <Redirect to='/' /> };
   if (isSubmitted) { return <Redirect to='/w' /> };
-
+  if (isFailedToLoad) { return <FailedToLoad /> };
 
   return (
     <div className="day">
-      <div className="checkout-back">
-        <button className="checkout-back__back" onClick={() => setIsSubmitted(true)}>⬅ BACK</button>
-        <div className="checkout">
-          <span className="checkout__heading">Menu for {params.day}</span>
-          <div className="checkout__board">
-            {checkoutMap}
+      {isLoading ? <Loading /> :
+        <div className="checkout-back">
+          <button className="checkout-back__back" onClick={() => setIsSubmitted(true)}>⬅ BACK</button>
+          <div className="checkout">
+            <span className="checkout__heading">Menu for {params.day}</span>
+            <div className="checkout__board">
+              {checkoutMap}
+            </div>
+            <div className="checkout__button-bar">
+              <button className="button" onClick={() => setCheckoutItems([])}>CLEAR ALL</button>
+              <button className="button--checkout-submit" onClick={handleSubmit}>SUBMIT</button>
+            </div>
           </div>
-          <div className="checkout__button-bar">
-            <button className="button" onClick={() => setCheckoutItems([])}>CLEAR ALL</button>
-            <button className="button--checkout-submit" onClick={handleSubmit}>SUBMIT</button>
-          </div>
-        </div>
-      </div>
+        </div>}
       <div className="search-filter-grid">
         <SearchBar
           menuList={menuList}

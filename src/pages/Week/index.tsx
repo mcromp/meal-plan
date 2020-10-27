@@ -10,11 +10,13 @@ import { User, WeekDay, CalendarItem } from "../../shared/types";
 import DayMenu from "./DayMenu";
 import { generateWeekDays } from "./utils/generateWeek"
 import './styles/week.css';
+import FailedToLoad from "../../shared/FailedToLoad";
 
 const Week: React.FC<any> = React.forwardRef((props, ref: any) => {
-  const currentUser = useSelector<RootState, User | null>(state => state.currentUser);
   const [week, setWeek] = useState<WeekDay[] | null>(null);
+  const currentUser = useSelector<RootState, User | null>(state => state.currentUser);
   const calendar = useSelector<RootState, CalendarItem[]>(state => state.calendar);
+  const isFailedToLoad = useSelector<RootState, Boolean>(state => state.isFailedToLoad);
   const isLoading = useSelector<RootState, boolean>(state => state.isLoading);
   const isLoggedIn = useSelector<RootState, boolean>(state => state.isLoggedIn);
 
@@ -38,7 +40,8 @@ const Week: React.FC<any> = React.forwardRef((props, ref: any) => {
   }, [dispatch]);
 
   if (!isLoggedIn && !currentUser) { return <Redirect to='/' /> };
-  if (isLoading) return <Loading />;
+  if (isLoading) { return <Loading /> };
+  if (isFailedToLoad) { return <FailedToLoad /> }
 
 
   return (
