@@ -44,13 +44,12 @@
  grid-area: checkout;
  display: flex;
  flex-direction: column;
- //  height: 350px;
  max-height: 300px;
  min-height: 200px;
  min-width: 600px;
  padding: 10px;
- //  margin: 0 40px;
  background: $bkgd;
+
  @include shadow-radius;
  &__heading {
   font: 22px $heading-font;
@@ -65,9 +64,9 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   overflow: scroll;
   background: $bkgd-white;
-
   border-radius: 10px;
  }
 
@@ -90,8 +89,7 @@
 .checkout-item {
  display: flex;
  flex-direction: row;
- align-items: center;
- justify-content: space-around;
+ align-items: flex-start;
  font: 14px $main-font;
  &:nth-child(2n) {
   background: rgba(204, 204, 204, 0.5);
@@ -200,7 +198,6 @@
  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
 }
 .food-item {
- background: orange;
  display: flex;
  flex-direction: column;
  justify-content: space-between;
@@ -276,5 +273,36 @@
   justify-content: center;
   margin: 10px;
   padding: 10px;
+ }
+ .search-filter-grid {
+  flex-direction: column;
+  align-items: flex-start;
+ }
+ .checkout-back {
+  display: flex;
+  flex-direction: column;
+ }
+ .checkout {
+  width: auto;
+  min-width: auto;
+ }
+ .filters {
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0;
+  overflow-x: scroll;
+  width: 100%;
+  &__button {
+   white-space: nowrap;
+  }
+ }
+ .checkout-item {
+  flex-wrap: nowrap;
+  white-space: nowrap;
+ }
+ .checkout-item__name {
+  white-space: nowrap;
+  overflow-x: scroll;
  }
 }

@@ -276,5 +276,11 @@
     margin: 0;
     padding: 0;
   }
+  .welcome {
+    width: 300px;
+  }
+  .login {
+    width: 300px;
+  }
 }
 /*# sourceMappingURL=home.css.map */

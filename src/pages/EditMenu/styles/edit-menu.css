@@ -235,6 +235,9 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
   overflow: scroll;
   background: #f3f3f3;
   border-radius: 10px;
@@ -271,11 +274,9 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -ms-flex-pack: distribute;
-      justify-content: space-around;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   font: 14px "Lato", sans-serif;
 }
 
@@ -429,7 +430,6 @@
 }
 
 .food-item, .food-item--disabled {
-  background: orange;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -538,6 +538,53 @@
             justify-content: center;
     margin: 10px;
     padding: 10px;
+  }
+  .search-filter-grid {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: start;
+        -ms-flex-align: start;
+            align-items: flex-start;
+  }
+  .checkout-back {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .checkout {
+    width: auto;
+    min-width: auto;
+  }
+  .filters {
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    margin: 0;
+    overflow-x: scroll;
+    width: 100%;
+  }
+  .filters__button, .filters__button--add, .filters__button--remove, .filters__button--clear-all {
+    white-space: nowrap;
+  }
+  .checkout-item {
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
+    white-space: nowrap;
+  }
+  .checkout-item__name {
+    white-space: nowrap;
+    overflow-x: scroll;
   }
 }
 /*# sourceMappingURL=edit-menu.css.map */
