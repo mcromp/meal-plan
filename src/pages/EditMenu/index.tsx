@@ -96,7 +96,7 @@ const EditMenu: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="search-filter-grid">
+      <div className="search-filter">
         <SearchBar
           menuList={menuList}
           checkoutBoardItems={checkoutItems}

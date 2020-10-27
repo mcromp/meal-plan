@@ -59,7 +59,7 @@ const FoodItems: React.FC<FoodItemsProps> = ({
   };
 
   return (
-    <div className="day__menu">
+    <div className="food-items-grid">
       {cardList && cardList.map((item: MenuItemJSON) => (
         <FoodItem
           key={item.ID}

@@ -33,12 +33,11 @@ const FoodItem: React.FC<FoodItemProps> = ({
 
 
   return (
-    <div className={isDisabled ? "menu__card--disabled" : "menu__card"} >
-      <span className="title">{item.ITEM}</span>
-      <div className="card-buttons">
-        <button className="add" disabled={isDisabled} onClick={() => addCheckoutItem(item)} >+</button>
-        {/* <button><HeartIcon /></button> */}
-        <button className={isFav ? "heart--fav" : "heart"} onClick={toggleFav}><HeartIcon /></button>
+    <div className={isDisabled ? "food-item--disabled" : "food-item"}>
+      <span className="food-item__title">{item.ITEM}</span>
+      <div className="food-item__button">
+        <button className="food-item__button--add" disabled={isDisabled} onClick={() => addCheckoutItem(item)} >+</button>
+        <button className={isFav ? "food-item__heart--fav" : "food-item__heart"} onClick={toggleFav}><HeartIcon /></button>
       </div>
     </div >
   );

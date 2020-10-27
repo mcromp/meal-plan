@@ -417,18 +417,15 @@
   height: 10px;
 }
 
-.item__buttons {
-  padding: 0 20px;
-}
-
-.day__menu {
+.food-items-grid {
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: (minmax(150px, 1fr))[auto-fill];
       grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
 }
 
-.menu__card, .menu__card--disabled {
+.food-item, .food-item--disabled {
+  background: orange;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -448,12 +445,18 @@
   border-radius: 6px;
 }
 
-.menu__card .title, .menu__card--disabled .title {
+.food-item .svg__heart, .food-item--disabled .svg__heart {
+  height: 50%;
+  width: 50%;
+  fill: #ccc;
+}
+
+.food-item__title {
   color: #444;
   font: 12px "Lato", sans-serif;
 }
 
-.menu__card .card-buttons, .menu__card--disabled .card-buttons {
+.food-item__button {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -467,7 +470,7 @@
   margin: 0;
 }
 
-.menu__card .card-buttons button, .menu__card--disabled .card-buttons button {
+.food-item__button button {
   height: 30px;
   width: 20px;
   -ms-flex-preferred-size: 40%;
@@ -480,32 +483,30 @@
   border: none;
 }
 
-.menu__card .card-buttons button:hover:enabled, .menu__card--disabled .card-buttons button:hover:enabled {
+.food-item__button button:hover:enabled {
   background: #555;
   color: white;
 }
 
-.menu__card .add, .menu__card--disabled .add {
+.food-item__button--add {
   height: 35px;
   width: 35px;
   font-size: 18px;
 }
 
-.menu__card .svg__heart, .menu__card--disabled .svg__heart {
-  height: 50%;
-  width: 50%;
-  fill: #ccc;
-}
-
-.menu__card .heart, .menu__card--disabled .heart, .menu__card .heart--fav, .menu__card--disabled .heart--fav {
+.food-item__heart {
   padding: 4px 0 0 0;
 }
 
-.menu__card .heart--fav .svg__heart, .menu__card--disabled .heart--fav .svg__heart {
+.food-item__heart--fav {
+  padding: 4px 0 0 0;
+}
+
+.food-item__heart--fav .svg__heart {
   fill: #ff7474;
 }
 
-.menu__card--disabled {
+.food-item--disabled {
   -webkit-filter: invert(20%);
           filter: invert(20%);
 }

@@ -187,7 +187,6 @@
   }
  }
 }
-
 .svg__close {
  margin: 0 2px;
  stroke: black;
@@ -195,15 +194,12 @@
  height: 10px;
 }
 
-.item__buttons {
- padding: 0 20px;
-}
-
-.day__menu {
+.food-items-grid {
  display: grid;
  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
 }
-.menu__card {
+.food-item {
+ background: orange;
  display: flex;
  flex-direction: column;
  justify-content: space-between;
@@ -212,12 +208,16 @@
  height: 100px;
  background-color: $bkgd;
  @include shadow-radius;
-
- .title {
+ .svg__heart {
+  height: 50%;
+  width: 50%;
+  fill: #ccc;
+ }
+ &__title {
   color: #444;
   font: 12px $main-font;
  }
- .card-buttons {
+ &__button {
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -237,32 +237,28 @@
     color: white;
    }
   }
+  &--add {
+   height: 35px;
+   width: 35px;
+   font-size: 18px;
+  }
  }
- .add {
-  height: 35px;
-  width: 35px;
-  font-size: 18px;
- }
-
- .svg__heart {
-  height: 50%;
-  width: 50%;
-  fill: #ccc;
- }
- .heart {
+ &__heart {
   padding: 4px 0 0 0;
   &--fav {
-   @extend .heart;
+   padding: 4px 0 0 0;
    .svg__heart {
     fill: #ff7474;
    }
   }
  }
+
  &--disabled {
-  @extend .menu__card;
+  @extend .food-item;
   filter: invert(20%);
  }
 }
+
 .none {
  padding: 0;
  margin: 0;
