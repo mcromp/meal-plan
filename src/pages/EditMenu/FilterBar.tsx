@@ -6,14 +6,14 @@ import { Filter } from "../../shared/types";
 import CloseIcon from "../../assets/CloseIcon";
 
 
-const FilterButtonList: React.FC = () => {
+const FilterBar: React.FC = () => {
   const [showAll, setShowAll] = useState<boolean>(false);
   const [enabledFilterList, setEnabledFilterList] = useState<Filter[]>([]);
-  const filterList = useSelector<RootState, Filter[]>(state => state.filterList)
-  const dispatch = useDispatch()
+  const filterList = useSelector<RootState, Filter[]>(state => state.filterList);
+  const dispatch = useDispatch();
 
   const handleFilterClick = (filter: Filter, isEnabled: boolean) => {
-    dispatch(setFilter(filter, isEnabled))
+    dispatch(setFilter(filter, isEnabled));
     setShowAll(true);
   };
 
@@ -30,7 +30,7 @@ const FilterButtonList: React.FC = () => {
   };
 
   const clearAll = () => {
-    dispatch(resetFilter())
+    dispatch(resetFilter());
     setEnabledFilterList([]);
     setShowAll(false);
   };
@@ -66,4 +66,4 @@ const FilterButtonList: React.FC = () => {
 
 
 
-export default FilterButtonList
+export default FilterBar;

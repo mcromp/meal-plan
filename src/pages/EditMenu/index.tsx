@@ -5,19 +5,19 @@ import { RootState } from "../../redux"
 import { fetchHelper } from "../../redux/fetchHelper/fetchHelper"
 import { ReqType } from "../../redux/fetchHelper/types"
 import { User, CalendarItem, MenuItemJSON, CalendarMenuItem } from "../../shared/types"
-import CheckoutBoardItem from "./CheckoutBoard"
-import FilterButtonList from "./FilterBar"
-import MenuBoard from "./MenuBoard"
+import CheckoutItem from "./Checkout"
+import FilterBar from "./FilterBar"
+import FoodItems from "./FoodItems"
 import SearchBar from "./SearchBar"
-import './styles/day.css'
+import './styles/edit-menu.css'
 
-const Day: React.FC = () => {
+const EditMenu: React.FC = () => {
   const currentUser = useSelector<RootState, User | null>(state => state.currentUser);
   const calendar = useSelector<RootState, CalendarItem[]>(state => state.calendar);
   const menuList = useSelector<RootState, MenuItemJSON[]>(state => state.menuList);
   // const isLoading = useSelector<RootState, boolean>(state => state.isLoading);
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
-  const [checkoutBoardItems, setCheckoutBoardItems] = useState<CalendarMenuItem[]>([]);
+  const [checkoutItems, setCheckoutBoardItems] = useState<CalendarMenuItem[]>([]);
   const params: { day: string } = useParams();
   const dispatch = useDispatch();
 
@@ -29,19 +29,19 @@ const Day: React.FC = () => {
   }, [params.day, calendar])
 
   const handleSubmit = () => {
-    if (currentUser && checkoutBoardItems) {
+    if (currentUser && checkoutItems) {
       const body = {
         userId: currentUser?.id,
         date: params.day,
-        menuItems: [...checkoutBoardItems]
+        menuItems: [...checkoutItems]
       }
       dispatch(fetchHelper(ReqType.reqUpdateCalendar, body))
     }
     setIsSubmitted(true)
   }
 
-  const modifyQuantityOfCheckoutBoardItem = (item: CalendarMenuItem, amount: number) => {
-    const tempBoard: CalendarMenuItem[] = [...checkoutBoardItems]
+  const modifyQuantityOfCheckoutItem = (item: CalendarMenuItem, amount: number) => {
+    const tempBoard: CalendarMenuItem[] = [...checkoutItems]
     const index: number = tempBoard?.indexOf(item);
     const updatedQuantity = tempBoard[index].quantity + amount
     updatedQuantity > 0 ?
@@ -50,32 +50,32 @@ const Day: React.FC = () => {
     setCheckoutBoardItems(tempBoard)
   };
 
-  const removeFromCheckoutBoard = (item: CalendarMenuItem) => {
-    const temp = [...checkoutBoardItems]
+  const removeFromCheckout = (item: CalendarMenuItem) => {
+    const temp = [...checkoutItems]
     const index: number = temp?.indexOf(item);
     temp.splice(index, 1)
     setCheckoutBoardItems(temp)
   };
 
-  const addCheckOutBoardItem = (item: MenuItemJSON) => {
-    if (checkoutBoardItems?.find(i => i.foodId === item.ID)) return;
+  const addCheckoutItem = (item: MenuItemJSON) => {
+    if (checkoutItems?.find(i => i.foodId === item.ID)) return;
     const itemToAdd: CalendarMenuItem = {
       foodId: item.ID,
       quantity: 1,
     }
-    const updatedItems = [...checkoutBoardItems, itemToAdd]
+    const updatedItems = [...checkoutItems, itemToAdd]
     setCheckoutBoardItems(updatedItems)
 
   };
 
-  const checkoutBoardMap = checkoutBoardItems.length === 0 ?
+  const checkoutMap = checkoutItems.length === 0 ?
     <span className="board__empty-text">Menu is empty! Add items by clicking "+".<br /> Then click "SUBMIT" to save the menu, or click "BACK" to return without saving</span> :
-    checkoutBoardItems.map((checkoutItem: CalendarMenuItem) => (
-      <CheckoutBoardItem
+    checkoutItems.map((checkoutItem: CalendarMenuItem) => (
+      <CheckoutItem
         key={checkoutItem.foodId + "checkout"}
         item={checkoutItem}
-        removeFromCheckoutBoard={removeFromCheckoutBoard}
-        modifyQuantityOfCheckoutBoardItem={modifyQuantityOfCheckoutBoardItem} />
+        removeFromCheckout={removeFromCheckout}
+        modifyQuantityOfCheckoutItem={modifyQuantityOfCheckoutItem} />
     ));
 
   if (!currentUser) { return <Redirect to='/' /> }
@@ -89,7 +89,7 @@ const Day: React.FC = () => {
         <div className="day__checkout">
           <span className="checkout__heading">Menu for {params.day}</span>
           <div className="checkout__board">
-            {checkoutBoardMap}
+            {checkoutMap}
           </div>
           <div className="checkout__button-bar">
             <button className="button" onClick={() => setCheckoutBoardItems([])}>CLEAR ALL</button>
@@ -100,19 +100,19 @@ const Day: React.FC = () => {
       <div className="day__search-filter">
         <SearchBar
           menuList={menuList}
-          checkoutBoardItems={checkoutBoardItems}
-          addCheckOutBoardItem={addCheckOutBoardItem} />
+          checkoutBoardItems={checkoutItems}
+          addCheckOutBoardItem={addCheckoutItem} />
 
-        <FilterButtonList />
+        <FilterBar />
       </div>
 
-      <MenuBoard
-        checkoutBoardItems={checkoutBoardItems}
-        addCheckOutBoardItem={addCheckOutBoardItem} />
+      <FoodItems
+        checkoutItems={checkoutItems}
+        addCheckoutItem={addCheckoutItem} />
 
 
     </div >
   );
 }
 
-export default Day;
+export default EditMenu;

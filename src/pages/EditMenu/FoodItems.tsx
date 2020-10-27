@@ -4,12 +4,12 @@ import { RootState } from "../../redux";
 import { fetchHelper } from "../../redux/fetchHelper/fetchHelper";
 import { ReqType } from "../../redux/fetchHelper/types";
 import { Filter, MenuItemJSON, User, FilterId, CalendarMenuItem } from "../../shared/types";
-import MenuCard from "./MenuCard";
+import FoodItem from "./FoodItem";
 
 
-const MenuBoard: React.FC<MenuBoardProps> = ({
-  addCheckOutBoardItem,
-  checkoutBoardItems
+const FoodItems: React.FC<FoodItemsProps> = ({
+  addCheckoutItem,
+  checkoutItems
 }) => {
   const filterList = useSelector<RootState, Filter[]>(state => state.filterList);
   const menuList = useSelector<RootState, MenuItemJSON[]>(state => state.menuList);
@@ -53,27 +53,27 @@ const MenuBoard: React.FC<MenuBoardProps> = ({
 
 
   const disableCheck = (id: string): boolean => {
-    return checkoutBoardItems ?
-      (checkoutBoardItems.some((item: CalendarMenuItem) => item.foodId === id))
+    return checkoutItems ?
+      (checkoutItems.some((item: CalendarMenuItem) => item.foodId === id))
       : false
   };
 
   return (
     <div className="day__menu">
       {cardList && cardList.map((item: MenuItemJSON) => (
-        <MenuCard
+        <FoodItem
           key={item.ID}
           item={item}
-          addCheckOutBoardItem={addCheckOutBoardItem}
+          addCheckoutItem={addCheckoutItem}
           disableCheck={disableCheck} />
       ))}
     </div>
   );
 };
 
-type MenuBoardProps = {
-  addCheckOutBoardItem: (item: MenuItemJSON) => void,
-  checkoutBoardItems: CalendarMenuItem[]
+type FoodItemsProps = {
+  addCheckoutItem: (item: MenuItemJSON) => void,
+  checkoutItems: CalendarMenuItem[]
 };
 
-export default MenuBoard;
+export default FoodItems;

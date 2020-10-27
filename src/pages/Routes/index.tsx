@@ -2,7 +2,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import Day from '../Day';
+import EditMenu from '../EditMenu';
 import Header from '../Header/Header';
 import Home from '../Home';
 import NotFound404 from '../NotFound404';
@@ -25,7 +25,7 @@ const Routes: React.FC = () => {
         <Route path="/d/:day">
           <>
             <Header />
-            <Day />
+            <EditMenu />
           </>
         </Route>
         <Route component={NotFound404} />

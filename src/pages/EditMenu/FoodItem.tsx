@@ -7,19 +7,19 @@ import { ReqType } from "../../redux/fetchHelper/types";
 import { MenuItemJSON, User } from "../../shared/types";
 import HeartIcon from "../../assets/HeartIcon";
 
-const MenuCard: React.FC<MenuCardProps> = ({
+const FoodItem: React.FC<FoodItemProps> = ({
   item,
-  addCheckOutBoardItem,
+  addCheckoutItem,
   disableCheck,
 }) => {
-  const { favList, id: userId } = useSelector<RootState, User>(state => state.currentUser)
-  const [isFav, setIsFav] = useState<boolean>(favList.includes(item.ID))
+  const { favList, id: userId } = useSelector<RootState, User>(state => state.currentUser);
+  const [isFav, setIsFav] = useState<boolean>(favList.includes(item.ID));
   const [isDisabled, setIsDisabled] = useState<boolean>();
   const dispatch = useDispatch()
 
   useEffect(() => {
-    setIsDisabled(disableCheck(item.ID))
-  }, [disableCheck, item.ID])
+    setIsDisabled(disableCheck(item.ID));
+  }, [disableCheck, item.ID]);
 
   const toggleFav = () => {
     const body = {
@@ -27,8 +27,8 @@ const MenuCard: React.FC<MenuCardProps> = ({
       itemId: item.ID
     }
     isFav ? dispatch(fetchHelper(ReqType.reqRemoveFav, body))
-      : dispatch(fetchHelper(ReqType.reqAddFav, body))
-    setIsFav(prevState => !prevState)
+      : dispatch(fetchHelper(ReqType.reqAddFav, body));
+    setIsFav(prevState => !prevState);
   };
 
 
@@ -36,7 +36,7 @@ const MenuCard: React.FC<MenuCardProps> = ({
     <div className={isDisabled ? "menu__card--disabled" : "menu__card"} >
       <span className="title">{item.ITEM}</span>
       <div className="card-buttons">
-        <button className="add" disabled={isDisabled} onClick={() => addCheckOutBoardItem(item)} >+</button>
+        <button className="add" disabled={isDisabled} onClick={() => addCheckoutItem(item)} >+</button>
         {/* <button><HeartIcon /></button> */}
         <button className={isFav ? "heart--fav" : "heart"} onClick={toggleFav}><HeartIcon /></button>
       </div>
@@ -44,10 +44,10 @@ const MenuCard: React.FC<MenuCardProps> = ({
   );
 };
 
-type MenuCardProps = {
+type FoodItemProps = {
   item: MenuItemJSON,
-  addCheckOutBoardItem: (item: MenuItemJSON) => void,
+  addCheckoutItem: (item: MenuItemJSON) => void,
   disableCheck: (id: string) => boolean
-}
+};
 
-export default MenuCard
+export default FoodItem;
