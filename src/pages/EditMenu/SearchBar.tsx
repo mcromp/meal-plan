@@ -41,7 +41,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ menuList, checkoutBoardItems, add
   }
 
   return (
-    <div ref={wrapperRef} className="day__search">
+    <div ref={wrapperRef} className="search">
       <input
         type="search"
         onClick={() => setisListShown(true)}
@@ -51,14 +51,14 @@ const SearchBar: React.FC<SearchBarProps> = ({ menuList, checkoutBoardItems, add
       <div className="search__alert">
         <AlertText />
       </div>
-      <div className={isListShown && textValue ? "search__display-list" : ""}>
+      <div className={isListShown && textValue ? "search-results" : "none"}>
         {isListShown && searchListDisplay.map(item =>
           <div
-            className="display-list__container"
+            className="search-results__container"
             onClick={() => handleClick(item)}
             key={item.ID}
             tabIndex={0}>
-            <span className="display-list__name">{item.ITEM}</span>
+            <span className="search-results__name">{item.ITEM}</span>
           </div>)}
       </div>
     </div >

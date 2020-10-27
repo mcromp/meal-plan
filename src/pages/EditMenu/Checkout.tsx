@@ -19,10 +19,10 @@ const CheckoutItem: React.FC<CheckoutItemProps> = ({
 
 
   return (
-    <div className="checkout-board">
-      <span className="checkout-board__name">{name}</span>
-      <span className="quantity">{item.quantity}</span>
-      <div className="checkout-board__buttons">
+    <div className="checkout-item">
+      <span className="checkout-item__name">{name}</span>
+      <span className="checkout-item">{item.quantity}</span>
+      <div className="checkout-item__buttons">
         <button className="button--checkout-item" onClick={() => modifyQuantityOfCheckoutItem(item, 1)}>+</button>
         <button className="button--checkout-item" onClick={() => modifyQuantityOfCheckoutItem(item, -1)}>-</button>
         <button className="button--checkout-item" onClick={() => removeFromCheckout(item)}>remove</button>

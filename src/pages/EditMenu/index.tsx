@@ -68,7 +68,7 @@ const EditMenu: React.FC = () => {
   };
 
   const checkoutMap = checkoutItems.length === 0 ?
-    <span className="board__empty-text">Menu is empty! Add items by clicking "+".<br /> Then click "SUBMIT" to save the menu, or click "BACK" to return without saving</span> :
+    <span className="checkout__empty-text">Menu is empty! Add items by clicking "+".<br /> Then click "SUBMIT" to save the menu, or click "BACK" to return without saving</span> :
     checkoutItems.map((checkoutItem: CalendarMenuItem) => (
       <CheckoutItem
         key={checkoutItem.foodId + "checkout"}
@@ -83,9 +83,9 @@ const EditMenu: React.FC = () => {
 
   return (
     <div className="day">
-      <div className="checkout">
-        <button className="day__back" onClick={() => setIsSubmitted(true)}>⬅ BACK</button>
-        <div className="day__checkout">
+      <div className="checkout-back">
+        <button className="checkout-back__back" onClick={() => setIsSubmitted(true)}>⬅ BACK</button>
+        <div className="checkout">
           <span className="checkout__heading">Menu for {params.day}</span>
           <div className="checkout__board">
             {checkoutMap}
@@ -96,8 +96,7 @@ const EditMenu: React.FC = () => {
           </div>
         </div>
       </div>
-
-      <div className="day__search-filter">
+      <div className="search-filter-grid">
         <SearchBar
           menuList={menuList}
           checkoutBoardItems={checkoutItems}
