@@ -69,6 +69,10 @@
   }
 }
 
+.loader {
+  font: 12px "Lato", sans-serif;
+}
+
 .home {
   padding: 0;
   margin: 0;
