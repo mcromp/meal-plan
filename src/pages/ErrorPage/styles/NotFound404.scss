@@ -4,19 +4,24 @@
 .main {
  width: 100vw;
  height: 100vh;
- background: #000000;
+ background: no-repeat url("../../../assets/bkgd.jpg");
  display: flex;
  align-items: center;
  justify-content: center;
  flex-direction: column;
  &__text {
   margin: 14px;
-  color: $bkgd;
-  font: 50px $heading-font;
+  color: black;
+  font: 40px $heading-font;
+  background: $bkgd;
+  padding: 14px;
+  @include shadow-radius;
  }
  &__sub-text {
-  padding: 4px;
-  color: $bkgd;
+  padding: 14px;
+  color: black;
   font: 20px $main-font;
+  background: $bkgd;
+  @include shadow-radius;
  }
 }

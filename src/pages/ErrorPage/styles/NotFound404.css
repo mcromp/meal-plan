@@ -72,7 +72,7 @@
 .main {
   width: 100vw;
   height: 100vh;
-  background: #000000;
+  background: no-repeat url("../../../assets/bkgd.jpg");
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -90,13 +90,22 @@
 
 .main__text {
   margin: 14px;
-  color: #f3f3f3;
-  font: 50px "Poppins", sans-serif;
+  color: black;
+  font: 40px "Poppins", sans-serif;
+  background: #f3f3f3;
+  padding: 14px;
+  -webkit-box-shadow: 0 2px 3px #777, 0 0 3px #777;
+          box-shadow: 0 2px 3px #777, 0 0 3px #777;
+  border-radius: 6px;
 }
 
 .main__sub-text {
-  padding: 4px;
-  color: #f3f3f3;
+  padding: 14px;
+  color: black;
   font: 20px "Lato", sans-serif;
+  background: #f3f3f3;
+  -webkit-box-shadow: 0 2px 3px #777, 0 0 3px #777;
+          box-shadow: 0 2px 3px #777, 0 0 3px #777;
+  border-radius: 6px;
 }
 /*# sourceMappingURL=NotFound404.css.map */

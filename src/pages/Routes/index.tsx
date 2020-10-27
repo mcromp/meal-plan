@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import EditMenu from '../EditMenu';
 import Header from '../Header/Header';
 import Home from '../Home';
-import NotFound404 from '../NotFound404';
+import ErrorPage from '../ErrorPage';
 import PrintableWeek from '../Week/WeekPrintable';
 
 
@@ -28,7 +28,12 @@ const Routes: React.FC = () => {
             <EditMenu />
           </>
         </Route>
-        <Route component={NotFound404} />
+        <Route>
+          <ErrorPage
+            text={"404: not found"}
+            subText={"Redirecting to homepage..."}
+            isRedirected={true} />
+        </Route>
       </Switch>
     </Router>
   )
