@@ -9,6 +9,7 @@ const NotFound404: React.FC = () => {
       setIsRedirect(true)
     }, 5000);
     return () => {
+      clearTimeout(listener)
     }
   }, [])
   if (isRedirect) { return <Redirect to={`/`} />; }
