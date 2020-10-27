@@ -13,6 +13,7 @@ import AlertText from "../../shared/AlertText";
 import Welcome from "./Welcome";
 import MenuIcon from "../../assets/MenuIcon";
 import "./styles/home.css";
+import ErrorPage from "../ErrorPage";
 
 const Home = () => {
   const [isDeleteConfirmShown, setIsDeleteConfirmShown] = useState<boolean>(false);
@@ -70,7 +71,12 @@ const Home = () => {
 
   const checkValue = value.length === 0;
 
-  if (isFailedToLoad) { return (<div>File has failed to load</div>); };
+  if (isFailedToLoad) {
+    return <ErrorPage
+      text={"Server Error"}
+      subText={"Could not load, please try again later"}
+      isRedirected={false} />
+  }
 
   return (
     <div className="home">

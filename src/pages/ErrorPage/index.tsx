@@ -18,6 +18,7 @@ const ErrorPage: React.FC<ErrorPageProps> = ({
   }, []);
 
   if (isRedirected && isTimedOut) { return <Redirect to={`/`} />; };
+
   return (
     <div className="main">
       <span className="main__text">{text}</span>

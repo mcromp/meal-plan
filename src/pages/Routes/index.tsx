@@ -30,7 +30,7 @@ const Routes: React.FC = () => {
         </Route>
         <Route>
           <ErrorPage
-            text={"404: not found"}
+            text={"404: Not found"}
             subText={"Redirecting to homepage..."}
             isRedirected={true} />
         </Route>
