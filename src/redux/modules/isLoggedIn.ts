@@ -1,4 +1,4 @@
-const IS_LOGGED_IN = "food-app/isLoggedIn/IS_LOGGED_IN";
+const IS_LOGGED_IN = "menu-plan/isLoggedIn/IS_LOGGED_IN";
 
 const reducer = (state: boolean = false, action: Is_Logged_In) => {
  switch (action.type) {

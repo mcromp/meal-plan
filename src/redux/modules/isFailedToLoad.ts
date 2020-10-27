@@ -1,4 +1,4 @@
-const IS_FAILED_TO_LOAD = "food-app/isFailedToLoad/IS_FAILED_TO_LOAD";
+const IS_FAILED_TO_LOAD = "menu-plan/isFailedToLoad/IS_FAILED_TO_LOAD";
 
 const reducer = (state: boolean = false, action: Is_Failed_To_Load) => {
  switch (action.type) {

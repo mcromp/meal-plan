@@ -1,6 +1,6 @@
 import { MenuItemJSON } from "../../shared/types";
 
-const SET_MENULIST = "food-app/menuList/SET_MENULIST";
+const SET_MENULIST = "menu-plan/menuList/SET_MENULIST";
 
 const reducer = (state = [], action: SetMenuList) => {
  switch (action.type) {

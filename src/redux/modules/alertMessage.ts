@@ -1,4 +1,4 @@
-const SET_ALERT_MESSAGE = "food-app/SET_ALERT_MESSAGE";
+const SET_ALERT_MESSAGE = "menu-plan/SET_ALERT_MESSAGE";
 
 const reducer = (state: string = "", action: AlertMessage) => {
  switch (action.type) {

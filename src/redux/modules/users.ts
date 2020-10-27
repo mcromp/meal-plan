@@ -1,8 +1,8 @@
 import { User, UserJSON } from "../../shared/types";
 
-const SET_USERS_FROM_JSON = "food-app/users/SET_USERS_FROM_JSON";
-const ADD_USER_JSON = "food-app/users/ADD_USER_JSON";
-const DELETE_ONE_USER = "food-app/users/DELETE_ONE_USER";
+const SET_USERS_FROM_JSON = "menu-plan/users/SET_USERS_FROM_JSON";
+const ADD_USER_JSON = "menu-plan/users/ADD_USER_JSON";
+const DELETE_ONE_USER = "menu-plan/users/DELETE_ONE_USER";
 
 const reducer = (state: User[] = [], action: UsersActions) => {
  switch (action.type) {

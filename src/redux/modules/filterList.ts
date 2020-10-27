@@ -1,7 +1,7 @@
 import { Filter } from "../../shared/types";
 
-const SET_FILTER = "food-app/filterList/SET_FILTER";
-const RESET_FILTER = "food-app/filterList/RESET_FILTER";
+const SET_FILTER = "menu-plan/filterList/SET_FILTER";
+const RESET_FILTER = "menu-plan/filterList/RESET_FILTER";
 
 const initalState: Filter[] = [
  { id: "FAVORITES", name: "User Favorites", selected: false },

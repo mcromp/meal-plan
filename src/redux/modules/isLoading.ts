@@ -1,4 +1,4 @@
-const IS_LOADING = "food-app/isLoading/IS_LOADING";
+const IS_LOADING = "menu-plan/isLoading/IS_LOADING";
 
 const reducer = (state: boolean = false, action: Is_Loading) => {
  switch (action.type) {

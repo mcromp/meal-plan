@@ -1,6 +1,6 @@
 import { CalendarItem, CalendarJSON } from "../../shared/types";
 
-const SET_CALENDAR = "food-app/calendar/SET_CALENDAR";
+const SET_CALENDAR = "menu-plan/calendar/SET_CALENDAR";
 
 const reducer = (state = [], action: SetCalendar) => {
  switch (action.type) {

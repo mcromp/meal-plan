@@ -1,7 +1,7 @@
 import { User, UserJSON } from "../../shared/types";
 
-export const SET_CURRENT_USER = "food-app/currentUser/SET_CURRENT_USER";
-export const CLEAR_CURRENT_USER = "food-app/currentUser/CLEAR_CURRENT_USER";
+export const SET_CURRENT_USER = "menu-plan/currentUser/SET_CURRENT_USER";
+export const CLEAR_CURRENT_USER = "menu-plan/currentUser/CLEAR_CURRENT_USER";
 
 const reducer = (
  currentUser: User | null = null,
