@@ -14,6 +14,8 @@ import Welcome from "./Welcome";
 import MenuIcon from "../../assets/MenuIcon";
 import "./styles/home.css";
 import FailedToLoad from "../../shared/FailedToLoad";
+import useIsLoading from "../../hooks/useIsLoading";
+import Loading from "../../shared/Loading";
 
 const Home = () => {
   const [isDeleteConfirmShown, setIsDeleteConfirmShown] = useState<boolean>(false);
@@ -23,6 +25,7 @@ const Home = () => {
   const users = useSelector<RootState, User[]>(state => state.users);
   const isFailedToLoad = useSelector<RootState, Boolean>(state => state.isFailedToLoad);
   const [value, setValue] = useState<string>("");
+  const [isLoading] = useIsLoading();
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -77,27 +80,29 @@ const Home = () => {
     <div className="home">
       <div className="home__header"><MenuIcon /> Menu Plan</div>
       <Welcome />
-      <div className="login">
-        <div className="signin">
-          {isDeleteConfirmShown ?
-            <UserDelete
-              handleSubmit={handleDeleteSubmit}
-              setConfirmDelete={setIsDeleteConfirmShown}
-              selectedUser={selectedUser} />
-            : <>
 
-              <span className="signin__heading">Select your username</span>
-              <SigninForm
-                value={value}
-                label={""}
-                selectMessage={"Select"}
-                optionMap={users}
-                handleSelect={handleSelect} />
-              <button className="button" onClick={() => handleSignin()} disabled={checkValue}>Sign in</button>
-              <button className="button" onClick={() => setIsDeleteConfirmShown(true)} disabled={checkValue}>Delete User</button>
-            </>
-          }
-        </div>
+      <div className="login">
+        {isLoading ? <Loading /> :
+          <div className="signin">
+            {isDeleteConfirmShown ?
+              <UserDelete
+                handleSubmit={handleDeleteSubmit}
+                setConfirmDelete={setIsDeleteConfirmShown}
+                selectedUser={selectedUser} />
+              : <>
+
+                <span className="signin__heading">Select your username</span>
+                <SigninForm
+                  value={value}
+                  label={""}
+                  selectMessage={"Select"}
+                  optionMap={users}
+                  handleSelect={handleSelect} />
+                <button className="button" onClick={() => handleSignin()} disabled={checkValue}>Sign in</button>
+                <button className="button" onClick={() => setIsDeleteConfirmShown(true)} disabled={checkValue}>Delete User</button>
+              </>
+            }
+          </div>}
         <div className="signup">
           {
             isSignupShown ?

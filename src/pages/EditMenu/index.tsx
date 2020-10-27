@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
+import useIsLoading from "../../hooks/useIsLoading";
 import { RootState } from "../../redux";
 import { fetchHelper } from "../../redux/fetchHelper/fetchHelper";
 import { ReqType } from "../../redux/fetchHelper/types";
@@ -17,12 +18,13 @@ const EditMenu: React.FC = () => {
   const currentUser = useSelector<RootState, User | null>(state => state.currentUser);
   const calendar = useSelector<RootState, CalendarItem[]>(state => state.calendar);
   const menuList = useSelector<RootState, MenuItemJSON[]>(state => state.menuList);
-  const isLoading = useSelector<RootState, boolean>(state => state.isLoading);
   const isFailedToLoad = useSelector<RootState, Boolean>(state => state.isFailedToLoad);
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   const [checkoutItems, setCheckoutItems] = useState<CalendarMenuItem[]>([]);
+  const [isLoading] = useIsLoading();
   const params: { day: string } = useParams();
   const dispatch = useDispatch();
+
 
   useEffect(() => {
     const menuItemFind = calendar.find(((item) => item.date === params.day))
@@ -84,23 +86,22 @@ const EditMenu: React.FC = () => {
   if (!currentUser) { return <Redirect to='/' /> };
   if (isSubmitted) { return <Redirect to='/w' /> };
   if (isFailedToLoad) { return <FailedToLoad /> };
-
   return (
     <div className="day">
-      {isLoading ? <Loading /> :
-        <div className="checkout-back">
-          <button className="checkout-back__back" onClick={() => setIsSubmitted(true)}>⬅ BACK</button>
-          <div className="checkout">
-            <span className="checkout__heading">Menu for {params.day}</span>
+      <div className="checkout-back">
+        <button className="checkout-back__back" onClick={() => setIsSubmitted(true)}>⬅ BACK</button>
+        <div className="checkout">
+          <span className="checkout__heading">Menu for {params.day}</span>
+          {isLoading ? <Loading /> :
             <div className="checkout__board">
               {checkoutMap}
-            </div>
-            <div className="checkout__button-bar">
-              <button className="button" onClick={() => setCheckoutItems([])}>CLEAR ALL</button>
-              <button className="button--checkout-submit" onClick={handleSubmit}>SUBMIT</button>
-            </div>
+            </div>}
+          <div className="checkout__button-bar">
+            <button className="button" onClick={() => setCheckoutItems([])}>CLEAR ALL</button>
+            <button className="button--checkout-submit" onClick={handleSubmit}>SUBMIT</button>
           </div>
-        </div>}
+        </div>
+      </div>
       <div className="search-filter-grid">
         <SearchBar
           menuList={menuList}
