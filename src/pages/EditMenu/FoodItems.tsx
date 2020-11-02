@@ -4,6 +4,7 @@ import { RootState } from "../../redux";
 import { fetchHelper } from "../../redux/fetchHelper/fetchHelper";
 import { ReqType } from "../../redux/fetchHelper/types";
 import { Filter, MenuItemJSON, User, FilterId, CalendarMenuItem } from "../../shared/types";
+import AddFoodItem from "./AddFoodItem";
 import FoodItem from "./FoodItem";
 
 
@@ -67,6 +68,7 @@ const FoodItems: React.FC<FoodItemsProps> = ({
           addCheckoutItem={addCheckoutItem}
           disableCheck={disableCheck} />
       ))}
+      <AddFoodItem />
     </div>
   );
 };
