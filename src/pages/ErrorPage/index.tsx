@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Redirect } from 'react-router-dom'
-import "./styles/NotFound404.css"
+import "./styles/error-page.css"
 
 const ErrorPage: React.FC<ErrorPageProps> = ({
   text,
