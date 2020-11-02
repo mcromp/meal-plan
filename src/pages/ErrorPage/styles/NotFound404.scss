@@ -2,9 +2,9 @@
 @import "../../../shared/sass/base";
 
 .main {
- width: 100vw;
- height: 100vh;
- background: no-repeat url("../../../assets/bkgd.jpg");
+ width: 100%;
+ height: 100%;
+ background: inherit;
  display: flex;
  align-items: center;
  justify-content: center;

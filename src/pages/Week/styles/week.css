@@ -183,7 +183,7 @@ body {
     size: landscape;
   }
   .week {
-    background: none;
+    background: #ccc;
   }
   .day-menu {
     background: none;
