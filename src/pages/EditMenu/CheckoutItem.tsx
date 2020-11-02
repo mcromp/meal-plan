@@ -13,8 +13,8 @@ const CheckoutItem: React.FC<CheckoutItemProps> = ({
   const [name, setName] = useState<string>("");
 
   useEffect(() => {
-    const findName = menuList.find(i => i.ID === item.foodId);
-    if (findName) setName(findName?.ITEM);
+    const findName = menuList.find(i => i.id === item.foodId);
+    if (findName) setName(findName?.item);
   }, [menuList, item.foodId]);
 
 

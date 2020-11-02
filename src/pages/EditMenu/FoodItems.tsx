@@ -34,10 +34,10 @@ const FoodItems: React.FC<FoodItemsProps> = ({
 
     const createCardList = (selectedFilterIdList: FilterId[]) =>
       menuList.reduce<MenuItemJSON[]>((acc, food) => {
-        const foodCategory = food.CATEGORY as FilterId;
+        const foodCategory = food.category as FilterId;
         if (
           selectedFilterIdList.includes(foodCategory) ||
-          (favList.includes(food.ID) &&
+          (favList.includes(food.id) &&
             selectedFilterIdList.includes("FAVORITES"))
         ) acc.push(food);
         return acc;
@@ -62,7 +62,7 @@ const FoodItems: React.FC<FoodItemsProps> = ({
     <div className="food-items-grid">
       {cardList && cardList.map((item: MenuItemJSON) => (
         <FoodItem
-          key={item.ID}
+          key={item.id}
           item={item}
           addCheckoutItem={addCheckoutItem}
           disableCheck={disableCheck} />

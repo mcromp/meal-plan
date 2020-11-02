@@ -63,9 +63,9 @@ const EditMenu: React.FC = () => {
   };
 
   const addCheckoutItem = (item: MenuItemJSON) => {
-    if (checkoutItems?.find(i => i.foodId === item.ID)) return;
+    if (checkoutItems?.find(i => i.foodId === item.id)) return;
     const itemToAdd: CalendarMenuItem = {
-      foodId: item.ID,
+      foodId: item.id,
       quantity: 1,
     };
     const updatedItems = [...checkoutItems, itemToAdd];

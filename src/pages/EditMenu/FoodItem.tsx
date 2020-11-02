@@ -13,18 +13,18 @@ const FoodItem: React.FC<FoodItemProps> = ({
   disableCheck,
 }) => {
   const { favList, id: userId } = useSelector<RootState, User>(state => state.currentUser);
-  const [isFav, setIsFav] = useState<boolean>(favList.includes(item.ID));
+  const [isFav, setIsFav] = useState<boolean>(favList.includes(item.id));
   const [isDisabled, setIsDisabled] = useState<boolean>();
   const dispatch = useDispatch()
 
   useEffect(() => {
-    setIsDisabled(disableCheck(item.ID));
-  }, [disableCheck, item.ID]);
+    setIsDisabled(disableCheck(item.id));
+  }, [disableCheck, item.id]);
 
   const toggleFav = () => {
     const body = {
       userId,
-      itemId: item.ID
+      itemId: item.id
     }
     isFav ? dispatch(fetchHelper(ReqType.reqRemoveFav, body))
       : dispatch(fetchHelper(ReqType.reqAddFav, body));
@@ -34,7 +34,7 @@ const FoodItem: React.FC<FoodItemProps> = ({
 
   return (
     <div className={isDisabled ? "food-item--disabled" : "food-item"}>
-      <span className="food-item__title">{item.ITEM}</span>
+      <span className="food-item__title">{item.item}</span>
       <div className="food-item__button">
         <button className="food-item__button--add" disabled={isDisabled} onClick={() => addCheckoutItem(item)} >+</button>
         <button className={isFav ? "food-item__heart--fav" : "food-item__heart"} onClick={toggleFav}><HeartIcon /></button>

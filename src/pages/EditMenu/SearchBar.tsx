@@ -25,7 +25,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ menuList, checkoutBoardItems, add
     setSearchListDisplay([])
     setTextValue(word)
     if (word.length > 0) {
-      const searchList = menuList.filter((item: MenuItemJSON) => checkSubStingIncludes(item.ITEM, word)).splice(0, 5)
+      const searchList = menuList.filter((item: MenuItemJSON) => checkSubStingIncludes(item.item, word)).splice(0, 5)
       setSearchListDisplay(searchList)
     }
   }
@@ -34,8 +34,8 @@ const SearchBar: React.FC<SearchBarProps> = ({ menuList, checkoutBoardItems, add
     setSearchListDisplay([])
     setTextValue("")
     const itemAlreadyInCheckout = checkoutBoardItems.map((item: CalendarMenuItem) => item.foodId)
-    if (itemAlreadyInCheckout.includes(item.ID)) {
-      dispatch(setAlertMessage(`${item.ITEM} has already been added`))
+    if (itemAlreadyInCheckout.includes(item.id)) {
+      dispatch(setAlertMessage(`${item.item} has already been added`))
     }
     else addCheckOutBoardItem(item)
   }
@@ -56,9 +56,9 @@ const SearchBar: React.FC<SearchBarProps> = ({ menuList, checkoutBoardItems, add
           <div
             className="search-results__container"
             onClick={() => handleClick(item)}
-            key={item.ID}
+            key={item.id}
             tabIndex={0}>
-            <span className="search-results__name">{item.ITEM}</span>
+            <span className="search-results__name">{item.item}</span>
           </div>)}
       </div>
     </div >

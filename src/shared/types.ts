@@ -11,11 +11,9 @@ export type CalendarMenuItem = {
 };
 
 export interface MenuItemJSON {
- ITEM: string;
- CAL: string;
- PRICE: string;
- CATEGORY: string;
- ID: string;
+ item: string;
+ category: string;
+ id: string;
 }
 
 export interface CalendarJSON {
@@ -41,11 +39,11 @@ export type User = {
 };
 
 export type FilterId =
- | "BURGERSANDWICH"
- | "BEVERAGE"
- | "CHICKENFISH"
- | "DESSERTSHAKE"
- | "SNACKSIDE"
+ | "LUNCH"
+ | "DINNER"
+ | "DESSERT"
+ | "DRINK"
+ | "SNACK"
  | "BREAKFAST"
  | "FAVORITES";
 
