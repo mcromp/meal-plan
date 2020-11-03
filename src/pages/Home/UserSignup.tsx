@@ -7,7 +7,7 @@ const UserSignup: React.FC<UserSignupProps> = ({
   setShowAddUser,
   signupUser
 }) => {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState<string>("");
   const [usernameList, setUsernameList] = useState<string[]>([]);
   const users = useSelector<RootState, User[]>(state => state.users);
 

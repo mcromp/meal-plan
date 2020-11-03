@@ -8,7 +8,7 @@ import { ReqType } from "../../redux/fetchHelper/types";
 import FailedToLoad from "../../shared/FailedToLoad";
 import Loading from "../../shared/Loading";
 import { User, CalendarItem, MenuItemJSON, CalendarMenuItem } from "../../shared/types";
-import AddModal from "./AddModal";
+import SubmitItem from "./SubmitItem";
 import CheckoutItem from "./CheckoutItem";
 import FilterBar from "./FilterBar";
 import FoodItems from "./FoodItems";
@@ -90,7 +90,7 @@ const EditMenu: React.FC = () => {
   if (isFailedToLoad) { return <FailedToLoad /> };
   return (
     <div className="day">
-      {isAddModalShown ? <AddModal /> : null}
+      {isAddModalShown ? <SubmitItem /> : null}
 
       <div className="checkout-back">
         <button className="checkout-back__back" onClick={() => setIsSubmitted(true)}>⬅ BACK</button>
