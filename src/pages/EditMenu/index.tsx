@@ -22,7 +22,7 @@ const EditMenu: React.FC = () => {
   const isFailedToLoad = useSelector<RootState, Boolean>(state => state.isFailedToLoad);
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   const [checkoutItems, setCheckoutItems] = useState<CalendarMenuItem[]>([]);
-  const [isAddModalShown, setIsAddModalShown] = useState<boolean>(false);
+  const [isModalShown, setIsAddModalShown] = useState<boolean>(false);
   const [isLoading] = useIsLoading();
   const params: { day: string } = useParams();
   const dispatch = useDispatch();
@@ -90,7 +90,7 @@ const EditMenu: React.FC = () => {
   if (isFailedToLoad) { return <FailedToLoad /> };
   return (
     <div className="day">
-      {isAddModalShown ? <SubmitItem /> : null}
+      {isModalShown ? <SubmitItem setIsAddModalShown={setIsAddModalShown} /> : null}
 
       <div className="checkout-back">
         <button className="checkout-back__back" onClick={() => setIsSubmitted(true)}>⬅ BACK</button>

@@ -8,6 +8,7 @@ const SubmitItemForm: React.FC<any> = ({
   handleSelect
 }) => {
   const filterList = useSelector<RootState, Filter[]>(state => state.filterList);
+
   const options = (filterList.map((filter: Filter) => {
     if (filter.id !== "FAVORITES") return <option className="" key={filter.id} value={filter.id}>{filter.name}</option>
   }
