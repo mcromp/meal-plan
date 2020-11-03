@@ -8,6 +8,7 @@ import { ReqType } from "../../redux/fetchHelper/types";
 import FailedToLoad from "../../shared/FailedToLoad";
 import Loading from "../../shared/Loading";
 import { User, CalendarItem, MenuItemJSON, CalendarMenuItem } from "../../shared/types";
+import AddModal from "./AddModal";
 import CheckoutItem from "./CheckoutItem";
 import FilterBar from "./FilterBar";
 import FoodItems from "./FoodItems";
@@ -21,6 +22,7 @@ const EditMenu: React.FC = () => {
   const isFailedToLoad = useSelector<RootState, Boolean>(state => state.isFailedToLoad);
   const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
   const [checkoutItems, setCheckoutItems] = useState<CalendarMenuItem[]>([]);
+  const [isAddModalShown, setIsAddModalShown] = useState<boolean>(false);
   const [isLoading] = useIsLoading();
   const params: { day: string } = useParams();
   const dispatch = useDispatch();
@@ -88,6 +90,8 @@ const EditMenu: React.FC = () => {
   if (isFailedToLoad) { return <FailedToLoad /> };
   return (
     <div className="day">
+      {isAddModalShown ? <AddModal /> : null}
+
       <div className="checkout-back">
         <button className="checkout-back__back" onClick={() => setIsSubmitted(true)}>⬅ BACK</button>
         <div className="checkout">
@@ -113,7 +117,8 @@ const EditMenu: React.FC = () => {
 
       <FoodItems
         checkoutItems={checkoutItems}
-        addCheckoutItem={addCheckoutItem} />
+        addCheckoutItem={addCheckoutItem}
+        setIsAddModalShown={setIsAddModalShown} />
 
     </div >
   );

@@ -10,7 +10,8 @@ import FoodItem from "./FoodItem";
 
 const FoodItems: React.FC<FoodItemsProps> = ({
   addCheckoutItem,
-  checkoutItems
+  checkoutItems,
+  setIsAddModalShown
 }) => {
   const filterList = useSelector<RootState, Filter[]>(state => state.filterList);
   const menuList = useSelector<RootState, MenuItemJSON[]>(state => state.menuList);
@@ -68,13 +69,14 @@ const FoodItems: React.FC<FoodItemsProps> = ({
           addCheckoutItem={addCheckoutItem}
           disableCheck={disableCheck} />
       ))}
-      <AddFoodItem />
+      <AddFoodItem setIsAddModalShown={setIsAddModalShown} />
     </div>
   );
 };
 
 type FoodItemsProps = {
   addCheckoutItem: (item: MenuItemJSON) => void,
+  setIsAddModalShown: React.Dispatch<React.SetStateAction<boolean>>,
   checkoutItems: CalendarMenuItem[]
 };
 

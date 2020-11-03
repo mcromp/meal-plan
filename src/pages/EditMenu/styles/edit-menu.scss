@@ -3,7 +3,7 @@
 
 .day {
  height: 100%;
- z-index: 0;
+ z-index: -1;
  display: flex;
  flex-direction: column;
 }
@@ -49,7 +49,6 @@
  min-width: 600px;
  padding: 10px;
  background: $bkgd;
-
  @include shadow-radius;
  &__heading {
   font: 22px $heading-font;
@@ -86,6 +85,7 @@
   }
  }
 }
+
 .checkout-item {
  display: flex;
  flex-direction: row;
@@ -130,7 +130,7 @@
  display: flex;
  flex-direction: column;
  position: absolute;
- z-index: 2;
+ z-index: 1;
  padding: 10px 0;
  @include shadow-radius;
  background: $bkgd-white;
@@ -250,10 +250,32 @@
    }
   }
  }
-
  &--disabled {
   @extend .food-item;
   filter: invert(20%);
+ }
+}
+
+.add-modal {
+ position: fixed;
+ top: 50%;
+ left: 50%;
+ transform: translate(-50%, -50%);
+ background-color: rgba(0, 0, 0, 0.35);
+ width: 100%;
+ height: 100%;
+ z-index: 2;
+ &__content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 50px 20px 20px;
+  background: $bkgd-white;
+  @include shadow-radius;
  }
 }
 
