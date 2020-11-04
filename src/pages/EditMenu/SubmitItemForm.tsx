@@ -11,6 +11,7 @@ const SubmitItemForm: React.FC<any> = ({
 
   const options = (filterList.map((filter: Filter) => {
     if (filter.id !== "FAVORITES") return <option className="" key={filter.id} value={filter.id}>{filter.name}</option>
+    return null
   }
   ));
   return (
