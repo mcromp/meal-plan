@@ -3,7 +3,7 @@ import { setCalendar } from "../modules/calendar";
 import { setCurrentUser } from "../modules/currentUser";
 import { isFailedToLoad } from "../modules/isFailedToLoad";
 import { isLoading } from "../modules/isLoading";
-import { setMenuList } from "../modules/menuList";
+import { addMenuList, setMenuList } from "../modules/menuList";
 import { setUsersFromJSON, deleteOneUser, addUserFromJSON } from "../modules/users";
 import { ReqType, ReqList } from "./types";
 
@@ -42,19 +42,20 @@ export const fetchHelper = (
 
 const setReqData = (dispatch: any, response: any, reqSelect: ReqList) => {
  if (reqSelect === ReqType.reqGetMenu) dispatch(setMenuList(response));
+ if (reqSelect === ReqType.reqAddMenu) dispatch(addMenuList(response));
  if (reqSelect === ReqType.reqGetUsers) dispatch(setUsersFromJSON(response));
  if (reqSelect === ReqType.reqGetUser) dispatch(setCurrentUser(response));
  if (reqSelect === ReqType.reqGetCalendar) dispatch(setCalendar(response));
- if (reqSelect === ReqType.reqDeleteUser) {
-  dispatch(deleteOneUser(response._id));
-  const deleteMessage: string = `User: ${response.username} deleted`;
-  dispatch(setAlertMessage(deleteMessage));
- }
- if (reqSelect === ReqType.reqAddUser) {
-  const userAddMessage: string = `User: ${response.username} added`;
-  dispatch(addUserFromJSON(response));
-  dispatch(setAlertMessage(userAddMessage));
- }
  if (reqSelect === ReqType.reqAddFav) dispatch(setCurrentUser(response));
  if (reqSelect === ReqType.reqRemoveFav) dispatch(setCurrentUser(response));
+ if (reqSelect === ReqType.reqDeleteUser) {
+      dispatch(deleteOneUser(response._id));
+      const deleteMessage: string = `User: ${response.username} deleted`;
+      dispatch(setAlertMessage(deleteMessage));
+ }
+ if (reqSelect === ReqType.reqAddUser) {
+      const userAddMessage: string = `User: ${response.username} added`;
+      dispatch(addUserFromJSON(response));
+      dispatch(setAlertMessage(userAddMessage)) 
+ }
 };
