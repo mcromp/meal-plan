@@ -33,7 +33,7 @@ const SubmitItem: React.FC<any> = ({
       <div className="add-modal__content">
         <button onClick={() => setIsAddModalShown(false)}> <CloseIcon /></button>
         <span>Input a name, assign a filter, then click 'Submit'</span>
-        <input value={selectedName} onChange={(e) => setSelectedName(e.target.value)} type="text" />
+        <input maxLength={20} value={selectedName} onChange={(e) => setSelectedName(e.target.value)} type="text" />
 
         <SubmitItemForm
           selectedFilter={selectedFilter}
