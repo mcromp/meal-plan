@@ -39,7 +39,7 @@ const FoodItem: React.FC<FoodItemProps> = ({
         <button className="food-item__button--add" disabled={isDisabled} onClick={() => addCheckoutItem(item)} >+</button>
         <button className={isFav ? "food-item__heart--fav" : "food-item__heart"} onClick={toggleFav}><HeartIcon /></button>
       </div>
-    </div >
+    </div>
   );
 };
 
