@@ -5,6 +5,8 @@
  export const CALENDAR_URL_GETMANY = CALENDAR_URL + "user/";
 
  export const MENU_URL = API_URL + "menu/";
+ export const MENU_URL_ADD = MENU_URL + "add/"
+ 
 
  export const USER_URL: string = API_URL + "users/";
  export const USER_URL_SIGNUP: string = USER_URL + "signup/";
