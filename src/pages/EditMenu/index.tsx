@@ -76,7 +76,7 @@ const EditMenu: React.FC = () => {
   };
 
   const checkoutMap = checkoutItems.length === 0 ?
-    <span className="checkout__empty-text">Menu is empty! Add items by clicking "+" on items of food below.<br /> Then click "SUBMIT" to save the menu, or click "BACK" to return without saving</span> :
+    <span className="checkout__empty-text">This menu is empty! <br />Add items by clicking "+" on cards of food below.<br /> Then click "SUBMIT" to save the menu, or click "BACK" to return without saving.</span> :
     checkoutItems.map((checkoutItem: CalendarMenuItem) => (
       <CheckoutItem
         key={checkoutItem.foodId + "checkout"}

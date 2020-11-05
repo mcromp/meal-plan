@@ -98,6 +98,9 @@
   flex-grow: 1;
   padding: 0 10px;
  }
+ &__quantity {
+  padding: 0 4px;
+ }
 }
 
 .search-filter-grid {
@@ -153,8 +156,6 @@
  padding: 4px;
  margin: 0 20px;
  display: flex;
- align-items: center;
- justify-content: center;
  flex-wrap: wrap;
  &__button {
   padding: 4px 18px 4px 6px;
@@ -172,6 +173,7 @@
   }
   &--remove {
    @extend .filters__button;
+   border-color: #eee;
    background: #ddd;
    color: black;
    display: flex;
@@ -255,18 +257,28 @@
   font-size: 55px;
   color: #444;
   align-self: center;
-  margin: 0 0 20px 0;
  }
  &--disabled {
   @extend .food-item;
   filter: invert(20%);
  }
- &--add {
-  &:hover {
-   background: #b4e2b4;
-   color: white;
-   cursor: pointer;
-  }
+}
+
+.add-food-item {
+ justify-content: flex-start;
+ background: #ddd;
+ &__title {
+  font-size: 14px;
+ }
+ &__icon {
+  align-self: center;
+  padding: 0;
+  font-size: 40px;
+  color: #444;
+ }
+ &:hover {
+  filter: invert(80%);
+  cursor: pointer;
  }
 }
 
@@ -308,9 +320,12 @@
   font: 16px $main-font;
  }
  &__text-input {
+  align-self: center;
+
   font-size: 16px;
   margin: 5px 0;
   padding: 2px;
+  width: 200px;
  }
  &__form {
   align-self: center;
