@@ -156,8 +156,8 @@
 .checkout-back {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: auto 600px auto auto;
-      grid-template-columns: auto 600px auto auto;
+  -ms-grid-columns: auto 600px auto 100px;
+      grid-template-columns: auto 600px auto 100px;
       grid-template-areas: "back checkout";
 }
 
@@ -177,7 +177,7 @@
   width: 100px;
   height: 30px;
   padding: 3px 20px;
-  margin: 0 0 10px 15px;
+  margin: 0 6px 10px 15px;
   font-size: 14px;
   background: #f3f3f3;
 }
@@ -308,9 +308,9 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   -webkit-box-orient: horizontal;
@@ -320,7 +320,7 @@
 }
 
 .search {
-  margin: 2px 40px 0 0;
+  margin: 2px 20px 0 0;
 }
 
 .search input {
@@ -371,13 +371,14 @@
 }
 
 .filters {
-  padding: 4px;
-  margin: 0 20px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
+  -ms-flex-item-align: center;
+      align-self: center;
+  justify-self: center;
 }
 
 .filters__button, .filters__button--add, .filters__button--remove, .filters__button--clear-all {
@@ -648,6 +649,20 @@
   display: hidden;
 }
 
+@media screen and (max-width: 750px) {
+  .checkout-back {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+}
+
 @media screen and (max-width: 600px) {
   .checkout__submit {
     width: auto;
@@ -665,6 +680,12 @@
     padding: 10px;
   }
   .search-filter-grid {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
@@ -681,6 +702,8 @@
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
   }
   .checkout {
     width: auto;

@@ -26,7 +26,7 @@
 
 .checkout-back {
  display: grid;
- grid-template-columns: auto 600px auto auto;
+ grid-template-columns: auto 600px auto 100px;
  grid-template-areas: "back checkout";
  &__back {
   grid-area: back;
@@ -34,7 +34,7 @@
   width: 100px;
   height: 30px;
   padding: 3px 20px;
-  margin: 0 0 10px 15px;
+  margin: 0 6px 10px 15px;
   font-size: 14px;
   background: $bkgd;
  }
@@ -108,13 +108,13 @@
  margin: 0 20px;
  display: flex;
  align-items: center;
- justify-content: flex-start;
+ justify-content: center;
  flex-wrap: wrap;
  flex-direction: row;
 }
 
 .search {
- margin: 2px 40px 0 0;
+ margin: 2px 20px 0 0;
  input {
   font-size: 14px;
   margin: 10px 0 0 0;
@@ -153,10 +153,10 @@
 }
 
 .filters {
- padding: 4px;
- margin: 0 20px;
  display: flex;
  flex-wrap: wrap;
+ align-self: center;
+ justify-self: center;
  &__button {
   padding: 4px 18px 4px 6px;
   border-radius: 20px;
@@ -353,6 +353,14 @@
  display: hidden;
 }
 
+@media screen and (max-width: 750px) {
+ .checkout-back {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+ }
+}
+
 @media screen and (max-width: 600px) {
  .checkout__submit {
   width: auto;
@@ -363,12 +371,15 @@
   padding: 10px;
  }
  .search-filter-grid {
+  display: flex;
+  justify-content: flex-start;
   flex-direction: column;
   align-items: flex-start;
  }
  .checkout-back {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
  }
  .checkout {
   width: auto;
