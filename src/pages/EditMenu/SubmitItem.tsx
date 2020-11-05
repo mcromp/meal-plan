@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import CloseIcon from '../../assets/CloseIcon';
 import { fetchHelper } from '../../redux/fetchHelper/fetchHelper';
@@ -11,8 +11,17 @@ const SubmitItem: React.FC<any> = ({
 }) => {
   const [selectedFilter, setSelectedFilter] = useState<FilterId | "">("")
   const [selectedName, setSelectedName] = useState<string>("")
-
   const dispatch = useDispatch();
+  const focusRef: React.MutableRefObject<any> = useRef();
+  const closeRef: React.MutableRefObject<any> = useRef();
+
+  useEffect(() => {
+    focusRef.current.focus();
+  }, []);
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "Escape") setIsAddModalShown(false)
+  }
 
   const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedFilter(e.target.value as FilterId)
@@ -29,11 +38,16 @@ const SubmitItem: React.FC<any> = ({
 
   const isDisabled: boolean = !selectedName || !selectedFilter;
   return (
-    <div className="submit-item-container">
+    <div className="submit-item-container" onKeyDown={(e) => handleKeyDown(e)}>
       <div className="submit-item">
-        <div className="submit-item__close-icon" onClick={() => setIsAddModalShown(false)}> <CloseIcon /></div>
+        <div className="submit-item__close-icon" ref={closeRef} onClick={() => setIsAddModalShown(false)}> <CloseIcon /></div>
         <span className="submit-item__text">Input a name, assign a filter, then click 'Submit'</span>
-        <input className="submit-item__text-input" maxLength={20} value={selectedName} onChange={(e) => setSelectedName(e.target.value)} type="text" />
+        <input className="submit-item__text-input"
+          ref={focusRef}
+          maxLength={20}
+          value={selectedName}
+          onChange={(e) => setSelectedName(e.target.value)}
+          type="text" />
 
         <SubmitItemForm
           selectedFilter={selectedFilter}
