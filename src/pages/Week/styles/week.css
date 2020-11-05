@@ -84,7 +84,7 @@ body {
 }
 
 .print__icon {
-  background: #eee;
+  background: #f3f3f3;
   padding: 8px 20px;
   margin: 5px 25px 0 0;
   -webkit-box-shadow: 0 2px 3px #777, 0 0 3px #777;
@@ -195,7 +195,7 @@ body {
   }
   .day-menu__heading {
     background: #eee;
-    color: black;
+    color: #000;
   }
 }
 /*# sourceMappingURL=week.css.map */

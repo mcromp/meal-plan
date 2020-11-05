@@ -10,7 +10,7 @@ body {
  width: 100%;
  text-align: right;
  &__icon {
-  background: #eee;
+  background: $color-light;
   padding: 8px 20px;
   margin: 5px 25px 0 0;
   @include shadow-radius;
@@ -34,7 +34,7 @@ body {
  display: flex;
  flex-direction: column;
  min-height: 200px;
- background: $bkgd;
+ background: $color-light;
  margin-bottom: 24px;
  padding: 0 0 3px 0;
  @include shadow-radius;
@@ -86,7 +86,7 @@ body {
   box-shadow: none;
   &__heading {
    background: #eee;
-   color: black;
+   color: $color-main;
   }
  }
 }

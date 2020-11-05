@@ -11,7 +11,7 @@
  @include btn;
  &--checkout-item {
   @include btn;
-  background: $bkgd;
+  background: $color-light;
   font-size: 10px;
   margin: 2px 4px;
   padding: 1px 7px;
@@ -36,7 +36,7 @@
   padding: 3px 20px;
   margin: 0 6px 10px 15px;
   font-size: 14px;
-  background: $bkgd;
+  background: $color-light;
  }
 }
 
@@ -48,7 +48,7 @@
  min-height: 200px;
  min-width: 600px;
  padding: 10px;
- background: $bkgd;
+ background: $color-light;
  @include shadow-radius;
  &__heading {
   font: 22px $heading-font;
@@ -65,7 +65,7 @@
   flex-direction: column;
   justify-content: flex-start;
   overflow: scroll;
-  background: $bkgd-white;
+  background: $color-light;
   border-radius: 10px;
  }
 
@@ -136,7 +136,7 @@
  z-index: 1;
  padding: 10px 0;
  @include shadow-radius;
- background: $bkgd-white;
+ background: $color-light;
  &__container {
   padding: 0 10px;
   &:hover {
@@ -206,7 +206,7 @@
  padding: 10px;
  margin: 10px;
  height: 100px;
- background-color: $bkgd;
+ background-color: $color-light;
  @include shadow-radius;
  .svg__heart {
   height: 50%;
@@ -303,7 +303,7 @@
  min-width: 300px;
  transform: translate(-50%, -50%);
  @include shadow-radius;
- background: $bkgd-white;
+ background: $color-light;
 
  &__close-icon {
   align-self: flex-end;
