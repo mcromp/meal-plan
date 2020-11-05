@@ -2,10 +2,10 @@
 @import "../../../shared/sass/base";
 
 .day {
- height: 100%;
- z-index: -1;
  display: flex;
  flex-direction: column;
+ height: 100%;
+ z-index: -1;
 }
 .button {
  @include btn;
@@ -233,6 +233,7 @@
    &:hover:enabled {
     background: #555;
     color: white;
+    cursor: pointer;
    }
   }
   &--add {
@@ -250,13 +251,26 @@
    }
   }
  }
+ &__add-icon {
+  font-size: 55px;
+  color: #444;
+  align-self: center;
+  margin: 0 0 20px 0;
+ }
  &--disabled {
   @extend .food-item;
   filter: invert(20%);
  }
+ &--add {
+  &:hover {
+   background: #b4e2b4;
+   color: white;
+   cursor: pointer;
+  }
+ }
 }
 
-.add-modal {
+.submit-item-container {
  position: fixed;
  top: 50%;
  left: 50%;
@@ -265,18 +279,54 @@
  width: 100%;
  height: 100%;
  z-index: 2;
- &__content {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  padding: 20px 50px 20px 20px;
-  background: $bkgd-white;
-  @include shadow-radius;
+}
+
+.submit-item {
+ display: flex;
+ flex-direction: column;
+ position: absolute;
+ padding: 20px;
+ left: 50%;
+ top: 50%;
+ min-width: 300px;
+ transform: translate(-50%, -50%);
+ @include shadow-radius;
+ background: $bkgd-white;
+
+ &__close-icon {
+  align-self: flex-end;
+  .svg__close {
+   height: 30px;
+   width: 30px;
+   &:hover {
+    cursor: pointer;
+   }
+  }
+ }
+ &__text {
+  padding: 15px 5px;
+  font: 16px $main-font;
+ }
+ &__text-input {
+  font-size: 16px;
+  margin: 5px 0;
+  padding: 2px;
+ }
+ &__form {
+  align-self: center;
+  justify-self: center;
+ }
+ &__select {
+  width: 200px;
+  font-size: 16px;
+  margin: 5px 0;
+  padding: 2px;
+ }
+ &__button-container {
+  align-self: center;
+ }
+ &__button {
+  margin: 10px;
  }
 }
 

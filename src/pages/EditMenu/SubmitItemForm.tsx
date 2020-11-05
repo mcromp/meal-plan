@@ -15,10 +15,10 @@ const SubmitItemForm: React.FC<any> = ({
   }
   ));
   return (
-    <form className="">
+    <form className="submit-item__form">
       <label>
-        <select className="" value={selectedFilter} onChange={(e) => handleSelect(e)}>
-          <option value="" disabled>Select Filter Category</option>
+        <select className="submit-item__select" value={selectedFilter} onChange={(e) => handleSelect(e)}>
+          <option value="" disabled>Select filter category</option>
           {options}
         </select>
       </label>

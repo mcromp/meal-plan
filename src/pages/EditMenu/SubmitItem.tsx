@@ -29,18 +29,20 @@ const SubmitItem: React.FC<any> = ({
 
   const isDisabled: boolean = !selectedName || !selectedFilter;
   return (
-    <div className="add-modal">
-      <div className="add-modal__content">
-        <button onClick={() => setIsAddModalShown(false)}> <CloseIcon /></button>
-        <span>Input a name, assign a filter, then click 'Submit'</span>
-        <input maxLength={20} value={selectedName} onChange={(e) => setSelectedName(e.target.value)} type="text" />
+    <div className="submit-item-container">
+      <div className="submit-item">
+        <div className="submit-item__close-icon" onClick={() => setIsAddModalShown(false)}> <CloseIcon /></div>
+        <span className="submit-item__text">Input a name, assign a filter, then click 'Submit'</span>
+        <input className="submit-item__text-input" maxLength={20} value={selectedName} onChange={(e) => setSelectedName(e.target.value)} type="text" />
 
         <SubmitItemForm
           selectedFilter={selectedFilter}
           handleSelect={handleSelect} />
 
-        <button disabled={isDisabled} onClick={() => handleSubmit()}>Submit</button>
-        <button onClick={() => setIsAddModalShown(false)}>NVM</button>
+        <div className="submit-item__button-container">
+          <button className="button submit-item__button" onClick={() => setIsAddModalShown(false)}>Cancel</button>
+          <button className="button submit-item__button" disabled={isDisabled} onClick={() => handleSubmit()}>Submit</button>
+        </div>
       </div>
     </div>
   );
