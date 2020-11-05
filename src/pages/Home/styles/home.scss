@@ -16,6 +16,7 @@
   ". . . .";
  justify-content: center;
  align-content: center;
+
  &__header {
   grid-area: title__header;
   display: flex;
@@ -51,7 +52,7 @@
  display: flex;
  flex-direction: column;
  padding: 30px;
- margin: 50px auto 0 auto;
+ margin: 50px auto 50px auto;
  width: 340px;
  height: 300px;
  background: $bkgd;
@@ -71,6 +72,7 @@
  grid-area: login;
  display: flex;
  flex-direction: column;
+ align-items: center;
  padding: 30px;
  margin: 50px auto 0 auto;
  width: 340px;
@@ -82,8 +84,7 @@
 }
 
 .signin {
- align-self: stretch;
- justify-self: stretch;
+ align-self: center;
  padding: 20px 10px 10px 0;
  font: 16px $main-font;
  &__heading {
@@ -95,7 +96,7 @@
  &__select {
   width: 130px;
   font-size: 16px;
-  margin: 5px 0;
+  margin: 5px 10px;
   padding: 2px;
  }
 }
@@ -113,8 +114,16 @@
   font: 16px $main-font;
   padding: 20px 0 0 0;
  }
+ &__input {
+  justify-self: center;
+  font-size: 16px;
+  width: 120px;
+  margin: 0 10px;
+ }
  &__error {
   font: 12px $main-font;
+  display: block;
+  position: relative;
  }
 }
 
@@ -134,11 +143,5 @@
    margin: 0;
    padding: 0;
   }
- }
- .welcome {
-  width: 300px;
- }
- .login {
-  width: 300px;
  }
 }

@@ -169,7 +169,7 @@
       -ms-flex-direction: column;
           flex-direction: column;
   padding: 30px;
-  margin: 50px auto 0 auto;
+  margin: 50px auto 50px auto;
   width: 340px;
   height: 300px;
   background: #f3f3f3;
@@ -202,6 +202,9 @@
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   padding: 30px;
   margin: 50px auto 0 auto;
   width: 340px;
@@ -216,11 +219,9 @@
 }
 
 .signin {
-  -ms-flex-item-align: stretch;
-      -ms-grid-row-align: stretch;
-      align-self: stretch;
-  -ms-grid-column-align: stretch;
-      justify-self: stretch;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
   padding: 20px 10px 10px 0;
   font: 16px "Lato", sans-serif;
 }
@@ -232,7 +233,7 @@
 .signin-form__select {
   width: 130px;
   font-size: 16px;
-  margin: 5px 0;
+  margin: 5px 10px;
   padding: 2px;
 }
 
@@ -250,8 +251,18 @@
   padding: 20px 0 0 0;
 }
 
+.user-signup__input {
+  -ms-grid-column-align: center;
+      justify-self: center;
+  font-size: 16px;
+  width: 120px;
+  margin: 0 10px;
+}
+
 .user-signup__error {
   font: 12px "Lato", sans-serif;
+  display: block;
+  position: relative;
 }
 
 .user-delete__text {
@@ -279,12 +290,6 @@
     width: 100%;
     margin: 0;
     padding: 0;
-  }
-  .welcome {
-    width: 300px;
-  }
-  .login {
-    width: 300px;
   }
 }
 /*# sourceMappingURL=home.css.map */
