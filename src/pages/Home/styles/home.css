@@ -223,6 +223,7 @@
       -ms-grid-row-align: center;
       align-self: center;
   padding: 20px 10px 10px 0;
+  height: 200px;
   font: 16px "Lato", sans-serif;
 }
 
