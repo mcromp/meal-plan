@@ -120,8 +120,17 @@
   border-radius: 8px;
  }
  &__alert {
-  font: 14px $main-font;
+  display: block;
+  position: fixed;
+  margin: 5px 0;
   color: $color-main;
+  background: rgba(255, 0, 0, 0.7);
+  border-radius: 10px;
+  font: 14px $main-font;
+  z-index: 1;
+  .alert {
+   padding: 4px;
+  }
  }
 }
 

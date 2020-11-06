@@ -35,7 +35,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ menuList, checkoutBoardItems, add
     setTextValue("")
     const itemAlreadyInCheckout = checkoutBoardItems.map((item: CalendarMenuItem) => item.foodId)
     if (itemAlreadyInCheckout.includes(item.id)) {
-      dispatch(setAlertMessage(`${item.item} has already been added`))
+      dispatch(setAlertMessage(`${item.item} already added`))
     }
     else addCheckOutBoardItem(item)
   }

@@ -23,7 +23,7 @@ const AlertText: React.FC<AlertTextProps> = ({ time = 1200 }) => {
 
   return (
     <>
-      <p className="alert">{text}</p>
+      <p className={text ? "alert" : ""}>{text}</p>
     </>);
 };
 
