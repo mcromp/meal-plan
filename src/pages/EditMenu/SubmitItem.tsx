@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useLayoutEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import CloseIcon from '../../assets/CloseIcon';
 import { fetchHelper } from '../../redux/fetchHelper/fetchHelper';
@@ -6,17 +6,17 @@ import { ReqType } from '../../redux/fetchHelper/types';
 import { FilterId } from '../../shared/types';
 import SubmitItemForm from './SubmitItemForm';
 
-const SubmitItem: React.FC<any> = ({
+const SubmitItem: React.FC<SubmitItemProps> = ({
   setIsAddModalShown
 }) => {
   const [selectedFilter, setSelectedFilter] = useState<FilterId | "">("")
   const [selectedName, setSelectedName] = useState<string>("")
   const dispatch = useDispatch();
-  const focusRef: React.MutableRefObject<any> = useRef();
-  const closeRef: React.MutableRefObject<any> = useRef();
+  const focusRef = useRef<HTMLInputElement>(null);
+  const closeRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    focusRef.current.focus();
+  useLayoutEffect(() => {
+    if (focusRef.current) focusRef.current.focus();
   }, []);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
@@ -62,5 +62,8 @@ const SubmitItem: React.FC<any> = ({
   );
 };
 
+type SubmitItemProps = {
+  setIsAddModalShown: (bool: boolean) => void;
+}
 
 export default SubmitItem;
