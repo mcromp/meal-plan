@@ -29,7 +29,7 @@ const SubmitItem: React.FC<SubmitItemProps> = ({
 
   const handleSubmit = () => {
     const body: AddMenuBody = {
-      name: selectedName,
+      item: selectedName,
       filter: selectedFilter
     }
     dispatch(fetchHelper(ReqType.reqAddMenu, body))

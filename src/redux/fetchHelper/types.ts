@@ -39,7 +39,7 @@ export type ReqList = keyof typeof ReqType
 
 
 export interface AddMenuBody {
-  name: string,
+  item: string,
   filter : FilterId | "",
 }
 export interface GetCalendarBody {
