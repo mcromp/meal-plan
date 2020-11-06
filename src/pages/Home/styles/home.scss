@@ -76,7 +76,6 @@
  width: 340px;
  height: 300px;
  background: $color-light;
- overflow: scroll;
  @include shadow-radius;
  @include fade-in(1s);
 }
@@ -101,7 +100,7 @@
 }
 
 .signup {
- padding: 25px 10px 20px 0;
+ padding: 10px 10px 0 0;
  &__heading {
   font: 14px $main-font;
   padding: 0 10px 0 0;
@@ -142,5 +141,13 @@
    margin: 0;
    width: 100%;
   }
+ }
+ .welcome {
+  width: 320px;
+ }
+ .login {
+  width: 320px;
+
+  overflow: scroll;
  }
 }
