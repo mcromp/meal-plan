@@ -1,3 +1,4 @@
+import { Dispatch } from "react";
 import { setAlertMessage } from "../modules/alertMessage";
 import { setCalendar } from "../modules/calendar";
 import { setCurrentUser } from "../modules/currentUser";
@@ -5,14 +6,14 @@ import { isFailedToLoad } from "../modules/isFailedToLoad";
 import { isLoading } from "../modules/isLoading";
 import { addMenuList, setMenuList } from "../modules/menuList";
 import { setUsersFromJSON, deleteOneUser, addUserFromJSON } from "../modules/users";
-import { ReqType, ReqList } from "./types";
+import { ReqType, ReqList, FetchHelperBodyType, FetchHelperDispatchTypes } from "./types";
 
 
-export const fetchHelper = (
+export const fetchHelper  = (
  reqSelect: ReqType,
- body: any = null,
+ body: FetchHelperBodyType = null,
  urlParam: string = ""
-) => async (dispatch: any) => {
+) => async (dispatch: Dispatch<FetchHelperDispatchTypes>) => {
  try {
   const fetchURL: string = ReqList[reqSelect].URL + urlParam;
   if (!fetchURL) throw Error("Error: invalid URL");

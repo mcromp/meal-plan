@@ -18,4 +18,6 @@ interface AlertMessage {
  message: string;
 }
 
+export type AlertMessageActions = AlertMessage
+
 export default reducer;

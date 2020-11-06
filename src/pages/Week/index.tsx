@@ -13,14 +13,13 @@ import './styles/week.css';
 import FailedToLoad from "../../shared/FailedToLoad";
 import useIsLoading from "../../hooks/useIsLoading";
 
-const Week: React.FC<any> = React.forwardRef((props, ref: any) => {
+const Week = React.forwardRef<HTMLDivElement>((_, ref) => {
   const [week, setWeek] = useState<WeekDay[] | null>(null);
   const currentUser = useSelector<RootState, User | null>(state => state.currentUser);
   const calendar = useSelector<RootState, CalendarItem[]>(state => state.calendar);
   const isFailedToLoad = useSelector<RootState, Boolean>(state => state.isFailedToLoad);
   const isLoggedIn = useSelector<RootState, boolean>(state => state.isLoggedIn);
   const [isLoading] = useIsLoading();
-
   const dispatch = useDispatch();
 
 
@@ -41,8 +40,7 @@ const Week: React.FC<any> = React.forwardRef((props, ref: any) => {
   }, [dispatch]);
 
   if (!isLoggedIn && !currentUser) { return <Redirect to='/' /> };
-  if (isFailedToLoad) { return <FailedToLoad /> }
-
+  if (isFailedToLoad) { return <FailedToLoad /> };
 
   return (
     <div className="week" ref={ref}>

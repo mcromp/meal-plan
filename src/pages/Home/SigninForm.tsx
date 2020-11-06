@@ -6,7 +6,7 @@ import { User } from "../../shared/types";
 
 const SigninForm: React.FC<SigninFormProps> = ({ value, label = "Select", selectMessage = " ", optionMap, handleSelect, }) => {
 
-  const isLoading = useSelector<RootState, any>(state => state.isLoading);
+  const isLoading = useSelector<RootState, boolean>(state => state.isLoading);
 
   const options = (optionMap.map((option: User, i: number) =>
     <option className="signin-form__option" key={option.id} value={i}>{option.username}</option>

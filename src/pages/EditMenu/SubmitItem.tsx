@@ -2,7 +2,7 @@ import React, { useState, useLayoutEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import CloseIcon from '../../assets/CloseIcon';
 import { fetchHelper } from '../../redux/fetchHelper/fetchHelper';
-import { ReqType } from '../../redux/fetchHelper/types';
+import { AddMenuBody, ReqType } from '../../redux/fetchHelper/types';
 import { FilterId } from '../../shared/types';
 import SubmitItemForm from './SubmitItemForm';
 
@@ -28,8 +28,8 @@ const SubmitItem: React.FC<SubmitItemProps> = ({
   };
 
   const handleSubmit = () => {
-    const body = {
-      item: selectedName,
+    const body: AddMenuBody = {
+      name: selectedName,
       filter: selectedFilter
     }
     dispatch(fetchHelper(ReqType.reqAddMenu, body))

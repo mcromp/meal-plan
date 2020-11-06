@@ -58,6 +58,6 @@ interface DeleteOneUser {
  id: string;
 }
 
-type UsersActions = SetUsersFromJSON | DeleteOneUser | AddUserJSON;
+export type UsersActions = SetUsersFromJSON | DeleteOneUser | AddUserJSON;
 
 export default reducer;

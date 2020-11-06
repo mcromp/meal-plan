@@ -1,9 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux';
-import { Filter } from '../../shared/types';
+import { Filter, FilterId } from '../../shared/types';
 
-const SubmitItemForm: React.FC<any> = ({
+const SubmitItemForm: React.FC<SubmitItemFormProps> = ({
   selectedFilter,
   handleSelect
 }) => {
@@ -24,6 +24,11 @@ const SubmitItemForm: React.FC<any> = ({
       </label>
     </form>
   )
+}
+
+type SubmitItemFormProps = {
+  selectedFilter: (FilterId | ""),
+  handleSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void
 }
 
 export default SubmitItemForm;

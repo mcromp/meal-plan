@@ -1,3 +1,10 @@
+import { CalendarMenuItem, FilterId } from "../../shared/types";
+import { AlertMessageActions } from "../modules/alertMessage";
+import { SetCalendar } from "../modules/calendar";
+import { IsFailedToLoadActions } from "../modules/isFailedToLoad";
+import { IsLoadingActions } from "../modules/isLoading";
+import { MenuListActions } from "../modules/menuList";
+import { UsersActions } from "../modules/users";
 import { MENU_URL, MENU_URL_ADD, USER_URL, CALENDAR_URL_GETMANY, USER_URL_SIGNUP, CALENDAR_URL_UPDATE, FAV_ADD, FAV_REMOVE, FAV_CLEAR } from "./apiURL";
 
 export enum ReqType {
@@ -29,3 +36,47 @@ export const ReqList = {
 } as const
 
 export type ReqList = keyof typeof ReqType
+
+
+export interface AddMenuBody {
+  name: string,
+  filter : FilterId | "",
+}
+export interface GetCalendarBody {
+ dateList: string[];
+}
+export interface DeleteUserBody {
+  id: string;
+}
+export interface AddUserBody {
+username: string
+}
+export interface UpdateCalendarBody {
+  userId: string;
+  date: string;
+  menuItems: CalendarMenuItem[];
+}
+export interface ToggleFavBody {
+  userId: string;
+  itemId: string;
+}
+
+export type FetchHelperBodyType = 
+| AddMenuBody 
+| GetCalendarBody 
+| DeleteUserBody 
+| AddUserBody
+| UpdateCalendarBody 
+| ToggleFavBody 
+| null
+| "";
+
+export type FetchHelperDispatchTypes = 
+ | UsersActions
+ | SetCalendar
+ | MenuListActions
+ | AlertMessageActions
+ | IsLoadingActions
+ | IsFailedToLoadActions;
+
+interface aa  { type: string, isLoading: boolean, }

@@ -23,7 +23,7 @@ export const setCalendar = (calendarJSON: CalendarJSON[]) => {
  };
 };
 
-interface SetCalendar {
+export interface SetCalendar {
  type: typeof SET_CALENDAR;
  calendar: CalendarItem[];
 }

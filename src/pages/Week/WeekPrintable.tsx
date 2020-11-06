@@ -1,8 +1,8 @@
 import React, { useRef } from "react";
 import ReactToPrint from "react-to-print";
 import Week from ".";
-import './styles/week.css';
 import printer from '../../assets/printer.svg';
+import './styles/week.css';
 
 //this is a wrapper created for use with react-to-print
 

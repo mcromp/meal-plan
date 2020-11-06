@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux';
 import { User } from '../../shared/types';
@@ -10,8 +10,7 @@ const UserSignup: React.FC<UserSignupProps> = ({
   const [value, setValue] = useState<string>("");
   const [usernameList, setUsernameList] = useState<string[]>([]);
   const users = useSelector<RootState, User[]>(state => state.users);
-
-  const focusRef: React.MutableRefObject<any> = useRef();
+  const focusRef = useRef<HTMLInputElement>(null);
 
 
   useEffect(() => {
@@ -22,8 +21,8 @@ const UserSignup: React.FC<UserSignupProps> = ({
     setUsernameList(newlist);
   }, [users]);
 
-  useEffect(() => {
-    focusRef.current.focus()
+  useLayoutEffect(() => {
+    if (focusRef.current) focusRef.current.focus()
   }, []);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {

@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { RootState } from "../../redux";
 import { fetchHelper } from "../../redux/fetchHelper/fetchHelper";
-import { ReqType } from "../../redux/fetchHelper/types";
+import { AddUserBody, ReqType } from "../../redux/fetchHelper/types";
 import { setIsLoggedIn } from "../../redux/modules/isLoggedIn";
 import { User } from "../../shared/types";
 import UserDelete from "./UserDelete";
@@ -67,7 +67,8 @@ const Home = () => {
   };
 
   const signupUser = (username: string) => {
-    dispatch(fetchHelper(ReqType.reqAddUser, { username }));
+    const body: AddUserBody = { username }
+    dispatch(fetchHelper(ReqType.reqAddUser, body));
     setIsSignupShown(false);
     setIsAlertShown(true);
   };

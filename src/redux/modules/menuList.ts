@@ -3,7 +3,7 @@ import { MenuItemJSON } from "../../shared/types";
 const SET_MENULIST = "menu-plan/menuList/SET_MENULIST";
 const ADD_MENULIST = "menu-plan/menuList/ADD_MENULIST"
 
-const reducer = (state = [], action: menuListActions) => {
+const reducer = (state = [], action: MenuListActions) => {
  switch (action.type) {
   case SET_MENULIST:
    return action.menuList;
@@ -34,6 +34,6 @@ interface AddMenuList {
  menuItem: MenuItemJSON;
 }
 
-type menuListActions = SetMenuList | AddMenuList;
+export type MenuListActions = SetMenuList | AddMenuList;
 
 export default reducer;

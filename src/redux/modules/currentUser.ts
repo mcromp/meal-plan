@@ -40,6 +40,6 @@ interface ClearCurrentUser {
  type: typeof CLEAR_CURRENT_USER;
 }
 
-type currentUserActions = SetCurrentUser | ClearCurrentUser;
+export type currentUserActions = SetCurrentUser | ClearCurrentUser;
 
 export default reducer;

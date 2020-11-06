@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useLayoutEffect, useRef } from 'react';
 import { User } from '../../shared/types';
 
 
@@ -8,10 +8,10 @@ const UserDelete: React.FC<UserDeleteProps> = ({
   setConfirmDelete
 }) => {
 
-  const focusRef: React.MutableRefObject<any> = useRef();
+  const focusRef = useRef<HTMLButtonElement>(null);
 
-  useEffect(() => {
-    focusRef.current.focus();
+  useLayoutEffect(() => {
+    if (focusRef.current) focusRef.current.focus();
   }, []);
 
   return (

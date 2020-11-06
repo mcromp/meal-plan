@@ -1,4 +1,4 @@
-const IS_FAILED_TO_LOAD = "menu-plan/isFailedToLoad/IS_FAILED_TO_LOAD";
+const IS_FAILED_TO_LOAD: string = "menu-plan/isFailedToLoad/IS_FAILED_TO_LOAD";
 
 const reducer = (state: boolean = false, action: Is_Failed_To_Load) => {
  switch (action.type) {
@@ -18,5 +18,7 @@ interface Is_Failed_To_Load {
  type: typeof IS_FAILED_TO_LOAD;
  isFailedToLoad: boolean;
 };
+
+export type IsFailedToLoadActions = Is_Failed_To_Load;
 
 export default reducer;
