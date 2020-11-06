@@ -12,10 +12,10 @@ import SigninForm from "./SigninForm";
 import AlertText from "../../shared/AlertText";
 import Welcome from "./Welcome";
 import MenuIcon from "../../assets/MenuIcon";
-import "./styles/home.css";
 import FailedToLoad from "../../shared/FailedToLoad";
 import useIsLoading from "../../hooks/useIsLoading";
 import Loading from "../../shared/Loading";
+import "./styles/home.css";
 
 const Home = () => {
   const [isDeleteConfirmShown, setIsDeleteConfirmShown] = useState<boolean>(false);
@@ -75,13 +75,12 @@ const Home = () => {
 
   const checkValue = value.length === 0;
 
-  if (isFailedToLoad) { return <FailedToLoad /> }
+  if (isFailedToLoad) { return <FailedToLoad /> };
 
   return (
     <div className="home">
       <div className="home__header"><MenuIcon /> Menu Plan</div>
       <Welcome />
-
       <div className="login">
         {isLoading ? <Loading /> :
           <div className="signin">
@@ -119,7 +118,7 @@ const Home = () => {
           {isAlertShown ? <AlertText /> : null}
         </div>
       </div>
-    </div >
+    </div>
   );
 };
 
