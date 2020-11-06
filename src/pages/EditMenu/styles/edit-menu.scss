@@ -115,20 +115,21 @@
  margin: 2px 20px 0 0;
  input {
   font-size: 14px;
-  margin: 10px 0 0 0;
+  margin: 0 0 0 0;
   padding: 3px 4px;
   border-radius: 8px;
  }
  &__alert {
   display: block;
   position: fixed;
-  margin: 5px 0;
+  margin: 2px;
   color: $color-main;
-  background: rgba(255, 0, 0, 0.7);
+  background: rgba(255, 0, 0, 1);
   border-radius: 10px;
   font: 14px $main-font;
   z-index: 1;
   .alert {
+   margin: 5px 0;
    padding: 4px;
   }
  }
@@ -164,10 +165,12 @@
  flex-wrap: wrap;
  align-self: center;
  justify-self: center;
+ //  margin: 10px 0;
+
  &__button {
   padding: 4px 18px 4px 6px;
   border-radius: 20px;
-  margin: 0px 2px;
+  margin: 10px 2px;
   border: solid 2px #555;
   color: $color-main;
   font-size: 12px;
