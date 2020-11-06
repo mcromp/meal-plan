@@ -9,21 +9,19 @@ $heading-font: "Poppins", sans-serif;
 $main-font: "Lato", sans-serif;
 
 @mixin shadow-radius {
- box-shadow: 0 2px 3px #777, 0 0 3px #777;
  border-radius: 6px;
+ box-shadow: 0 2px 3px #777, 0 0 3px #777;
 }
 
 @mixin btn {
  padding: 7px 7px;
- text-transform: uppercase;
- box-shadow: 0 2px 3px #777, 0 0 3px #777;
- border-radius: 6px;
- color: black;
- background: white;
- font: 12px "Poppins", sans-serif;
  border: none;
- //  opacity: 0.8;/
-
+ border-radius: 6px;
+ color: $color-main;
+ background: white;
+ text-transform: uppercase;
+ font: 12px "Poppins", sans-serif;
+ box-shadow: 0 2px 3px #777, 0 0 3px #777;
  &:enabled {
   cursor: pointer;
  }

@@ -7,14 +7,14 @@
  height: 100%;
  z-index: -1;
 }
+
 .button {
  @include btn;
  &--checkout-item {
-  @include btn;
-  background: $color-light;
-  font-size: 10px;
   margin: 2px 4px;
   padding: 1px 7px;
+  background: $color-light;
+  font-size: 10px;
  }
 }
 
@@ -30,13 +30,12 @@
  grid-template-areas: "back checkout";
  &__back {
   grid-area: back;
-  @include btn;
-  width: 100px;
-  height: 30px;
   padding: 3px 20px;
   margin: 0 6px 10px 15px;
-  font-size: 14px;
+  width: 100px;
+  height: 30px;
   background: $color-light;
+  font-size: 14px;
  }
 }
 
@@ -58,15 +57,15 @@
   font: 14px $main-font;
  }
  &__board {
-  padding: 3px;
-  height: 100%;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  overflow: scroll;
+  padding: 3px;
+  height: 100%;
   background: $color-light;
   border-radius: 10px;
+  overflow: scroll;
  }
 
  &__button-bar {
@@ -79,7 +78,6 @@
    margin: 2px 5px;
    padding: 3px 5px;
    &--checkout-submit {
-    @extend .button;
     background: #b4e2b4;
    }
   }
@@ -104,13 +102,13 @@
 }
 
 .search-filter-grid {
- padding: 4px;
- margin: 0 20px;
  display: flex;
  align-items: center;
  justify-content: center;
  flex-wrap: wrap;
  flex-direction: row;
+ padding: 4px;
+ margin: 0 20px;
 }
 
 .search {
@@ -123,20 +121,20 @@
  }
  &__alert {
   font: 14px $main-font;
-  color: black;
+  color: $color-main;
  }
 }
 
 .search-results {
- margin: 0;
- padding: 0 10px;
  display: flex;
  flex-direction: column;
  position: absolute;
- z-index: 1;
+ margin: 0;
+ padding: 0 10px;
  padding: 10px 0;
- @include shadow-radius;
  background: $color-light;
+ z-index: 1;
+ @include shadow-radius;
  &__container {
   padding: 0 10px;
   &:hover {
@@ -146,9 +144,9 @@
   }
  }
  &__name {
-  font: 16px $main-font;
   margin: 0;
   padding: 0;
+  font: 16px $main-font;
  }
 }
 
@@ -162,43 +160,42 @@
   border-radius: 20px;
   margin: 0px 2px;
   border: solid 2px #555;
-  color: black;
+  color: $color-main;
   font-size: 12px;
   &:hover {
    cursor: pointer;
   }
   &--add {
-   @extend .filters__button;
    background: none;
   }
   &--remove {
-   @extend .filters__button;
-   border-color: #eee;
-   background: #ddd;
-   color: black;
    display: flex;
    align-items: center;
    justify-content: center;
    padding: 4px 4px 4px 6px;
+   border-color: #eee;
+   background: #ddd;
+   color: $color-main;
   }
   &--clear-all {
-   @extend .filters__button;
    padding: 4px 6px;
    background: none;
   }
  }
 }
+
 .svg__close {
  margin: 0 2px;
- stroke: black;
  width: 10px;
  height: 10px;
+ stroke: $color-main;
 }
 
 .food-items-grid {
  display: grid;
  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
 }
+
 .food-item {
  display: flex;
  flex-direction: column;
@@ -214,7 +211,7 @@
   fill: #ccc;
  }
  &__title {
-  color: #444;
+  color: $color-dark;
   font: 12px $main-font;
  }
  &__button {
@@ -254,12 +251,11 @@
   }
  }
  &__add-icon {
-  font-size: 55px;
-  color: #444;
   align-self: center;
+  font-size: 55px;
+  color: $color-dark;
  }
  &--disabled {
-  @extend .food-item;
   filter: invert(20%);
  }
 }
@@ -273,8 +269,8 @@
  &__icon {
   align-self: center;
   padding: 0;
+  color: $color-dark;
   font-size: 40px;
-  color: #444;
  }
  &:hover {
   filter: invert(80%);
@@ -287,9 +283,9 @@
  top: 50%;
  left: 50%;
  transform: translate(-50%, -50%);
- background-color: rgba(0, 0, 0, 0.35);
  width: 100%;
  height: 100%;
+ background-color: rgba(0, 0, 0, 0.35);
  z-index: 2;
 }
 
@@ -304,7 +300,6 @@
  transform: translate(-50%, -50%);
  @include shadow-radius;
  background: $color-light;
-
  &__close-icon {
   align-self: flex-end;
   .svg__close {
@@ -321,11 +316,10 @@
  }
  &__text-input {
   align-self: center;
-
-  font-size: 16px;
   margin: 5px 0;
   padding: 2px;
   width: 200px;
+  font-size: 16px;
  }
  &__form {
   align-self: center;
@@ -333,9 +327,9 @@
  }
  &__select {
   width: 200px;
-  font-size: 16px;
   margin: 5px 0;
   padding: 2px;
+  font-size: 16px;
  }
  &__button-container {
   align-self: center;
@@ -370,36 +364,42 @@
   margin: 10px;
   padding: 10px;
  }
+
  .search-filter-grid {
   display: flex;
-  justify-content: flex-start;
   flex-direction: column;
+  justify-content: flex-start;
   align-items: flex-start;
  }
+
  .checkout-back {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
  }
+
  .checkout {
   width: auto;
   min-width: auto;
  }
+
  .filters {
   flex-wrap: nowrap;
   justify-content: flex-start;
   align-items: center;
   margin: 0;
-  overflow-x: scroll;
   width: 100%;
+  overflow-x: scroll;
   &__button {
    white-space: nowrap;
   }
  }
+
  .checkout-item {
   flex-wrap: nowrap;
   white-space: nowrap;
  }
+
  .checkout-item__name {
   white-space: nowrap;
   overflow-x: scroll;

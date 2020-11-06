@@ -74,11 +74,6 @@
 }
 
 .home {
-  padding: 0;
-  margin: 0;
-  min-height: 100vh;
-  min-width: 100vw;
-  background: no-repeat url("../../../assets/bkgd.jpg");
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: 20px 1fr 1fr 20px;
@@ -86,11 +81,16 @@
   -ms-grid-rows: 0.3fr 2.5fr 0.2fr;
       grid-template-rows: 0.3fr 2.5fr 0.2fr;
       grid-template-areas: "title__header title__header title__header title__header" ". welcome login ." ". . . .";
+  -ms-flex-line-pack: center;
+      align-content: center;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -ms-flex-line-pack: center;
-      align-content: center;
+  padding: 0;
+  margin: 0;
+  min-height: 100vh;
+  min-width: 100vw;
+  background: no-repeat url("../../../assets/bkgd.jpg");
 }
 
 .home__header {
@@ -101,42 +101,42 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  font-size: 30px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   background-color: #f3f3f3;
-  font-family: "Poppins", sans-serif;
   -webkit-box-shadow: 0 2px 3px #777, 0 0 3px #777;
           box-shadow: 0 2px 3px #777, 0 0 3px #777;
+  font-family: "Poppins", sans-serif;
+  font-size: 30px;
 }
 
-.home .button, .home .button--signup {
+.home .button {
   margin: 10px 5px 10px 5px;
   padding: 7px 7px;
+  border: none;
+  border-radius: 6px;
+  color: #000;
+  background: white;
   text-transform: uppercase;
+  font: 12px "Poppins", sans-serif;
   -webkit-box-shadow: 0 2px 3px #777, 0 0 3px #777;
           box-shadow: 0 2px 3px #777, 0 0 3px #777;
-  border-radius: 6px;
-  color: black;
-  background: white;
-  font: 12px "Poppins", sans-serif;
-  border: none;
 }
 
-.home .button:enabled, .home .button--signup:enabled {
+.home .button:enabled {
   cursor: pointer;
 }
 
-.home .button:disabled, .home .button--signup:disabled {
+.home .button:disabled {
   -webkit-filter: opacity(30%);
           filter: opacity(30%);
 }
 
-.home .button:hover:enabled, .home .button--signup:hover:enabled {
+.home .button:hover:enabled {
   background: #555;
   color: white;
 }
@@ -148,7 +148,7 @@
 }
 
 .home .svg__menu {
-  stroke: black;
+  stroke: #000;
   fill: none;
   margin: 6px 15px;
 }
@@ -173,9 +173,9 @@
   width: 340px;
   height: 300px;
   background: #f3f3f3;
+  border-radius: 6px;
   -webkit-box-shadow: 0 2px 3px #777, 0 0 3px #777;
           box-shadow: 0 2px 3px #777, 0 0 3px #777;
-  border-radius: 6px;
   -webkit-animation: fade-in-opacity-keyframes 1 1s ease-in;
           animation: fade-in-opacity-keyframes 1 1s ease-in;
 }
@@ -210,10 +210,10 @@
   width: 340px;
   height: 300px;
   background: #f3f3f3;
-  overflow: hidden;
+  overflow: scroll;
+  border-radius: 6px;
   -webkit-box-shadow: 0 2px 3px #777, 0 0 3px #777;
           box-shadow: 0 2px 3px #777, 0 0 3px #777;
-  border-radius: 6px;
   -webkit-animation: fade-in-opacity-keyframes 1 1s ease-in;
           animation: fade-in-opacity-keyframes 1 1s ease-in;
 }
@@ -248,8 +248,8 @@
 }
 
 .user-signup__heading {
-  font: 16px "Lato", sans-serif;
   padding: 20px 0 0 0;
+  font: 16px "Lato", sans-serif;
 }
 
 .user-signup__input {
@@ -261,14 +261,14 @@
 }
 
 .user-signup__error {
-  font: 12px "Lato", sans-serif;
   display: block;
   position: relative;
+  font: 12px "Lato", sans-serif;
 }
 
 .user-delete__text {
-  font: 18px "Lato", sans-serif;
   margin: 0 15px 0 0;
+  font: 18px "Lato", sans-serif;
 }
 
 @media screen and (max-width: 900px) {
@@ -288,9 +288,9 @@
             flex-direction: column;
   }
   .home__header {
-    width: 100%;
-    margin: 0;
     padding: 0;
+    margin: 0;
+    width: 100%;
   }
 }
 /*# sourceMappingURL=home.css.map */

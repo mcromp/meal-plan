@@ -113,7 +113,7 @@ body {
   padding: 0;
   width: 25px;
   fill: none;
-  stroke: black;
+  stroke: #000;
 }
 
 .svg__menu:hover {
@@ -131,14 +131,14 @@ body {
 .header__signout {
   margin: 0 40px 0 0;
   padding: 7px 7px;
+  border: none;
+  border-radius: 6px;
+  color: #000;
+  background: white;
   text-transform: uppercase;
+  font: 12px "Poppins", sans-serif;
   -webkit-box-shadow: 0 2px 3px #777, 0 0 3px #777;
           box-shadow: 0 2px 3px #777, 0 0 3px #777;
-  border-radius: 6px;
-  color: black;
-  background: white;
-  font: 12px "Poppins", sans-serif;
-  border: none;
 }
 
 .header__signout:enabled {

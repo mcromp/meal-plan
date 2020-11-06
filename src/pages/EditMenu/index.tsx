@@ -93,7 +93,7 @@ const EditMenu: React.FC = () => {
       {isModalShown ? <SubmitItem setIsAddModalShown={setIsAddModalShown} /> : null}
 
       <div className="checkout-back">
-        <button className="checkout-back__back" onClick={() => setIsSubmitted(true)}>⬅ BACK</button>
+        <button className="button checkout-back__back" onClick={() => setIsSubmitted(true)}>⬅ BACK</button>
         <div className="checkout">
           <span className="checkout__heading">Menu for {params.day}</span>
           {isLoading ? <Loading /> :
@@ -102,7 +102,7 @@ const EditMenu: React.FC = () => {
             </div>}
           <div className="checkout__button-bar">
             <button className="button" onClick={() => setCheckoutItems([])}>CLEAR ALL</button>
-            <button className="button--checkout-submit" onClick={handleSubmit}>SUBMIT</button>
+            <button className="button button--checkout-submit" onClick={handleSubmit}>SUBMIT</button>
           </div>
         </div>
       </div>

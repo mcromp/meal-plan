@@ -10,9 +10,9 @@ body {
  width: 100%;
  text-align: right;
  &__icon {
-  background: $color-light;
   padding: 8px 20px;
   margin: 5px 25px 0 0;
+  background: $color-light;
   @include shadow-radius;
   &:hover {
    cursor: pointer;
@@ -22,21 +22,21 @@ body {
 }
 
 .week {
- width: 100%;
- height: 100%;
- padding: 14px;
  display: grid;
  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
  gap: 0.7rem;
+ width: 100%;
+ height: 100%;
+ padding: 14px;
 }
 
 .day-menu {
  display: flex;
  flex-direction: column;
  min-height: 200px;
- background: $color-light;
- margin-bottom: 24px;
  padding: 0 0 3px 0;
+ margin: 0 0 24px 0;
+ background: $color-light;
  @include shadow-radius;
  &:hover {
   filter: brightness(110%);
@@ -44,14 +44,14 @@ body {
  }
  &__heading {
   display: flex;
-  justify-content: space-around;
   flex-flow: row nowrap;
   align-items: center;
+  justify-content: space-around;
   width: 100%;
   height: 50px;
+  background: #ddd;
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
-  background: #ddd;
   &--day {
    font: bold 18px $heading-font;
    text-align: center;
@@ -61,11 +61,11 @@ body {
   }
  }
  &__menu-item {
-  padding: 1px 10px;
   display: flex;
-  justify-content: space-between;
   flex-flow: row nowrap;
   align-items: flex-start;
+  justify-content: space-between;
+  padding: 1px 10px;
   font: 14px $main-font;
  }
 }
@@ -74,13 +74,13 @@ body {
  @page {
   size: landscape;
  }
+
  .week {
   background: none;
  }
 
  .day-menu {
-  background: none;
-  color: black;
+  color: $color-main;
   background: none;
   border: solid 1px;
   box-shadow: none;

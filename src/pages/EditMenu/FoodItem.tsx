@@ -33,7 +33,7 @@ const FoodItem: React.FC<FoodItemProps> = ({
 
 
   return (
-    <div className={isDisabled ? "food-item--disabled" : "food-item"}>
+    <div className={isDisabled ? "food-item food-item--disabled" : "food-item"}>
       <span className="food-item__title">{item.item}</span>
       <div className="food-item__button">
         <button className="food-item__button--add" disabled={isDisabled} onClick={() => addCheckoutItem(item)} >+</button>

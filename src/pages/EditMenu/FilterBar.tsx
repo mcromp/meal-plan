@@ -39,7 +39,7 @@ const FilterBar: React.FC = () => {
       {filterList.map((filter: Filter) => {
         return (enabledFilterList.includes(filter)) ?
           <button
-            className="filters__button--remove"
+            className="filters__button filters__button--remove"
             key={filter.name}
             onClick={() => {
               handleFilterClick(filter, false);
@@ -47,7 +47,7 @@ const FilterBar: React.FC = () => {
             }}>{filter.name} <CloseIcon /></button>
           :
           <button
-            className="filters__button--add"
+            className="filters__button filters__button--add"
             key={filter.name}
             onClick={() => {
               handleFilterClick(filter, true);
@@ -57,7 +57,7 @@ const FilterBar: React.FC = () => {
       }
       )}
 
-      {showAll ? <button className="filters__button--clear-all" onClick={clearAll}>Clear All Filters</button> : null}
+      {showAll ? <button className="filters__button filters__button--clear-all" onClick={clearAll}>Clear All Filters</button> : null}
     </div>
   );
 };

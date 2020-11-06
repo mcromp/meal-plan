@@ -112,7 +112,7 @@ const Home = () => {
               :
               <>
                 <span className="signup__heading">Don't have a username?</span>
-                <button className="button--signup" onClick={() => setIsSignupShown(true)} >Sign up</button>
+                <button className="button button--signup" onClick={() => setIsSignupShown(true)} >Sign up</button>
               </>
           }
           {isAlertShown ? <AlertText /> : null}
