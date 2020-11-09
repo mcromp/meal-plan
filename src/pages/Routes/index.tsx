@@ -10,7 +10,7 @@ import PrintableWeek from '../Week/WeekPrintable';
 
 const Routes: React.FC = () => {
   return (
-    <Router>
+    <Router basename="/">
       <Switch>
         <Route exact path="/">
           <Home />
