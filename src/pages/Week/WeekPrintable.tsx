@@ -2,8 +2,6 @@ import React, { useRef } from "react";
 import ReactToPrint from "react-to-print";
 import Week from ".";
 import printer from '../../assets/printer.svg';
-import useIsLoading from "../../hooks/useIsLoading";
-import Loading from "../../shared/Loading";
 import './styles/week.css';
 
 //this is a wrapper created for use with react-to-print
