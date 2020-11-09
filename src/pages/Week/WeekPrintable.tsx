@@ -13,7 +13,7 @@ const PrintableWeek = () => {
   return (
     <div className="print">
       <ReactToPrint
-        trigger={() => <a href="#/" ><img className="print__icon" src={printer} alt="Printer Icon" /></a>}
+        trigger={() => <img className="print__icon" src={printer} alt="Printer Icon" />}
         content={() => componentRef.current}
       />
       <Week ref={componentRef} />
