@@ -22,7 +22,6 @@ const Week = React.forwardRef<HTMLDivElement>((_, ref) => {
   const [isLoading] = useIsLoading();
   const dispatch = useDispatch();
 
-
   useEffect(() => {
     const generatedWeek = generateWeekDays();
     setWeek([...generatedWeek]);
@@ -44,15 +43,18 @@ const Week = React.forwardRef<HTMLDivElement>((_, ref) => {
 
   return (
     <div className="week" ref={ref}>
-      {isLoading ? <Loading /> : null}
-      { week?.map(day => {
-        const calendarDisplay = calendar.find(item => item.date === day.dateId);
-        return (
-          <DayMenu
-            key={day.dateId}
-            day={day}
-            calendarDisplay={calendarDisplay} />)
-      })}
+      {isLoading ? <Loading /> :
+        <>
+          { week?.map(day => {
+            const calendarDisplay = calendar.find(item => item.date === day.dateId);
+            return (
+              <DayMenu
+                key={day.dateId}
+                day={day}
+                calendarDisplay={calendarDisplay} />)
+          })}
+        </>
+      }
     </div>
   );
 });

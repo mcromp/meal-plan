@@ -97,13 +97,15 @@ const EditMenu: React.FC = () => {
         <div className="checkout">
           <span className="checkout__heading">Menu for {params.day}</span>
           {isLoading ? <Loading /> :
-            <div className="checkout__board">
-              {checkoutMap}
-            </div>}
-          <div className="checkout__button-bar">
-            <button className="button" onClick={() => setCheckoutItems([])}>CLEAR ALL</button>
-            <button className="button button--checkout-submit" onClick={handleSubmit}>SUBMIT</button>
-          </div>
+            <>
+              <div className="checkout__board">
+                {checkoutMap}
+              </div>
+              <div className="checkout__button-bar">
+                <button className="button" onClick={() => setCheckoutItems([])}>CLEAR ALL</button>
+                <button className="button button--checkout-submit" onClick={handleSubmit}>SUBMIT</button>
+              </div>
+            </>}
         </div>
       </div>
       <div className="search-filter-grid">
