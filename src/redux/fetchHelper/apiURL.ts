@@ -1,4 +1,4 @@
- export const API_URL: string = "http://localhost:5000/";
+ export const API_URL: string = "https://ancient-fortress-30675.herokuapp.com/";
 
  export const CALENDAR_URL = API_URL + "calendar/";
  export const CALENDAR_URL_UPDATE = CALENDAR_URL + "update/";
