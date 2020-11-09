@@ -1,5 +1,6 @@
 {
-  "name": "body",
+  "homepage": "https://mcromp.github.io/meal-plan",
+  "name": "meal-plan",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
