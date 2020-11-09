@@ -1,8 +1,8 @@
 import React from 'react'
-import LoadSpinner from '../assets/LoadSpinner';
+import MenuIcon from '../assets/MenuIcon';
 
 const Loading: React.FC = () => {
-  return <div className="loader"><LoadSpinner /></div>;
+  return <div className="loader"><MenuIcon /></div>;
 }
 
 export default Loading;

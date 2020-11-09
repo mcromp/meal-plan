@@ -9,7 +9,20 @@
  animation: scale-up-keyframes 5s cubic-bezier(0.39, 0.575, 0.565, 1) both;
 }
 
+@mixin spin {
+ animation: rotate-keyframes 1s linear infinite;
+}
 // keyframes
+
+@keyframes rotate-keyframes {
+ 0% {
+  transform: rotate(0deg);
+ }
+
+ 100% {
+  transform: rotate(360deg);
+ }
+}
 
 @keyframes pulse-keyframes {
  0% {

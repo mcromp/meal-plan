@@ -35,6 +35,12 @@ $main-font: "Lato", sans-serif;
 }
 
 .loader {
- font: 12px $main-font;
- padding: 4px;
+ width: 20px;
+ height: 20px;
+ margin: 12px;
+ .svg__menu {
+  width: 20px;
+  height: 20px;
+  @include spin;
+ }
 }
