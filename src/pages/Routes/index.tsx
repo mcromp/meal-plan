@@ -1,7 +1,6 @@
 
 import React from 'react'
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import EditMenu from '../EditMenu';
 import Header from '../Header/Header';
 import Home from '../Home';
