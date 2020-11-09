@@ -5,13 +5,11 @@ import { RootState } from "../../redux";
 import { fetchHelper } from "../../redux/fetchHelper/fetchHelper";
 import { ReqType } from "../../redux/fetchHelper/types";
 import { resetFilter } from "../../redux/modules/filterList"
-import Loading from "../../shared/Loading";
 import { User, WeekDay, CalendarItem } from "../../shared/types";
 import DayMenu from "./DayMenu";
 import { generateWeekDays } from "./utils/generateWeek"
 import './styles/week.css';
 import FailedToLoad from "../../shared/FailedToLoad";
-import useIsLoading from "../../hooks/useIsLoading";
 
 const Week = React.forwardRef<HTMLDivElement>((_, ref) => {
   const [week, setWeek] = useState<WeekDay[] | null>(null);
@@ -19,7 +17,6 @@ const Week = React.forwardRef<HTMLDivElement>((_, ref) => {
   const calendar = useSelector<RootState, CalendarItem[]>(state => state.calendar);
   const isFailedToLoad = useSelector<RootState, Boolean>(state => state.isFailedToLoad);
   const isLoggedIn = useSelector<RootState, boolean>(state => state.isLoggedIn);
-  const [isLoading] = useIsLoading();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -43,18 +40,14 @@ const Week = React.forwardRef<HTMLDivElement>((_, ref) => {
 
   return (
     <div className="week" ref={ref}>
-      {isLoading ? <Loading /> :
-        <>
-          { week?.map(day => {
-            const calendarDisplay = calendar.find(item => item.date === day.dateId);
-            return (
-              <DayMenu
-                key={day.dateId}
-                day={day}
-                calendarDisplay={calendarDisplay} />)
-          })}
-        </>
-      }
+      { week?.map(day => {
+        const calendarDisplay = calendar.find(item => item.date === day.dateId);
+        return (
+          <DayMenu
+            key={day.dateId}
+            day={day}
+            calendarDisplay={calendarDisplay} />)
+      })}
     </div>
   );
 });
