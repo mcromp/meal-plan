@@ -5,11 +5,19 @@ import { setCurrentUser } from "../modules/currentUser";
 import { isFailedToLoad } from "../modules/isFailedToLoad";
 import { isLoading } from "../modules/isLoading";
 import { addMenuList, setMenuList } from "../modules/menuList";
-import { setUsersFromJSON, deleteOneUser, addUserFromJSON } from "../modules/users";
-import { ReqType, ReqList, FetchHelperBodyType, FetchHelperDispatchTypes } from "./types";
+import {
+ setUsersFromJSON,
+ deleteOneUser,
+ addUserFromJSON,
+} from "../modules/users";
+import {
+ ReqType,
+ ReqList,
+ FetchHelperBodyType,
+ FetchHelperDispatchTypes,
+} from "./types";
 
-
-export const fetchHelper  = (
+export const fetchHelper = (
  reqSelect: ReqType,
  body: FetchHelperBodyType = null,
  urlParam: string = ""
@@ -50,13 +58,13 @@ const setReqData = (dispatch: any, response: any, reqSelect: ReqList) => {
  if (reqSelect === ReqType.reqAddFav) dispatch(setCurrentUser(response));
  if (reqSelect === ReqType.reqRemoveFav) dispatch(setCurrentUser(response));
  if (reqSelect === ReqType.reqDeleteUser) {
-      dispatch(deleteOneUser(response._id));
-      const deleteMessage: string = `User: ${response.username} deleted`;
-      dispatch(setAlertMessage(deleteMessage));
+  dispatch(deleteOneUser(response._id));
+  const deleteMessage: string = `User: ${response.username} deleted`;
+  dispatch(setAlertMessage(deleteMessage));
  }
  if (reqSelect === ReqType.reqAddUser) {
-      const userAddMessage: string = `User: ${response.username} added`;
-      dispatch(addUserFromJSON(response));
-      dispatch(setAlertMessage(userAddMessage)) 
+  const userAddMessage: string = `User: ${response.username} added`;
+  dispatch(addUserFromJSON(response));
+  dispatch(setAlertMessage(userAddMessage));
  }
 };
