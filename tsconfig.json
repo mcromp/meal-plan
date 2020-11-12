@@ -16,9 +16,5 @@
   "jsx": "react",
   "noFallthroughCasesInSwitch": true
  },
- "include": [
-  "src",
-  "public/assets/CloseIcon.tsx",
-  "src/__test__/Header.test.tsx"
- ]
+ "include": ["src", "public/assets/CloseIcon.tsx"]
 }
