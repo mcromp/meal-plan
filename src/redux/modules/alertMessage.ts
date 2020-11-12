@@ -1,4 +1,4 @@
-const SET_ALERT_MESSAGE = "menu-plan/SET_ALERT_MESSAGE";
+export const SET_ALERT_MESSAGE = "menu-plan/SET_ALERT_MESSAGE";
 
 const reducer = (state: string = "", action: AlertMessage) => {
  switch (action.type) {
@@ -18,6 +18,6 @@ interface AlertMessage {
  message: string;
 }
 
-export type AlertMessageActions = AlertMessage
+export type AlertMessageActions = AlertMessage;
 
 export default reducer;
