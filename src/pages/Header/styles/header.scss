@@ -5,7 +5,6 @@ body {
  background: #ccc;
 }
 .header {
- z-index: 3;
  display: flex;
  flex-flow: row;
  flex-wrap: nowrap;
@@ -16,50 +15,48 @@ body {
  padding: 3px 0 7px 0;
  background-color: $color-light;
  box-shadow: 0px 3px 3px 0px rgba(66, 66, 66, 0.3);
-}
-
-.header__title {
- color: $color-main;
- margin: 0;
- padding: 0 20px 0 8px;
- font-size: 20px;
- font-family: $heading-font;
-}
-
-.svg__menu {
- margin: 0 0 0 30px;
- padding: 0;
- width: 25px;
- fill: none;
- stroke: $color-main;
- &:hover {
-  @include pulse;
+ &__title {
+  color: $color-main;
+  margin: 0;
+  padding: 0 20px 0 8px;
+  font-size: 20px;
+  font-family: $heading-font;
  }
-}
+ &__username {
+  color: $color-main;
+  font: 14px $heading-font;
 
-.header__username {
- color: $color-main;
- font: 14px $heading-font;
-
- padding: 0 20px 0 0;
- margin: 0 30px 0 auto;
-}
-
-.header__signout {
- margin: 0 40px 0 0;
- @include btn;
-}
-
-@media screen and (max-width: 400px) {
- .header__icon {
+  padding: 0 20px 0 0;
+  margin: 0 30px 0 auto;
+ }
+ &__signout {
+  margin: 0 40px 0 0;
+  @include btn;
+ }
+ .svg__menu {
   margin: 0 0 0 30px;
   padding: 0;
   width: 25px;
+  fill: none;
+  stroke: $color-main;
   &:hover {
    @include pulse;
   }
  }
- .header__title {
-  display: none;
+}
+
+@media screen and (max-width: 400px) {
+ .header {
+  &__icon {
+   margin: 0 0 0 30px;
+   padding: 0;
+   width: 25px;
+   &:hover {
+    @include pulse;
+   }
+  }
+  &__title {
+   display: none;
+  }
  }
 }

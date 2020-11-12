@@ -109,7 +109,6 @@ body {
 }
 
 .header {
-  z-index: 3;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -137,19 +136,6 @@ body {
   padding: 0 20px 0 8px;
   font-size: 20px;
   font-family: "Poppins", sans-serif;
-}
-
-.svg__menu {
-  margin: 0 0 0 30px;
-  padding: 0;
-  width: 25px;
-  fill: none;
-  stroke: #000;
-}
-
-.svg__menu:hover {
-  -webkit-animation: 1s ease infinite pulse-keyframes;
-          animation: 1s ease infinite pulse-keyframes;
 }
 
 .header__username {
@@ -184,6 +170,19 @@ body {
 .header__signout:hover:enabled {
   background: #555;
   color: white;
+}
+
+.header .svg__menu {
+  margin: 0 0 0 30px;
+  padding: 0;
+  width: 25px;
+  fill: none;
+  stroke: #000;
+}
+
+.header .svg__menu:hover {
+  -webkit-animation: 1s ease infinite pulse-keyframes;
+          animation: 1s ease infinite pulse-keyframes;
 }
 
 @media screen and (max-width: 400px) {
