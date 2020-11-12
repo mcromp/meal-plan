@@ -1,59 +1,64 @@
 {
-  "homepage": "https://mcromp.github.io/meal-plan",
-  "name": "meal-plan",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@testing-library/user-event": "^7.1.2",
-    "@types/node": "^14.14.6",
-    "@types/react": "^16.9.56",
-    "@types/react-dom": "^16.9.9",
-    "@types/react-redux": "^7.1.11",
-    "@types/react-router-dom": "^5.1.6",
-    "@types/redux": "^3.6.0",
-    "@types/redux-logger": "^3.0.8",
-    "framer-motion": "^2.9.4",
-    "gh-pages": "^3.1.0",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
-    "react-redux": "^7.2.2",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "^4.0.0",
-    "react-to-print": "^2.11.0",
-    "redux": "^4.0.5",
-    "redux-logger": "^3.0.6",
-    "redux-thunk": "^2.3.0",
-    "typescript": "^3.9.7"
-  },
-  "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "devDependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@types/jest": "^26.0.15",
-    "@types/testing-library__jest-dom": "^5.9.5",
-    "@types/testing-library__react": "^10.2.0",
-    "ts-jest": "^26.4.4"
-  }
+ "homepage": "https://mcromp.github.io/meal-plan",
+ "name": "meal-plan",
+ "version": "0.1.0",
+ "private": true,
+ "dependencies": {
+  "@types/node": "^14.14.6",
+  "@types/react": "^16.9.56",
+  "@types/react-dom": "^16.9.9",
+  "@types/react-redux": "^7.1.11",
+  "@types/react-router-dom": "^5.1.6",
+  "@types/redux": "^3.6.0",
+  "@types/redux-logger": "^3.0.8",
+  "framer-motion": "^2.9.4",
+  "gh-pages": "^3.1.0",
+  "react": "^16.14.0",
+  "react-dom": "^16.14.0",
+  "react-redux": "^7.2.2",
+  "react-router-dom": "^5.2.0",
+  "react-scripts": "^4.0.0",
+  "react-to-print": "^2.11.0",
+  "redux": "^4.0.5",
+  "redux-logger": "^3.0.6",
+  "redux-thunk": "^2.3.0",
+  "ts-node": "^9.0.0",
+  "typescript": "^3.9.7"
+ },
+ "scripts": {
+  "predeploy": "npm run build",
+  "deploy": "gh-pages -d build",
+  "start": "react-scripts start",
+  "build": "react-scripts build",
+  "check-types": "tsc",
+  "test": "jest",
+  "eject": "react-scripts eject"
+ },
+ "eslintConfig": {
+  "extends": "react-app"
+ },
+ "browserslist": {
+  "production": [
+   ">0.2%",
+   "not dead",
+   "not op_mini all"
+  ],
+  "development": [
+   "last 1 chrome version",
+   "last 1 firefox version",
+   "last 1 safari version"
+  ]
+ },
+ "devDependencies": {
+  "@testing-library/jest-dom": "^4.2.4",
+  "@testing-library/react": "^9.5.0",
+  "@testing-library/user-event": "^7.2.1",
+  "@types/jest": "^26.0.15",
+  "@types/testing-library__jest-dom": "^5.9.5",
+  "@types/testing-library__react": "^10.2.0",
+  "jest": "^26.6.3",
+  "jest-dom": "^4.0.0",
+  "nock": "^13.0.5",
+  "ts-jest": "^26.4.4"
+ }
 }
