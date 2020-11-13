@@ -29,7 +29,7 @@
   "start": "react-scripts start",
   "build": "react-scripts build",
   "check-types": "tsc",
-  "test": "jest --config jest.config.js",
+  "test": "react-scripts test",
   "eject": "react-scripts eject"
  },
  "eslintConfig": {
@@ -52,7 +52,8 @@
   "@testing-library/jest-dom": "^5.11.6",
   "@testing-library/react": "^11.1.2",
   "@types/jest": "^26.0.15",
-  "jest": "^26.6.3",
+  "fibers": "^5.0.0",
+  "sass": "^1.29.0",
   "ts-jest": "^26.4.4"
  }
 }
