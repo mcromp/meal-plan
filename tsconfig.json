@@ -1,20 +1,31 @@
 {
  "compilerOptions": {
-  "target": "es5",
-  "lib": ["dom", "dom.iterable", "esnext"],
-  "allowJs": true,
-  "skipLibCheck": true,
-  "esModuleInterop": true,
-  "allowSyntheticDefaultImports": true,
-  "strict": true,
-  "forceConsistentCasingInFileNames": true,
-  "module": "esnext",
-  "moduleResolution": "node",
-  "resolveJsonModule": true,
-  "isolatedModules": true,
-  "noEmit": true,
+  "target": "esnext",
+  "module": "es2015",
+  "lib": ["ES2015", "ES2016", "ES2017", "ES2018", "ESNext", "dom"],
   "jsx": "react",
-  "noFallthroughCasesInSwitch": true
+  "baseUrl": "./src",
+  "allowJs": true,
+  "noEmit": true,
+  "moduleResolution": "node",
+  "esModuleInterop": true,
+
+  "strict": true,
+  "strictNullChecks": true,
+  "removeComments": true,
+  "alwaysStrict": true,
+  "allowUnreachableCode": false,
+  "noImplicitAny": true,
+  "noImplicitThis": true,
+  "noUnusedLocals": true,
+  "noUnusedParameters": true,
+  "noImplicitReturns": true,
+  "noFallthroughCasesInSwitch": true,
+  "forceConsistentCasingInFileNames": true,
+  "importHelpers": true,
+  "skipLibCheck": true,
+  "typeRoots": ["./node_modules/@types"]
  },
- "include": ["src", "public/assets/CloseIcon.tsx"]
+ "include": ["src/**/*"],
+ "exclude": ["node_modules"]
 }
