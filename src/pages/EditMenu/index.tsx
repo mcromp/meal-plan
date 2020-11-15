@@ -85,27 +85,29 @@ const EditMenu: React.FC = () => {
         modifyQuantityOfCheckoutItem={modifyQuantityOfCheckoutItem} />
     ));
 
+  const checkoutBoardContainer = (
+    <>
+      <div className="checkout__board">
+        {checkoutMap}
+      </div>
+      <div className="checkout__button-bar">
+        <button className="button" onClick={() => setCheckoutItems([])}>CLEAR ALL</button>
+        <button className="button button--checkout-submit" onClick={handleSubmit}>SUBMIT</button>
+      </div>
+    </>);
+
   if (!currentUser) { return <Redirect to='/' /> };
   if (isSubmitted) { return <Redirect to='/w' /> };
   if (isFailedToLoad) { return <FailedToLoad /> };
+
   return (
     <div className="day">
       {isModalShown ? <SubmitItem setIsAddModalShown={setIsAddModalShown} /> : null}
-
       <div className="checkout-back">
         <button className="button checkout-back__back" onClick={() => setIsSubmitted(true)}>← BACK</button>
         <div className="checkout">
           <span className="checkout__heading">Menu for {params.day}</span>
-          {isLoading ? <Loading /> :
-            <>
-              <div className="checkout__board">
-                {checkoutMap}
-              </div>
-              <div className="checkout__button-bar">
-                <button className="button" onClick={() => setCheckoutItems([])}>CLEAR ALL</button>
-                <button className="button button--checkout-submit" onClick={handleSubmit}>SUBMIT</button>
-              </div>
-            </>}
+          {isLoading ? <Loading /> : checkoutBoardContainer}
         </div>
       </div>
       <div className="search-filter-grid">
@@ -113,16 +115,13 @@ const EditMenu: React.FC = () => {
           menuList={menuList}
           checkoutBoardItems={checkoutItems}
           addCheckOutBoardItem={addCheckoutItem} />
-
         <FilterBar />
       </div>
-
       <FoodItems
         checkoutItems={checkoutItems}
         addCheckoutItem={addCheckoutItem}
         setIsAddModalShown={setIsAddModalShown} />
-
-    </div >
+    </div>
   );
 };
 
