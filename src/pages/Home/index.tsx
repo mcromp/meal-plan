@@ -75,6 +75,36 @@ const Home = () => {
 
   const checkValue = value.length === 0;
 
+  const signinForm = <>
+    <span className="signin__heading">Select your username</span>
+    <SigninForm
+      value={value}
+      label={""}
+      selectMessage={"Select"}
+      optionMap={users}
+      handleSelect={handleSelect} />
+    <button className="button" onClick={() => handleSignin()} disabled={checkValue}>Sign in</button>
+    <button className="button" onClick={() => setIsDeleteConfirmShown(true)} disabled={checkValue}>Delete User</button>
+  </>;
+
+  const userDelete = (
+    <UserDelete
+      handleSubmit={handleDeleteSubmit}
+      setConfirmDelete={setIsDeleteConfirmShown}
+      selectedUser={selectedUser} />);
+
+  const userSignup = (
+    <UserSignup
+      setShowAddUser={setIsSignupShown}
+      signupUser={signupUser} />
+  )
+  const signupButton = (
+    <>
+      <span className="signup__heading">Don't have a username?</span>
+      <button className="button button--signup" onClick={() => setIsSignupShown(true)} >Sign up</button>
+    </>
+  )
+
   if (isFailedToLoad) { return <FailedToLoad /> };
 
   return (
@@ -85,37 +115,10 @@ const Home = () => {
         {isLoading ? <Loading /> :
           <>
             <div className="signin">
-              {isDeleteConfirmShown ?
-                <UserDelete
-                  handleSubmit={handleDeleteSubmit}
-                  setConfirmDelete={setIsDeleteConfirmShown}
-                  selectedUser={selectedUser} />
-                :
-                <>
-                  <span className="signin__heading">Select your username</span>
-                  <SigninForm
-                    value={value}
-                    label={""}
-                    selectMessage={"Select"}
-                    optionMap={users}
-                    handleSelect={handleSelect} />
-                  <button className="button" onClick={() => handleSignin()} disabled={checkValue}>Sign in</button>
-                  <button className="button" onClick={() => setIsDeleteConfirmShown(true)} disabled={checkValue}>Delete User</button>
-                </>
-              }
+              {isDeleteConfirmShown ? userDelete : signinForm}
             </div>
             <div className="signup">
-              {
-                isSignupShown ?
-                  <UserSignup
-                    setShowAddUser={setIsSignupShown}
-                    signupUser={signupUser} />
-                  :
-                  <>
-                    <span className="signup__heading">Don't have a username?</span>
-                    <button className="button button--signup" onClick={() => setIsSignupShown(true)} >Sign up</button>
-                  </>
-              }
+              {isSignupShown ? userSignup : signupButton}
               {isAlertShown ? <AlertText /> : null}
             </div>
           </>
