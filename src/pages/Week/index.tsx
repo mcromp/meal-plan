@@ -13,14 +13,12 @@ import FailedToLoad from "../../shared/FailedToLoad";
 
 const Week = React.forwardRef<HTMLDivElement>((_, ref) => {
   const [week, setWeek] = useState<WeekDay[] | null>(null);
-  const state0 = useSelector<any>(state => state)
   const currentUser = useSelector<RootState, User | null>(state => state.currentUser);
   const calendar = useSelector<RootState, CalendarItem[]>(state => state.calendar);
   const isFailedToLoad = useSelector<RootState, Boolean>(state => state.isFailedToLoad);
   const isLoggedIn = useSelector<RootState, boolean>(state => state.isLoggedIn);
   const dispatch = useDispatch();
 
-  console.log(state0)
   useEffect(() => {
     const generatedWeek = generateWeekDays();
     setWeek([...generatedWeek]);
