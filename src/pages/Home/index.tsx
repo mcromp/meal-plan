@@ -112,7 +112,7 @@ const Home = () => {
       <div className="home__header"><MenuIcon /> Menu Plan</div>
       <Welcome />
       <div className="login">
-        {isLoading ? <Loading /> :
+        {!isLoading ?
           <>
             <div className="signin">
               {isDeleteConfirmShown ? userDelete : signinForm}
@@ -122,7 +122,7 @@ const Home = () => {
               {isAlertShown ? <AlertText /> : null}
             </div>
           </>
-        }
+          : <Loading />}
       </div>
     </div>
   );
