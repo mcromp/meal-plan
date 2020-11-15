@@ -7,18 +7,7 @@ For the Backend's repo:
 
 ## Meal Plan
 
-Meal Plan is a web app that enables a user to plan out the food for the duration of the 7 upcoming days.
-
-- First the user either creates or selects username.
-- The user is then presented with a calendar containing the 7 upcoming days.
-- The user clicks on one of the 7 days and is then taken to a page containing food items.
-
-- The user 'adds' food items to the selected calendar date.
-- After user 'submits' the added food items they appear on the 7 day calendar.
-
-## DEMO
-
-![Meal Plan Demo](src/assets/demo.gif)
+Meal Plan is a web app that enables a user to create a 7 day calendar containing food items.
 
 ## Tech used
 
@@ -37,7 +26,16 @@ Meal Plan is a web app that enables a user to plan out the food for the duration
 - Jest
 - Supertest
 
-## Notes on
+## Notes
+
+The Redux file architecture organized using **"Redux Ducks"** method.
+To learn more about Redux Ducks [read here](https://www.freecodecamp.org/news/scaling-your-redux-app-with-ducks-6115955638be/)
+
+The SASS/CSS classNames are organized using **BEM** naming convetions
+
+## DEMO
+
+![Meal Plan Demo](src/assets/demo.gif)
 
 ## Motivation
 
