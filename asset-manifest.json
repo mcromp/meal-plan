@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/meal-plan/static/css/main.60bd909b.chunk.css",
-    "main.js": "/meal-plan/static/js/main.786765e1.chunk.js",
-    "main.js.map": "/meal-plan/static/js/main.786765e1.chunk.js.map",
+    "main.css": "/meal-plan/static/css/main.82f4499b.chunk.css",
+    "main.js": "/meal-plan/static/js/main.7481b089.chunk.js",
+    "main.js.map": "/meal-plan/static/js/main.7481b089.chunk.js.map",
     "runtime-main.js": "/meal-plan/static/js/runtime-main.d8cb9645.js",
     "runtime-main.js.map": "/meal-plan/static/js/runtime-main.d8cb9645.js.map",
-    "static/js/2.3e015820.chunk.js": "/meal-plan/static/js/2.3e015820.chunk.js",
-    "static/js/2.3e015820.chunk.js.map": "/meal-plan/static/js/2.3e015820.chunk.js.map",
+    "static/js/2.dc26c758.chunk.js": "/meal-plan/static/js/2.dc26c758.chunk.js",
+    "static/js/2.dc26c758.chunk.js.map": "/meal-plan/static/js/2.dc26c758.chunk.js.map",
     "index.html": "/meal-plan/index.html",
-    "static/css/main.60bd909b.chunk.css.map": "/meal-plan/static/css/main.60bd909b.chunk.css.map",
-    "static/js/2.3e015820.chunk.js.LICENSE.txt": "/meal-plan/static/js/2.3e015820.chunk.js.LICENSE.txt",
+    "static/css/main.82f4499b.chunk.css.map": "/meal-plan/static/css/main.82f4499b.chunk.css.map",
+    "static/js/2.dc26c758.chunk.js.LICENSE.txt": "/meal-plan/static/js/2.dc26c758.chunk.js.LICENSE.txt",
     "static/media/home.css": "/meal-plan/static/media/bkgd.0aaf48d0.jpg",
     "static/media/printer.1a6e7ce5.svg": "/meal-plan/static/media/printer.1a6e7ce5.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.d8cb9645.js",
-    "static/js/2.3e015820.chunk.js",
-    "static/css/main.60bd909b.chunk.css",
-    "static/js/main.786765e1.chunk.js"
+    "static/js/2.dc26c758.chunk.js",
+    "static/css/main.82f4499b.chunk.css",
+    "static/js/main.7481b089.chunk.js"
   ]
 }
