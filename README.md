@@ -1,13 +1,13 @@
-[Click here to see the deployed web app](https://mcromp.github.io/meal-plan/).
+[Click here to see the deployed web app](https://mcromp.github.io/menu-plan/).
 
 <b>Notice:</b>
-This is Meal Plan's **front-end** repo:
+This is Menu Plan's **front-end** repo:
 For the Backend's repo:
-[Click here!](https://github.com/mcromp/meal-plan-backend)
+[Click here!](https://github.com/mcromp/menu-plan-backend)
 
-## Meal Plan
+## Menu Plan
 
-Meal Plan is a web app that enables a user to create a 7 day calendar containing food items.
+Menu Plan is a web app that enables a user to create a 7 day calendar containing food items.
 
 ## Tech used
 
