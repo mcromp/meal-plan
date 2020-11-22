@@ -35,7 +35,7 @@ The SASS/CSS classNames are organized using **BEM** naming convetions
 
 ## DEMO
 
-![Meal Plan Demo](src/assets/demo.gif)
+![Menu Plan Demo](src/assets/demo.gif)
 
 ## Motivation
 
