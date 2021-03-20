@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/menu-plan/static/css/main.833142e6.chunk.css",
+    "main.css": "/menu-plan/static/css/main.de8e6933.chunk.css",
     "main.js": "/menu-plan/static/js/main.4d2b7e1b.chunk.js",
     "main.js.map": "/menu-plan/static/js/main.4d2b7e1b.chunk.js.map",
     "runtime-main.js": "/menu-plan/static/js/runtime-main.3ff6f506.js",
@@ -8,7 +8,7 @@
     "static/js/2.d774c3df.chunk.js": "/menu-plan/static/js/2.d774c3df.chunk.js",
     "static/js/2.d774c3df.chunk.js.map": "/menu-plan/static/js/2.d774c3df.chunk.js.map",
     "index.html": "/menu-plan/index.html",
-    "static/css/main.833142e6.chunk.css.map": "/menu-plan/static/css/main.833142e6.chunk.css.map",
+    "static/css/main.de8e6933.chunk.css.map": "/menu-plan/static/css/main.de8e6933.chunk.css.map",
     "static/js/2.d774c3df.chunk.js.LICENSE.txt": "/menu-plan/static/js/2.d774c3df.chunk.js.LICENSE.txt",
     "static/media/home.css": "/menu-plan/static/media/bkgd.0aaf48d0.jpg",
     "static/media/printer.1a6e7ce5.svg": "/menu-plan/static/media/printer.1a6e7ce5.svg"
@@ -16,7 +16,7 @@
   "entrypoints": [
     "static/js/runtime-main.3ff6f506.js",
     "static/js/2.d774c3df.chunk.js",
-    "static/css/main.833142e6.chunk.css",
+    "static/css/main.de8e6933.chunk.css",
     "static/js/main.4d2b7e1b.chunk.js"
   ]
 }
